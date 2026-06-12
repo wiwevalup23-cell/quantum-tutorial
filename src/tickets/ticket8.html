@@ -1,0 +1,172 @@
+<!-- БИЛЕТ 8 -->
+<section id="ticket-8" class="ticket-section">
+    <h1>Билет 8</h1>
+    <p>Определение оператора углового момента. Оператор орбитального момента. Оператор спинового момента. Матрицы Паули. Спиновые функции для спина 1/2.</p>
+
+    <div class="card toc" style="border-color: rgba(168, 85, 247, 0.5);">
+        <h3 style="margin-bottom: 1rem; color: #c084fc;">Оглавление (Билет 8)</h3>
+        <ol>
+            <li><a href="#t8-angular">1. Определение оператора углового момента</a></li>
+            <li><a href="#t8-orbital">2. Оператор орбитального момента</a></li>
+            <li><a href="#t8-spin">3. Оператор спинового момента</a></li>
+            <li><a href="#t8-pauli">4. Матрицы Паули</a></li>
+            <li><a href="#t8-spin-functions">5. Спиновые функции для спина 1/2</a></li>
+        </ol>
+    </div>
+
+    <!-- 1. Оператор углового момента -->
+    <h2 id="t8-angular">1. Определение оператора углового момента</h2>
+    <div class="card">
+        <p>Оператором углового момента называется векторный (точнее псевдовекторный) оператор $\hat{\mathbf{J}} = (\hat{J}_x, \hat{J}_y, \hat{J}_z)$, компоненты которого удовлетворяют двум ключевым условиям:</p>
+        
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                1. Эрмитовость (наблюдаемость)
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Все три декартовы проекции углового момента соответствуют физически измеримым величинам, следовательно, они являются самосопряженными (эрмитовыми) операторами:</p>
+                <div class="math-block">
+                    $$ \hat{J}_x^+ = \hat{J}_x, \quad \hat{J}_y^+ = \hat{J}_y, \quad \hat{J}_z^+ = \hat{J}_z $$
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                2. Фундаментальные коммутационные соотношения
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Проекции углового момента на разные оси не коммутируют друг с другом. Это означает, что их невозможно измерить одновременно с абсолютной точностью. Их коммутаторы имеют вид:</p>
+                <div class="math-block">
+                    $$ [\hat{J}_x, \hat{J}_y] = i\hbar\hat{J}_z, \quad [\hat{J}_y, \hat{J}_z] = i\hbar\hat{J}_x, \quad [\hat{J}_z, \hat{J}_x] = i\hbar\hat{J}_y $$
+                </div>
+                <p>Через тензор Леви-Чивиты это можно записать компактно:</p>
+                <div class="math-block">
+                    $$ [\hat{J}_n, \hat{J}_k] = i\hbar \sum_{l} \varepsilon_{nkl} \hat{J}_l \quad \text{или} \quad [\hat{\mathbf{J}} \times \hat{\mathbf{J}}] = i\hbar\hat{\mathbf{J}} $$
+                </div>
+            </div>
+        </div>
+
+        <p>Квадрат оператора углового момента $\hat{J}^2 = \hat{J}_x^2 + \hat{J}_y^2 + \hat{J}_z^2$ коммутирует с любой своей проекцией (например, $[\hat{J}^2, \hat{J}_z] = 0$). Следовательно, квадрат момента и одну из его проекций (обычно выбирают ось $z$) можно измерить одновременно, и они имеют общую систему собственных функций.</p>
+    </div>
+
+    <!-- 2. Оператор орбитального момента -->
+    <h2 id="t8-orbital">2. Оператор орбитального момента</h2>
+    <div class="card">
+        <p><strong>Орбитальный угловой момент</strong> возникает в результате движения частицы в трехмерном пространстве (аналог классического момента импульса $\mathbf{L} = \mathbf{r} \times \mathbf{p}$).</p>
+        <p>В квантовой механике оператор орбитального момента $\hat{\mathbf{L}}$ вводится простой заменой классических вектора координаты $\mathbf{r}$ и импульса $\mathbf{p}$ на соответствующие им операторы $\hat{\mathbf{r}}$ и $\hat{\mathbf{p}} = -i\hbar\nabla$:</p>
+        
+        <div class="math-block">
+            $$ \hat{\mathbf{L}} = [\hat{\mathbf{r}} \times \hat{\mathbf{p}}] = -i\hbar [\mathbf{r} \times \nabla] $$
+        </div>
+
+        <p>В декартовых координатах проекции имеют дифференциальный вид:</p>
+        <div class="math-block">
+            $$ \hat{L}_x = -i\hbar\left(y\frac{\partial}{\partial z} - z\frac{\partial}{\partial y}\right) $$
+            $$ \hat{L}_y = -i\hbar\left(z\frac{\partial}{\partial x} - x\frac{\partial}{\partial z}\right) $$
+            $$ \hat{L}_z = -i\hbar\left(x\frac{\partial}{\partial y} - y\frac{\partial}{\partial x}\right) $$
+        </div>
+        
+        <div class="alert">
+            Квантовое число орбитального момента (обозначается $l$) принимает <strong>только целые</strong> неотрицательные значения $l = 0, 1, 2, \dots$. Проекция $m$ принимает $(2l+1)$ значений от $-l$ до $+l$.
+        </div>
+    </div>
+
+    <!-- 3. Оператор спинового момента -->
+    <h2 id="t8-spin">3. Оператор спинового момента</h2>
+    <div class="card">
+        <p>Из опыта Штерна-Герлаха (расщепление пучка на две части) выяснилось, что электрон обладает собственным, внутренним угловым моментом, не связанным с движением в пространстве.</p>
+        <p>Этот внутренний момент называется <strong>спином</strong> электрона. Оператор спина обозначается как $\hat{\mathbf{s}}$. Поскольку пучок расщепляется на две части, проекция спина $m_s$ может принимать ровно два значения. Число проекций связано с квантовым числом спина $s$ как $(2s + 1) = 2$, откуда вытекает, что $s = 1/2$.</p>
+        
+        <p>Проекция $m_s$ принимает значения $\pm 1/2$. Уравнения на собственные значения записываются как:</p>
+        <div class="math-block">
+            $$ \hat{s}^2 |sm_s\rangle = \hbar^2 s(s+1) |sm_s\rangle = \frac{3}{4}\hbar^2 |sm_s\rangle $$
+            $$ \hat{s}_z |sm_s\rangle = \hbar m_s |sm_s\rangle $$
+        </div>
+        <p>Поскольку проекция имеет только два значения, оператор спина для $s=1/2$ действует в строго <strong>двумерном гильбертовом пространстве</strong>. В таком пространстве операторы представляются матрицами размера $2 \times 2$.</p>
+    </div>
+
+    <!-- 4. Матрицы Паули -->
+    <h2 id="t8-pauli">4. Матрицы Паули</h2>
+    <div class="card">
+        <p>Операторы проекций спина удобно выражать через безразмерные матрицы $2 \times 2$, называемые <strong>матрицами Паули</strong> ($\sigma_x, \sigma_y, \sigma_z$):</p>
+        <div class="math-block">
+            $$ \hat{s}_x = \frac{\hbar}{2}\sigma_x, \quad \hat{s}_y = \frac{\hbar}{2}\sigma_y, \quad \hat{s}_z = \frac{\hbar}{2}\sigma_z $$
+        </div>
+
+        <h3>Явный вид матриц Паули</h3>
+        <p>В стандартном (z-базисе) матрицы имеют вид:</p>
+        <div class="math-block">
+            $$ \sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad \sigma_y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \quad \sigma_z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} $$
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Ключевые свойства матриц Паули
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <ul>
+                    <li><strong>Эрмитовость:</strong> $\sigma_n^+ = \sigma_n$ ($n = x, y, z$).</li>
+                    <li><strong>Нулевой след:</strong> $\text{Tr}(\sigma_n) = 0$. (сумма диагональных элементов равна нулю).</li>
+                    <li><strong>Собственные числа:</strong> равны $\pm 1$.</li>
+                    <li><strong>Квадраты матриц:</strong> квадрат каждой матрицы дает единичную матрицу: $\sigma_x^2 = \sigma_y^2 = \sigma_z^2 = I$.</li>
+                    <li><strong>Коммутационные соотношения:</strong> $[\sigma_x, \sigma_y] = 2i\sigma_z$ (циклично переставляются). Обратите внимание на коэффициент 2, он появляется из-за того, что $\hat{\mathbf{s}} = \hbar/2 \vec{\sigma}$.</li>
+                    <li><strong>Антикоммутация:</strong> разные матрицы антикоммутируют: $\{\sigma_x, \sigma_y\} = \sigma_x\sigma_y + \sigma_y\sigma_x = 0$.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Спиновые функции -->
+    <h2 id="t8-spin-functions">5. Спиновые функции для спина 1/2</h2>
+    <div class="card">
+        <p>Поскольку пространство двумерно, состояния спина задаются двухкомпонентными векторами-столбцами (<strong>спинорами</strong>). Базисными функциями служат собственные векторы оператора $\hat{s}_z$:</p>
+        
+        <div class="math-block">
+            $$ \chi_{1/2} = \alpha = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \quad \text{— состояние со спином "вверх" } (\uparrow) $$
+            $$ \chi_{-1/2} = \beta = \begin{pmatrix} 0 \\ 1 \end{pmatrix} \quad \text{— состояние со спином "вниз" } (\downarrow) $$
+        </div>
+
+        <p>Эти функции ортонормированы:</p>
+        <div class="math-block">
+            $$ \alpha^+\alpha = \begin{pmatrix} 1 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = 1, \quad \alpha^+\beta = 0, \quad \beta^+\beta = 1 $$
+        </div>
+
+        <p>Произвольное спиновое состояние является линейной суперпозицией этих базисных векторов: $|\chi\rangle = c_1 \alpha + c_2 \beta = \begin{pmatrix} c_1 \\ c_2 \end{pmatrix}$, где $|c_1|^2 + |c_2|^2 = 1$.</p>
+        
+        <p>Полная волновая функция частицы со спином $\psi(\mathbf{r}, \sigma)$ зависит и от пространственных, и от спиновых координат, и записывается как двухкомпонентный спинор:</p>
+        <div class="math-block">
+            $$ \psi = \begin{pmatrix} \psi_1(\mathbf{r}) \\ \psi_2(\mathbf{r}) \end{pmatrix} = \psi_1(\mathbf{r})\alpha + \psi_2(\mathbf{r})\beta $$
+        </div>
+
+        <div class="visual-container" style="margin-top: 2rem;">
+            <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная модель: Сфера Блоха и квантовый спин</h3>
+            <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.5rem;">
+                Состояние двухуровневой системы (спин $1/2$) удобно изображать вектором на поверхности единичной сферы. Управляйте углами $\theta$ и $\phi$, чтобы задать суперпозицию, и наблюдайте за вероятностями измерения спина вдоль осей $X, Y, Z$.
+            </p>
+            <canvas id="blochCanvas" width="600" height="400" style="width: 100%; max-width: 600px; display: block; margin: 0 auto; border-radius: 8px; background: #0f172a; cursor: grab;"></canvas>
+            
+            <div class="controls" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; justify-content: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                <div style="display: flex; flex-direction: column; align-items: center; min-width: 150px;">
+                    <label for="thetaSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Полярный угол $\theta$ (0 до $\pi$)</label>
+                    <input type="range" id="thetaSlider" min="0" max="3.14159" value="0.785" step="0.01" style="width: 100%;">
+                    <span id="thetaVal" style="color: #c084fc; font-weight: bold; margin-top: 0.25rem;">0.79</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; min-width: 150px;">
+                    <label for="phiSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Азимут $\phi$ (0 до $2\pi$)</label>
+                    <input type="range" id="phiSlider" min="0" max="6.28318" value="0.0" step="0.01" style="width: 100%;">
+                    <span id="phiVal" style="color: #c084fc; font-weight: bold; margin-top: 0.25rem;">0.00</span>
+                </div>
+                <div style="display: flex; flex-direction: column; color: #cbd5e1; font-size: 0.9rem; background: rgba(0,0,0,0.3); padding: 0.5rem 1rem; border-radius: 6px;">
+                    <strong style="color: #f1f5f9; margin-bottom: 0.25rem;">Вероятности измерения $s_n=+\hbar/2$:</strong>
+                    <div>Ось Z (вверх): <span id="probZ" style="color: #4ade80; font-weight: bold;">0.00</span>%</div>
+                    <div>Ось X: <span id="probX" style="color: #60a5fa; font-weight: bold;">0.00</span>%</div>
+                    <div>Ось Y: <span id="probY" style="color: #f472b6; font-weight: bold;">0.00</span>%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

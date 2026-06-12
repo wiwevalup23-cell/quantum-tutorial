@@ -1,0 +1,136 @@
+        <!-- БИЛЕТ 4 -->
+        <section id="ticket-4" class="ticket-section">
+            <h1>Билет 4</h1>
+            <p>Характеристики физических наблюдаемых: среднее значение, дисперсия и соотношение неопределенностей Гейзенберга.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (3 вопроса):</h3>
+                <ol>
+                    <li><a href="#t4-q1">Среднее значение, дисперсия и среднеквадратичное отклонение физической величины.</a></li>
+                    <li><a href="#t4-q2">Соотношение неопределенности Гейзенберга общего вида.</a></li>
+                    <li><a href="#t4-q3">Соотношение неопределенности Гейзенберга для координаты и импульса.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t4-q1">1. Среднее значение и дисперсия</h2>
+            <div class="card">
+                <p>Физическая величина $L$, сопоставляемая с самосопряженным оператором $\hat{L}$, в квантовом состоянии $|\psi\rangle$ ведет себя как случайная величина. Её вероятностные характеристики определяются следующими величинами:</p>
+                <ul>
+                    <li><strong>Математическое ожидание (среднее значение) $\overline{L}$:</strong>
+                        <div class="math-block">
+                            $$\overline{L} = \langle \psi | \hat{L} | \psi \rangle$$
+                        </div>
+                        В координатном представлении для чистого состояния: $\overline{L} = \int_{-\infty}^{\infty} \psi^*(x) \hat{L} \psi(x) dx$. Для смешанного состояния: $\overline{L} = \text{Tr}(\hat{\rho}\hat{L})$.
+                    </li>
+                    <li><strong>Дисперсия $\sigma^2(L)$:</strong> определяет меру разброса результатов измерений вокруг среднего значения:
+                        <div class="math-block">
+                            $$\sigma^2(L) = \langle (\hat{L} - \overline{L}\hat{I})^2 \rangle = \overline{L^2} - (\overline{L})^2$$
+                        </div>
+                    </li>
+                    <li><strong>Среднеквадратичное отклонение (неопределенность) $\Delta L$:</strong>
+                        <div class="math-block">
+                            $$\Delta L = \sqrt{\sigma^2(L)} = \sqrt{\overline{L^2} - (\overline{L})^2}$$
+                        </div>
+                    </li>
+                </ul>
+                <p><strong>Физический смысл дисперсии:</strong> Дисперсия $\Delta L = 0$ тогда и только тогда, когда состояние $|\psi\rangle$ является <em>собственным состоянием</em> оператора $\hat{L}$ ($\hat{L}|\psi\rangle = \lambda|\psi\rangle$). В этом случае измерение величины $L$ дает единственное точное значение $\lambda$ с вероятностью 100%.</p>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t4-q2">2. Соотношение неопределенности Гейзенберга общего вида</h2>
+                <p>Пусть $\hat{A}$ и $\hat{B}$ — два самосопряженных оператора. Введем эрмитов оператор $\hat{D} = i[\hat{A}, \hat{B}]$ и <span class="highlight">квантовые скобки Пуассона</span>:</p>
+                <div class="math-block">
+                    $$\{\hat{A}, \hat{B}\} = \frac{i}{\hbar} [\hat{A}, \hat{B}]$$
+                </div>
+                <p>Тогда для неопределенностей (среднеквадратичных отклонений) физических величин $A$ и $B$ справедливо <strong>соотношение неопределенности общего вида</strong>:</p>
+                <div class="math-block">
+                    $$\Delta A \cdot \Delta B \ge \frac{\hbar}{2} \left| \langle \{\hat{A}, \hat{B}\} \rangle \right| = \frac{1}{2} \left| \langle \hat{D} \rangle \right|$$
+                </div>
+                <p>Если операторы $\hat{A}$ и $\hat{B}$ не коммутируют, то соответствующие физические величины нельзя одновременно измерить сколь угодно точно.</p>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Строгий математический вывод соотношения неопределенности
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Введем центрированные операторы: $\hat{A}' = \hat{A} - \overline{A}\hat{I}$ и $\hat{B}' = \hat{B} - \overline{B}\hat{I}$. Заметим, что $[\hat{A}', \hat{B}'] = [\hat{A}, \hat{B}]$.</p>
+                        <p>Для любого вещественного числа $\alpha$ рассмотрим вектор $|\phi\rangle = (\hat{A}' + i\alpha \hat{B}')|\psi\rangle$. Квадрат нормы любого вектора в гильбертовом пространстве неотрицателен: $\langle \phi | \phi \rangle \ge 0$.</p>
+                        <p>Распишем скалярное произведение, пользуясь самосопряженностью операторов $\hat{A}'$ и $\hat{B}'$:</p>
+                        <div class="math-block">
+                            $$\langle \phi | \phi \rangle = \langle (\hat{A}' + i\alpha \hat{B}')\psi | (\hat{A}' + i\alpha \hat{B}')\psi \rangle = \langle \psi | (\hat{A}' - i\alpha \hat{B}')(\hat{A}' + i\alpha \hat{B}') | \psi \rangle \ge 0$$
+                        </div>
+                        <p>Раскрываем скобки с сохранением порядка операторов:</p>
+                        <div class="math-block">
+                            $$\langle \psi | (\hat{A}'^2 + \alpha^2 \hat{B}'^2 + i\alpha [\hat{A}', \hat{B}']) | \psi \rangle = \langle \hat{A}'^2 \rangle + \alpha^2 \langle \hat{B}'^2 \rangle + i\alpha \langle [\hat{A}, \hat{B}] \rangle \ge 0$$
+                        </div>
+                        <p>Вспоминая определения дисперсии, запишем это как квадратный трехчлен относительно $\alpha$:</p>
+                        <div class="math-block">
+                            $$\alpha^2 (\Delta B)^2 + \alpha \cdot i\langle [\hat{A}, \hat{B}] \rangle + (\Delta A)^2 \ge 0$$
+                        </div>
+                        <p>Поскольку $[\hat{A}, \hat{B}]$ — кососимметричный оператор (коммутатор двух эрмитовых), его среднее значение чисто мнимо, следовательно, коэффициент при $\alpha$ — $i\langle [\hat{A}, \hat{B}] \rangle = \langle \hat{D} \rangle$ — вещественное число.</p>
+                        <p>Для того чтобы квадратный трехчлен был неотрицательным при всех вещественных $\alpha$, его дискриминант $D$ должен быть неположительным ($D \le 0$):</p>
+                        <div class="math-block">
+                            $$D = \left(i\langle [\hat{A}, \hat{B}] \rangle\right)^2 - 4(\Delta B)^2(\Delta A)^2 \le 0$$
+                        </div>
+                        <p>Поскольку $i^2 = -1$:</p>
+                        <div class="math-block">
+                            $$- \left|\langle [\hat{A}, \hat{B}] \rangle\right|^2 - 4(\Delta A)^2(\Delta B)^2 \le 0 \implies (\Delta A)^2(\Delta B)^2 \ge \frac{1}{4} \left|\langle [\hat{A}, \hat{B}] \rangle\right|^2$$
+                        </div>
+                        <p>Извлекая квадратный корень, получаем искомое соотношение:</p>
+                        <div class="math-block">
+                            $$\Delta A \cdot \Delta B \ge \frac{1}{2} \left| \langle [\hat{A}, \hat{B}] \rangle \right| = \frac{1}{2} |\langle \hat{D} \rangle| = \frac{\hbar}{2} |\langle \{\hat{A}, \hat{B}\} \rangle|$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t4-q3">3. Соотношение неопределенности Гейзенберга для координаты и импульса</h2>
+            <div class="card">
+                <p>Применим общее соотношение неопределенностей к операторам обобщенной координаты $\hat{q}$ и импульса $\hat{p}$.</p>
+                <p>Как известно из классической механики для обобщенных координат и импульсов, их скобки Пуассона равны единице. В квантовой механике <span class="highlight-secondary">квантовые скобки Пуассона</span> также равны единице:</p>
+                <div class="math-block">
+                    $$\{\hat{p}, \hat{q}\} = 1 \implies [\hat{p}, \hat{q}] = \frac{\hbar}{i}$$
+                </div>
+                <p>Подставляя $\{\hat{p}, \hat{q}\} = 1$ в общее соотношение, получаем:</p>
+                <div class="math-block">
+                    $$\Delta q \cdot \Delta p \ge \frac{\hbar}{2} \left| \langle \{\hat{p}, \hat{q}\} \rangle \right| = \frac{\hbar}{2}$$
+                </div>
+                <p>Это знаменитое <strong>соотношение неопределенностей Гейзенберга</strong>. Оно накладывает фундаментальный запрет на одновременное точное измерение координаты и импульса микрочастицы. Чем точнее локализована частица ($\Delta x \to 0$), тем шире разброс по импульсам ($\Delta p \to \infty$).</p>
+
+                <!-- Интерактивная визуализация пакета Гейзенберга -->
+                <div class="visual-container">
+                    <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная визуализация: Волновой пакет в $x$ и $p$ пространствах</h3>
+                    <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.5rem;">
+                        Управляйте координатной шириной пакета $\Delta x$ слайдером. Вы увидите, что сжатие пакета в пространстве координат приводит к его неминуемому уширению в импульсном пространстве, иллюстрируя закон сохранения $\Delta x \Delta p \ge \hbar/2$ (здесь $\hbar = 1$).
+                    </p>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; width: 100%;">
+                        <div>
+                            <div style="text-align: center; font-size: 0.85rem; margin-bottom: 0.25rem; color: #60a5fa;">Координатное пространство $|\psi(x)|^2$</div>
+                            <canvas id="heisenbergCanvasX" class="visual-canvas" width="280" height="180"></canvas>
+                        </div>
+                        <div>
+                            <div style="text-align: center; font-size: 0.85rem; margin-bottom: 0.25rem; color: #fbbf24;">Импульсное пространство $|\Phi(p)|^2$</div>
+                            <canvas id="heisenbergCanvasP" class="visual-canvas" width="280" height="180"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="control-panel" style="max-width: 600px; margin-top: 0.5rem;">
+                        <div class="control-group">
+                            <label for="heisenbergSigmaSlider">Разброс координат ($\Delta x$):</label>
+                            <input type="range" id="heisenbergSigmaSlider" class="slider" min="0.15" max="1.5" step="0.05" value="0.5">
+                            <span id="dxVal">0.50</span>
+                        </div>
+                        <div>
+                            Разброс импульсов $\Delta p$: <span id="dpVal" class="highlight" style="font-weight: 600;">1.00</span>
+                        </div>
+                        <div>
+                            Произведение $\Delta x \Delta p$: <span id="uncVal" class="highlight-secondary" style="font-weight: 600;">0.50</span> (предел: 0.50)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

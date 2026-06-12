@@ -1,0 +1,197 @@
+        /* Подключаем локальные шрифты Lora */
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-Italic.otf') format('opentype');
+            font-weight: 400;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-MediumItalic.otf') format('opentype');
+            font-weight: 500;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-SemiBold.otf') format('opentype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-SemiBoldItalic.otf') format('opentype');
+            font-weight: 600;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-BoldItalic.otf') format('opentype');
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        :root {
+            --bg-color: #06060a;
+            --sidebar-bg: rgba(10, 10, 15, 0.85);
+            --card-bg: rgba(18, 18, 26, 0.88);
+            --text-main: #f1f5f9;
+            --text-muted: #cbd5e1;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --border: rgba(255, 255, 255, 0.15);
+            --warning-bg: rgba(234, 179, 8, 0.15);
+            --warning-border: rgba(234, 179, 8, 0.4);
+            --warning-text: #fef08a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Lora', Georgia, 'Times New Roman', serif;
+            background-color: var(--bg-color);
+            background-image: url('фон.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .bg-glow {
+            position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+            z-index: -1; pointer-events: none;
+        }
+
+        .sidebar {
+            width: 320px; background: var(--sidebar-bg); backdrop-filter: blur(16px);
+            border-right: 1px solid var(--border); padding: 2rem 1rem;
+            position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 1rem;
+        }
+
+        .logo {
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; padding-left: 1rem;
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .nav-btn {
+            background: transparent; border: 1px solid transparent; color: var(--text-muted);
+            padding: 1rem; text-align: left; border-radius: 0.75rem; cursor: pointer;
+            font-size: 0.95rem; font-family: system-ui, -apple-system, sans-serif; transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+
+        .nav-btn:hover { background: rgba(255, 255, 255, 0.08); color: var(--text-main); }
+        .nav-btn.active { background: rgba(255, 255, 255, 0.12); color: white; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .nav-btn.active::before {
+            content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+            height: 60%; width: 3px; background: var(--accent); border-radius: 0 4px 4px 0;
+        }
+
+        .content { flex: 1; padding: 4rem; max-width: 1000px; margin: 0 auto; }
+        .ticket-section { display: none; animation: fadeIn 0.5s ease; }
+        .ticket-section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.02em; }
+        h2 { font-size: 1.5rem; margin: 3rem 0 1.5rem; color: #f1f5f9; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; scroll-margin-top: 2rem; }
+        h2::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent-glow); }
+        p { margin-bottom: 1.25rem; color: var(--text-muted); font-size: 1.05rem; }
+
+        .card {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem;
+            padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(16px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+        .alert {
+            background: var(--warning-bg); border-left: 4px solid var(--warning-text); border-radius: 0.5rem;
+            padding: 1rem 1.5rem; margin-bottom: 1.5rem; color: var(--text-main); font-size: 1rem;
+        }
+
+        .math-block {
+            background: rgba(0,0,0,0.6); border-radius: 0.5rem; padding: 1rem;
+            margin: 1rem 0; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .accordion { background: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem; margin-bottom: 1rem; overflow: hidden; }
+        .accordion-header { padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; user-select: none; transition: background 0.3s ease; }
+        .accordion-header:hover { background: rgba(255, 255, 255, 0.05); }
+        .accordion-content { padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: all 0.4s ease; opacity: 0; }
+        .accordion.open .accordion-content { padding: 0 1.5rem 1.5rem; max-height: 5000px; opacity: 1; }
+        .accordion-icon { transition: transform 0.3s ease; }
+        .accordion.open .accordion-icon { transform: rotate(180deg); }
+
+        .highlight { color: #93c5fd; font-weight: 500; }
+        .highlight-secondary { color: #c084fc; font-weight: 500; }
+        .highlight-important { color: #fde047; font-weight: 600; }
+
+        ul { list-style-type: none; padding-left: 1rem; margin-bottom: 1.25rem; }
+        ul li { position: relative; margin-bottom: 0.5rem; color: var(--text-muted); }
+        ul li::before { content: '→'; position: absolute; left: -1.2rem; color: var(--accent); }
+
+        ol { padding-left: 1.5rem; margin-bottom: 1.25rem; color: var(--text-muted); }
+        ol li { margin-bottom: 0.5rem; }
+        ol li a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        ol li a:hover { color: var(--accent); text-decoration: underline; }
+
+        /* Flowchart CSS */
+        .flow-container { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin: 2rem 0; font-size: 0.95rem; }
+        .flow-box { background: rgba(15, 23, 42, 0.92); border: 2px solid rgba(59, 130, 246, 0.5); padding: 1rem 1.5rem; border-radius: 0.5rem; text-align: center; width: 100%; max-width: 450px; position: relative; }
+        .flow-box.decision { border-color: #a855f7; border-radius: 2rem; background: rgba(15, 23, 42, 0.92); font-weight: bold; }
+        .flow-box.result { border-color: #10b981; background: rgba(15, 23, 42, 0.92); font-weight: 600; }
+        .flow-box.result-warn { border-color: #f59e0b; background: rgba(15, 23, 42, 0.92); font-weight: 600; }
+        .flow-box.result-err { border-color: #ef4444; background: rgba(15, 23, 42, 0.92); font-weight: 600; }
+        .flow-arrow { color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; line-height: 1; margin: -0.25rem 0; }
+        .flow-row { display: flex; justify-content: center; gap: 2rem; width: 100%; align-items: stretch; position: relative; }
+        .flow-col { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; flex: 1; }
+        
+        .flow-connector-horizontal { position: absolute; top: 2rem; left: 25%; right: 25%; height: 2px; background: rgba(255,255,255,0.4); z-index: -1; }
+
+        .visual-container {
+            background: rgba(15, 15, 25, 0.9); border: 1px solid var(--border);
+            border-radius: 0.75rem; padding: 1.5rem; margin: 1.5rem 0;
+            display: flex; flex-direction: column; align-items: center; gap: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        .visual-canvas {
+            background: #0d0d15; border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem; max-width: 100%;
+        }
+        .control-panel {
+            width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between;
+            align-items: center; gap: 1rem; color: var(--text-muted); font-size: 0.9rem;
+        }
+        .control-group { display: flex; align-items: center; gap: 0.5rem; }
+        .slider { -webkit-appearance: none; width: 150px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.1); outline: none; }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 0 8px var(--accent-glow); }
+        .diagram-axis { width: 100%; height: 60px; position: relative; margin: 1rem 0; border-bottom: 2px solid rgba(255,255,255,0.2); }
+        
+        .katex-display { margin: 0.5em 0; overflow-x: auto; overflow-y: hidden; padding-bottom: 5px;}
+    </style>

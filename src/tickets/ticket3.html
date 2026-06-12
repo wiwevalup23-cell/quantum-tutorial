@@ -1,0 +1,208 @@
+        <!-- БИЛЕТ 3 -->
+        <section id="ticket-3" class="ticket-section">
+            <h1>Билет 3</h1>
+            <p>Состояния квантовой системы, чистые и смешанные состояния, статистический оператор, и вероятностное толкование измерения.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета:</h3>
+                <ol>
+                    <li><a href="#t3-q1">Понятие состояния (Квантовая система, Вектор состояния, Волновая функция, Наблюдаемая величина).</a></li>
+                    <li><a href="#t3-q2">Чистые и смешанные состояния.</a></li>
+                    <li><a href="#t3-q3">Физический смысл волновой функции (Разложение по спектру).</a></li>
+                    <li><a href="#t3-q4">Среднее значение и дисперсия физической величины.</a></li>
+                    <li><a href="#t3-q5">Статистический оператор (матрица плотности) смешанного и чистого состояний.</a></li>
+                    <li><a href="#t3-q6">Вероятностное толкование процесса измерения и коллапс волновой функции.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t3-q1">1. Понятие состояния</h2>
+            <div class="card">
+                <ul>
+                    <li><span class="highlight">Квантовая система:</span> физическая система, которой математически ставится в соответствие гильбертово пространство $\mathcal{H}$.</li>
+                    <li><span class="highlight">Состояние:</span> математический объект, который <em>полностью задает вероятности</em> всех возможных результатов любых измерений над системой.</li>
+                    <li><span class="highlight">Волновая функция (ВФ):</span> вектор $|\psi\rangle \in \mathcal{H}$, определяющий состояние квантовой системы. Обычно состояния отождествляются с волновой функцией. Она всегда нормирована на единицу: $\langle \psi | \psi \rangle = 1$.</li>
+                    <li><span class="highlight">Наблюдаемая величина:</span> математически описывается линейным самосопряженным (эрмитовым) оператором $\hat{A}$. Область определения $D(\hat{A}) \subset \mathcal{H}$. Все возможные результаты измерения этой величины лежат в спектре оператора $\sigma(\hat{A}) \subset \mathbb{R}$.</li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t3-q2">2. Чистые и смешанные состояния</h2>
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Определения чистого и смешанного состояния
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-color: #10b981;">
+                        <strong>Чистое состояние:</strong> Состояние, которое описывается одной волновой функцией $|\psi\rangle$ (или $\psi(q)$ в координатном представлении). Это состояние максимального знания о системе.
+                    </div>
+                    <div class="alert">
+                        <strong>Смешанное состояние:</strong> Состояние, в котором система с вероятностью $w_1$ находится в чистом состоянии $|\psi_1\rangle$, с вероятностью $w_2$ — в состоянии $|\psi_2\rangle$, и т.д. Описывается <em>ансамблем</em> $\{w_n, |\psi_n\rangle\}$, где $\sum_k w_k = 1$. 
+                        <br><br>
+                        <em>Важно:</em> В смешанном состоянии нет квантовой интерференции между разными $|\psi_k\rangle$. Мы просто не знаем, в каком именно из них находится система (классическая неопределенность).
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Примеры смешанных состояний</h3>
+                <ul>
+                    <li>Пучок неполяризованных частиц (фотонов или электронов). Мы не можем описать весь пучок одной волновой функцией с определенным спином, так как частицы в пучке имеют разные случайно распределенные спины.</li>
+                    <li>Квантовая подсистема, взаимодействующая с большей системой (термостатом). Даже если вся замкнутая Вселенная находится в чистом состоянии, её выделенная часть из-за квантовой запутанности будет находиться в смешанном состоянии.</li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t3-q3">3. Физический смысл волновой функции</h2>
+            <div class="card">
+                <p>Физический смысл ВФ заключается в её вероятностной интерпретации. Разложим волновую функцию по собственным векторам некоторого оператора наблюдаемой $\hat{L}$ (базис $|\phi_n\rangle$).</p>
+                
+                <h3>Дискретный спектр</h3>
+                <p>Единичный оператор: $\hat{I} = \sum_n |\phi_n\rangle\langle\phi_n|$. Тогда разложение:</p>
+                <div class="math-block">
+                    $$|\psi\rangle = \sum_n c_n |\phi_n\rangle, \quad \text{где } c_n = \langle \phi_n | \psi \rangle$$
+                </div>
+                <p>Вероятность получить невырожденное собственное значение $\lambda_n$ при измерении равна квадрату модуля коэффициента разложения:</p>
+                <div class="math-block">
+                    $$P_n = |\langle \phi_n | \psi \rangle|^2 = |c_n|^2$$
+                </div>
+
+                <h3>Непрерывный спектр (на примере координаты $\hat{x}$)</h3>
+                <p>Для оператора координаты $\hat{x} \psi_\lambda = \lambda \psi_\lambda$, собственные функции $\psi_\lambda(x) = \delta(x-\lambda)$.</p>
+                <p>Аналогом вероятности $P_n$ выступает <strong>плотность вероятности</strong> $P(\lambda)$:</p>
+                <div class="math-block">
+                    $$P(\lambda) = |\langle \psi_\lambda | \psi \rangle|^2 = \left| \int_{-\infty}^\infty dx\, \delta(x-\lambda)\psi(x) \right|^2 = |\psi(\lambda)|^2$$
+                </div>
+                <p>Таким образом, $|\psi(x)|^2$ — это плотность вероятности обнаружить частицу в точке $x$. Квадрат модуля ВФ задает распределение вероятностей в непрерывном спектре.</p>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t3-q4">4. Среднее значение и дисперсия</h2>
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <h3>Математическое ожидание (Среднее значение)</h3>
+                <p>Среднее значение физической величины $L$ в чистом состоянии $|\psi\rangle$ вычисляется как:</p>
+                <div class="math-block">
+                    $$M[L] = \overline{L} = \sum_n P_n \lambda_n = \sum_n \langle \psi | \phi_n \rangle \lambda_n \langle \phi_n | \psi \rangle = \langle \psi | \hat{L} | \psi \rangle$$
+                </div>
+                <p>В случае непрерывного спектра (интегральный вид в $L_2$):</p>
+                <div class="math-block">
+                    $$M[L] = \int_{-\infty}^\infty \lambda \rho(\lambda) d\lambda = \int_{-\infty}^\infty \psi^*(x)\hat{L}\psi(x) dx$$
+                </div>
+                
+                <h3>Дисперсия (Среднеквадратичное отклонение)</h3>
+                <p>Дисперсия характеризует разброс (ширину распределения) результатов измерений вокруг среднего значения:</p>
+                <div class="math-block">
+                    $$\sigma^2(\hat{L}) = M[(\hat{L} - \overline{L})^2] = M[\hat{L}^2] - (M[\hat{L}])^2 \ge 0$$
+                </div>
+                <p>Среднеквадратичное отклонение (неопределенность величины $L$):</p>
+                <div class="math-block">
+                    $$\Delta L = \sqrt{\sigma^2(\hat{L})} = \sqrt{\overline{L^2} - \overline{L}^2}$$
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t3-q5">5. Статистический оператор (Матрица плотности)</h2>
+            <div class="card">
+                <p>В квантовой статистической механике вместо волновых функций удобнее использовать универсальный объект — <strong>статистический оператор</strong> $\hat{\rho}$.</p>
+                
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Для смешанного состояния
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Если система находится в ансамбле состояний $\{w_k, |\phi_k\rangle\}$, то статистический оператор по определению:</p>
+                        <div class="math-block">
+                            $$\hat{\rho} = \sum_k w_k |\phi_k\rangle\langle\phi_k|$$
+                        </div>
+                        <p>Среднее значение физической величины $L$ в смешанном состоянии ищется через след (Trace):</p>
+                        <div class="math-block">
+                            $$M[L] = \text{Tr}(\hat{\rho}\hat{L})$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Для чистого состояния
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Чистое состояние является частным случаем смешанного, когда одна из вероятностей $w_1 = 1$, а все остальные равны нулю. Тогда:</p>
+                        <div class="math-block">
+                            $$\hat{\rho} = |\psi\rangle\langle\psi|$$
+                        </div>
+                        <p>Этот оператор является проектором на состояние $|\psi\rangle$. Для чистого состояния всегда выполняется свойство идемпотентности: $\hat{\rho}^2 = \hat{\rho}$. Для смешанного это не так ($\text{Tr}(\hat{\rho}^2) < 1$).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <h2 id="t3-q6">6. Вероятностное толкование измерения и коллапс ВФ</h2>
+            <div class="card">
+                <h3>Процесс измерения и Постулат Фон Неймана</h3>
+                <p>Измерение в квантовой механике активно воздействует на систему. Пусть мы измеряем наблюдаемую $\hat{L}$. Согласно <strong>проекционному постулату фон Неймана</strong>:</p>
+                <ol>
+                    <li>При измерении мы всегда получаем одно из собственных значений $\lambda_n$ оператора $\hat{L}$. Вероятность этого исхода: $P_n = |\langle\phi_n|\psi\rangle|^2$.</li>
+                    <li><strong>Коллапс (редукция) волновой функции:</strong> Сразу после того, как прибор показал значение $\lambda_n$, исходное состояние $|\psi\rangle$ мгновенно "схлопывается" (переходит) в соответствующее собственное состояние $|\phi_n\rangle$.</li>
+                    <li>Если мы повторим измерение $\hat{L}$ через бесконечно малый промежуток времени, мы со $100\%$ вероятностью снова получим $\lambda_n$.</li>
+                </ol>
+
+                <div class="alert" style="background: rgba(245, 158, 11, 0.1); border-color: #f59e0b;">
+                    <strong>Измерение вырожденного состояния:</strong><br>
+                    Если полученное собственное значение $\lambda_n$ вырождено (ему соответствует не одна функция, а целое подпространство с базисом $|\phi_{n,k}\rangle$), то волновая функция проецируется на всё это подпространство.<br>
+                    Новое состояние:
+                    $$|\psi'\rangle = \frac{\hat{P}_\lambda |\psi\rangle}{\|\hat{P}_\lambda \psi\|}$$
+                    Где $\hat{P}_\lambda = \sum_k |\phi_{n,k}\rangle\langle\phi_{n,k}|$ — оператор проектирования на собственное подпространство $\lambda_n$.
+                </div>
+            </div>
+
+            <!-- ИНТЕРАКТИВНЫЙ БЛОК: СИМУЛЯТОР ИЗМЕРЕНИЯ -->
+            <div class="visual-container">
+                <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная симуляция: Коллапс волновой функции</h3>
+                <p style="text-align: center; font-size: 0.95rem; max-width: 800px; margin-bottom: 1rem;">
+                    Настройте начальное состояние системы как суперпозицию трех энергетических уровней: $|\psi\rangle = c_1|E_1\rangle + c_2|E_2\rangle + c_3|E_3\rangle$.<br>
+                    Нажмите "Измерить Энергию", чтобы увидеть случайный результат (с вероятностями $P_i \sim |c_i|^2$) и мгновенный коллапс волновой функции в одно из состояний.
+                </p>
+                
+                <canvas id="collapseCanvas" class="visual-canvas" width="600" height="250"></canvas>
+                
+                <div class="control-panel" style="justify-content: center; margin-top: 1rem; max-width: 700px;">
+                    <div class="control-group" style="flex-direction: column; align-items: flex-start; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+                        <h4 style="margin-bottom: 0.5rem; color: #cbd5e1;">Суперпозиция до измерения:</h4>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                            <label style="width: 120px;">$c_1$ (Уровень 1):</label>
+                            <input type="range" id="c1Slider" class="slider" min="0" max="1" step="0.05" value="0.7">
+                            <span id="c1Val" style="width: 40px; text-align: right;">0.70</span>
+                            <span id="pE1" style="color: #60a5fa; width: 50px; font-weight: bold; text-align: right;"></span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                            <label style="width: 120px;">$c_2$ (Уровень 2):</label>
+                            <input type="range" id="c2Slider" class="slider" min="0" max="1" step="0.05" value="0.5">
+                            <span id="c2Val" style="width: 40px; text-align: right;">0.50</span>
+                            <span id="pE2" style="color: #34d399; width: 50px; font-weight: bold; text-align: right;"></span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <label style="width: 120px;">$c_3$ (Уровень 3):</label>
+                            <input type="range" id="c3Slider" class="slider" min="0" max="1" step="0.05" value="0.2">
+                            <span id="c3Val" style="width: 40px; text-align: right;">0.20</span>
+                            <span id="pE3" style="color: #f472b6; width: 50px; font-weight: bold; text-align: right;"></span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; justify-content: center;">
+                        <button id="measureEnergyBtn" style="padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-family: inherit; font-weight: 600; transition: background 0.3s;">Измерить Энергию</button>
+                        <button id="measurePosBtn" style="padding: 0.75rem 1.5rem; background: #a855f7; color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-family: inherit; font-weight: 600; transition: background 0.3s;" title="Измерение другой наблюдаемой, не коммутирующей с энергией, разрушит энергетическое состояние">Измерить Координату</button>
+                        <button id="resetCollapseBtn" style="padding: 0.5rem 1rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 0.5rem; cursor: pointer; transition: all 0.3s;">Сбросить систему</button>
+                    </div>
+                </div>
+                
+                <div id="measurementStatus" style="margin-top: 1rem; font-weight: 600; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--accent); border-radius: 0.5rem; width: 100%; max-width: 700px;">
+                    Система подготовлена в суперпозиции. Ожидание измерения...
+                </div>
+            </div>
+        </section>

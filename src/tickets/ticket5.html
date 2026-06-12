@@ -1,0 +1,144 @@
+<section id="ticket-5" class="ticket-section">
+    <div class="card toc">
+        <h2>Оглавление (Билет 5)</h2>
+        <ol>
+            <li><a href="#t5-schrodinger">Временное и стационарное уравнения Шредингера. Уравнение Лиувилля</a></li>
+            <li><a href="#t5-ehrenfest">Теоремы Эренфеста</a></li>
+            <li><a href="#t5-continuity">Плотность тока вероятности и квантовое уравнение непрерывности</a></li>
+        </ol>
+    </div>
+
+    <h2 id="t5-schrodinger">1. Временное и стационарное уравнения Шредингера. Уравнение Лиувилля</h2>
+    <div class="card">
+        <h3>Временное уравнение Шредингера</h3>
+        <p>
+            Развитие во времени чистого состояния квантовой системы, описываемого волновой функцией $\psi(t)$, постулируется 
+            <span class="highlight">временным уравнением Шредингера</span>:
+        </p>
+        <div class="math-block">
+            $$ i\hbar \frac{\partial}{\partial t}\psi(x, t) = \hat{H} \psi(x, t) $$
+        </div>
+        <p>где $\hat{H}$ — оператор энергии (гамильтониан) системы. Это уравнение первого порядка по времени, поэтому для однозначного определения волновой функции достаточно задать её в начальный момент $t=t_0$. Норма волновой функции при эволюции сохраняется.</p>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Вывод из эволюции средних значений
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Если предположить, что среднее значение любой величины $L$ развивается по закону:</p>
+                <div class="math-block">
+                    $$ \frac{d}{dt} \langle\psi|\hat{L}|\psi\rangle = \langle\psi|\frac{\partial\hat{L}}{\partial t}|\psi\rangle + \frac{i}{\hbar}\langle\psi|[\hat{H}, \hat{L}]|\psi\rangle $$
+                </div>
+                <p>Раскрыв производную $\frac{d}{dt}\langle\psi|\hat{L}|\psi\rangle$, получим:</p>
+                <div class="math-block">
+                    $$ \frac{d}{dt} \langle\psi|\hat{L}|\psi\rangle = \langle\frac{\partial\psi}{\partial t}|\hat{L}|\psi\rangle + \langle\psi|\frac{\partial\hat{L}}{\partial t}|\psi\rangle + \langle\psi|\hat{L}|\frac{\partial\psi}{\partial t}\rangle $$
+                </div>
+                <p>Сравнивая с постулатом и учитывая эрмитовость $\hat{H}$, приходим к соотношению:</p>
+                <div class="math-block">
+                    $$ \text{Re} \left[ \left\langle \hat{L}\psi \left| \frac{\partial}{\partial t} + \frac{i}{\hbar}\hat{H} \right| \psi \right\rangle \right] = 0 $$
+                </div>
+                <p>Поскольку это верно для любого оператора $\hat{L}$, в скобках должен стоять ноль, откуда и следует $i\hbar \frac{\partial\psi}{\partial t} = \hat{H}\psi$.</p>
+            </div>
+        </div>
+
+        <h3>Стационарное уравнение Шредингера</h3>
+        <p>
+            Если гамильтониан $\hat{H}$ явно не зависит от времени, можно разделить переменные, подставив решение в виде 
+            $\psi(x, t) = \psi(x)e^{-\frac{i}{\hbar}Et}$. Это приводит к 
+            <span class="highlight-secondary">стационарному уравнению Шредингера</span> (уравнению на собственные значения энергии):
+        </p>
+        <div class="math-block">
+            $$ \hat{H} \psi(x) = E \psi(x) $$
+        </div>
+        <p>Состояния с определенной энергией $E$ называются стационарными. В таких состояниях средние значения физических величин (не зависящих явно от времени) остаются постоянными.</p>
+
+        <h3>Уравнение Лиувилля</h3>
+        <p>Для смешанных состояний, описываемых оператором плотности $\hat{\rho} = \sum_k w_k |\psi_k\rangle\langle\psi_k|$, эволюция во времени задается 
+        <span class="highlight">квантовым уравнением Лиувилля</span> (уравнением фон Неймана):</p>
+        <div class="math-block">
+            $$ i\hbar \frac{\partial \hat{\rho}}{\partial t} = [\hat{H}, \hat{\rho}] $$
+        </div>
+    </div>
+
+    <h2 id="t5-ehrenfest">2. Теоремы Эренфеста</h2>
+    <div class="card">
+        <p>Теоремы Эренфеста показывают, что средние значения квантовомеханических величин изменяются по законам, аналогичным законам классической механики. В их основе лежит обобщенное уравнение для средних:</p>
+        <div class="math-block">
+            $$ \frac{d\langle\hat{A}\rangle}{dt} = \langle \frac{\partial \hat{A}}{\partial t} \rangle + \frac{i}{\hbar}\langle [\hat{H}, \hat{A}] \rangle $$
+        </div>
+
+        <h3>1-я теорема Эренфеста (аналог определения скорости)</h3>
+        <p>Рассмотрим оператор координаты $\hat{\mathbf{r}}$, который явно не зависит от времени. Коммутатор координаты с гамильтонианом $\hat{H} = \frac{\hat{\mathbf{p}}^2}{2m} + V(\mathbf{r})$ равен $[\hat{H}, \hat{\mathbf{r}}] = -\frac{i\hbar}{m}\hat{\mathbf{p}}$. Отсюда следует 1-я теорема:</p>
+        <div class="math-block">
+            $$ \frac{d\langle \mathbf{r} \rangle}{dt} = \frac{1}{m} \langle \hat{\mathbf{p}} \rangle $$
+        </div>
+
+        <h3>2-я теорема Эренфеста (аналог 2-го закона Ньютона)</h3>
+        <p>Теперь рассмотрим оператор импульса $\hat{\mathbf{p}}$. Коммутатор импульса с гамильтонианом равен $[\hat{H}, \hat{\mathbf{p}}] = [V(\mathbf{r}), \hat{\mathbf{p}}] = i\hbar\nabla V(\mathbf{r})$. Подстановка в уравнение эволюции дает 2-ю теорему:</p>
+        <div class="math-block">
+            $$ \frac{d\langle \hat{\mathbf{p}} \rangle}{dt} = \langle -\nabla V(\mathbf{r}) \rangle $$
+        </div>
+
+        <div class="alert">
+            <strong>Обратите внимание:</strong> Для средних значений квантовых величин выполняются классические законы Ньютона, где $-\nabla V(\mathbf{r})$ играет роль классической силы $\mathbf{F}$.
+        </div>
+    </div>
+
+    <h2 id="t5-continuity">3. Плотность тока вероятности и квантовое уравнение непрерывности</h2>
+    <div class="card">
+        <p>Квантовая механика требует сохранения вероятности. Если вероятность убывает в каком-то объеме, она должна «вытекать» через границы этого объема в виде потока (тока) вероятности.</p>
+        
+        <p>Введем плотность вероятности $\rho(\mathbf{r}, t) = |\psi(\mathbf{r}, t)|^2$ и <span class="highlight">плотность тока вероятности</span> $\mathbf{j}(\mathbf{r}, t)$:</p>
+        <div class="math-block">
+            $$ \mathbf{j}(\mathbf{r}, t) = \frac{\hbar}{2mi} \left( \psi^* \nabla \psi - \psi \nabla \psi^* \right) $$
+        </div>
+
+        <p>Из временного уравнения Шредингера напрямую следует <span class="highlight-secondary">квантовое уравнение непрерывности</span> (неразрывности):</p>
+        <div class="math-block">
+            $$ \frac{\partial \rho}{\partial t} + \text{div} \mathbf{j} = 0 $$
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Вывод уравнения непрерывности
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Запишем временное УШ и сопряженное к нему:</p>
+                <ul>
+                    <li>$ i\hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\Delta\psi + V\psi $</li>
+                    <li>$ -i\hbar \frac{\partial \psi^*}{\partial t} = -\frac{\hbar^2}{2m}\Delta\psi^* + V\psi^* $</li>
+                </ul>
+                <p>Умножим первое на $\psi^*$, а второе на $\psi$ и вычтем второе из первого. Члены с потенциалом сократятся:</p>
+                <div class="math-block">
+                    $$ i\hbar \frac{\partial}{\partial t}(\psi^* \psi) = -\frac{\hbar^2}{2m} (\psi^*\Delta\psi - \psi\Delta\psi^*) $$
+                </div>
+                <p>Поскольку $\psi^*\Delta\psi - \psi\Delta\psi^* = \text{div}(\psi^*\nabla\psi - \psi\nabla\psi^*)$, мы получаем:</p>
+                <div class="math-block">
+                    $$ \frac{\partial |\psi|^2}{\partial t} + \text{div} \left[ \frac{\hbar}{2mi} (\psi^*\nabla\psi - \psi\nabla\psi^*) \right] = 0 $$
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Canvas Simulation -->
+        <div class="canvas-container" style="margin-top: 2rem;">
+            <h3>Интерактивная модель: Плотность тока вероятности волнового пакета</h3>
+            <canvas id="currentSimCanvas" width="800" height="300" style="width: 100%; border-radius: 8px; background: #0f172a;"></canvas>
+            
+            <div class="controls" style="margin-top: 1rem; display: flex; gap: 1.5rem; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <label for="momentumSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Импульс $p_0$</label>
+                    <input type="range" id="momentumSlider" min="-5" max="5" value="2" step="0.1" style="width: 150px;">
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <label for="widthSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Ширина $\sigma$</label>
+                    <input type="range" id="widthSlider" min="0.5" max="3" value="1.5" step="0.1" style="width: 150px;">
+                </div>
+            </div>
+            <p style="text-align: center; color: #64748b; font-size: 0.9rem; margin-top: 1rem;">
+                Симуляция показывает плотность вероятности $\rho(x)$ (заливка) и направление плотности тока $j(x)$ (стрелки).
+            </p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квантминимум | Билеты 1-3</title>
+
+    <!-- Inlined KaTeX CSS -->
+    <style>
+        /* KATEX_CSS */
+    </style>
+
+    <!-- Inlined KaTeX JS -->
+    <script>
+        /* KATEX_JS */
+    </script>
+
+    <!-- Inlined KaTeX Auto-Render JS -->
+    <script>
+        /* KATEX_AUTO_RENDER */
+    </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false,
+                trust: true,
+                strict: false
+            });
+        });
+    </script>
+
+    <style>
+        /* Подключаем локальные шрифты Lora */
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-Italic.otf') format('opentype');
+            font-weight: 400;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-MediumItalic.otf') format('opentype');
+            font-weight: 500;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-SemiBold.otf') format('opentype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-SemiBoldItalic.otf') format('opentype');
+            font-weight: 600;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lora';
+            src: url('fonts/Lora/Lora-BoldItalic.otf') format('opentype');
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        :root {
+            --bg-color: #06060a;
+            --sidebar-bg: rgba(10, 10, 15, 0.85);
+            --card-bg: rgba(18, 18, 26, 0.88);
+            --text-main: #f1f5f9;
+            --text-muted: #cbd5e1;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --border: rgba(255, 255, 255, 0.15);
+            --warning-bg: rgba(234, 179, 8, 0.15);
+            --warning-border: rgba(234, 179, 8, 0.4);
+            --warning-text: #fef08a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Lora', Georgia, 'Times New Roman', serif;
+            background-color: var(--bg-color);
+            background-image: url('фон.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .bg-glow {
+            position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+            z-index: -1; pointer-events: none;
+        }
+
+        .sidebar {
+            width: 320px; background: var(--sidebar-bg); backdrop-filter: blur(16px);
+            border-right: 1px solid var(--border); padding: 2rem 1rem;
+            position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 1rem;
+        }
+
+        .logo {
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; padding-left: 1rem;
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .nav-btn {
+            background: transparent; border: 1px solid transparent; color: var(--text-muted);
+            padding: 1rem; text-align: left; border-radius: 0.75rem; cursor: pointer;
+            font-size: 0.95rem; font-family: system-ui, -apple-system, sans-serif; transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+
+        .nav-btn:hover { background: rgba(255, 255, 255, 0.08); color: var(--text-main); }
+        .nav-btn.active { background: rgba(255, 255, 255, 0.12); color: white; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .nav-btn.active::before {
+            content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+            height: 60%; width: 3px; background: var(--accent); border-radius: 0 4px 4px 0;
+        }
+
+        .content { flex: 1; padding: 4rem; max-width: 1000px; margin: 0 auto; }
+        .ticket-section { display: none; animation: fadeIn 0.5s ease; }
+        .ticket-section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.02em; }
+        h2 { font-size: 1.5rem; margin: 3rem 0 1.5rem; color: #f1f5f9; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; scroll-margin-top: 2rem; }
+        h2::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent-glow); }
+        p { margin-bottom: 1.25rem; color: var(--text-muted); font-size: 1.05rem; }
+
+        .card {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem;
+            padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(16px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+        .alert {
+            background: var(--warning-bg); border-left: 4px solid var(--warning-text); border-radius: 0.5rem;
+            padding: 1rem 1.5rem; margin-bottom: 1.5rem; color: var(--text-main); font-size: 1rem;
+        }
+
+        .math-block {
+            background: rgba(0,0,0,0.6); border-radius: 0.5rem; padding: 1rem;
+            margin: 1rem 0; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .accordion { background: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem; margin-bottom: 1rem; overflow: hidden; }
+        .accordion-header { padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; user-select: none; transition: background 0.3s ease; }
+        .accordion-header:hover { background: rgba(255, 255, 255, 0.05); }
+        .accordion-content { padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: all 0.4s ease; opacity: 0; }
+        .accordion.open .accordion-content { padding: 0 1.5rem 1.5rem; max-height: 5000px; opacity: 1; }
+        .accordion-icon { transition: transform 0.3s ease; }
+        .accordion.open .accordion-icon { transform: rotate(180deg); }
+
+        .highlight { color: #93c5fd; font-weight: 500; }
+        .highlight-secondary { color: #c084fc; font-weight: 500; }
+        .highlight-important { color: #fde047; font-weight: 600; }
+
+        ul { list-style-type: none; padding-left: 1rem; margin-bottom: 1.25rem; }
+        ul li { position: relative; margin-bottom: 0.5rem; color: var(--text-muted); }
+        ul li::before { content: '→'; position: absolute; left: -1.2rem; color: var(--accent); }
+
+        ol { padding-left: 1.5rem; margin-bottom: 1.25rem; color: var(--text-muted); }
+        ol li { margin-bottom: 0.5rem; }
+        ol li a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        ol li a:hover { color: var(--accent); text-decoration: underline; }
+
+        /* Flowchart CSS */
+        .flow-container { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin: 2rem 0; font-size: 0.95rem; }
+        .flow-box { background: rgba(15, 23, 42, 0.92); border: 2px solid rgba(59, 130, 246, 0.5); padding: 1rem 1.5rem; border-radius: 0.5rem; text-align: center; width: 100%; max-width: 450px; position: relative; }
+        .flow-box.decision { border-color: #a855f7; border-radius: 2rem; background: rgba(15, 23, 42, 0.92); font-weight: bold; }
+        .flow-box.result { border-color: #10b981; background: rgba(15, 23, 42, 0.92); font-weight: 600; }
+        .flow-box.result-warn { border-color: #f59e0b; background: rgba(15, 23, 42, 0.92); font-weight: 600; }
+        .flow-box.result-err { border-color: #ef4444; background: rgba(15, 23, 42, 0.92); font-weight: 600; }
+        .flow-arrow { color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; line-height: 1; margin: -0.25rem 0; }
+        .flow-row { display: flex; justify-content: center; gap: 2rem; width: 100%; align-items: stretch; position: relative; }
+        .flow-col { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; flex: 1; }
+        
+        .flow-connector-horizontal { position: absolute; top: 2rem; left: 25%; right: 25%; height: 2px; background: rgba(255,255,255,0.4); z-index: -1; }
+
+        .visual-container {
+            background: rgba(15, 15, 25, 0.9); border: 1px solid var(--border);
+            border-radius: 0.75rem; padding: 1.5rem; margin: 1.5rem 0;
+            display: flex; flex-direction: column; align-items: center; gap: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        .visual-canvas {
+            background: #0d0d15; border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem; max-width: 100%;
+        }
+        .control-panel {
+            width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between;
+            align-items: center; gap: 1rem; color: var(--text-muted); font-size: 0.9rem;
+        }
+        .control-group { display: flex; align-items: center; gap: 0.5rem; }
+        .slider { -webkit-appearance: none; width: 150px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.1); outline: none; }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 0 8px var(--accent-glow); }
+        .diagram-axis { width: 100%; height: 60px; position: relative; margin: 1rem 0; border-bottom: 2px solid rgba(255,255,255,0.2); }
+        
+        .katex-display { margin: 0.5em 0; overflow-x: auto; overflow-y: hidden; padding-bottom: 5px;}
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    
+    <nav class="sidebar">
+        <div class="logo">Квант. минимум</div>
+        <button class="nav-btn active" onclick="showTicket(1)">Билет 1. Пространства и операторы</button>
+        <button class="nav-btn" onclick="showTicket(2)">Билет 2. Операторы физических величин</button>
+        <button class="nav-btn" onclick="showTicket(3)">Билет 3. Состояния и измерения</button>
+        <button class="nav-btn" onclick="showTicket(4)">Билет 4. Соотношение неопределенности</button>
+    </nav>
+
+    <main class="content">
+        <!-- БИЛЕТ 1 -->
+        <section id="ticket-1" class="ticket-section active">
+            <h1>Билет 1</h1>
+            <p>Фундаментальные основы квантовой механики: от гильбертова пространства до классификации спектров.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (7 вопросов):</h3>
+                <ol>
+                    <li><a href="#q1">Определение гильбертова пространства и линейного оператора в гильбертовом пространстве.</a></li>
+                    <li><a href="#q2">Определение суммы, произведения, коммутатора и антикоммутатора операторов.</a></li>
+                    <li><a href="#q3">Определение обратного, эрмитово сопряженного, унитарного, эрмитового (самосопряженного) и антиэрмитового операторов.</a></li>
+                    <li><a href="#q4">Спектры эрмитового и унитарного операторов.</a></li>
+                    <li><a href="#q5">Свойства собственных функций и собственных значений эрмитового оператора.</a></li>
+                    <li><a href="#q6">Разложение функций по спектру самосопряженного оператора.</a></li>
+                    <li><a href="#q7">Определение дельта-функции Дирака.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="q1">1. Определение гильбертова пространства и линейного оператора</h2>
+            <div class="card">
+                <h3>Гильбертово пространство $\mathcal{H}$</h3>
+                <p>Это линейное векторное пространство над полем комплексных чисел $\mathbb{C}$, удовлетворяющее требованиям:</p>
+                <div class="alert" style="background: rgba(147, 197, 253, 0.1); border-left-color: #93c5fd; padding: 0.75rem 1rem;">
+                    <strong>Нотация Дирака (Бра и Кет векторы):</strong> В квантовой механике векторы состояний обозначаются как <strong>кет-векторы</strong> $| \psi \rangle$ (векторы-столбцы). Элементы сопряженного пространства (линейные функционалы) называются <strong>бра-векторами</strong> $\langle \phi |$ (векторы-строки). Скалярное произведение записывается как "скобка" (bracket): $\langle \phi | \psi \rangle$.
+                </div>
+                <ul>
+                    <li><span class="highlight">Введено скалярное произведение</span> $\langle x | y \rangle = (y,x)$. Из него следует неравенство Коши-Буняковского: $|\langle x | y \rangle| \le ||x||\cdot||y||$.</li>
+                    <li><span class="highlight">Бесконечномерность</span> (не существует конечного базиса).</li>
+                    <li><span class="highlight">Полнота:</span> всякая фундаментальная последовательность сходится к элементу этого же пространства (нет "дыр", пределы лежат в $\mathcal{H}$).</li>
+                    <li><span class="highlight">Сепарабельность:</span> существует счетное множество векторов, образующее всюду плотное множество (существует счетный базис).</li>
+                </ul>
+
+                <h3>Линейный оператор</h3>
+                <p>Отображение $\hat{L}$, которое каждому вектору $f$ из своей области определения $D(\hat{L}) \subset \mathcal{H}$ однозначно сопоставляет вектор $g \in \mathcal{H}$, и удовлетворяет условию линейности:</p>
+                <div class="math-block">
+                    $$\hat{L}(c_1 f + c_2 g) = c_1 \hat{L}f + c_2 \hat{L}g$$
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="q2">2. Определение суммы, произведения, коммутатора и антикоммутатора</h2>
+            <div class="card">
+                <p>Бинарные операции в множестве операторов:</p>
+                <ul>
+                    <li><strong>Сумма:</strong> $\hat{C} = \hat{A} + \hat{B}$, если $\hat{C}f = \hat{A}f + \hat{B}f$.</li>
+                    <li><strong>Произведение:</strong> $\hat{C} = \hat{A}\hat{B}$, если $\hat{C}f = \hat{A}(\hat{B}f)$ (последовательное действие).</li>
+                    <li><strong>Коммутатор:</strong> $[\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}$. Операторы коммутируют, если $[\hat{A}, \hat{B}] = 0$.</li>
+                    <li><strong>Антикоммутатор:</strong> $\{\hat{A}, \hat{B}\} = [\hat{A}, \hat{B}]_+ = \hat{A}\hat{B} + \hat{B}\hat{A}$.</li>
+                </ul>
+                <div class="alert" style="background: rgba(192, 132, 252, 0.1); border-left-color: #c084fc; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Коммутирующие операторы и общий ОНБ:</strong> Если два эрмитовых оператора коммутируют ($[\hat{A}, \hat{B}] = 0$), то они обладают <strong>общей ортонормированной системой (ОНБ) собственных функций</strong>. С физической точки зрения это означает, что соответствующие им физические величины можно точно и одновременно измерить в одном состоянии.
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="q3">3. Виды операторов (Строгая классификация)</h2>
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Обратный и Эрмитово сопряженный
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Обратный:</strong> $\hat{L}^{-1}$ существует, если отображение взаимно-однозначно (ядро пустое). $\hat{L}\hat{L}^{-1} = \hat{L}^{-1}\hat{L} = \hat{I}$.</p>
+                    <p><strong>Эрмитово сопряженный $\hat{L}^\dagger$:</strong> определяется интегральным тождеством $\langle \hat{L}^\dagger f | g \rangle = \langle f | \hat{L} g \rangle$.</p>
+                </div>
+            </div>
+
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Эрмитов vs Самосопряженный (Критично!)
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="alert">
+                        <strong>Эрмитов (Симметричный) оператор:</strong>
+                        Выполняется соотношение $\langle \hat{L} f | g \rangle = \langle f | \hat{L} g \rangle$ на области $D(\hat{L})$. При этом область определения сопряженного может быть шире: $D(\hat{L}) \subseteq D(\hat{L}^\dagger)$.
+                    </div>
+                    <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-color: #10b981; color: #e2e8f0;">
+                        <strong>Самосопряженный оператор:</strong>
+                        Оператор строго совпадает со своим сопряженным: $\hat{L} = \hat{L}^\dagger$, и их <strong>области определения совпадают</strong>: $D(\hat{L}) = D(\hat{L}^\dagger)$. Только они являются физическими наблюдаемыми!
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Антиэрмитов и Унитарный
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Антиэрмитов:</strong> $\hat{L}^\dagger = -\hat{L}$. (Пример: оператор $\frac{d}{dx}$ без множителя $i$).</p>
+                    <p><strong>Унитарный:</strong> $\hat{U}^\dagger \hat{U} = \hat{U} \hat{U}^\dagger = \hat{I}$ (т.е. $\hat{U}^\dagger = \hat{U}^{-1}$). Сохраняет скалярное произведение векторов $\langle \hat{U}f | \hat{U}g \rangle = \langle f | g \rangle$.</p>
+                </div>
+            </div>
+
+
+            <!-- QUESTION 4 -->
+            <h2 id="q4">4. Спектры эрмитового и унитарного операторов</h2>
+
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <h3>Суть задачи: что мы ищем и зачем?</h3>
+                <p><strong>Физическая постановка:</strong> В квантовой механике результаты измерения физической величины $L$ (например, энергии, импульса или координаты) являются случайными величинами. Но спектр возможных значений, которые мы вообще <em>можем</em> получить на приборе, фиксирован и определяется оператором $\hat{L}$. Наша цель — найти эти возможные значения.</p>
+                <p><strong>Математическая модель:</strong> Возможные результаты измерения соответствуют собственным значениям $\lambda$ оператора $\hat{L}$. Это приводит к уравнению на собственные значения и собственные векторы (функции) $f \neq 0$:</p>
+                <div class="math-block">
+                    $$\hat{L} f = \lambda f$$
+                </div>
+                <p><strong>Откуда берется оператор $(\hat{L} - \lambda\hat{I})$?</strong></p>
+                <p>Мы переносим всё в одну сторону и выносим вектор за скобки. Так как $\lambda$ — это число, а $\hat{L}$ — оператор, для корректности мы умножаем число $\lambda$ на единичный оператор $\hat{I}$:</p>
+                <div class="math-block">
+                    $$\hat{L} f - \lambda \hat{I} f = 0 \implies (\hat{L} - \lambda\hat{I}) f = 0$$
+                </div>
+                <p>Таким образом, поиск дискретных собственных значений сводится к нахождению таких $\lambda$, при которых оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ имеет нетривиальное (ненулевое) ядро $\ker(\hat{L}_\lambda) \neq \{0\}$.</p>
+                
+                <p><strong>Что такое спектр на самом деле?</strong></p>
+                <p>В бесконечномерных пространствах ситуация сложнее, чем в матричной алгебре (где либо есть нетривиальное решение, либо оператор полностью обратим). Здесь оператор обратной задачи — так называемая <span class="highlight">резольвента</span> $\hat{R}_\lambda = (\hat{L} - \lambda\hat{I})^{-1}$ — может ломаться тремя разными способами. Набор всех "плохих" точек $\lambda$, где резольвента $\hat{R}_\lambda$ не существует как взаимно-однозначный ограниченный оператор, определенный на всем $\mathcal{H}$, и называется <strong>спектром</strong> $\sigma(\hat{L})$:</p>
+                <ul>
+                    <li><span class="highlight">Точечный спектр ($\sigma_p$)</span>: Резольвента не существует, так как оператор склеивает векторы ($\ker \neq \{0\}$). Это дает классические <em>дискретные уровни</em> (например, уровни энергии в атоме водорода).</li>
+                    <li><span class="highlight">Непрерывный спектр ($\sigma_c$)</span>: Резольвента существует ($\ker = \{0\}$), ее область определения плотна, но она <em>не ограничена</em>. Физически это соответствует <em>состояниям рассеяния</em> (например, свободное движение частицы, где энергия может быть любой). Собственные функции непрерывного спектра (плоские волны) "не влезают" в гильбертово пространство $L_2$, так как не нормируются на единицу.</li>
+                    <li><span class="highlight">Остаточный спектр ($\sigma_r$)</span>: Резольвента существует, но ее образ не всюду плотен в $\mathcal{H}$. Это математическая патология, которая <strong>отсутствует у физических (самосопряженных) операторов</strong>, что гарантирует чистоту спектрального разложения.</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Понятия Ядра (Ker) и Образа (Ran)</h3>
+                <p>Для понимания спектра нужно знать две важнейшие характеристики оператора $\hat{A}$:</p>
+                <ul>
+                    <li><span class="highlight">Ядро $\ker(\hat{A})$</span>: множество всех векторов, которые оператор обнуляет ($\hat{A}f = 0$). Если ядро не пустое (содержит не только нуль), оператор "склеивает" векторы и необратим.</li>
+                    <li><span class="highlight">Образ $\text{Ran}(\hat{A})$</span>: множество всех возможных значений на выходе оператора ($\{g \in \mathcal{H} \mid g = \hat{A}f\}$). Если образ не покрывает всё гильбертово пространство, оператор не "дотягивается" до некоторых векторов.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Алгоритм классификации точек спектра $\sigma(\hat{L})$</h3>
+                <p>Исследуем оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ для классификации любой точки $\lambda \in \mathbb{C}$:</p>
+                
+                <!-- CSS Flowchart -->
+                <div class="flow-container">
+                    <div class="flow-box">
+                        Выбираем точку $\lambda \in \mathbb{C}$
+                    </div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box decision">
+                        Шаг 1: Анализируем Ядро<br>
+                        $\ker(\hat{L} - \lambda\hat{I})$
+                    </div>
+                    <div class="flow-arrow">↓</div>
+                    
+                    <div class="flow-row">
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed;">
+                                $\ker \neq \{0\}$<br>
+                                <small>$\exists f \neq 0 : \hat{L}f = \lambda f$</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result-warn">
+                                ТОЧЕЧНЫЙ СПЕКТР<br>
+                                $\lambda \in \sigma_p$ (дискретный)
+                            </div>
+                        </div>
+                        
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed;">
+                                $\ker = \{0\}$<br>
+                                <small>Уравнение имеет лишь $f=0$</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box decision">
+                                Шаг 2: Анализируем Образ<br>
+                                $\text{Ran}(\hat{L} - \lambda\hat{I})$
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow" style="margin-left: 50%; transform: translateX(-50%);">↓</div>
+                    
+                    <div class="flow-row" style="margin-top: 1rem;">
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                <small>Резольвента $\hat{R}_\lambda$ ограничена</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result">
+                                РЕГУЛЯРНАЯ ТОЧКА<br>
+                                (Не спектр)
+                            </div>
+                        </div>
+
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                <small>Но $\hat{R}_\lambda$ не ограничена</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result-warn" style="border-color: #3b82f6; background: rgba(59,130,246,0.1);">
+                                НЕПРЕРЫВНЫЙ СПЕКТР<br>
+                                $\lambda \in \sigma_c$ (сплошной)
+                            </div>
+                        </div>
+
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                $\overline{\text{Ran}} \neq \mathcal{H}$<br>
+                                <small>Образ не всюду плотен</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result-err">
+                                ОСТАТОЧНЫЙ СПЕКТР<br>
+                                $\lambda \in \sigma_r$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="q5">5. Свойства собственных функций и значений эрмитового оператора</h2>
+            <div class="card">
+                <ul>
+                    <li><strong>Вещественность:</strong> Все собственные числа $\lambda$ (весь спектр) вещественны. $\lambda = \lambda^*$.</li>
+                    <li><strong>Ортогональность:</strong> Собственные функции, отвечающие разным $\lambda$, ортогональны: $\langle \phi_m | \phi_n \rangle = 0$ при $\lambda_m \neq \lambda_n$.</li>
+                    <li><strong>Полнота:</strong> Система собственных функций самосопряженного оператора образует полный базис (базис разложения).</li>
+                    <li><strong>Унитарный оператор:</strong> Собственные числа унитарного оператора лежат на единичной окружности ($|\lambda|^2 = 1 \implies \lambda = e^{i\alpha}$).</li>
+                    <li>У эрмитовых и унитарных операторов <strong>остаточный спектр отсутствует</strong>.</li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <h2 id="q6">6. Разложение функций по спектру самосопряженного оператора</h2>
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <h3>Суть и значение разложения по спектру</h3>
+                <p><strong>Физическая концепция:</strong> Принцип суперпозиции утверждает, что любое состояние квантовой системы $|f\rangle \in \mathcal{H}$ можно представить как линейную комбинацию (суперпозицию) других квантовых состояний. Если мы выбираем в качестве этих состояний собственные функции $\phi$ физического оператора $\hat{L}$ (которые в силу самосопряженности $\hat{L}$ образуют полную систему), то коэффициенты разложения будут соответствовать <strong>амплитудам вероятности</strong> обнаружить те или иные значения измеряемой величины.</p>
+                <p>Математически это реализуется через <strong>разложение единичного оператора $\hat{I}$</strong> (разложение единицы), которое зависит от типа спектра наблюдаемой.</p>
+            </div>
+
+            <div class="card">
+                <h3>1. Чисто дискретный спектр (ЧДСП)</h3>
+                <p>Если самосопряженный оператор $\hat{L}$ обладает чисто дискретным спектром, то его собственные функции $\{\phi_k\}$ образуют в $\mathcal{H}$ полную ортонормированную систему (ОНС):</p>
+                <div class="math-block">
+                    $$\langle \phi_n | \phi_k \rangle = \delta_{n,k}$$
+                </div>
+                <p>Из свойства полноты этой системы векторов следует <strong>«разложение единицы»</strong>:</p>
+                <div class="math-block">
+                    $$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k|$$
+                </div>
+                <p>Подставляя это тождество к любому состоянию $|f\rangle \in \mathcal{H}$, получаем разложение по спектру:</p>
+                <div class="math-block">
+                    $$|f\rangle = \hat{I}|f\rangle = \sum_k |\phi_k\rangle\langle \phi_k|f\rangle = \sum_k c_k |\phi_k\rangle$$
+                </div>
+                <p>Где коэффициенты разложения (проекции вектора состояния на базис собственных функций) равны:</p>
+                <div class="math-block">
+                    $$c_k = \langle \phi_k | f\rangle \quad (\text{или в координатном виде: } c_k = \int \phi_k^*(x) f(x) dx)$$
+                </div>
+                <p>Если исходная функция нормирована на единицу ($\|f\| = 1$), то сумма квадратов модулей коэффициентов (вероятностей) равна единице (<strong>условие нормировки для ЧДСП</strong>):</p>
+                <div class="math-block">
+                    $$\|f\|^2 = \sum_k |c_k|^2 = 1$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>2. Чисто непрерывный спектр (ЧНСП)</h3>
+                <p>Если спектр $\sigma(\hat{L})$ непрерывен (например, для оператора координаты или импульса), собственные числа $\mu$ сплошь заполняют некоторый интервал $(a, b)$ или всю вещественную ось $\mathbb{R}$.</p>
+                <p>В этом случае уравнение на собственные функции $\hat{L}\psi_\mu = \mu \psi_\mu$ имеет решения, но они **не принадлежат гильбертову пространству** ($\psi_\mu \notin \mathcal{H}$), так как интеграл их нормы расходится:</p>
+                <div class="math-block">
+                    $$\|\psi_\mu\|^2 = \int_{-\infty}^{\infty} |\psi_\mu(x)|^2 dx = \infty$$
+                </div>
+                <p>Такие функции $\psi_\mu$ называют <span class="highlight">обобщенными собственными функциями</span>. Несмотря на расходимость нормы, они образуют полный непрерывный базис (в смысле обобщенных функций Дирака) с нормировкой на дельта-функцию (<strong>$\delta$-нормировка</strong>):</p>
+                <div class="math-block">
+                    $$\langle \psi_\mu | \psi_{\mu'} \rangle = \int_{-\infty}^{\infty} \psi_\mu^*(x) \psi_{\mu'}(x) dx = \delta(\mu - \mu')$$
+                </div>
+                <p>Разложение единицы для ЧНСП переходит в интеграл по спектру:</p>
+                <div class="math-block">
+                    $$\hat{I} = \int_{\sigma(\hat{L})} |\psi_\mu\rangle\langle \psi_\mu| d\mu$$
+                </div>
+                <p>Разложение любого состояния $|f\rangle \in \mathcal{H}$ записывается как:</p>
+                <div class="math-block">
+                    $$|f\rangle = \hat{I}|f\rangle = \int_{\sigma(\hat{L})} \langle \psi_\mu | f\rangle |\psi_\mu\rangle d\mu = \int_{\sigma(\hat{L})} c_\mu |\psi_\mu\rangle d\mu$$
+                </div>
+                <p>Где плотность амплитуды вероятности равна $c_\mu = \langle \psi_\mu | f\rangle$, а условие нормировки имеет вид:</p>
+                <div class="math-block">
+                    $$\int_{\sigma(\hat{L})} |c_\mu|^2 d\mu = 1$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>3. Смешанный спектр</h3>
+                <p>В реальных задачах (например, в атоме водорода, где есть дискретные связанные уровни энергии и непрерывная область ионизации) оператор $\hat{L}$ обладает смешанным спектром. Полная система состояний образуется объединением ОНС дискретного спектра $\{\phi_k\}$ и непрерывного базиса $\{\psi_\mu\}$:</p>
+                <div class="math-block">
+                    $$\langle \phi_n | \phi_k \rangle = \delta_{n, k}, \quad \langle \psi_\mu | \phi_k \rangle = 0, \quad \langle \psi_\mu | \psi_{\mu'} \rangle = \delta(\mu - \mu')$$
+                </div>
+                <p>Соответственно, разложение единицы объединяет сумму и интеграл:</p>
+                <div class="math-block">
+                    $$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k| + \int_{\sigma(\hat{L})_c} |\psi_\mu\rangle\langle\psi_\mu| d\mu$$
+                </div>
+                <p>Разложение произвольного состояния $|f\rangle$ принимает вид:</p>
+                <div class="math-block">
+                    $$|f\rangle = \sum_k c_k |\phi_k\rangle + \int_{\sigma(\hat{L})_c} c_\mu |\psi_\mu\rangle d\mu$$
+                </div>
+                <p>Где коэффициенты $c_k = \langle \phi_k | f\rangle$ и плотность амплитуд $c_\mu = \langle \psi_\mu | f\rangle$ связаны общим условием сохранения вероятности:</p>
+                <div class="math-block">
+                    $$\sum_k |c_k|^2 + \int_{\sigma(\hat{L})_c} |c_\mu|^2 d\mu = 1$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>4. Спектральное разложение оператора</h3>
+                <p>Зная разложение единицы, мы можем получить представление самого оператора $\hat{L}$ через его собственные значения и проекторы. Подействуем оператором $\hat{L}$ на произвольный вектор $|f\rangle$ (для наглядности рассмотрим ЧДСП-случай):</p>
+                <div class="math-block">
+                    $$\hat{L}|f\rangle = \hat{L}\hat{I}|f\rangle = \hat{L} \left( \sum_k |\phi_k\rangle\langle \phi_k|f\rangle \right) = \sum_k \left(\hat{L}|\phi_k\rangle\right)\langle \phi_k|f\rangle$$
+                </div>
+                <p>Используя уравнение на собственные значения $\hat{L}|\phi_k\rangle = \lambda_k |\phi_k\rangle$, получаем:</p>
+                <div class="math-block">
+                    $$\hat{L}|f\rangle = \sum_k \lambda_k |\phi_k\rangle\langle \phi_k|f\rangle$$
+                </div>
+                <p>Поскольку вектор $|f\rangle$ произвольный, мы можем исключить его из равенства и получить спектральное разложение самого оператора:</p>
+                <div class="math-block">
+                    $$\hat{L} = \sum_k \lambda_k |\phi_k\rangle\langle \phi_k| = \sum_k \lambda_k \hat{P}_k$$
+                </div>
+                <p>Где $\hat{P}_k = |\phi_k\rangle\langle \phi_k|$ — оператор проектирования на подпространство собственного состояния $\phi_k$. В случае смешанного спектра выражение принимает общий вид:</p>
+                <div class="math-block">
+                    $$\hat{L} = \sum_k \lambda_k |\phi_k\rangle\langle \phi_k| + \int_{\sigma(\hat{L})_c} \mu |\psi_\mu\rangle\langle \psi_\mu| d\mu$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>5. Разложение функции от оператора</h3>
+                <p>Существует <strong>два определения</strong> функции от оператора:</p>
+                
+                <p><strong>1. Через разложение в ряд Тейлора:</strong><br>
+                Пусть функция $F(x)$ раскладывается в ряд Тейлора: $F(x) = \sum_{n=0}^{\infty} c_n x^n$, где $c_n = \frac{1}{n!} \frac{d^n F}{dx^n} \Big|_{x=0}$.<br>
+                Тогда функция от оператора определяется подстановкой оператора в этот ряд:</p>
+                <div class="math-block">
+                    $$F(\hat{L}) = \sum_{n=0}^{\infty} c_n \hat{L}^n$$
+                </div>
+                
+                <p><strong>2. Через спектральное разложение:</strong><br>
+                Используя полученный аппарат спектрального разложения для самосопряженного оператора $\hat{L}$, функцию от оператора можно определить так, что она имеет те же собственные функции, а ее собственные значения равны функции от исходных собственных значений ($F(\hat{L}) |\phi_k\rangle = F(\lambda_k) |\phi_k\rangle$). Опираясь на разложение единицы, спектральное представление имеет вид:</p>
+                <div class="math-block">
+                    $$F(\hat{L}) = \sum_k F(\lambda_k) |\phi_k\rangle\langle \phi_k| + \int_{\sigma(\hat{L})_c} F(\mu) |\psi_\mu\rangle\langle \psi_\mu| d\mu$$
+                </div>
+
+                <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-left-color: #10b981; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Важное свойство:</strong> При этом функция от оператора всегда <strong>коммутирует</strong> с самим оператором: $[F(\hat{L}), \hat{L}] = 0$.
+                </div>
+            </div>
+
+
+            <!-- QUESTION 7 -->
+            <h2 id="q7">7. Определение дельта-функции Дирака</h2>
+            <div class="card">
+                <p>Дельта-функция относится к классу обобщенных функций (сингулярных распределений). При непрерывном спектре функции "выпадают" из гильбертова пространства и нормируются на дельта-функцию: $\langle \lambda | \lambda' \rangle = \delta(\lambda - \lambda')$.</p>
+                
+                <p>Строгое определение — ядро единичного интегрального оператора:</p>
+                <div class="math-block">
+                    $$f(x) = \int_{-\infty}^{\infty} \delta(x - x') f(x') dx'$$
+                </div>
+                <p><strong>Свойства дельта-функции:</strong></p>
+                <ul>
+                    <li>Свойство масштабирования: $\delta(\alpha x) = \frac{1}{|\alpha|} \delta(x)$.</li>
+                    <li>Корни сложного аргумента: $\delta[\varphi(x)] = \sum_i \frac{\delta(x - x_i)}{|\varphi'(x_i)|}$.</li>
+                    <li>Производная от функции Хэвисайда: $\frac{d\theta}{dx} = \delta(x)$.</li>
+                    <li>Интегральное представление (Фурье): $\delta(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ikx} dk$.</li>
+                </ul>
+
+                <!-- Интерактивная визуализация дельта-функции -->
+                <div class="visual-container">
+                    <div class="card-title">Интерактивный симулятор: $\delta(x)$ как предел Гауссиана</div>
+                    <canvas id="deltaCanvas" class="visual-canvas" width="600" height="250"></canvas>
+                    <div class="control-panel">
+                        <div class="control-group">
+                            <label for="sigmaSlider">Ширина ($\sigma$):</label>
+                            <input type="range" id="sigmaSlider" class="slider" min="0.04" max="1.0" step="0.01" value="0.3">
+                            <span id="sigmaVal">0.30</span>
+                        </div>
+                        <div>
+                            Максимум пика: <span id="peakVal" class="highlight" style="font-weight: 600;">1.33</span>
+                        </div>
+                        <div>
+                            Площадь $\int \rho(x)dx \equiv 1.00$
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- БИЛЕТ 2 -->
+        <section id="ticket-2" class="ticket-section">
+            <h1>Билет 2</h1>
+            <p>Фундаментальные операторы квантовой механики и гамильтониан частицы во внешних полях.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (6 вопросов):</h3>
+                <ol>
+                    <li><a href="#t2-q1">Оператор физической величины.</a></li>
+                    <li><a href="#t2-q2">Оператор координаты.</a></li>
+                    <li><a href="#t2-q3">Оператор импульса.</a></li>
+                    <li><a href="#t2-q4">Оператор кинетической энергии.</a></li>
+                    <li><a href="#t2-q5">Гамильтониан для частицы в потенциальном поле.</a></li>
+                    <li><a href="#t2-q6">Гамильтониан во внешнем электромагнитном поле.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t2-q1">1. Оператор физической величины</h2>
+            <div class="card">
+                <p>В квантовой механике (согласно постулатам) каждой физической величине (наблюдаемой) $A$ сопоставляется <span class="highlight">линейный самосопряженный (эрмитов) оператор</span> $\hat{A}$.</p>
+                <ul>
+                    <li><strong>Спектр:</strong> У самосопряженного оператора вещественный спектр $\sigma(\hat{A}) \subset \mathbb{R}$. Это гарантирует, что возможные результаты измерений (собственные значения $\lambda_n \in \text{Ran}(\hat{A})$) — всегда вещественные числа.</li>
+                    <li>
+                        <strong>Среднее значение (Математическое ожидание):</strong> $\bar{A} = \langle \psi | \hat{A} | \psi \rangle$.
+                        <div style="margin-top: 0.5rem; padding-left: 1rem; border-left: 2px solid rgba(255,255,255,0.2);">
+                            <p style="margin-bottom: 0.5rem;"><strong>Что это такое:</strong> Из-за принципиально вероятностной природы квантовой механики, среднее значение $\bar{A}$ — это среднее арифметическое результатов серии измерений величины $A$ над <em>ансамблем одинаково приготовленных систем</em>.</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Что значит «в состоянии $\psi$»:</strong> Это как раз и означает условие приготовления. Перед каждым измерением система была подготовлена таким образом, что её полностью описывает один и тот же вектор состояния $|\psi\rangle$.</p>
+                            <p style="margin-bottom: 0;"><strong>Почему так записывается:</strong> Запись $\langle \psi | \hat{A} | \psi \rangle$ — это элегантная форма классического матожидания. Если разложить состояние по базису собственных векторов оператора ($|\psi\rangle = \sum c_n |\phi_n\rangle$), то мы получим $\bar{A} = \sum \lambda_n |c_n|^2$, где $\lambda_n$ — возможное значение (результат измерения), а $|c_n|^2$ — вероятность его получить.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="alert" style="background: rgba(234, 179, 8, 0.1); border-left-color: #eab308; margin-top: 1.5rem; padding: 1rem;">
+                    <strong style="color: #eab308; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">⚠️ Важное концептуальное различие:</strong>
+                    <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.95rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Квантовое состояние $|\psi\rangle$</strong> — это первичный абстрактный вектор в гильбертовом пространстве. Оно содержит <em>всю возможную информацию</em> о системе, независимо от того, в каком представлении мы работаем.</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Волновая функция $\psi(x)$</strong> — это проекция абстрактного состояния на конкретный базис (в данном случае координатный). Это всего лишь <em>один из способов</em> (представление) описания состояния: $\psi(x) = \langle x | \psi\rangle$.</li>
+                        <li><strong>Физическая величина (Наблюдаемая) $A$</strong> — это измеримое на опыте свойство системы (энергия, импульс, координата). Математическим аппаратом квантовой механики ей ставится в жесткое соответствие <strong>эрмитов оператор $\hat{A}$</strong>.</li>
+                    </ul>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        От эксперимента к математике: что такое «приготовленное состояние»
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Связь физики и математики можно выстроить в простую логическую цепочку:</p>
+                        <ol style="padding-left: 1.5rem; margin-bottom: 0;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Лаборатория (Подготовка):</strong> Мы берем физический прибор (например, источник электронов, пропущенных через магнитное поле). Этот прибор создает поток частиц с совершенно одинаковыми свойствами (например, у всех определенный импульс). Это называется <em>приготовлением состояния</em>.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Абстракция (Вектор состояния):</strong> В математике этой конкретной настройке приборов жестко сопоставляется абстрактный вектор $|\psi\rangle$ в гильбертовом пространстве.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Измерение (Наблюдаемая):</strong> Затем мы ставим детектор (начинаем измерять энергию, координату и т.д.). Самому детектору (измерительному процессу) в теории ставится в соответствие оператор $\hat{A}$.</li>
+                            <li><strong>Предсказание (Среднее значение):</strong> Сэндвич $\langle \psi | \hat{A} | \psi \rangle$ — это математическая машина, которая берет описание настройки источника ($|\psi\rangle$) и описание детектора ($\hat{A}$), и выдает число — средний результат, который мы увидим на приборе, если повторим опыт миллион раз.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Что такое «представление» (Representation)?
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Вектор состояния $|\psi\rangle$ идеален в абстрактных выкладках, но чтобы считать реальные интегралы и производные, нам нужно спроецировать его на понятные нам оси.</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>Аналогия:</strong> У вас есть физическая стрелка (вектор $\vec{v}$). Вы можете записать её в декартовых осях $(v_x, v_y, v_z)$, а можете в полярных. Стрелка одна и та же, но числа в тетрадке разные. В квантмехе "оси" — это базисы.</p>
+                        <ul style="margin-bottom: 0; padding-left: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Координатное представление:</strong> Мы берем абстрактный вектор $|\psi\rangle$ и проецируем его на координатные оси (базис собственных векторов оператора координаты). Абстрактный вектор превращается в <em>волновую функцию от координаты</em> $\psi(x) = \langle x | \psi\rangle$.</li>
+                            <li><strong>Импульсное представление:</strong> Мы проецируем тот же самый вектор на оси импульсов. Получаем волновую функцию от импульса $\psi(p) = \langle p | \psi\rangle$.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t2-q2">2. Оператор координаты</h2>
+            <div class="card">
+                <p>В координатном представлении $L_2(-\infty, \infty)$ оператор координаты $\hat{x}$ является оператором умножения на аргумент $x$:</p>
+                <div class="math-block">
+                    $$\hat{x} \psi(x) = x \psi(x)$$
+                </div>
+                <p>Уравнение на собственные значения имеет вид: $\hat{x} \phi_\lambda(x) = \lambda \phi_\lambda(x)$.</p>
+                <ul>
+                    <li><strong>Спектр:</strong> Чисто сплошной, $\sigma(\hat{x}) = \mathbb{R}$. Собственные значения $\lambda \in (-\infty, \infty)$.</li>
+                    <li><strong>Собственные функции:</strong> Формальным решением являются дельта-функции Дирака $\phi_\lambda(x) = \delta(x - \lambda)$. Они не интегрируемы с квадратом (не принадлежат $L_2$), но нормированы на дельта-функцию: $\langle \phi_\lambda | \phi_{\lambda'} \rangle = \delta(\lambda - \lambda')$.</li>
+                </ul>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        быть ненормируемой функцией?
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Дельта-функция не принадлежит гильбертову пространству $L_2$, так как интеграл от квадрата ее модуля расходится. Это означает, что физически невозможно приготовить состояние с абсолютно точным значением координаты (это потребовало бы бесконечной энергии).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t2-q3">3. Оператор импульса</h2>
+            <div class="card">
+                <p>В координатном представлении оператор импульса частицы $\hat{\mathbf{p}}$ выражается через градиент:</p>
+                <div class="math-block">
+                    $$\hat{\mathbf{p}} = -i\hbar \nabla \quad \left(\text{в одномерном случае: } \hat{p} = -i\hbar \frac{d}{dx} = \frac{\hbar}{i} \frac{d}{dx}\right)$$
+                </div>
+                <p><strong>Спектральные характеристики:</strong></p>
+                <ul>
+                    <li><strong>Спектр:</strong> Чисто непрерывный (сплошной), $\sigma(\hat{p}) = \mathbb{R}$. Возможные результаты измерения импульса лежат в диапазоне $p \in (-\infty, \infty)$.</li>
+                    <li><strong>Собственные функции:</strong> Собственное уравнение $\hat{p} \phi_p(x) = p \phi_p(x)$ дает уравнение $-i\hbar \frac{d\phi_p}{dx} = p \phi_p$. Его решение — плоские монохроматические волны Де Бройля:
+                        $$\phi_p(x) = \frac{1}{\sqrt{2\pi\hbar}} e^{i \frac{px}{\hbar}} = \frac{1}{\sqrt{2\pi}} e^{ikx}, \quad \text{где } p = \hbar k$$
+                    </li>
+                    <li><strong>Нормировка:</strong> Собственные функции сплошного спектра не принадлежат пространству $L_2$ (интеграл квадрата модуля расходится), поэтому они нормируются на дельта-функцию Дирака:
+                        $$\langle \phi_p | \phi_{p'} \rangle = \int_{-\infty}^{\infty} \phi_p^*(x) \phi_{p'}(x) dx = \delta(p - p')$$
+                    </li>
+                </ul>
+
+                <!-- Интерактивная визуализация плоской волны -->
+                <div class="visual-container">
+                    <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивный симулятор: Плоская волна $e^{ikx}$</h3>
+                    <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.5rem;">
+                        Изменяйте волновой вектор $k$ слайдером. Вы увидите действительную часть волны $\text{Re}(\psi) = \cos(kx)$ (синий график) и мнимую $\text{Im}(\psi) = \sin(kx)$ (пунктирный фиолетовый график). Обратите внимание: плотность вероятности $|\psi(x)|^2 = 1/(2\pi) \equiv \text{const}$ (частица равновероятно размазана по всему пространству).
+                    </p>
+                    <canvas id="waveCanvas" class="visual-canvas" width="600" height="200"></canvas>
+                    <div class="control-panel">
+                        <div class="control-group">
+                            <label for="kSlider">Волновой вектор ($k$):</label>
+                            <input type="range" id="kSlider" class="slider" min="0.5" max="5.0" step="0.1" value="2.0">
+                            <span id="kVal">2.0</span>
+                        </div>
+                        <div>
+                            Импульс $p = k\hbar$: <span id="pVal" class="highlight" style="font-weight: 600;">2.0 ħ</span>
+                        </div>
+                        <div>
+                            Кинетическая энергия $E_k = \frac{k^2\hbar^2}{2m}$: <span id="eVal" class="highlight-secondary" style="font-weight: 600;">2.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t2-q4">4. Оператор кинетической энергии</h2>
+            <div class="card">
+                <p>Оператор кинетической энергии $\hat{T}$ получается из классического выражения $T = \frac{p^2}{2m}$ заменой импульса на оператор:</p>
+                <div class="math-block">
+                    $$\hat{T} = \frac{\hat{\mathbf{p}}^2}{2m} = -\frac{\hbar^2}{2m}\Delta \quad \left(\text{в одномерном случае: } \hat{T} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\right)$$
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Доказательство положительной определенности оператора $\hat{T}$
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Оператор $\hat{A}$ называется положительно определенным, если для любого $|\psi\rangle \in D(\hat{A})$ выполняется $\langle\psi|\hat{A}|\psi\rangle \ge 0$.</p>
+                        <p>Докажем это для $\hat{T}$ в пространстве $L_2(-\infty, \infty)$ с помощью интегрирования по частям:</p>
+                        <div class="math-block">
+                            $$\langle \psi | \hat{T} | \psi \rangle = \int_{-\infty}^{\infty} \psi^*(x) \left(-\frac{\hbar^2}{2m} \frac{d^2\psi(x)}{dx^2}\right) dx$$
+                        </div>
+                        <p>Интегрируем по частям, полагая $u = \psi^*(x)$ и $dv = \frac{d^2\psi}{dx^2} dx$:</p>
+                        <div class="math-block">
+                            $$\langle \psi | \hat{T} | \psi \rangle = -\frac{\hbar^2}{2m} \left( \left. \psi^*(x) \frac{d\psi(x)}{dx} \right|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \frac{d\psi^*(x)}{dx} \frac{d\psi(x)}{dx} dx \right)$$
+                        </div>
+                        <p>В силу того, что $\psi(x) \in L_2$, на бесконечности $\psi(\pm\infty) = 0$, поэтому внеинтегральный член обращается в нуль. Получаем:</p>
+                        <div class="math-block">
+                            $$\langle \psi | \hat{T} | \psi \rangle = \frac{\hbar^2}{2m} \int_{-\infty}^{\infty} \left| \frac{d\psi(x)}{dx} \right|^2 dx \ge 0$$
+                        </div>
+                        <p>Равенство нулю достигается только при $\frac{d\psi}{dx} = 0 \implies \psi = \text{const}$, что в $L_2$ возможно только для тождественного нуля $\psi(x) \equiv 0$.</p>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Качественный вид спектров базовых операторов ($\hat{x}$, $\hat{p}$, $\hat{T}$)
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Спектры операторов определяются их физическим смыслом и математическими границами:</p>
+                        <ul>
+                            <li><strong>Координата $\hat{x}$ и Импульс $\hat{p}$:</strong> Спектр непрерывный и занимает всю вещественную ось: $\sigma(\hat{x}) = \sigma(\hat{p}) = (-\infty, \infty)$.</li>
+                            <li><strong>Кинетическая энергия $\hat{T}$:</strong> Поскольку оператор положительно определен, его собственные значения не могут быть отрицательными. Спектр является непрерывным полубесконечным: $\sigma(\hat{T}) = [0, \infty)$.</li>
+                        </ul>
+
+                        <!-- Сравнительная CSS диаграмма спектров -->
+                        <div class="visual-container" style="background: rgba(0,0,0,0.2); padding: 1.25rem; margin-top: 1rem; width: 100%;">
+                            <div style="font-weight: 600; margin-bottom: 1rem; color: #cbd5e1; text-align: center;">Сравнение спектров базовых операторов</div>
+                            <div style="width: 100%; margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.25rem;">
+                                    <span>Спектр $\hat{x}$ и $\hat{p}$ (Вещественная ось $\mathbb{R}$)</span>
+                                    <span style="color: #60a5fa;">Непрерывный</span>
+                                </div>
+                                <div style="height: 6px; background: linear-gradient(to right, transparent, #3b82f6, transparent); border-radius: 3px;"></div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
+                                    <span>$-\infty$</span>
+                                    <span>0</span>
+                                    <span>$+\infty$</span>
+                                </div>
+                            </div>
+                            <div style="width: 100%;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.25rem;">
+                                    <span>Спектр $\hat{T}$ (Положительная полуось $\mathbb{R}^+$)</span>
+                                    <span style="color: #a855f7;">Непрерывный, $\ge 0$</span>
+                                </div>
+                                <div style="height: 6px; display: flex; border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 50%; background: transparent; border-right: 2px solid #64748b;"></div>
+                                    <div style="width: 50%; background: linear-gradient(to right, #a855f7, transparent);"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
+                                    <span style="width: 50%; text-align: right; padding-right: 4px;">0</span>
+                                    <span>$+\infty$</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t2-q5">5. Гамильтониан для частицы в потенциальном поле</h2>
+            <div class="card">
+                <p><strong>Оператор Гамильтона (Гамильтониан) $\hat{H}$</strong> — это оператор полной энергии системы. Он является важнейшим оператором в квантовой механике, так как определяет временную эволюцию системы через уравнение Шредингера.</p>
+                <p>Для частицы массы $m$, движущейся в стационарном потенциальном поле $U(\mathbf{r})$, функция Гамильтона $H = T + U$ переходит в оператор:</p>
+                <div class="math-block">
+                    $$\hat{H} = \hat{T} + \hat{U} = -\frac{\hbar^2}{2m}\Delta + U(\mathbf{r})$$
+                </div>
+                <p>Где:</p>
+                <ul>
+                    <li>$\hat{T} = -\frac{\hbar^2}{2m}\Delta$ — оператор кинетической энергии.</li>
+                    <li>$\hat{U} = U(\mathbf{r})$ — оператор потенциальной энергии, сводящийся в координатном представлении к умножению волновой функции на вещественную функцию $U(\mathbf{r})$.</li>
+                </ul>
+                <div class="alert" style="background: rgba(16, 185, 129, 0.08); border-left-color: #10b981; padding: 1rem;">
+                    <strong>Спектр гамильтониана $\hat{H}$:</strong><br>
+                    В отличие от базовых операторов, спектр гамильтониана зависит от конкретного вида потенциала $U(\mathbf{r})$:
+                    <ul style="margin: 0.5rem 0 0; padding-left: 1.5rem;">
+                        <li><strong>Дискретный спектр</strong> (связанные состояния, когда частица заперта в яме, $E < U(\infty)$).</li>
+                        <li><strong>Непрерывный спектр</strong> (состояния рассеяния, свободное движение на бесконечности, $E > U(\infty)$).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <h2 id="t2-q6">6. Гамильтониан во внешнем электромагнитном поле</h2>
+            <div class="card">
+                <p>Электромагнитное поле описывается скалярным потенциалом $U(\mathbf{r}, t)$ и векторным потенциалом $\mathbf{A}(\mathbf{r}, t)$. Согласно процедуре квантования, обобщенный импульс $\mathbf{p}$ заменяется на оператор $\hat{\mathbf{p}}$, а кинетический импульс равен $\mathbf{P} = \mathbf{p} - \frac{e}{c}\mathbf{A}$.</p>
+                <p>Оператор Гамильтона частицы заряда $e$ в электромагнитном поле имеет вид:</p>
+                <div class="math-block">
+                    $$\hat{H} = \frac{1}{2m} \left( \hat{\mathbf{p}} - \frac{e}{c} \mathbf{A}(\mathbf{r}, t) \right)^2 + e U(\mathbf{r}, t)$$
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Раскрытие квадрата и Кулоновская калибровка
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Раскроем квадрат скобки оператора кинетического импульса, учитывая некоммутативность координаты (входящей в $\mathbf{A}$) и оператора импульса $\hat{\mathbf{p}}$:</p>
+                        <div class="math-block">
+                            $$\left(\hat{\mathbf{p}} - \frac{e}{c}\mathbf{A}\right)^2 = \hat{\mathbf{p}}^2 - \frac{e}{c}(\hat{\mathbf{p}}\cdot\mathbf{A} + \mathbf{A}\cdot\hat{\mathbf{p}}) + \frac{e^2}{c^2}\mathbf{A}^2$$
+                        </div>
+                        <p>Оператор импульса действует на произведение $\mathbf{A}\psi$ по правилу Лейбница:</p>
+                        <div class="math-block">
+                            $$\hat{\mathbf{p}} \cdot (\mathbf{A}\psi) = -i\hbar \nabla \cdot (\mathbf{A}\psi) = -i\hbar (\nabla\cdot\mathbf{A})\psi - i\hbar \mathbf{A}\cdot(\nabla\psi) = (-i\hbar \nabla\cdot\mathbf{A})\psi + \mathbf{A}\cdot(\hat{\mathbf{p}}\psi)$$
+                        </div>
+                        <p>Таким образом, коммутатор импульса и векторного потенциала равен: $[\hat{\mathbf{p}}, \mathbf{A}] = -i\hbar (\nabla \cdot \mathbf{A})$.</p>
+                        
+                        <p>В <strong>кулоновской калибровке</strong> полагают $\nabla \cdot \mathbf{A} = 0$. В этом случае операторы коммутируют ($\hat{\mathbf{p}}\cdot\mathbf{A} = \mathbf{A}\cdot\hat{\mathbf{p}}$), и гамильтониан упрощается:</p>
+                        <div class="math-block">
+                            $$\hat{H} = -\frac{\hbar^2}{2m}\Delta - \frac{e}{mc}\mathbf{A}\cdot\hat{\mathbf{p}} + \frac{e^2}{2mc^2}\mathbf{A}^2 + e U(\mathbf{r})$$
+                        </div>
+                        <p>Здесь член $-\frac{e}{mc}\mathbf{A}\cdot\hat{\mathbf{p}}$ описывает парамагнитное взаимодействие (спин-орбитальный магнитный момент), а $\frac{e^2}{2mc^2}\mathbf{A}^2$ — диамагнитный вклад.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- БИЛЕТ 3 -->
+        <section id="ticket-3" class="ticket-section">
+            <h1>Билет 3</h1>
+            <p>Состояния квантовой системы, чистые и смешанные состояния, статистический оператор, и вероятностное толкование измерения.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета:</h3>
+                <ol>
+                    <li><a href="#t3-q1">Понятие состояния (Квантовая система, Вектор состояния, Волновая функция, Наблюдаемая величина).</a></li>
+                    <li><a href="#t3-q2">Чистые и смешанные состояния.</a></li>
+                    <li><a href="#t3-q3">Физический смысл волновой функции (Разложение по спектру).</a></li>
+                    <li><a href="#t3-q4">Среднее значение и дисперсия физической величины.</a></li>
+                    <li><a href="#t3-q5">Статистический оператор (матрица плотности) смешанного и чистого состояний.</a></li>
+                    <li><a href="#t3-q6">Вероятностное толкование процесса измерения и коллапс волновой функции.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t3-q1">1. Понятие состояния</h2>
+            <div class="card">
+                <ul>
+                    <li><span class="highlight">Квантовая система:</span> физическая система, которой математически ставится в соответствие гильбертово пространство $\mathcal{H}$.</li>
+                    <li><span class="highlight">Состояние:</span> математический объект, который <em>полностью задает вероятности</em> всех возможных результатов любых измерений над системой.</li>
+                    <li><span class="highlight">Волновая функция (ВФ):</span> вектор $|\psi\rangle \in \mathcal{H}$, определяющий состояние квантовой системы. Обычно состояния отождествляются с волновой функцией. Она всегда нормирована на единицу: $\langle \psi | \psi \rangle = 1$.</li>
+                    <li><span class="highlight">Наблюдаемая величина:</span> математически описывается линейным самосопряженным (эрмитовым) оператором $\hat{A}$. Область определения $D(\hat{A}) \subset \mathcal{H}$. Все возможные результаты измерения этой величины лежат в спектре оператора $\sigma(\hat{A}) \subset \mathbb{R}$.</li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t3-q2">2. Чистые и смешанные состояния</h2>
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Определения чистого и смешанного состояния
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-color: #10b981;">
+                        <strong>Чистое состояние:</strong> Состояние, которое описывается одной волновой функцией $|\psi\rangle$ (или $\psi(q)$ в координатном представлении). Это состояние максимального знания о системе.
+                    </div>
+                    <div class="alert">
+                        <strong>Смешанное состояние:</strong> Состояние, в котором система с вероятностью $w_1$ находится в чистом состоянии $|\psi_1\rangle$, с вероятностью $w_2$ — в состоянии $|\psi_2\rangle$, и т.д. Описывается <em>ансамблем</em> $\{w_n, |\psi_n\rangle\}$, где $\sum_k w_k = 1$. 
+                        <br><br>
+                        <em>Важно:</em> В смешанном состоянии нет квантовой интерференции между разными $|\psi_k\rangle$. Мы просто не знаем, в каком именно из них находится система (классическая неопределенность).
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Примеры смешанных состояний</h3>
+                <ul>
+                    <li>Пучок неполяризованных частиц (фотонов или электронов). Мы не можем описать весь пучок одной волновой функцией с определенным спином, так как частицы в пучке имеют разные случайно распределенные спины.</li>
+                    <li>Квантовая подсистема, взаимодействующая с большей системой (термостатом). Даже если вся замкнутая Вселенная находится в чистом состоянии, её выделенная часть из-за квантовой запутанности будет находиться в смешанном состоянии.</li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t3-q3">3. Физический смысл волновой функции</h2>
+            <div class="card">
+                <p>Физический смысл ВФ заключается в её вероятностной интерпретации. Разложим волновую функцию по собственным векторам некоторого оператора наблюдаемой $\hat{L}$ (базис $|\phi_n\rangle$).</p>
+                
+                <h3>Дискретный спектр</h3>
+                <p>Единичный оператор: $\hat{I} = \sum_n |\phi_n\rangle\langle\phi_n|$. Тогда разложение:</p>
+                <div class="math-block">
+                    $$|\psi\rangle = \sum_n c_n |\phi_n\rangle, \quad \text{где } c_n = \langle \phi_n | \psi \rangle$$
+                </div>
+                <p>Вероятность получить невырожденное собственное значение $\lambda_n$ при измерении равна квадрату модуля коэффициента разложения:</p>
+                <div class="math-block">
+                    $$P_n = |\langle \phi_n | \psi \rangle|^2 = |c_n|^2$$
+                </div>
+
+                <h3>Непрерывный спектр (на примере координаты $\hat{x}$)</h3>
+                <p>Для оператора координаты $\hat{x} \psi_\lambda = \lambda \psi_\lambda$, собственные функции $\psi_\lambda(x) = \delta(x-\lambda)$.</p>
+                <p>Аналогом вероятности $P_n$ выступает <strong>плотность вероятности</strong> $P(\lambda)$:</p>
+                <div class="math-block">
+                    $$P(\lambda) = |\langle \psi_\lambda | \psi \rangle|^2 = \left| \int_{-\infty}^\infty dx\, \delta(x-\lambda)\psi(x) \right|^2 = |\psi(\lambda)|^2$$
+                </div>
+                <p>Таким образом, $|\psi(x)|^2$ — это плотность вероятности обнаружить частицу в точке $x$. Квадрат модуля ВФ задает распределение вероятностей в непрерывном спектре.</p>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t3-q4">4. Среднее значение и дисперсия</h2>
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <h3>Математическое ожидание (Среднее значение)</h3>
+                <p>Среднее значение физической величины $L$ в чистом состоянии $|\psi\rangle$ вычисляется как:</p>
+                <div class="math-block">
+                    $$M[L] = \overline{L} = \sum_n P_n \lambda_n = \sum_n \langle \psi | \phi_n \rangle \lambda_n \langle \phi_n | \psi \rangle = \langle \psi | \hat{L} | \psi \rangle$$
+                </div>
+                <p>В случае непрерывного спектра (интегральный вид в $L_2$):</p>
+                <div class="math-block">
+                    $$M[L] = \int_{-\infty}^\infty \lambda \rho(\lambda) d\lambda = \int_{-\infty}^\infty \psi^*(x)\hat{L}\psi(x) dx$$
+                </div>
+                
+                <h3>Дисперсия (Среднеквадратичное отклонение)</h3>
+                <p>Дисперсия характеризует разброс (ширину распределения) результатов измерений вокруг среднего значения:</p>
+                <div class="math-block">
+                    $$\sigma^2(\hat{L}) = M[(\hat{L} - \overline{L})^2] = M[\hat{L}^2] - (M[\hat{L}])^2 \ge 0$$
+                </div>
+                <p>Среднеквадратичное отклонение (неопределенность величины $L$):</p>
+                <div class="math-block">
+                    $$\Delta L = \sqrt{\sigma^2(\hat{L})} = \sqrt{\overline{L^2} - \overline{L}^2}$$
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t3-q5">5. Статистический оператор (Матрица плотности)</h2>
+            <div class="card">
+                <p>В квантовой статистической механике вместо волновых функций удобнее использовать универсальный объект — <strong>статистический оператор</strong> $\hat{\rho}$.</p>
+                
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Для смешанного состояния
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Если система находится в ансамбле состояний $\{w_k, |\phi_k\rangle\}$, то статистический оператор по определению:</p>
+                        <div class="math-block">
+                            $$\hat{\rho} = \sum_k w_k |\phi_k\rangle\langle\phi_k|$$
+                        </div>
+                        <p>Среднее значение физической величины $L$ в смешанном состоянии ищется через след (Trace):</p>
+                        <div class="math-block">
+                            $$M[L] = \text{Tr}(\hat{\rho}\hat{L})$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Для чистого состояния
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Чистое состояние является частным случаем смешанного, когда одна из вероятностей $w_1 = 1$, а все остальные равны нулю. Тогда:</p>
+                        <div class="math-block">
+                            $$\hat{\rho} = |\psi\rangle\langle\psi|$$
+                        </div>
+                        <p>Этот оператор является проектором на состояние $|\psi\rangle$. Для чистого состояния всегда выполняется свойство идемпотентности: $\hat{\rho}^2 = \hat{\rho}$. Для смешанного это не так ($\text{Tr}(\hat{\rho}^2) < 1$).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <h2 id="t3-q6">6. Вероятностное толкование измерения и коллапс ВФ</h2>
+            <div class="card">
+                <h3>Процесс измерения и Постулат Фон Неймана</h3>
+                <p>Измерение в квантовой механике активно воздействует на систему. Пусть мы измеряем наблюдаемую $\hat{L}$. Согласно <strong>проекционному постулату фон Неймана</strong>:</p>
+                <ol>
+                    <li>При измерении мы всегда получаем одно из собственных значений $\lambda_n$ оператора $\hat{L}$. Вероятность этого исхода: $P_n = |\langle\phi_n|\psi\rangle|^2$.</li>
+                    <li><strong>Коллапс (редукция) волновой функции:</strong> Сразу после того, как прибор показал значение $\lambda_n$, исходное состояние $|\psi\rangle$ мгновенно "схлопывается" (переходит) в соответствующее собственное состояние $|\phi_n\rangle$.</li>
+                    <li>Если мы повторим измерение $\hat{L}$ через бесконечно малый промежуток времени, мы со $100\%$ вероятностью снова получим $\lambda_n$.</li>
+                </ol>
+
+                <div class="alert" style="background: rgba(245, 158, 11, 0.1); border-color: #f59e0b;">
+                    <strong>Измерение вырожденного состояния:</strong><br>
+                    Если полученное собственное значение $\lambda_n$ вырождено (ему соответствует не одна функция, а целое подпространство с базисом $|\phi_{n,k}\rangle$), то волновая функция проецируется на всё это подпространство.<br>
+                    Новое состояние:
+                    $$|\psi'\rangle = \frac{\hat{P}_\lambda |\psi\rangle}{\|\hat{P}_\lambda \psi\|}$$
+                    Где $\hat{P}_\lambda = \sum_k |\phi_{n,k}\rangle\langle\phi_{n,k}|$ — оператор проектирования на собственное подпространство $\lambda_n$.
+                </div>
+            </div>
+
+            <!-- ИНТЕРАКТИВНЫЙ БЛОК: СИМУЛЯТОР ИЗМЕРЕНИЯ -->
+            <div class="visual-container">
+                <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная симуляция: Коллапс волновой функции</h3>
+                <p style="text-align: center; font-size: 0.95rem; max-width: 800px; margin-bottom: 1rem;">
+                    Настройте начальное состояние системы как суперпозицию трех энергетических уровней: $|\psi\rangle = c_1|E_1\rangle + c_2|E_2\rangle + c_3|E_3\rangle$.<br>
+                    Нажмите "Измерить Энергию", чтобы увидеть случайный результат (с вероятностями $P_i \sim |c_i|^2$) и мгновенный коллапс волновой функции в одно из состояний.
+                </p>
+                
+                <canvas id="collapseCanvas" class="visual-canvas" width="600" height="250"></canvas>
+                
+                <div class="control-panel" style="justify-content: center; margin-top: 1rem; max-width: 700px;">
+                    <div class="control-group" style="flex-direction: column; align-items: flex-start; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+                        <h4 style="margin-bottom: 0.5rem; color: #cbd5e1;">Суперпозиция до измерения:</h4>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                            <label style="width: 120px;">$c_1$ (Уровень 1):</label>
+                            <input type="range" id="c1Slider" class="slider" min="0" max="1" step="0.05" value="0.7">
+                            <span id="c1Val" style="width: 40px; text-align: right;">0.70</span>
+                            <span id="pE1" style="color: #60a5fa; width: 50px; font-weight: bold; text-align: right;"></span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                            <label style="width: 120px;">$c_2$ (Уровень 2):</label>
+                            <input type="range" id="c2Slider" class="slider" min="0" max="1" step="0.05" value="0.5">
+                            <span id="c2Val" style="width: 40px; text-align: right;">0.50</span>
+                            <span id="pE2" style="color: #34d399; width: 50px; font-weight: bold; text-align: right;"></span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <label style="width: 120px;">$c_3$ (Уровень 3):</label>
+                            <input type="range" id="c3Slider" class="slider" min="0" max="1" step="0.05" value="0.2">
+                            <span id="c3Val" style="width: 40px; text-align: right;">0.20</span>
+                            <span id="pE3" style="color: #f472b6; width: 50px; font-weight: bold; text-align: right;"></span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; justify-content: center;">
+                        <button id="measureEnergyBtn" style="padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-family: inherit; font-weight: 600; transition: background 0.3s;">Измерить Энергию</button>
+                        <button id="measurePosBtn" style="padding: 0.75rem 1.5rem; background: #a855f7; color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-family: inherit; font-weight: 600; transition: background 0.3s;" title="Измерение другой наблюдаемой, не коммутирующей с энергией, разрушит энергетическое состояние">Измерить Координату</button>
+                        <button id="resetCollapseBtn" style="padding: 0.5rem 1rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 0.5rem; cursor: pointer; transition: all 0.3s;">Сбросить систему</button>
+                    </div>
+                </div>
+                
+                <div id="measurementStatus" style="margin-top: 1rem; font-weight: 600; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--accent); border-radius: 0.5rem; width: 100%; max-width: 700px;">
+                    Система подготовлена в суперпозиции. Ожидание измерения...
+                </div>
+            </div>
+        </section>
+
+        <!-- БИЛЕТ 4 -->
+        <section id="ticket-4" class="ticket-section">
+            <h1>Билет 4</h1>
+            <p>Характеристики физических наблюдаемых: среднее значение, дисперсия и соотношение неопределенностей Гейзенберга.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (3 вопроса):</h3>
+                <ol>
+                    <li><a href="#t4-q1">Среднее значение, дисперсия и среднеквадратичное отклонение физической величины.</a></li>
+                    <li><a href="#t4-q2">Соотношение неопределенности Гейзенберга общего вида.</a></li>
+                    <li><a href="#t4-q3">Соотношение неопределенности Гейзенберга для координаты и импульса.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t4-q1">1. Среднее значение и дисперсия</h2>
+            <div class="card">
+                <p>Физическая величина $L$, сопоставляемая с самосопряженным оператором $\hat{L}$, в квантовом состоянии $|\psi\rangle$ ведет себя как случайная величина. Её вероятностные характеристики определяются следующими величинами:</p>
+                <ul>
+                    <li><strong>Математическое ожидание (среднее значение) $\overline{L}$:</strong>
+                        <div class="math-block">
+                            $$\overline{L} = \langle \psi | \hat{L} | \psi \rangle$$
+                        </div>
+                        В координатном представлении для чистого состояния: $\overline{L} = \int_{-\infty}^{\infty} \psi^*(x) \hat{L} \psi(x) dx$. Для смешанного состояния: $\overline{L} = \text{Tr}(\hat{\rho}\hat{L})$.
+                    </li>
+                    <li><strong>Дисперсия $\sigma^2(L)$:</strong> определяет меру разброса результатов измерений вокруг среднего значения:
+                        <div class="math-block">
+                            $$\sigma^2(L) = \langle (\hat{L} - \overline{L}\hat{I})^2 \rangle = \overline{L^2} - (\overline{L})^2$$
+                        </div>
+                    </li>
+                    <li><strong>Среднеквадратичное отклонение (неопределенность) $\Delta L$:</strong>
+                        <div class="math-block">
+                            $$\Delta L = \sqrt{\sigma^2(L)} = \sqrt{\overline{L^2} - (\overline{L})^2}$$
+                        </div>
+                    </li>
+                </ul>
+                <p><strong>Физический смысл дисперсии:</strong> Дисперсия $\Delta L = 0$ тогда и только тогда, когда состояние $|\psi\rangle$ является <em>собственным состоянием</em> оператора $\hat{L}$ ($\hat{L}|\psi\rangle = \lambda|\psi\rangle$). В этом случае измерение величины $L$ дает единственное точное значение $\lambda$ с вероятностью 100%.</p>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t4-q2">2. Соотношение неопределенности Гейзенберга общего вида</h2>
+            <div class="card">
+                <p>Для любых двух самосопряженных операторов $\hat{A}$ и $\hat{B}$ справедливо фундаментальное <strong>соотношение неопределенности общего вида</strong>:</p>
+                <div class="math-block">
+                    $$\Delta A \cdot \Delta B \ge \frac{1}{2} \left| \langle [\hat{A}, \hat{B}] \rangle \right|$$
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Строгий математический вывод соотношения неопределенности
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Введем центрированные операторы: $\hat{A}' = \hat{A} - \overline{A}\hat{I}$ и $\hat{B}' = \hat{B} - \overline{B}\hat{I}$. Заметим, что $[\hat{A}', \hat{B}'] = [\hat{A}, \hat{B}]$.</p>
+                        <p>Для любого вещественного числа $\alpha$ рассмотрим вектор $|\phi\rangle = (\hat{A}' + i\alpha \hat{B}')|\psi\rangle$. Квадрат нормы любого вектора в гильбертовом пространстве неотрицателен: $\langle \phi | \phi \rangle \ge 0$.</p>
+                        <p>Распишем скалярное произведение, пользуясь самосопряженностью операторов $\hat{A}'$ и $\hat{B}'$:</p>
+                        <div class="math-block">
+                            $$\langle \phi | \phi \rangle = \langle (\hat{A}' + i\alpha \hat{B}')\psi | (\hat{A}' + i\alpha \hat{B}')\psi \rangle = \langle \psi | (\hat{A}' - i\alpha \hat{B}')(\hat{A}' + i\alpha \hat{B}') | \psi \rangle \ge 0$$
+                        </div>
+                        <p>Раскрываем скобки с сохранением порядка операторов:</p>
+                        <div class="math-block">
+                            $$\langle \psi | (\hat{A}'^2 + \alpha^2 \hat{B}'^2 + i\alpha [\hat{A}', \hat{B}']) | \psi \rangle = \langle \hat{A}'^2 \rangle + \alpha^2 \langle \hat{B}'^2 \rangle + i\alpha \langle [\hat{A}, \hat{B}] \rangle \ge 0$$
+                        </div>
+                        <p>Вспоминая определения дисперсии, запишем это как квадратный трехчлен относительно $\alpha$:</p>
+                        <div class="math-block">
+                            $$\alpha^2 (\Delta B)^2 + \alpha \cdot i\langle [\hat{A}, \hat{B}] \rangle + (\Delta A)^2 \ge 0$$
+                        </div>
+                        <p>Поскольку $[\hat{A}, \hat{B}]$ — кососимметричный оператор (коммутатор двух эрмитовых), его среднее значение чисто мнимо, следовательно, коэффициент при $\alpha$ — $i\langle [\hat{A}, \hat{B}] \rangle$ — вещественное число.</p>
+                        <p>Для того чтобы квадратный трехчлен был неотрицательным при всех вещественных $\alpha$, его дискриминант $D$ должен быть неположительным ($D \le 0$):</p>
+                        <div class="math-block">
+                            $$D = \left(i\langle [\hat{A}, \hat{B}] \rangle\right)^2 - 4(\Delta B)^2(\Delta A)^2 \le 0$$
+                        </div>
+                        <p>Поскольку $i^2 = -1$:</p>
+                        <div class="math-block">
+                            $$- \left|\langle [\hat{A}, \hat{B}] \rangle\right|^2 - 4(\Delta A)^2(\Delta B)^2 \le 0 \implies (\Delta A)^2(\Delta B)^2 \ge \frac{1}{4} \left|\langle [\hat{A}, \hat{B}] \rangle\right|^2$$
+                        </div>
+                        <p>Извлекая квадратный корень, получаем искомое соотношение:</p>
+                        <div class="math-block">
+                            $$\Delta A \cdot \Delta B \ge \frac{1}{2} \left| \langle [\hat{A}, \hat{B}] \rangle \right|$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t4-q3">3. Соотношение неопределенности Гейзенберга для координаты и импульса</h2>
+            <div class="card">
+                <p>Применим общее соотношение неопределенностей к операторам координаты $\hat{x}$ и импульса $\hat{p}$.</p>
+                <p>Их коммутатор фундаментален и равен: $[\hat{x}, \hat{p}] = i\hbar$. Подставляя это в общее соотношение:</p>
+                <div class="math-block">
+                    $$\Delta x \cdot \Delta p \ge \frac{1}{2} \left| \langle i\hbar \rangle \right| = \frac{\hbar}{2}$$
+                </div>
+                <p>Это знаменитое <strong>соотношение неопределенностей Гейзенберга</strong>. Оно накладывает фундаментальный запрет на одновременное точное измерение координаты и импульса микрочастицы. Чем точнее локализована частица ($\Delta x \to 0$), тем шире разброс по импульсам ($\Delta p \to \infty$).</p>
+
+                <!-- Интерактивная визуализация пакета Гейзенберга -->
+                <div class="visual-container">
+                    <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная визуализация: Волновой пакет в $x$ и $p$ пространствах</h3>
+                    <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.5rem;">
+                        Управляйте координатной шириной пакета $\Delta x$ слайдером. Вы увидите, что сжатие пакета в пространстве координат приводит к его неминуемому уширению в импульсном пространстве, иллюстрируя закон сохранения $\Delta x \Delta p \ge \hbar/2$ (здесь $\hbar = 1$).
+                    </p>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; width: 100%;">
+                        <div>
+                            <div style="text-align: center; font-size: 0.85rem; margin-bottom: 0.25rem; color: #60a5fa;">Координатное пространство $|\psi(x)|^2$</div>
+                            <canvas id="heisenbergCanvasX" class="visual-canvas" width="280" height="180"></canvas>
+                        </div>
+                        <div>
+                            <div style="text-align: center; font-size: 0.85rem; margin-bottom: 0.25rem; color: #fbbf24;">Импульсное пространство $|\Phi(p)|^2$</div>
+                            <canvas id="heisenbergCanvasP" class="visual-canvas" width="280" height="180"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="control-panel" style="max-width: 600px; margin-top: 0.5rem;">
+                        <div class="control-group">
+                            <label for="heisenbergSigmaSlider">Разброс координат ($\Delta x$):</label>
+                            <input type="range" id="heisenbergSigmaSlider" class="slider" min="0.15" max="1.5" step="0.05" value="0.5">
+                            <span id="dxVal">0.50</span>
+                        </div>
+                        <div>
+                            Разброс импульсов $\Delta p$: <span id="dpVal" class="highlight" style="font-weight: 600;">1.00</span>
+                        </div>
+                        <div>
+                            Произведение $\Delta x \Delta p$: <span id="uncVal" class="highlight-secondary" style="font-weight: 600;">0.50</span> (предел: 0.50)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<script>
+        let activeTicket = 1;
+
+        function showTicket(num) {
+            activeTicket = num;
+            document.querySelectorAll('.ticket-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            const targetSec = document.getElementById('ticket-' + num);
+            if (targetSec) targetSec.classList.add('active');
+            
+            const targetBtn = document.querySelectorAll('.nav-btn')[num-1];
+            if (targetBtn) targetBtn.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (window.renderMathInElement) {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    throwOnError : false
+                });
+            }
+
+            // Перерисовываем канвасы при активации вкладок
+            if (num === 1) drawDelta();
+            if (num === 2) drawWave();
+            if (num === 3) initCollapseSim();
+            if (num === 4) updateHeisenberg();
+        }
+
+        // --- --- Визуализация Дельта-функции (Билет 1) --- ---
+        const deltaCanvas = document.getElementById('deltaCanvas');
+        const sigmaSlider = document.getElementById('sigmaSlider');
+        const sigmaVal = document.getElementById('sigmaVal');
+        const peakVal = document.getElementById('peakVal');
+
+        function drawDelta() {
+            if (!deltaCanvas || !sigmaSlider) return;
+            const ctx = deltaCanvas.getContext('2d');
+            const W = deltaCanvas.width;
+            const H = deltaCanvas.height;
+            ctx.clearRect(0, 0, W, H);
+
+            const sigma = parseFloat(sigmaSlider.value);
+            if (sigmaVal) sigmaVal.innerText = sigma.toFixed(2);
+            
+            const maxVal = 1 / (Math.sqrt(2 * Math.PI) * sigma);
+            if (peakVal) peakVal.innerText = maxVal.toFixed(2);
+
+            // Отрисовка осей
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, H - 30); ctx.lineTo(W, H - 30); // Ось X
+            ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); // Ось Y
+            ctx.stroke();
+
+            // Отрисовка колокола Гаусса
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineWidth = 2.5;
+            ctx.shadowColor = 'rgba(59, 130, 246, 0.4)';
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+
+            const scaleX = 200; // пикселей на 1 единицу x
+            const scaleY = (H - 50) / 8; // пикселей на 1 единицу y
+
+            for (let px = 0; px < W; px++) {
+                const x = (px - W / 2) / scaleX;
+                const y = Math.exp(-(x * x) / (2 * sigma * sigma)) / (Math.sqrt(2 * Math.PI) * sigma);
+                const py = (H - 30) - y * scaleY;
+                if (px === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0; // Сброс блюра
+        }
+
+        if (sigmaSlider) {
+            sigmaSlider.addEventListener('input', drawDelta);
+        }
+
+        // --- --- Визуализация плоской волны (Билет 2) --- ---
+        function drawWave() {
+            const canvas = document.getElementById('waveCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const W = canvas.width;
+            const H = canvas.height;
+            
+            const kSlider = document.getElementById('kSlider');
+            const kVal = document.getElementById('kVal');
+            const pVal = document.getElementById('pVal');
+            const eVal = document.getElementById('eVal');
+
+            const k = parseFloat(kSlider ? kSlider.value : 2.0);
+            
+            if(kVal) kVal.innerText = k.toFixed(1);
+            if(pVal) pVal.innerText = k.toFixed(1) + ' ħ';
+            if(eVal) eVal.innerText = (k*k/2).toFixed(2);
+
+            ctx.clearRect(0, 0, W, H);
+
+            // Отрисовка осей
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); // Ось X
+            ctx.stroke();
+
+            // Линия графика волны (вещественная часть)
+            ctx.strokeStyle = '#3b82f6'; // Синий
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            const scaleX = 40;
+            const amplitude = 60;
+            
+            for (let px = 0; px < W; px++) {
+                const x = px / scaleX;
+                const y = Math.cos(k * x);
+                const py = H / 2 - y * amplitude;
+                if (px === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+            
+            // Мнимая часть волны пунктиром
+            ctx.strokeStyle = 'rgba(168, 85, 247, 0.5)'; // Фиолетовый полупрозрачный
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            for (let px = 0; px < W; px++) {
+                const x = px / scaleX;
+                const y = Math.sin(k * x);
+                const py = H / 2 - y * amplitude;
+                if (px === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        if (document.getElementById('kSlider')) {
+            document.getElementById('kSlider').addEventListener('input', drawWave);
+        }
+
+        // --- --- Симулятор измерения и коллапса ВФ (Билет 3) --- ---
+        let collapseCanvas = null;
+        let collapseCtx = null;
+        let c1 = 0.8, c2 = 0.5, c3 = 0.3;
+        
+        let isCollapsed = false;
+        let collapseType = 'none'; // 'energy', 'position'
+        let collapsedLevel = 1;
+        let collapsedPos = 0.5;
+        
+        let isTransitioning = false;
+        let transitionT = 0;
+        
+        // Временные массивы для интерполяции в процессе коллапса
+        const gridPointsCount = 200;
+        let psiInitialRe = new Float32Array(gridPointsCount + 1);
+        let psiInitialIm = new Float32Array(gridPointsCount + 1);
+        
+        let simTime = 0;
+        let simLoopRunning = false;
+        const omega1 = 0.5; // Базовая угловая частота
+
+        function initCollapseSim() {
+            collapseCanvas = document.getElementById('collapseCanvas');
+            if (!collapseCanvas) return;
+            collapseCtx = collapseCanvas.getContext('2d');
+            
+            const c1Slider = document.getElementById('c1Slider');
+            const c2Slider = document.getElementById('c2Slider');
+            const c3Slider = document.getElementById('c3Slider');
+            
+            const measureEnergyBtn = document.getElementById('measureEnergyBtn');
+            const measurePosBtn = document.getElementById('measurePosBtn');
+            const resetCollapseBtn = document.getElementById('resetCollapseBtn');
+            
+            // Настройка слушателей слайдеров
+            const handleSliderChange = () => {
+                c1 = parseFloat(c1Slider.value);
+                c2 = parseFloat(c2Slider.value);
+                c3 = parseFloat(c3Slider.value);
+                
+                // Предотвращение нулевого вектора
+                if (c1 === 0 && c2 === 0 && c3 === 0) {
+                    c1 = 0.1;
+                    c1Slider.value = 0.1;
+                }
+                
+                document.getElementById('c1Val').innerText = c1.toFixed(2);
+                document.getElementById('c2Val').innerText = c2.toFixed(2);
+                document.getElementById('c3Val').innerText = c3.toFixed(2);
+                
+                updateProbabilities();
+                resetCollapse();
+            };
+
+            if (c1Slider) c1Slider.addEventListener('input', handleSliderChange);
+            if (c2Slider) c2Slider.addEventListener('input', handleSliderChange);
+            if (c3Slider) c3Slider.addEventListener('input', handleSliderChange);
+            
+            if (measureEnergyBtn) measureEnergyBtn.onclick = measureEnergy;
+            if (measurePosBtn) measurePosBtn.onclick = measurePosition;
+            if (resetCollapseBtn) resetCollapseBtn.onclick = resetCollapse;
+            
+            updateProbabilities();
+            
+            if (!simLoopRunning) {
+                simLoopRunning = true;
+                requestAnimationFrame(simLoop);
+            }
+        }
+        
+        function updateProbabilities() {
+            const normSq = c1*c1 + c2*c2 + c3*c3;
+            const p1 = (c1*c1 / normSq) * 100;
+            const p2 = (c2*c2 / normSq) * 100;
+            const p3 = (c3*c3 / normSq) * 100;
+            
+            const pE1 = document.getElementById('pE1');
+            const pE2 = document.getElementById('pE2');
+            const pE3 = document.getElementById('pE3');
+            if (pE1) pE1.innerText = p1.toFixed(0) + '%';
+            if (pE2) pE2.innerText = p2.toFixed(0) + '%';
+            if (pE3) pE3.innerText = p3.toFixed(0) + '%';
+        }
+        
+        function resetCollapse() {
+            isCollapsed = false;
+            collapseType = 'none';
+            isTransitioning = false;
+            const status = document.getElementById('measurementStatus');
+            if (status) status.innerText = "Система подготовлена в суперпозиции. Ожидание измерения...";
+        }
+        
+        // Собственные функции потенциальной ямы: phi_n(x) = sqrt(2) * sin(n * pi * x)
+        function phi(n, x) {
+            return Math.sqrt(2) * Math.sin(n * Math.PI * x);
+        }
+        
+        // Получение текущего состояния суперпозиции в точке x и времени t
+        function getSuperpositionPsi(x, t) {
+            const norm = Math.sqrt(c1*c1 + c2*c2 + c3*c3);
+            const a1 = c1 / norm;
+            const a2 = c2 / norm;
+            const a3 = c3 / norm;
+            
+            const re = a1 * phi(1, x) * Math.cos(1 * omega1 * t) + 
+                       a2 * phi(2, x) * Math.cos(4 * omega1 * t) + 
+                       a3 * phi(3, x) * Math.cos(9 * omega1 * t);
+                       
+            const im = a1 * phi(1, x) * Math.sin(-1 * omega1 * t) + 
+                       a2 * phi(2, x) * Math.sin(-4 * omega1 * t) + 
+                       a3 * phi(3, x) * Math.sin(-9 * omega1 * t);
+                       
+            return { re, im };
+        }
+
+        function measureEnergy() {
+            if (isCollapsed && collapseType === 'energy') {
+                const status = document.getElementById('measurementStatus');
+                if (status) status.innerText = `Повторное измерение энергии: результат E_${collapsedLevel} (вероятность 100%). Состояние стабильно.`;
+                return;
+            }
+            
+            let p1, p2, p3;
+            if (isCollapsed && collapseType === 'position') {
+                const f1 = 2 * Math.pow(Math.sin(Math.PI * collapsedPos), 2);
+                const f2 = 2 * Math.pow(Math.sin(2 * Math.PI * collapsedPos), 2);
+                const f3 = 2 * Math.pow(Math.sin(3 * Math.PI * collapsedPos), 2);
+                const sum = f1 + f2 + f3;
+                p1 = f1 / sum;
+                p2 = f2 / sum;
+                p3 = f3 / sum;
+            } else {
+                const normSq = c1*c1 + c2*c2 + c3*c3;
+                p1 = (c1*c1 / normSq);
+                p2 = (c2*c2 / normSq);
+                p3 = (c3*c3 / normSq);
+            }
+            
+            captureCurrentPsi();
+            
+            const rand = Math.random();
+            let chosen = 1;
+            let prob = p1;
+            
+            if (rand < p1) {
+                chosen = 1;
+                prob = p1;
+            } else if (rand < p1 + p2) {
+                chosen = 2;
+                prob = p2;
+            } else {
+                chosen = 3;
+                prob = p3;
+            }
+            
+            collapsedLevel = chosen;
+            isCollapsed = true;
+            collapseType = 'energy';
+            isTransitioning = true;
+            transitionT = 0;
+            
+            const status = document.getElementById('measurementStatus');
+            if (status) status.innerText = `Измерение энергии... Результат: E_${chosen} (вероятность была ${(prob*100).toFixed(0)}%). Состояние редуцировало к собственной функции.`;
+        }
+        
+        function measurePosition() {
+            if (isCollapsed && collapseType === 'position') {
+                const status = document.getElementById('measurementStatus');
+                if (status) status.innerText = `Повторное измерение координаты: результат x = ${collapsedPos.toFixed(3)} (вероятность 100%). Частица локализована.`;
+                return;
+            }
+            
+            captureCurrentPsi();
+            
+            const cdf = new Float32Array(gridPointsCount + 1);
+            let sum = 0;
+            
+            for (let j = 0; j <= gridPointsCount; j++) {
+                const x = j / gridPointsCount;
+                let psiSq = 0;
+                
+                if (isCollapsed && collapseType === 'energy') {
+                    const val = phi(collapsedLevel, x);
+                    psiSq = val * val;
+                } else {
+                    const psi = getSuperpositionPsi(x, simTime);
+                    psiSq = psi.re * psi.re + psi.im * psi.im;
+                }
+                
+                sum += psiSq;
+                cdf[j] = sum;
+            }
+            
+            for (let j = 0; j <= gridPointsCount; j++) {
+                cdf[j] /= sum;
+            }
+            
+            const rand = Math.random();
+            let idx = 0;
+            while (idx < gridPointsCount && cdf[idx] < rand) {
+                idx++;
+            }
+            
+            const xMeas = idx / gridPointsCount;
+            collapsedPos = Math.max(0.04, Math.min(0.96, xMeas));
+            
+            isCollapsed = true;
+            collapseType = 'position';
+            isTransitioning = true;
+            transitionT = 0;
+            
+            const status = document.getElementById('measurementStatus');
+            if (status) status.innerText = `Измерение координаты... Результат: x = ${collapsedPos.toFixed(3)}. Волновая функция коллапсировала в дельта-подобный пик.`;
+        }
+        
+        function captureCurrentPsi() {
+            for (let j = 0; j <= gridPointsCount; j++) {
+                const x = j / gridPointsCount;
+                const psi = getCurrentPsiAtFrame(x);
+                psiInitialRe[j] = psi.re;
+                psiInitialIm[j] = psi.im;
+            }
+        }
+        
+        function getCurrentPsiAtFrame(x) {
+            if (isCollapsed && !isTransitioning) {
+                if (collapseType === 'energy') {
+                    const val = phi(collapsedLevel, x);
+                    const ePhase = collapsedLevel * collapsedLevel * omega1 * simTime;
+                    return {
+                        re: val * Math.cos(ePhase),
+                        im: val * Math.sin(-ePhase)
+                    };
+                } else {
+                    const sigma = 0.035;
+                    const peak = Math.exp(-Math.pow(x - collapsedPos, 2) / (2 * sigma * sigma));
+                    const norm = 1 / (Math.sqrt(sigma * Math.sqrt(Math.PI)));
+                    return {
+                        re: peak * norm,
+                        im: 0
+                    };
+                }
+            } else if (isTransitioning) {
+                const idx = Math.round(x * gridPointsCount);
+                const initRe = psiInitialRe[idx];
+                const initIm = psiInitialIm[idx];
+                
+                let targetRe = 0, targetIm = 0;
+                if (collapseType === 'energy') {
+                    const val = phi(collapsedLevel, x);
+                    const ePhase = collapsedLevel * collapsedLevel * omega1 * simTime;
+                    targetRe = val * Math.cos(ePhase);
+                    targetIm = val * Math.sin(-ePhase);
+                } else {
+                    const sigma = 0.035;
+                    const peak = Math.exp(-Math.pow(x - collapsedPos, 2) / (2 * sigma * sigma));
+                    const norm = 1 / (Math.sqrt(sigma * Math.sqrt(Math.PI)));
+                    targetRe = peak * norm;
+                    targetIm = 0;
+                }
+                
+                const t = transitionT;
+                let re = (1 - t) * initRe + t * targetRe;
+                let im = (1 - t) * initIm + t * targetIm;
+                
+                return { re, im };
+            } else {
+                return getSuperpositionPsi(x, simTime);
+            }
+        }
+        
+        function simLoop() {
+            if (activeTicket !== 3) {
+                simLoopRunning = false;
+                return;
+            }
+            
+            simTime += 0.035;
+            
+            if (isTransitioning) {
+                transitionT += 0.04;
+                if (transitionT >= 1) {
+                    transitionT = 1;
+                    isTransitioning = false;
+                }
+            }
+            
+            drawCollapseFrame();
+            requestAnimationFrame(simLoop);
+        }
+        
+        function drawCollapseFrame() {
+            if (!collapseCanvas || !collapseCtx) return;
+            const ctx = collapseCtx;
+            const W = collapseCanvas.width;
+            const H = collapseCanvas.height;
+            
+            ctx.clearRect(0, 0, W, H);
+            
+            const leftX = 50;
+            const rightX = W - 50;
+            const widthX = rightX - leftX;
+            const centerY = H / 2;
+            
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(leftX, 20);
+            ctx.lineTo(leftX, H - 30);
+            ctx.lineTo(rightX, H - 30);
+            ctx.lineTo(rightX, 20);
+            ctx.stroke();
+            
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(leftX, centerY);
+            ctx.lineTo(rightX, centerY);
+            ctx.stroke();
+            
+            const scaleAmp = 40;
+            const scaleProb = 35;
+            
+            const pxRe = [];
+            const pxIm = [];
+            const pxSq = [];
+            
+            let sumSq = 0;
+            for (let j = 0; j <= gridPointsCount; j++) {
+                const x = j / gridPointsCount;
+                const psi = getCurrentPsiAtFrame(x);
+                sumSq += (psi.re*psi.re + psi.im*psi.im) / gridPointsCount;
+            }
+            const normCorrection = Math.sqrt(sumSq > 0.001 ? 1 / sumSq : 1);
+            
+            for (let j = 0; j <= gridPointsCount; j++) {
+                const x = j / gridPointsCount;
+                let psi = getCurrentPsiAtFrame(x);
+                
+                if (isTransitioning) {
+                    psi.re *= normCorrection;
+                    psi.im *= normCorrection;
+                }
+                
+                const px = leftX + x * widthX;
+                
+                const yRe = centerY - psi.re * scaleAmp;
+                const yIm = centerY - psi.im * scaleAmp;
+                const ySq = (H - 30) - (psi.re*psi.re + psi.im*psi.im) * scaleProb;
+                
+                pxRe.push({x: px, y: yRe});
+                pxIm.push({x: px, y: yIm});
+                pxSq.push({x: px, y: ySq});
+            }
+            
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+            ctx.beginPath();
+            ctx.moveTo(leftX, H - 30);
+            for (let j = 0; j <= gridPointsCount; j++) {
+                ctx.lineTo(pxSq[j].x, pxSq[j].y);
+            }
+            ctx.lineTo(rightX, H - 30);
+            ctx.closePath();
+            ctx.fill();
+            
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(pxSq[0].x, pxSq[0].y);
+            for (let j = 1; j <= gridPointsCount; j++) {
+                ctx.lineTo(pxSq[j].x, pxSq[j].y);
+            }
+            ctx.stroke();
+            
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(pxRe[0].x, pxRe[0].y);
+            for (let j = 1; j <= gridPointsCount; j++) {
+                ctx.lineTo(pxRe[j].x, pxRe[j].y);
+            }
+            ctx.stroke();
+            
+            ctx.strokeStyle = 'rgba(168, 85, 247, 0.5)';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(pxIm[0].x, pxIm[0].y);
+            for (let j = 1; j <= gridPointsCount; j++) {
+                ctx.lineTo(pxIm[j].x, pxIm[j].y);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.font = '11px sans-serif';
+            ctx.fillText('x = 0', leftX - 10, H - 12);
+            ctx.fillText('x = a', rightX - 10, H - 12);
+            
+            ctx.fillStyle = '#3b82f6';
+            ctx.fillRect(leftX + 20, 20, 12, 6);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.fillText('Re(ψ) — вещ. часть', leftX + 38, 26);
+            
+            ctx.strokeStyle = 'rgba(168, 85, 247, 0.7)';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([3, 3]);
+            ctx.beginPath();
+            ctx.moveTo(leftX + 170, 23); ctx.lineTo(leftX + 182, 23);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.fillText('Im(ψ) — мним. часть', leftX + 188, 26);
+            
+            ctx.fillStyle = '#f59e0b';
+            ctx.fillRect(leftX + 320, 20, 12, 6);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.fillText('|ψ|² — плотность вероятности', leftX + 338, 26);
+        }
+
+        function drawProb() {
+            drawWave(); 
+        }
+
+        // --- --- Визуализация Неопределенности Гейзенберга (Билет 4) --- ---
+        const heisenbergCanvasX = document.getElementById('heisenbergCanvasX');
+        const heisenbergCanvasP = document.getElementById('heisenbergCanvasP');
+        const ctxX = heisenbergCanvasX ? heisenbergCanvasX.getContext('2d') : null;
+        const ctxP = heisenbergCanvasP ? heisenbergCanvasP.getContext('2d') : null;
+        const heisenbergSigmaSlider = document.getElementById('heisenbergSigmaSlider');
+        const dxValLabel = document.getElementById('dxVal');
+        const dpValLabel = document.getElementById('dpVal');
+        const uncValLabel = document.getElementById('uncVal');
+
+        function drawGaussian(ctx, w, h, sigma, color) {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, w, h);
+            
+            // Оси
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, h - 20); ctx.lineTo(w, h - 20); // x-axis
+            ctx.moveTo(w/2, 0); ctx.lineTo(w/2, h); // y-axis
+            ctx.stroke();
+
+            // Гауссиана
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            const maxAmp = h - 30;
+            
+            let visualAmp = (1 / sigma) * 25;
+            if (visualAmp > maxAmp) visualAmp = maxAmp;
+
+            for (let px = 0; px <= w; px++) {
+                let x = ((px - w/2) / (w/2)) * 4; 
+                let y = visualAmp * Math.exp(-(x * x) / (2 * sigma * sigma));
+                if (px === 0) ctx.moveTo(px, h - 20 - y);
+                else ctx.lineTo(px, h - 20 - y);
+            }
+            ctx.stroke();
+            
+            // Заливка под графиком
+            ctx.lineTo(w, h - 20);
+            ctx.lineTo(0, h - 20);
+            ctx.fillStyle = color.replace('1)', '0.15)');
+            ctx.fill();
+        }
+
+        function updateHeisenberg() {
+            if (!ctxX || !ctxP || !heisenbergSigmaSlider) return;
+            
+            const sigmaX = parseFloat(heisenbergSigmaSlider.value);
+            // По соотношению Гейзенберга для когерентного Гауссова пакета: sigma_x * sigma_p = hbar / 2
+            // Полагая hbar = 1, получаем sigma_p = 0.5 / sigma_x
+            const sigmaP = 0.5 / sigmaX;
+            
+            if (dxValLabel) dxValLabel.innerText = sigmaX.toFixed(2);
+            if (dpValLabel) dpValLabel.innerText = sigmaP.toFixed(2);
+            if (uncValLabel) uncValLabel.innerText = (sigmaX * sigmaP).toFixed(2);
+            
+            if (heisenbergCanvasX) drawGaussian(ctxX, heisenbergCanvasX.width, heisenbergCanvasX.height, sigmaX, 'rgba(59, 130, 246, 1)'); 
+            if (heisenbergCanvasP) drawGaussian(ctxP, heisenbergCanvasP.width, heisenbergCanvasP.height, sigmaP, 'rgba(245, 158, 11, 1)'); 
+        }
+
+        if (heisenbergSigmaSlider) {
+            heisenbergSigmaSlider.addEventListener('input', updateHeisenberg);
+        }
+
+        // Запуск при старте
+        window.addEventListener('load', () => {
+            drawDelta();
+            drawWave(); 
+            initCollapseSim();
+            updateHeisenberg();
+        });
+    </script>
+</body>
+</html>

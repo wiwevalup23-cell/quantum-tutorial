@@ -1,0 +1,274 @@
+        <!-- БИЛЕТ 2 -->
+        <section id="ticket-2" class="ticket-section">
+            <h1>Билет 2</h1>
+            <p>Фундаментальные операторы квантовой механики и гамильтониан частицы во внешних полях.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (6 вопросов):</h3>
+                <ol>
+                    <li><a href="#t2-q1">Оператор физической величины.</a></li>
+                    <li><a href="#t2-q2">Оператор координаты.</a></li>
+                    <li><a href="#t2-q3">Оператор импульса.</a></li>
+                    <li><a href="#t2-q4">Оператор кинетической энергии.</a></li>
+                    <li><a href="#t2-q5">Гамильтониан для частицы в потенциальном поле.</a></li>
+                    <li><a href="#t2-q6">Гамильтониан во внешнем электромагнитном поле.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t2-q1">1. Оператор физической величины</h2>
+            <div class="card">
+                <p>В квантовой механике (согласно постулатам) каждой физической величине (наблюдаемой) $A$ сопоставляется <span class="highlight">линейный самосопряженный (эрмитов) оператор</span> $\hat{A}$.</p>
+                <ul>
+                    <li><strong>Спектр:</strong> У самосопряженного оператора вещественный спектр $\sigma(\hat{A}) \subset \mathbb{R}$. Это гарантирует, что возможные результаты измерений (собственные значения $\lambda_n \in \text{Ran}(\hat{A})$) — всегда вещественные числа.</li>
+                    <li>
+                        <strong>Среднее значение (Математическое ожидание):</strong> $\bar{A} = \langle \psi | \hat{A} | \psi \rangle$.
+                        <div style="margin-top: 0.5rem; padding-left: 1rem; border-left: 2px solid rgba(255,255,255,0.2);">
+                            <p style="margin-bottom: 0.5rem;"><strong>Что это такое:</strong> Из-за принципиально вероятностной природы квантовой механики, среднее значение $\bar{A}$ — это среднее арифметическое результатов серии измерений величины $A$ над <em>ансамблем одинаково приготовленных систем</em>.</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Что значит «в состоянии $\psi$»:</strong> Это как раз и означает условие приготовления. Перед каждым измерением система была подготовлена таким образом, что её полностью описывает один и тот же вектор состояния $|\psi\rangle$.</p>
+                            <p style="margin-bottom: 0;"><strong>Почему так записывается:</strong> Запись $\langle \psi | \hat{A} | \psi \rangle$ — это элегантная форма классического матожидания. Если разложить состояние по базису собственных векторов оператора ($|\psi\rangle = \sum c_n |\phi_n\rangle$), то мы получим $\bar{A} = \sum \lambda_n |c_n|^2$, где $\lambda_n$ — возможное значение (результат измерения), а $|c_n|^2$ — вероятность его получить.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="alert" style="background: rgba(234, 179, 8, 0.1); border-left-color: #eab308; margin-top: 1.5rem; padding: 1rem;">
+                    <strong style="color: #eab308; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">📌 Важное терминологическое замечание курса:</strong>
+                    <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.95rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Квантовая система</strong> математически связывается с гильбертовым пространством $\mathcal{H}$.</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Состояние</strong> — это математический объект, который полностью задает вероятности любых измерений.</li>
+                        <li style="margin-bottom: 0.5rem;">В рамках нашего курса чистое состояние <em>отождествляется</em> с <strong>Волновой функцией (ВФ)</strong> — абстрактным вектором $|\psi\rangle \in \mathcal{H}$, а не только с его проекцией на координаты.</li>
+                        <li><strong>Наблюдаемая величина</strong> — ей математически ставится в соответствие линейный самосопряженный оператор $\hat{A}$.</li>
+                    </ul>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        От эксперимента к математике: что такое «приготовленное состояние»
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Связь физики и математики можно выстроить в простую логическую цепочку:</p>
+                        <ol style="padding-left: 1.5rem; margin-bottom: 0;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Лаборатория (Подготовка):</strong> Мы берем физический прибор (например, источник электронов, пропущенных через магнитное поле). Этот прибор создает поток частиц с совершенно одинаковыми свойствами (например, у всех определенный импульс). Это называется <em>приготовлением состояния</em>.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Абстракция (Вектор состояния):</strong> В математике этой конкретной настройке приборов жестко сопоставляется абстрактный вектор $|\psi\rangle$ в гильбертовом пространстве.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Измерение (Наблюдаемая):</strong> Затем мы ставим детектор (начинаем измерять энергию, координату и т.д.). Самому детектору (измерительному процессу) в теории ставится в соответствие оператор $\hat{A}$.</li>
+                            <li><strong>Предсказание (Среднее значение):</strong> Сэндвич $\langle \psi | \hat{A} | \psi \rangle$ — это математическая машина, которая берет описание настройки источника ($|\psi\rangle$) и описание детектора ($\hat{A}$), и выдает число — средний результат, который мы увидим на приборе, если повторим опыт миллион раз.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Что такое «представление» (Representation)?
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Волновая функция (вектор состояния) $|\psi\rangle$ идеальна в абстрактных выкладках, но чтобы считать реальные интегралы и производные, нам нужно спроецировать её на понятные нам оси.</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>Аналогия:</strong> У вас есть физическая стрелка (вектор $\vec{v}$). Вы можете записать её в декартовых осях $(v_x, v_y, v_z)$, а можете в полярных. Стрелка одна и та же, но числа в тетрадке разные. В квантмехе "оси" — это базисы.</p>
+                        <ul style="margin-bottom: 0; padding-left: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Координатное представление:</strong> Мы берем абстрактную волновую функцию $|\psi\rangle$ и проецируем её на координатные оси (базис собственных векторов оператора координаты). Получаем <em>волновую функцию в координатном представлении</em> $\psi(x) = \langle x | \psi\rangle$.</li>
+                            <li><strong>Импульсное представление:</strong> Мы проецируем ту же самую волновую функцию на оси импульсов. Получаем <em>волновую функцию в импульсном представлении</em> $\psi(p) = \langle p | \psi\rangle$.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t2-q2">2. Оператор координаты</h2>
+            <div class="card">
+                <p>В координатном представлении $L_2(-\infty, \infty)$ оператор координаты $\hat{x}$ является оператором умножения на аргумент $x$:</p>
+                <div class="math-block">
+                    $$\hat{x} \psi(x) = x \psi(x)$$
+                </div>
+                <p>Уравнение на собственные значения имеет вид: $\hat{x} \phi_\lambda(x) = \lambda \phi_\lambda(x)$.</p>
+                <ul>
+                    <li><strong>Спектр:</strong> Чисто сплошной, $\sigma(\hat{x}) = \mathbb{R}$. Собственные значения $\lambda \in (-\infty, \infty)$.</li>
+                    <li><strong>Собственные функции:</strong> Формальным решением являются дельта-функции Дирака $\phi_\lambda(x) = \delta(x - \lambda)$. Они не интегрируемы с квадратом (не принадлежат $L_2$), но нормированы на дельта-функцию: $\langle \phi_\lambda | \phi_{\lambda'} \rangle = \delta(\lambda - \lambda')$.</li>
+                </ul>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        быть ненормируемой функцией?
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Дельта-функция не принадлежит гильбертову пространству $L_2$, так как интеграл от квадрата ее модуля расходится. Это означает, что физически невозможно приготовить состояние с абсолютно точным значением координаты (это потребовало бы бесконечной энергии).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t2-q3">3. Оператор импульса</h2>
+            <div class="card">
+                <p>В координатном представлении оператор импульса частицы $\hat{\mathbf{p}}$ выражается через градиент:</p>
+                <div class="math-block">
+                    $$\hat{\mathbf{p}} = -i\hbar \nabla \quad \left(\text{в одномерном случае: } \hat{p} = -i\hbar \frac{d}{dx} = \frac{\hbar}{i} \frac{d}{dx}\right)$$
+                </div>
+                <p><strong>Спектральные характеристики:</strong></p>
+                <ul>
+                    <li><strong>Спектр:</strong> Чисто непрерывный (сплошной), $\sigma(\hat{p}) = \mathbb{R}$. Возможные результаты измерения импульса лежат в диапазоне $p \in (-\infty, \infty)$.</li>
+                    <li><strong>Собственные функции:</strong> Собственное уравнение $\hat{p} \phi_p(x) = p \phi_p(x)$ дает уравнение $-i\hbar \frac{d\phi_p}{dx} = p \phi_p$. Его решение — плоские монохроматические волны Де Бройля:
+                        $$\phi_p(x) = \frac{1}{\sqrt{2\pi\hbar}} e^{i \frac{px}{\hbar}} = \frac{1}{\sqrt{2\pi}} e^{ikx}, \quad \text{где } p = \hbar k$$
+                    </li>
+                    <li><strong>Нормировка:</strong> Собственные функции сплошного спектра не принадлежат пространству $L_2$ (интеграл квадрата модуля расходится), поэтому они нормируются на дельта-функцию Дирака:
+                        $$\langle \phi_p | \phi_{p'} \rangle = \int_{-\infty}^{\infty} \phi_p^*(x) \phi_{p'}(x) dx = \delta(p - p')$$
+                    </li>
+                </ul>
+
+                <!-- Интерактивная визуализация плоской волны -->
+                <div class="visual-container">
+                    <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивный симулятор: Плоская волна $e^{ikx}$</h3>
+                    <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.5rem;">
+                        Изменяйте волновой вектор $k$ слайдером. Вы увидите действительную часть волны $\text{Re}(\psi) = \cos(kx)$ (синий график) и мнимую $\text{Im}(\psi) = \sin(kx)$ (пунктирный фиолетовый график). Обратите внимание: плотность вероятности $|\psi(x)|^2 = 1/(2\pi) \equiv \text{const}$ (частица равновероятно размазана по всему пространству).
+                    </p>
+                    <canvas id="waveCanvas" class="visual-canvas" width="600" height="200"></canvas>
+                    <div class="control-panel">
+                        <div class="control-group">
+                            <label for="kSlider">Волновой вектор ($k$):</label>
+                            <input type="range" id="kSlider" class="slider" min="0.5" max="5.0" step="0.1" value="2.0">
+                            <span id="kVal">2.0</span>
+                        </div>
+                        <div>
+                            Импульс $p = k\hbar$: <span id="pVal" class="highlight" style="font-weight: 600;">2.0 ħ</span>
+                        </div>
+                        <div>
+                            Кинетическая энергия $E_k = \frac{k^2\hbar^2}{2m}$: <span id="eVal" class="highlight-secondary" style="font-weight: 600;">2.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t2-q4">4. Оператор кинетической энергии</h2>
+            <div class="card">
+                <p>Оператор кинетической энергии $\hat{T}$ получается из классического выражения $T = \frac{p^2}{2m}$ заменой импульса на оператор:</p>
+                <div class="math-block">
+                    $$\hat{T} = \frac{\hat{\mathbf{p}}^2}{2m} = -\frac{\hbar^2}{2m}\Delta \quad \left(\text{в одномерном случае: } \hat{T} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\right)$$
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Доказательство положительной определенности оператора $\hat{T}$
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Оператор $\hat{A}$ называется положительно определенным, если для любого $|\psi\rangle \in D(\hat{A})$ выполняется $\langle\psi|\hat{A}|\psi\rangle \ge 0$.</p>
+                        <p>Докажем это для $\hat{T}$ в пространстве $L_2(-\infty, \infty)$ с помощью интегрирования по частям:</p>
+                        <div class="math-block">
+                            $$\langle \psi | \hat{T} | \psi \rangle = \int_{-\infty}^{\infty} \psi^*(x) \left(-\frac{\hbar^2}{2m} \frac{d^2\psi(x)}{dx^2}\right) dx$$
+                        </div>
+                        <p>Интегрируем по частям, полагая $u = \psi^*(x)$ и $dv = \frac{d^2\psi}{dx^2} dx$:</p>
+                        <div class="math-block">
+                            $$\langle \psi | \hat{T} | \psi \rangle = -\frac{\hbar^2}{2m} \left( \left. \psi^*(x) \frac{d\psi(x)}{dx} \right|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \frac{d\psi^*(x)}{dx} \frac{d\psi(x)}{dx} dx \right)$$
+                        </div>
+                        <p>В силу того, что $\psi(x) \in L_2$, на бесконечности $\psi(\pm\infty) = 0$, поэтому внеинтегральный член обращается в нуль. Получаем:</p>
+                        <div class="math-block">
+                            $$\langle \psi | \hat{T} | \psi \rangle = \frac{\hbar^2}{2m} \int_{-\infty}^{\infty} \left| \frac{d\psi(x)}{dx} \right|^2 dx \ge 0$$
+                        </div>
+                        <p>Равенство нулю достигается только при $\frac{d\psi}{dx} = 0 \implies \psi = \text{const}$, что в $L_2$ возможно только для тождественного нуля $\psi(x) \equiv 0$.</p>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Качественный вид спектров базовых операторов ($\hat{x}$, $\hat{p}$, $\hat{T}$)
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Спектры операторов определяются их физическим смыслом и математическими границами:</p>
+                        <ul>
+                            <li><strong>Координата $\hat{x}$ и Импульс $\hat{p}$:</strong> Спектр непрерывный и занимает всю вещественную ось: $\sigma(\hat{x}) = \sigma(\hat{p}) = (-\infty, \infty)$.</li>
+                            <li><strong>Кинетическая энергия $\hat{T}$:</strong> Поскольку оператор положительно определен, его собственные значения не могут быть отрицательными. Спектр является непрерывным полубесконечным: $\sigma(\hat{T}) = [0, \infty)$.</li>
+                        </ul>
+
+                        <!-- Сравнительная CSS диаграмма спектров -->
+                        <div class="visual-container" style="background: rgba(0,0,0,0.2); padding: 1.25rem; margin-top: 1rem; width: 100%;">
+                            <div style="font-weight: 600; margin-bottom: 1rem; color: #cbd5e1; text-align: center;">Сравнение спектров базовых операторов</div>
+                            <div style="width: 100%; margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.25rem;">
+                                    <span>Спектр $\hat{x}$ и $\hat{p}$ (Вещественная ось $\mathbb{R}$)</span>
+                                    <span style="color: #60a5fa;">Непрерывный</span>
+                                </div>
+                                <div style="height: 6px; background: linear-gradient(to right, transparent, #3b82f6, transparent); border-radius: 3px;"></div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
+                                    <span>$-\infty$</span>
+                                    <span>0</span>
+                                    <span>$+\infty$</span>
+                                </div>
+                            </div>
+                            <div style="width: 100%;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.25rem;">
+                                    <span>Спектр $\hat{T}$ (Положительная полуось $\mathbb{R}^+$)</span>
+                                    <span style="color: #a855f7;">Непрерывный, $\ge 0$</span>
+                                </div>
+                                <div style="height: 6px; display: flex; border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 50%; background: transparent; border-right: 2px solid #64748b;"></div>
+                                    <div style="width: 50%; background: linear-gradient(to right, #a855f7, transparent);"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
+                                    <span style="width: 50%; text-align: right; padding-right: 4px;">0</span>
+                                    <span>$+\infty$</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t2-q5">5. Гамильтониан для частицы в потенциальном поле</h2>
+            <div class="card">
+                <p><strong>Оператор Гамильтона (Гамильтониан) $\hat{H}$</strong> — это оператор полной энергии системы. Он является важнейшим оператором в квантовой механике, так как определяет временную эволюцию системы через уравнение Шредингера.</p>
+                <p>Для частицы массы $m$, движущейся в стационарном потенциальном поле $U(\mathbf{r})$, функция Гамильтона $H = T + U$ переходит в оператор:</p>
+                <div class="math-block">
+                    $$\hat{H} = \hat{T} + \hat{U} = -\frac{\hbar^2}{2m}\Delta + U(\mathbf{r})$$
+                </div>
+                <p>Где:</p>
+                <ul>
+                    <li>$\hat{T} = -\frac{\hbar^2}{2m}\Delta$ — оператор кинетической энергии.</li>
+                    <li>$\hat{U} = U(\mathbf{r})$ — оператор потенциальной энергии, сводящийся в координатном представлении к умножению волновой функции на вещественную функцию $U(\mathbf{r})$.</li>
+                </ul>
+                <div class="alert" style="background: rgba(16, 185, 129, 0.08); border-left-color: #10b981; padding: 1rem;">
+                    <strong>Спектр гамильтониана $\hat{H}$:</strong><br>
+                    В отличие от базовых операторов, спектр гамильтониана зависит от конкретного вида потенциала $U(\mathbf{r})$:
+                    <ul style="margin: 0.5rem 0 0; padding-left: 1.5rem;">
+                        <li><strong>Дискретный спектр</strong> (связанные состояния, когда частица заперта в яме, $E < U(\infty)$).</li>
+                        <li><strong>Непрерывный спектр</strong> (состояния рассеяния, свободное движение на бесконечности, $E > U(\infty)$).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <h2 id="t2-q6">6. Гамильтониан во внешнем электромагнитном поле</h2>
+            <div class="card">
+                <p>Электромагнитное поле описывается скалярным потенциалом $U(\mathbf{r}, t)$ и векторным потенциалом $\mathbf{A}(\mathbf{r}, t)$. Согласно процедуре квантования, обобщенный импульс $\mathbf{p}$ заменяется на оператор $\hat{\mathbf{p}}$, а кинетический импульс равен $\mathbf{P} = \mathbf{p} - \frac{e}{c}\mathbf{A}$.</p>
+                <p>Оператор Гамильтона частицы заряда $e$ в электромагнитном поле имеет вид:</p>
+                <div class="math-block">
+                    $$\hat{H} = \frac{1}{2m} \left( \hat{\mathbf{p}} - \frac{e}{c} \mathbf{A}(\mathbf{r}, t) \right)^2 + e U(\mathbf{r}, t)$$
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Раскрытие квадрата и Кулоновская калибровка
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Раскроем квадрат скобки оператора кинетического импульса, учитывая некоммутативность координаты (входящей в $\mathbf{A}$) и оператора импульса $\hat{\mathbf{p}}$:</p>
+                        <div class="math-block">
+                            $$\left(\hat{\mathbf{p}} - \frac{e}{c}\mathbf{A}\right)^2 = \hat{\mathbf{p}}^2 - \frac{e}{c}(\hat{\mathbf{p}}\cdot\mathbf{A} + \mathbf{A}\cdot\hat{\mathbf{p}}) + \frac{e^2}{c^2}\mathbf{A}^2$$
+                        </div>
+                        <p>Оператор импульса действует на произведение $\mathbf{A}\psi$ по правилу Лейбница:</p>
+                        <div class="math-block">
+                            $$\hat{\mathbf{p}} \cdot (\mathbf{A}\psi) = -i\hbar \nabla \cdot (\mathbf{A}\psi) = -i\hbar (\nabla\cdot\mathbf{A})\psi - i\hbar \mathbf{A}\cdot(\nabla\psi) = (-i\hbar \nabla\cdot\mathbf{A})\psi + \mathbf{A}\cdot(\hat{\mathbf{p}}\psi)$$
+                        </div>
+                        <p>Таким образом, коммутатор импульса и векторного потенциала равен: $[\hat{\mathbf{p}}, \mathbf{A}] = -i\hbar (\nabla \cdot \mathbf{A})$.</p>
+                        
+                        <p>В <strong>кулоновской калибровке</strong> полагают $\nabla \cdot \mathbf{A} = 0$. В этом случае операторы коммутируют ($\hat{\mathbf{p}}\cdot\mathbf{A} = \mathbf{A}\cdot\hat{\mathbf{p}}$), и гамильтониан упрощается:</p>
+                        <div class="math-block">
+                            $$\hat{H} = -\frac{\hbar^2}{2m}\Delta - \frac{e}{mc}\mathbf{A}\cdot\hat{\mathbf{p}} + \frac{e^2}{2mc^2}\mathbf{A}^2 + e U(\mathbf{r})$$
+                        </div>
+                        <p>Здесь член $-\frac{e}{mc}\mathbf{A}\cdot\hat{\mathbf{p}}$ описывает парамагнитное взаимодействие (спин-орбитальный магнитный момент), а $\frac{e^2}{2mc^2}\mathbf{A}^2$ — диамагнитный вклад.</p>
+                    </div>
+                </div>
+            </div>
+        </section>

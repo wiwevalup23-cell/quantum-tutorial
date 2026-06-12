@@ -1,0 +1,674 @@
+<script>
+        let activeTicket = 1;
+
+        function showTicket(num) {
+            activeTicket = num;
+            document.querySelectorAll('.ticket-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById('ticket-' + num).classList.add('active');
+            document.querySelectorAll('.nav-btn')[num-1].classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (window.renderMathInElement) {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    throwOnError : false
+                });
+            }
+
+            // Перерисовываем канвасы при активации вкладок
+            if (num === 1) drawDelta();
+            if (num === 2) drawWave();
+            if (num === 3) initCollapseSim();
+        }
+
+        // --- Визуализация Дельта-функции ---
+        const deltaCanvas = document.getElementById('deltaCanvas');
+        const sigmaSlider = document.getElementById('sigmaSlider');
+        const sigmaVal = document.getElementById('sigmaVal');
+        const peakVal = document.getElementById('peakVal');
+
+        function drawDelta() {
+            if (!deltaCanvas) return;
+            const ctx = deltaCanvas.getContext('2d');
+            const W = deltaCanvas.width;
+            const H = deltaCanvas.height;
+            ctx.clearRect(0, 0, W, H);
+
+            const sigma = parseFloat(sigmaSlider.value);
+            if (sigmaVal) sigmaVal.innerText = sigma.toFixed(2);
+            
+            const maxVal = 1 / (Math.sqrt(2 * Math.PI) * sigma);
+            if (peakVal) peakVal.innerText = maxVal.toFixed(2);
+
+            // Отрисовка осей
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, H - 30); ctx.lineTo(W, H - 30); // Ось X
+            ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); // Ось Y
+            ctx.stroke();
+
+            // Отрисовка колокола Гаусса
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineWidth = 2.5;
+            ctx.shadowColor = 'rgba(59, 130, 246, 0.4)';
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+
+            const scaleX = 200; // пикселей на 1 единицу x
+            const scaleY = (H - 50) / 8; // пикселей на 1 единицу y
+
+            for (let px = 0; px < W; px++) {
+                const x = (px - W / 2) / scaleX;
+                const y = Math.exp(-(x * x) / (2 * sigma * sigma)) / (Math.sqrt(2 * Math.PI) * sigma);
+                const py = (H - 30) - y * scaleY;
+                if (px === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0; // Сброс блюра
+        }
+
+        if (sigmaSlider) {
+            sigmaSlider.addEventListener('input', drawDelta);
+        }
+
+        // Функция отрисовки для Билета 2 (Плоская волна)
+        function drawWave() {
+            const canvas = document.getElementById('waveCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const W = canvas.width;
+            const H = canvas.height;
+            
+            const kSlider = document.getElementById('kSlider');
+            const kVal = document.getElementById('kVal');
+            const pVal = document.getElementById('pVal');
+            const eVal = document.getElementById('eVal');
+
+            const k = parseFloat(kSlider ? kSlider.value : 2.0);
+            
+            if(kVal) kVal.innerText = k.toFixed(1);
+            if(pVal) pVal.innerText = k.toFixed(1) + ' ħ';
+            if(eVal) eVal.innerText = (k*k/2).toFixed(2);
+
+            ctx.clearRect(0, 0, W, H);
+
+            // Отрисовка осей
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); // Ось X
+            ctx.stroke();
+
+            // Линия графика волны (вещественная часть)
+            ctx.strokeStyle = '#3b82f6'; // Синий
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            const scaleX = 40;
+            const amplitude = 60;
+            
+            for (let px = 0; px < W; px++) {
+                const x = px / scaleX;
+                const y = Math.cos(k * x);
+                const py = H / 2 - y * amplitude;
+                if (px === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+            
+            // Мнимая часть волны пунктиром
+            ctx.strokeStyle = 'rgba(168, 85, 247, 0.5)'; // Фиолетовый полупрозрачный
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            for (let px = 0; px < W; px++) {
+                const x = px / scaleX;
+                const y = Math.sin(k * x);
+                const py = H / 2 - y * amplitude;
+                if (px === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        if (document.getElementById('kSlider')) {
+            document.getElementById('kSlider').addEventListener('input', drawWave);
+        }
+
+        // --- --- Симулятор измерения и коллапса ВФ (Билет 3) --- ---
+        let collapseCanvas = null;
+        let collapseCtx = null;
+        let c1 = 0.8, c2 = 0.5, c3 = 0.3;
+        
+        let isCollapsed = false;
+        let collapseType = 'none'; // 'energy', 'position'
+        let collapsedLevel = 1;
+        let collapsedPos = 0.5;
+        
+        let isTransitioning = false;
+        let transitionT = 0;
+        
+        // Временные массивы для интерполяции в процессе коллапса
+        const gridPointsCount = 200;
+        let psiInitialRe = new Float32Array(gridPointsCount + 1);
+        let psiInitialIm = new Float32Array(gridPointsCount + 1);
+        
+        let simTime = 0;
+        let simLoopRunning = false;
+        const omega1 = 0.5; // Базовая угловая частота
+
+        function initCollapseSim() {
+            collapseCanvas = document.getElementById('collapseCanvas');
+            if (!collapseCanvas) return;
+            collapseCtx = collapseCanvas.getContext('2d');
+            
+            const c1Slider = document.getElementById('c1Slider');
+            const c2Slider = document.getElementById('c2Slider');
+            const c3Slider = document.getElementById('c3Slider');
+            
+            const measureEnergyBtn = document.getElementById('measureEnergyBtn');
+            const measurePosBtn = document.getElementById('measurePosBtn');
+            const resetCollapseBtn = document.getElementById('resetCollapseBtn');
+            
+            // Настройка слушателей слайдеров
+            const handleSliderChange = () => {
+                c1 = parseFloat(c1Slider.value);
+                c2 = parseFloat(c2Slider.value);
+                c3 = parseFloat(c3Slider.value);
+                
+                // Предотвращение нулевого вектора
+                if (c1 === 0 && c2 === 0 && c3 === 0) {
+                    c1 = 0.1;
+                    c1Slider.value = 0.1;
+                }
+                
+                document.getElementById('c1Val').innerText = c1.toFixed(2);
+                document.getElementById('c2Val').innerText = c2.toFixed(2);
+                document.getElementById('c3Val').innerText = c3.toFixed(2);
+                
+                updateProbabilities();
+                resetCollapse();
+            };
+
+            if (c1Slider) c1Slider.addEventListener('input', handleSliderChange);
+            if (c2Slider) c2Slider.addEventListener('input', handleSliderChange);
+            if (c3Slider) c3Slider.addEventListener('input', handleSliderChange);
+            
+            if (measureEnergyBtn) measureEnergyBtn.onclick = measureEnergy;
+            if (measurePosBtn) measurePosBtn.onclick = measurePosition;
+            if (resetCollapseBtn) resetCollapseBtn.onclick = resetCollapse;
+            
+            updateProbabilities();
+            
+            if (!simLoopRunning) {
+                simLoopRunning = true;
+                requestAnimationFrame(simLoop);
+            }
+        }
+        
+        function updateProbabilities() {
+            const normSq = c1*c1 + c2*c2 + c3*c3;
+            const p1 = (c1*c1 / normSq) * 100;
+            const p2 = (c2*c2 / normSq) * 100;
+            const p3 = (c3*c3 / normSq) * 100;
+            
+            document.getElementById('pE1').innerText = p1.toFixed(0) + '%';
+            document.getElementById('pE2').innerText = p2.toFixed(0) + '%';
+            document.getElementById('pE3').innerText = p3.toFixed(0) + '%';
+        }
+        
+        function resetCollapse() {
+            isCollapsed = false;
+            collapseType = 'none';
+            isTransitioning = false;
+            document.getElementById('measurementStatus').innerText = "Система подготовлена в суперпозиции. Ожидание измерения...";
+        }
+        
+        // Собственные функции потенциальной ямы: phi_n(x) = sqrt(2) * sin(n * pi * x)
+        function phi(n, x) {
+            return Math.sqrt(2) * Math.sin(n * Math.PI * x);
+        }
+        
+        // Получение текущего состояния суперпозиции в точке x и времени t
+        function getSuperpositionPsi(x, t) {
+            const norm = Math.sqrt(c1*c1 + c2*c2 + c3*c3);
+            const a1 = c1 / norm;
+            const a2 = c2 / norm;
+            const a3 = c3 / norm;
+            
+            const re = a1 * phi(1, x) * Math.cos(1 * omega1 * t) + 
+                       a2 * phi(2, x) * Math.cos(4 * omega1 * t) + 
+                       a3 * phi(3, x) * Math.cos(9 * omega1 * t);
+                       
+            const im = a1 * phi(1, x) * Math.sin(-1 * omega1 * t) + 
+                       a2 * phi(2, x) * Math.sin(-4 * omega1 * t) + 
+                       a3 * phi(3, x) * Math.sin(-9 * omega1 * t);
+                       
+            return { re, im };
+        }
+
+        function measureEnergy() {
+            if (isCollapsed && collapseType === 'energy') {
+                document.getElementById('measurementStatus').innerText = 
+                    `Повторное измерение энергии: результат E_${collapsedLevel} (вероятность 100%). Состояние стабильно.`;
+                return;
+            }
+            
+            let p1, p2, p3;
+            if (isCollapsed && collapseType === 'position') {
+                // Если коллапсировало в координату, проектируем узкий пик обратно на энергетический базис
+                // P_n ~ |<phi_n|psi_pos>|^2 ~ phi_n(x_meas)^2
+                const f1 = 2 * Math.pow(Math.sin(Math.PI * collapsedPos), 2);
+                const f2 = 2 * Math.pow(Math.sin(2 * Math.PI * collapsedPos), 2);
+                const f3 = 2 * Math.pow(Math.sin(3 * Math.PI * collapsedPos), 2);
+                const sum = f1 + f2 + f3;
+                p1 = f1 / sum;
+                p2 = f2 / sum;
+                p3 = f3 / sum;
+            } else {
+                const normSq = c1*c1 + c2*c2 + c3*c3;
+                p1 = (c1*c1 / normSq);
+                p2 = (c2*c2 / normSq);
+                p3 = (c3*c3 / normSq);
+            }
+            
+            // Фиксация текущей ВФ перед переходом
+            captureCurrentPsi();
+            
+            // Разыгрываем случайный исход по правилу Борна
+            const rand = Math.random();
+            let chosen = 1;
+            let prob = p1;
+            
+            if (rand < p1) {
+                chosen = 1;
+                prob = p1;
+            } else if (rand < p1 + p2) {
+                chosen = 2;
+                prob = p2;
+            } else {
+                chosen = 3;
+                prob = p3;
+            }
+            
+            collapsedLevel = chosen;
+            isCollapsed = true;
+            collapseType = 'energy';
+            isTransitioning = true;
+            transitionT = 0;
+            
+            document.getElementById('measurementStatus').innerText = 
+                `Измерение энергии... Результат: E_${chosen} (вероятность была ${(prob*100).toFixed(0)}%). Состояние редуцировало к собственной функции.`;
+        }
+        
+        function measurePosition() {
+            if (isCollapsed && collapseType === 'position') {
+                document.getElementById('measurementStatus').innerText = 
+                    `Повторное измерение координаты: результат x = ${collapsedPos.toFixed(3)} (вероятность 100%). Частица локализована.`;
+                return;
+            }
+            
+            // Фиксация текущей ВФ перед переходом
+            captureCurrentPsi();
+            
+            // Выбираем координату по распределению плотности вероятности |psi(x)|^2
+            // Численное построение CDF
+            const cdf = new Float32Array(gridPointsCount + 1);
+            let sum = 0;
+            
+            for (let j = 0; j <= gridPointsCount; j++) {
+                const x = j / gridPointsCount;
+                let psiSq = 0;
+                
+                if (isCollapsed && collapseType === 'energy') {
+                    // Плотность вероятности для стационарного состояния
+                    const val = phi(collapsedLevel, x);
+                    psiSq = val * val;
+                } else {
+                    const psi = getSuperpositionPsi(x, simTime);
+                    psiSq = psi.re * psi.re + psi.im * psi.im;
+                }
+                
+                sum += psiSq;
+                cdf[j] = sum;
+            }
+            
+            // Нормировка CDF
+            for (let j = 0; j <= gridPointsCount; j++) {
+                cdf[j] /= sum;
+            }
+            
+            // Выбор случайной координаты методом обратного преобразования
+            const rand = Math.random();
+            let idx = 0;
+            while (idx < gridPointsCount && cdf[idx] < rand) {
+                idx++;
+            }
+            
+            const xMeas = idx / gridPointsCount;
+            // Удерживаем от самих границ ямы
+            collapsedPos = Math.max(0.04, Math.min(0.96, xMeas));
+            
+            isCollapsed = true;
+            collapseType = 'position';
+            isTransitioning = true;
+            transitionT = 0;
+            
+            document.getElementById('measurementStatus').innerText = 
+                `Измерение координаты... Результат: x = ${collapsedPos.toFixed(3)}. Волновая функция коллапсировала в дельта-подобный пик.`;
+        }
+        
+        function captureCurrentPsi() {
+            for (let j = 0; j <= gridPointsCount; j++) {
+                const x = j / gridPointsCount;
+                const psi = getCurrentPsiAtFrame(x);
+                psiInitialRe[j] = psi.re;
+                psiInitialIm[j] = psi.im;
+            }
+        }
+        
+        // Получение мгновенного состояния в анимационном цикле
+        function getCurrentPsiAtFrame(x) {
+            if (isCollapsed && !isTransitioning) {
+                if (collapseType === 'energy') {
+                    // Стационарное состояние phi_n(x) * e^(-i E_n t)
+                    const val = phi(collapsedLevel, x);
+                    const ePhase = collapsedLevel * collapsedLevel * omega1 * simTime;
+                    return {
+                        re: val * Math.cos(ePhase),
+                        im: val * Math.sin(-ePhase)
+                    };
+                } else {
+                    // Коллапсировало в координату: узкий Гауссов пик (модель дельта-функции, фаза заморожена)
+                    const sigma = 0.035;
+                    const peak = Math.exp(-Math.pow(x - collapsedPos, 2) / (2 * sigma * sigma));
+                    // Нормировочный коэффициент для Гауссианы
+                    const norm = 1 / (Math.sqrt(sigma * Math.sqrt(Math.PI)));
+                    return {
+                        re: peak * norm,
+                        im: 0
+                    };
+                }
+            } else if (isTransitioning) {
+                // В процессе перехода (интерполяция)
+                const idx = Math.round(x * gridPointsCount);
+                const initRe = psiInitialRe[idx];
+                const initIm = psiInitialIm[idx];
+                
+                let targetRe = 0, targetIm = 0;
+                if (collapseType === 'energy') {
+                    const val = phi(collapsedLevel, x);
+                    const ePhase = collapsedLevel * collapsedLevel * omega1 * simTime;
+                    targetRe = val * Math.cos(ePhase);
+                    targetIm = val * Math.sin(-ePhase);
+                } else {
+                    const sigma = 0.035;
+                    const peak = Math.exp(-Math.pow(x - collapsedPos, 2) / (2 * sigma * sigma));
+                    const norm = 1 / (Math.sqrt(sigma * Math.sqrt(Math.PI)));
+                    targetRe = peak * norm;
+                    targetIm = 0;
+                }
+                
+                // Линейная интерполяция
+                const t = transitionT;
+                let re = (1 - t) * initRe + t * targetRe;
+                let im = (1 - t) * initIm + t * targetIm;
+                
+                return { re, im };
+            } else {
+                // Обычная суперпозиция
+                return getSuperpositionPsi(x, simTime);
+            }
+        }
+        
+        function simLoop() {
+            if (activeTicket !== 3) {
+                simLoopRunning = false;
+                return;
+            }
+            
+            simTime += 0.035; // Изменение времени
+            
+            if (isTransitioning) {
+                transitionT += 0.04;
+                if (transitionT >= 1) {
+                    transitionT = 1;
+                    isTransitioning = false;
+                }
+            }
+            
+            drawCollapseFrame();
+            requestAnimationFrame(simLoop);
+        }
+        
+        function drawCollapseFrame() {
+            if (!collapseCanvas || !collapseCtx) return;
+            const ctx = collapseCtx;
+            const W = collapseCanvas.width;
+            const H = collapseCanvas.height;
+            
+            ctx.clearRect(0, 0, W, H);
+            
+            // Координаты ямы в пикселях
+            const leftX = 50;
+            const rightX = W - 50;
+            const widthX = rightX - leftX;
+            const centerY = H / 2;
+            
+            // Рисуем границы ямы
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(leftX, 20);
+            ctx.lineTo(leftX, H - 30);
+            ctx.lineTo(rightX, H - 30);
+            ctx.lineTo(rightX, 20);
+            ctx.stroke();
+            
+            // Линия нуля
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(leftX, centerY);
+            ctx.lineTo(rightX, centerY);
+            ctx.stroke();
+            
+            // Вычисляем ВФ на сетке
+            const scaleAmp = 40; // Масштаб амплитуды psi
+            const scaleProb = 35; // Масштаб плотности |psi|^2
+            
+            const pxRe = [];
+            const pxIm = [];
+            const pxSq = [];
+            
+            // Накапливаем нормировку при интерполяции
+            let sumSq = 0;
+            for (let j = 0; j <= gridPointsCount; j++) {
+                const x = j / gridPointsCount;
+                const psi = getCurrentPsiAtFrame(x);
+                sumSq += (psi.re*psi.re + psi.im*psi.im) / gridPointsCount;
+            }
+            const normCorrection = Math.sqrt(sumSq > 0.001 ? 1 / sumSq : 1);
+            
+            for (let j = 0; j <= gridPointsCount; j++) {
+                const x = j / gridPointsCount;
+                let psi = getCurrentPsiAtFrame(x);
+                
+                // Корректируем норму во время переходов
+                if (isTransitioning) {
+                    psi.re *= normCorrection;
+                    psi.im *= normCorrection;
+                }
+                
+                const px = leftX + x * widthX;
+                
+                const yRe = centerY - psi.re * scaleAmp;
+                const yIm = centerY - psi.im * scaleAmp;
+                const ySq = (H - 30) - (psi.re*psi.re + psi.im*psi.im) * scaleProb;
+                
+                pxRe.push({x: px, y: yRe});
+                pxIm.push({x: px, y: yIm});
+                pxSq.push({x: px, y: ySq});
+            }
+            
+            // 1. Отрисовка закрашенной плотности вероятности |psi|^2
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+            ctx.beginPath();
+            ctx.moveTo(leftX, H - 30);
+            for (let j = 0; j <= gridPointsCount; j++) {
+                ctx.lineTo(pxSq[j].x, pxSq[j].y);
+            }
+            ctx.lineTo(rightX, H - 30);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Граница плотности вероятности
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(pxSq[0].x, pxSq[0].y);
+            for (let j = 1; j <= gridPointsCount; j++) {
+                ctx.lineTo(pxSq[j].x, pxSq[j].y);
+            }
+            ctx.stroke();
+            
+            // 2. Отрисовка вещественной части Re(psi)
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(pxRe[0].x, pxRe[0].y);
+            for (let j = 1; j <= gridPointsCount; j++) {
+                ctx.lineTo(pxRe[j].x, pxRe[j].y);
+            }
+            ctx.stroke();
+            
+            // 3. Отрисовка мнимой части Im(psi)
+            ctx.strokeStyle = 'rgba(168, 85, 247, 0.5)';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(pxIm[0].x, pxIm[0].y);
+            for (let j = 1; j <= gridPointsCount; j++) {
+                ctx.lineTo(pxIm[j].x, pxIm[j].y);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Рисуем подписи осей
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.font = '11px sans-serif';
+            ctx.fillText('x = 0', leftX - 10, H - 12);
+            ctx.fillText('x = a', rightX - 10, H - 12);
+            
+            // Легенда
+            ctx.fillStyle = '#3b82f6';
+            ctx.fillRect(leftX + 20, 20, 12, 6);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.fillText('Re(ψ) — вещ. часть', leftX + 38, 26);
+            
+            ctx.strokeStyle = 'rgba(168, 85, 247, 0.7)';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([3, 3]);
+            ctx.beginPath();
+            ctx.moveTo(leftX + 170, 23); ctx.lineTo(leftX + 182, 23);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.fillText('Im(ψ) — мним. часть', leftX + 188, 26);
+            
+            ctx.fillStyle = '#f59e0b';
+            ctx.fillRect(leftX + 320, 20, 12, 6);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.fillText('|ψ|² — плотность вероятности', leftX + 338, 26);
+        }
+
+        // --- Визуализация Вероятности Волновой функции (leftover cleanup) ---
+        // (Мы не используем probCanvas в HTML, но сохраняем заглушку для совместимости с showTicket(2))
+        function drawProb() {
+            drawWave(); // Билет 2 использует drawWave
+        }
+
+        // --- Визуализация Неопределенности Гейзенберга (Билет 4) ---
+        const canvasX = document.getElementById('heisenbergCanvasX');
+        const canvasP = document.getElementById('heisenbergCanvasP');
+        const ctxX = canvasX ? canvasX.getContext('2d') : null;
+        const ctxP = canvasP ? canvasP.getContext('2d') : null;
+        const sigmaSlider = document.getElementById('sigmaSlider');
+        const dxValLabel = document.getElementById('dxVal');
+        const dpValLabel = document.getElementById('dpVal');
+
+        function drawGaussian(ctx, w, h, sigma, color, title) {
+            ctx.clearRect(0, 0, w, h);
+            
+            // Оси
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, h - 20); ctx.lineTo(w, h - 20); // x-axis
+            ctx.moveTo(w/2, 0); ctx.lineTo(w/2, h); // y-axis
+            ctx.stroke();
+
+            // Гауссиана
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            const maxAmp = h - 30;
+            
+            // Условие нормировки: амплитуда Гауссианы (плотности вероятности)
+            // Плотность вероятности ~ 1/(sigma*sqrt(2pi)) * exp(-x^2/(2*sigma^2))
+            // Для красоты визуала отнормируем высоту по 1/sigma, но ограничим сверху
+            let visualAmp = (1 / sigma) * 40;
+            if (visualAmp > maxAmp) visualAmp = maxAmp;
+
+            for (let px = 0; px <= w; px++) {
+                // Преобразование координат (x в диапазоне от -4 до 4)
+                let x = ((px - w/2) / (w/2)) * 4; 
+                let y = visualAmp * Math.exp(-(x * x) / (2 * sigma * sigma));
+                if (px === 0) ctx.moveTo(px, h - 20 - y);
+                else ctx.lineTo(px, h - 20 - y);
+            }
+            ctx.stroke();
+            
+            // Заливка под графиком
+            ctx.lineTo(w, h - 20);
+            ctx.lineTo(0, h - 20);
+            ctx.fillStyle = color.replace('1)', '0.15)');
+            ctx.fill();
+        }
+
+        function updateHeisenberg() {
+            if (!ctxX || !ctxP) return;
+            
+            const sigmaX = parseFloat(sigmaSlider.value);
+            // По соотношению Гейзенберга sigma_p ~ 1 / sigma_x
+            const sigmaP = 1.0 / sigmaX;
+            
+            dxValLabel.innerText = sigmaX.toFixed(2);
+            dpValLabel.innerText = sigmaP.toFixed(2);
+            
+            drawGaussian(ctxX, canvasX.width, canvasX.height, sigmaX, 'rgba(59, 130, 246, 1)'); // Blue
+            drawGaussian(ctxP, canvasP.width, canvasP.height, sigmaP, 'rgba(245, 158, 11, 1)'); // Amber
+        }
+
+        if (sigmaSlider) {
+            sigmaSlider.addEventListener('input', updateHeisenberg);
+        }
+
+        // Запуск при старте
+        window.addEventListener('load', () => {
+            drawDelta();
+            drawWave(); 
+            initCollapseSim();
+            if (sigmaSlider) updateHeisenberg();
+        });
+    </script>

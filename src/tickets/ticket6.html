@@ -1,0 +1,166 @@
+        <!-- БИЛЕТ 6 -->
+        <section id="ticket-6" class="ticket-section">
+            <h1>Билет 6</h1>
+            <p>Собственные функции одномерного оператора Гамильтона свободной частицы. Спектр гамильтониана свободной частицы. Монохроматическая плоская волна. Волновой пакет и движение свободной частицы.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета:</h3>
+                <ol>
+                    <li><a href="#t6-q1">Собственные функции одномерного оператора Гамильтона свободной частицы. Спектр.</a></li>
+                    <li><a href="#t6-q2">Монохроматическая плоская волна.</a></li>
+                    <li><a href="#t6-q3">Волновой пакет.</a></li>
+                    <li><a href="#t6-q4">Движение свободной частицы. Групповая скорость.</a></li>
+                    <li><a href="#t6-q5">Расплывание волнового пакета.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t6-q1">1. СФ одномерного оператора Гамильтона свободной частицы. Спектр</h2>
+            <div class="card">
+                <p>Для свободной частицы потенциальная энергия равна нулю ($\hat{U} = 0$). Гамильтониан совпадает с оператором кинетической энергии:</p>
+                <div class="math-block">
+                    $$\hat{H} = \hat{T} + \hat{U} = \hat{T} = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2}$$
+                </div>
+                <p>Гамильтониан $\hat{H}$ коммутирует с оператором импульса $\hat{p} = \frac{\hbar}{i}\frac{d}{dx}$, поэтому они имеют общие собственные функции (СФ). Формальным решением уравнения на собственные значения являются <span class="highlight">монохроматические плоские волны</span>:</p>
+                <div class="math-block">
+                    $$\varphi_k(x) = \frac{1}{\sqrt{2\pi}} e^{ikx}$$
+                </div>
+                <p>Подействуем операторами $\hat{p}$ и $\hat{H}$ на эту функцию:</p>
+                <div class="math-block">
+                    $$\hat{p} \varphi_k(x) = \frac{\hbar}{i} \frac{d}{dx} \varphi_k(x) = \hbar k \varphi_k(x) = p \varphi_k(x)$$
+                </div>
+                <div class="math-block">
+                    $$\hat{H} \varphi_k(x) = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} \varphi_k(x) = \frac{\hbar^2 k^2}{2m} \varphi_k(x) = E(k) \varphi_k(x)$$
+                </div>
+                
+                <p>Отсюда находим <strong>спектр операторов</strong>:</p>
+                <ul>
+                    <li>Спектр импульса: $p = \hbar k$. Волновой вектор $k$ может принимать любые вещественные значения: $k \in (-\infty, +\infty)$. Спектр <span class="highlight-secondary">чисто сплошной</span>.</li>
+                    <li>Спектр энергии: $E = \frac{\hbar^2 k^2}{2m} = \frac{p^2}{2m}$. Значения энергии непрерывны и положительны $E \in [0, +\infty)$. Уровни энергии дважды вырождены (волнам $+k$ и $-k$ отвечает одна и та же энергия $E$).</li>
+                </ul>
+
+                <div class="alert" style="background: rgba(245, 158, 11, 0.1); border-left-color: #f59e0b; margin-top: 1rem;">
+                    <strong>Проблема нормировки:</strong><br>
+                    Плоские волны $\varphi_k(x)$ не интегрируемы с квадратом на всей оси $x$, то есть <em>не принадлежат гильбертову пространству $L_2(-\infty, \infty)$</em>. Интеграл от $|\varphi_k(x)|^2 = \frac{1}{2\pi}$ равен бесконечности. Такие функции нормируются на дельта-функцию Дирака:<br>
+                    $$\langle \varphi_k | \varphi_{k'} \rangle = \int_{-\infty}^{\infty} \varphi_k^*(x)\varphi_{k'}(x) dx = \delta(k - k')$$
+                    Поэтому строго говоря, плоская волна не является физически реализуемым состоянием (неопределенность координаты бесконечна).
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t6-q2">2. Монохроматическая плоская волна</h2>
+            <div class="card">
+                <p>Рассмотрим временное уравнение Шредингера для свободной частицы:</p>
+                <div class="math-block">
+                    $$i\hbar \frac{\partial}{\partial t} \Psi(x,t) = \hat{H} \Psi(x,t)$$
+                </div>
+                <p>Так как гамильтониан не зависит от времени, частным формальным решением этого уравнения является зависящая от времени <strong>монохроматическая плоская волна де Бройля</strong>:</p>
+                <div class="math-block">
+                    $$\Psi_k(x,t) = \varphi_k(x) e^{-\frac{i}{\hbar}E(k)t} = \frac{1}{\sqrt{2\pi}} e^{i(kx - \omega t)}$$
+                </div>
+                <p>Связь частоты $\omega$ и энергии $E(k)$ задается формулой Планка-Эйнштейна:</p>
+                <div class="math-block">
+                    $$\omega = \frac{E(k)}{\hbar} = \frac{\hbar k^2}{2m} = \frac{p^2}{2m\hbar}$$
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t6-q3">3. Волновой пакет</h2>
+            <div class="card">
+                <p>Физически реализуемое состояние свободной частицы (интегрируемое с квадратом) формируется как суперпозиция (интеграл) зависящих от времени плоских волн с различными импульсами (энергиями). Такая конструкция называется <span class="highlight">волновым пакетом</span>.</p>
+                <p>Общее решение временного уравнения Шредингера записывается в виде интеграла Фурье:</p>
+                <div class="math-block">
+                    $$\Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} dk \, C(k) e^{i(kx - \omega(k) t)} \quad \in L_2(-\infty, \infty)$$
+                </div>
+                <p>Здесь весовая функция $C(k)$ — это коэффициенты разложения, амплитуда вероятности найти частицу с волновым вектором $k$.</p>
+                <ul>
+                    <li>Волновой пакет <strong>является</strong> решением временного уравнения Шредингера.</li>
+                    <li>Волновой пакет <strong>не является</strong> собственной функцией гамильтониана $\hat{H}$ (он не имеет строго определенной энергии, так как "смешан" из разных $\omega(k)$).</li>
+                </ul>
+                <p>В начальный момент времени $t=0$ волновая функция $\Psi(x, 0) = \psi_0(x)$ нормирована на единицу. Коэффициенты $C(k)$ определяются как обратное преобразование Фурье начального состояния:</p>
+                <div class="math-block">
+                    $$C(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \psi_0(x) e^{-ikx} dx$$
+                </div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t6-q4">4. Движение свободной частицы. Групповая скорость</h2>
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <p>Предположим, что спектр функции $C(k)$ узко локализован в $k$-пространстве вблизи некоторого значения $k_0$. Тогда $C(k)$ можно представить как $C(k) = \Phi(k - k_0) e^{-ikx_0}$, где функция $\Phi(q)$ имеет острый максимум в нуле.</p>
+                <p>Разложим частоту $\omega(k)$ в ряд Тейлора вблизи $k_0$, оставив только линейный член:</p>
+                <div class="math-block">
+                    $$\omega(k) \approx \omega(k_0) + \left. \frac{d\omega}{dk} \right|_{k=k_0} (k - k_0) = \omega_0 + v_g (k - k_0)$$
+                </div>
+                <p>Здесь <span class="highlight">групповая скорость</span> $v_g$ — это скорость движения центра локализованного волнового пакета. Для свободной частицы она совпадает с классической скоростью:</p>
+                <div class="math-block">
+                    $$v_g = \frac{d\omega}{dk} = \frac{d}{dk}\left( \frac{\hbar k^2}{2m} \right) = \frac{\hbar k_0}{m} = \frac{p_0}{m}$$
+                </div>
+                <div class="alert" style="background: rgba(16, 185, 129, 0.08); border-color: #10b981;">
+                    <strong>Групповая и фазовая скорости:</strong><br>
+                    - <em>Групповая скорость</em> $v_g = d\omega/dk = p/m$ — это физическая скорость движения самого "сгустка" (огибающей), с которой движется частица.<br>
+                    - <em>Фазовая скорость</em> $v_{ph} = \omega/k = p/(2m) = v_g/2$ — это скорость бега узлов синусоиды "внутри" пакета. Она не имеет прямого физического смысла для движения частицы.
+                </div>
+                <p>Подставляя линейное приближение для $\omega(k)$ в интеграл волнового пакета, мы получаем:</p>
+                <div class="math-block">
+                    $$\Psi(x,t) \approx e^{i(k_0 x - \omega_0 t)} F(x - x_0 - v_g t)$$
+                </div>
+                <p>Квадрат модуля плотности вероятности:</p>
+                <div class="math-block">
+                    $$|\Psi(x,t)|^2 \approx |F(x - x_0 - v_g t)|^2$$
+                </div>
+                <p>Это уравнение описывает волновой пакет $F(x)$, который движется прямолинейно и равномерно со скоростью $v_g$, при этом не меняя своей формы. (Но только в линейном приближении!).</p>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t6-q5">5. Расплывание волнового пакета</h2>
+            <div class="card">
+                <p>Если учесть в разложении $\omega(k)$ квадратичные члены по $k$, то обнаружится фундаментальное квантовое явление — <span class="highlight-secondary">расплывание волнового пакета</span>.</p>
+                <p>Причина расплывания состоит в том, что разные $k$-компоненты пакета распространяются с разной фазовой скоростью ($v_{ph} \sim k$). Компоненты с большим импульсом убегают вперед, а с меньшим — отстают. Это приводит к размазыванию пакета в пространстве с течением времени.</p>
+                
+                <h3>Закон расплывания гауссова пакета</h3>
+                <p>Пусть в $t=0$ пакет имеет форму гауссианы с дисперсией $\sigma_0^2$. (Пакет минимизирует соотношение неопределенностей $\Delta x(0) \Delta p = \hbar/2$, где $\Delta x(0) = \sigma_0$).</p>
+                <p>При точном интегрировании ширина пакета (дисперсия $\sigma(t)$) со временем растет по закону:</p>
+                <div class="math-block">
+                    $$\sigma(t) = \sigma_0 \sqrt{1 + \left( \frac{\hbar t}{2m \sigma_0^2} \right)^2} \quad \implies \quad \Delta x(t) = \Delta x(0) \sqrt{1 + \left( \frac{\hbar t}{m (\Delta x(0))^2} \right)^2}$$
+                </div>
+                <p><strong>Важные следствия:</strong></p>
+                <ol>
+                    <li>При малых временах ($t \to 0$) расплывание идет с ускорением $\sigma(t) \approx \sigma_0 + \frac{\hbar^2 t^2}{8m^2\sigma_0^3}$.</li>
+                    <li>При больших временах ($t \to \infty$) ширина растет линейно со временем: $\sigma(t) \sim \frac{\hbar}{2m\sigma_0} t$. Скорость расплывания обратно пропорциональна начальной ширине: <em>чем точнее локализована частица изначально, тем быстрее она "размажется" по пространству</em>.</li>
+                    <li>Чем больше масса частицы $m$, тем медленнее идет расплывание. (Для макроскопических тел этот эффект незаметен).</li>
+                    <li><strong>Свободная квантовая частица не может оставаться локализованной вечно.</strong> Чтобы состояние было стабильным и локализованным, частица должна находиться в потенциальной яме.</li>
+                </ol>
+            </div>
+
+            <!-- ИНТЕРАКТИВНЫЙ БЛОК: СИМУЛЯТОР РАСПЛЫВАНИЯ -->
+            <div class="visual-container">
+                <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная симуляция: Движение и расплывание Гауссова волнового пакета</h3>
+                <p style="text-align: center; font-size: 0.95rem; max-width: 800px; margin-bottom: 1rem;">
+                    Наблюдайте, как центр пакета движется с групповой скоростью $v_g \sim p_0$, а ширина огибающей $|\Psi(x,t)|^2$ постепенно расплывается из-за дисперсии. Высокочастотные осцилляции внутри пакета (реальная часть ВФ) бегут с фазовой скоростью $v_{ph} = v_g / 2$.
+                </p>
+                
+                <canvas id="packetCanvas" class="visual-canvas" width="800" height="300"></canvas>
+                
+                <div class="control-panel" style="justify-content: center; margin-top: 1rem; max-width: 800px;">
+                    <div class="control-group" style="flex-direction: column; align-items: flex-start; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border); width: 100%;">
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; width: 100%;">
+                            <label style="width: 180px;">Импульс $p_0$ (скорость):</label>
+                            <input type="range" id="p0Slider" class="slider" min="1" max="15" step="0.5" value="6">
+                            <span id="p0Val" style="width: 40px; text-align: right; color: var(--accent); font-weight: bold;">6.0</span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; width: 100%;">
+                            <label style="width: 180px;">Нач. ширина $\Delta x(0)$:</label>
+                            <input type="range" id="sigmaSlider" class="slider" min="0.5" max="3" step="0.1" value="1.0">
+                            <span id="sigmaVal" style="width: 40px; text-align: right; color: #a855f7; font-weight: bold;">1.0</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: center; width: 100%; gap: 1rem; margin-top: 0.5rem;">
+                            <button id="playPauseBtn" style="padding: 0.5rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Пауза</button>
+                            <button id="resetSimBtn" style="padding: 0.5rem 1.5rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 0.5rem; cursor: pointer;">Сброс (t=0)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

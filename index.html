@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квантминимум | Билеты 1-3</title>
+
+    <!-- Подключаем локальный KaTeX для автономной работы без интернета -->
+    <link rel="stylesheet" href="katex/katex.min.css">
+    <script defer src="katex/katex.min.js"></script>
+    <script defer src="katex/contrib/auto-render.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false,
+                trust: true,
+                strict: false
+            });
+        });
+    </script>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    
+    <nav class="sidebar">
+        <div class="logo">Квант. минимум</div>
+        <button class="nav-btn active" onclick="showTicket(1)">Билет 1. Пространства и операторы</button>
+        <button class="nav-btn" onclick="showTicket(2)">Билет 2. Операторы физических величин</button>
+        <button class="nav-btn" onclick="showTicket(3)">Билет 3. Состояния и измерения</button>
+        <button class="nav-btn" onclick="showTicket(4)">Билет 4. Соотношение неопределенности</button>
+        <button class="nav-btn" onclick="showTicket(5)">Билет 5. Уравнения Шредингера и Эренфеста</button>
+        <button class="nav-btn" onclick="showTicket(6)">Билет 6. Движение свободной частицы</button>
+        <button class="nav-btn" onclick="showTicket(7)">Билет 7. Типовые потенциалы и квантовые эффекты</button>
+        <button class="nav-btn" onclick="showTicket(8)">Билет 8. Угловой момент, спин и матрицы Паули</button>
+        <button class="nav-btn" onclick="showTicket(9)">Билет 9. Волновые функции центрального поля</button>
+        <button class="nav-btn" onclick="showTicket(10)">Билет 10. Уравнение Дирака</button>
+        <button class="nav-btn" onclick="showTicket(11)">Билет 11. Теория возмущений и вариационный принцип</button>
+        <button class="nav-btn" onclick="showTicket(12)">Билет 12. Излучение и поглощение. Дипольное приближение</button>
+    </nav>
+
+    <main class="content">
+                <!-- БИЛЕТ 1 -->
+        <section id="ticket-1" class="ticket-section active">
+            <h1>Билет 1</h1>
+            <p>Фундаментальные основы квантовой механики: от гильбертова пространства до классификации спектров.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (7 вопросов):</h3>
+                <ol>
+                    <li><a href="#q1">Определение гильбертова пространства и линейного оператора в гильбертовом пространстве.</a></li>
+                    <li><a href="#q2">Определение суммы, произведения, коммутатора и антикоммутатора операторов.</a></li>
+                    <li><a href="#q3">Определение обратного, эрмитово сопряженного, унитарного, эрмитового (самосопряженного) и антиэрмитового операторов.</a></li>
+                    <li><a href="#q4">Спектры эрмитового и унитарного операторов.</a></li>
+                    <li><a href="#q5">Свойства собственных функций и собственных значений эрмитового оператора.</a></li>
+                    <li><a href="#q6">Разложение функций по спектру самосопряженного оператора.</a></li>
+                    <li><a href="#q7">Определение дельта-функции Дирака.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="q1">1. Определение гильбертова пространства и линейного оператора</h2>
+            <div class="card">
+                <h3>Гильбертово пространство $\mathcal{H}$</h3>
+                <p>Это линейное векторное пространство над полем комплексных чисел $\mathbb{C}$, удовлетворяющее требованиям:</p>
+                <div class="alert" style="background: rgba(147, 197, 253, 0.1); border-left-color: #93c5fd; padding: 0.75rem 1rem;">
+                    <strong>Нотация Дирака (Бра и Кет векторы):</strong> В квантовой механике векторы состояний обозначаются как <strong>кет-векторы</strong> $| \psi \rangle$ (векторы-столбцы). Элементы сопряженного пространства (линейные функционалы) называются <strong>бра-векторами</strong> $\langle \phi |$ (векторы-строки). Скалярное произведение записывается как "скобка" (bracket): $\langle \phi | \psi \rangle$.
+                </div>
+                <ul>
+                    <li><span class="highlight">Введено скалярное произведение</span> $\langle x | y \rangle = (y,x)$. Из него следует неравенство Коши-Буняковского: $|\langle x | y \rangle| \le ||x||\cdot||y||$.</li>
+                    <li><span class="highlight">Бесконечномерность</span> (не существует конечного базиса).</li>
+                    <li><span class="highlight">Полнота:</span> всякая фундаментальная последовательность сходится к элементу этого же пространства (нет "дыр", пределы лежат в $\mathcal{H}$).</li>
+                    <li><span class="highlight">Сепарабельность:</span> существует счетное множество векторов, образующее всюду плотное множество (существует счетный базис).</li>
+                </ul>
+
+                <h3>Линейный оператор</h3>
+                <p>Отображение $\hat{L}$, которое каждому вектору $f$ из своей области определения $D(\hat{L}) \subset \mathcal{H}$ однозначно сопоставляет вектор $g \in \mathcal{H}$, и удовлетворяет условию линейности:</p>
+                <div class="math-block">
+                    $$\hat{L}(c_1 f + c_2 g) = c_1 \hat{L}f + c_2 \hat{L}g$$
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="q2">2. Определение суммы, произведения, коммутатора и антикоммутатора</h2>
+            <div class="card">
+                <p>Бинарные операции в множестве операторов:</p>
+                <ul>
+                    <li><strong>Сумма:</strong> $\hat{C} = \hat{A} + \hat{B}$, если $\hat{C}f = \hat{A}f + \hat{B}f$.</li>
+                    <li><strong>Произведение:</strong> $\hat{C} = \hat{A}\hat{B}$, если $\hat{C}f = \hat{A}(\hat{B}f)$ (последовательное действие).</li>
+                    <li><strong>Коммутатор:</strong> $[\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}$. Операторы коммутируют, если $[\hat{A}, \hat{B}] = 0$.</li>
+                    <li><strong>Антикоммутатор:</strong> $\{\hat{A}, \hat{B}\} = [\hat{A}, \hat{B}]_+ = \hat{A}\hat{B} + \hat{B}\hat{A}$.</li>
+                </ul>
+                <div class="alert" style="background: rgba(192, 132, 252, 0.1); border-left-color: #c084fc; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Коммутирующие операторы и общий ОНБ:</strong> Если два эрмитовых оператора коммутируют ($[\hat{A}, \hat{B}] = 0$), то они обладают <strong>общей ортонормированной системой (ОНБ) собственных функций</strong>. С физической точки зрения это означает, что соответствующие им физические величины можно точно и одновременно измерить в одном состоянии.
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="q3">3. Виды операторов (Строгая классификация)</h2>
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Обратный и Эрмитово сопряженный
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Обратный:</strong> $\hat{L}^{-1}$ существует, если отображение взаимно-однозначно (ядро пустое). $\hat{L}\hat{L}^{-1} = \hat{L}^{-1}\hat{L} = \hat{I}$.</p>
+                    <p><strong>Эрмитово сопряженный $\hat{L}^\dagger$:</strong> определяется интегральным тождеством $\langle \hat{L}^\dagger f | g \rangle = \langle f | \hat{L} g \rangle$.</p>
+                </div>
+            </div>
+
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Эрмитов vs Самосопряженный (Критично!)
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="alert">
+                        <strong>Эрмитов (Симметричный) оператор:</strong>
+                        Выполняется соотношение $\langle \hat{L} f | g \rangle = \langle f | \hat{L} g \rangle$ на области $D(\hat{L})$. При этом область определения сопряженного может быть шире: $D(\hat{L}) \subseteq D(\hat{L}^\dagger)$.
+                    </div>
+                    <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-color: #10b981; color: #e2e8f0;">
+                        <strong>Самосопряженный оператор:</strong>
+                        Оператор строго совпадает со своим сопряженным: $\hat{L} = \hat{L}^\dagger$, и их <strong>области определения совпадают</strong>: $D(\hat{L}) = D(\hat{L}^\dagger)$. Только они являются физическими наблюдаемыми!
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Антиэрмитов и Унитарный
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Антиэрмитов:</strong> $\hat{L}^\dagger = -\hat{L}$. (Пример: оператор $\frac{d}{dx}$ без множителя $i$).</p>
+                    <p><strong>Унитарный:</strong> $\hat{U}^\dagger \hat{U} = \hat{U} \hat{U}^\dagger = \hat{I}$ (т.е. $\hat{U}^\dagger = \hat{U}^{-1}$). Сохраняет скалярное произведение векторов $\langle \hat{U}f | \hat{U}g \rangle = \langle f | g \rangle$.</p>
+                </div>
+            </div>
+
+
+            <!-- QUESTION 4 -->
+            <h2 id="q4">4. Спектры эрмитового и унитарного операторов</h2>
+
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <h3>Суть задачи: что мы ищем и зачем?</h3>
+                <p><strong>Физическая постановка:</strong> В квантовой механике результаты измерения физической величины $L$ (например, энергии, импульса или координаты) являются случайными величинами. Но спектр возможных значений, которые мы вообще <em>можем</em> получить на приборе, фиксирован и определяется оператором $\hat{L}$. Наша цель — найти эти возможные значения.</p>
+                <p><strong>Математическая модель:</strong> Возможные результаты измерения соответствуют собственным значениям $\lambda$ оператора $\hat{L}$. Это приводит к уравнению на собственные значения и собственные векторы (функции) $f \neq 0$:</p>
+                <div class="math-block">
+                    $$\hat{L} f = \lambda f$$
+                </div>
+                <p><strong>Откуда берется оператор $(\hat{L} - \lambda\hat{I})$?</strong></p>
+                <p>Мы переносим всё в одну сторону и выносим вектор за скобки. Так как $\lambda$ — это число, а $\hat{L}$ — оператор, для корректности мы умножаем число $\lambda$ на единичный оператор $\hat{I}$:</p>
+                <div class="math-block">
+                    $$\hat{L} f - \lambda \hat{I} f = 0 \implies (\hat{L} - \lambda\hat{I}) f = 0$$
+                </div>
+                <p>Таким образом, поиск дискретных собственных значений сводится к нахождению таких $\lambda$, при которых оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ имеет нетривиальное (ненулевое) ядро $\ker(\hat{L}_\lambda) \neq \{0\}$.</p>
+                
+                <p><strong>Что такое спектр на самом деле?</strong></p>
+                <p>В бесконечномерных пространствах ситуация сложнее, чем в матричной алгебре (где либо есть нетривиальное решение, либо оператор полностью обратим). Здесь оператор обратной задачи — так называемая <span class="highlight">резольвента</span> $\hat{R}_\lambda = (\hat{L} - \lambda\hat{I})^{-1}$ — может ломаться тремя разными способами. Набор всех "плохих" точек $\lambda$, где резольвента $\hat{R}_\lambda$ не существует как взаимно-однозначный ограниченный оператор, определенный на всем $\mathcal{H}$, и называется <strong>спектром</strong> $\sigma(\hat{L})$:</p>
+                <ul>
+                    <li><span class="highlight">Точечный спектр ($\sigma_p$)</span>: Резольвента не существует, так как оператор склеивает векторы ($\ker \neq \{0\}$). Это дает классические <em>дискретные уровни</em> (например, уровни энергии в атоме водорода).</li>
+                    <li><span class="highlight">Непрерывный спектр ($\sigma_c$)</span>: Резольвента существует ($\ker = \{0\}$), ее область определения плотна, но она <em>не ограничена</em>. Физически это соответствует <em>состояниям рассеяния</em> (например, свободное движение частицы, где энергия может быть любой). Собственные функции непрерывного спектра (плоские волны) "не влезают" в гильбертово пространство $L_2$, так как не нормируются на единицу.</li>
+                    <li><span class="highlight">Остаточный спектр ($\sigma_r$)</span>: Резольвента существует, но ее образ не всюду плотен в $\mathcal{H}$. Это математическая патология, которая <strong>отсутствует у физических (самосопряженных) операторов</strong>, что гарантирует чистоту спектрального разложения.</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Понятия Ядра (Ker) и Образа (Ran)</h3>
+                <p>Для понимания спектра нужно знать две важнейшие характеристики оператора $\hat{A}$:</p>
+                <ul>
+                    <li><span class="highlight">Ядро $\ker(\hat{A})$</span>: множество всех векторов, которые оператор обнуляет ($\hat{A}f = 0$). Если ядро не пустое (содержит не только нуль), оператор "склеивает" векторы и необратим.</li>
+                    <li><span class="highlight">Образ $\text{Ran}(\hat{A})$</span>: множество всех возможных значений на выходе оператора ($\{g \in \mathcal{H} \mid g = \hat{A}f\}$). Если образ не покрывает всё гильбертово пространство, оператор не "дотягивается" до некоторых векторов.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Алгоритм классификации точек спектра $\sigma(\hat{L})$</h3>
+                <p>Исследуем оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ для классификации любой точки $\lambda \in \mathbb{C}$:</p>
+                
+                <!-- CSS Flowchart -->
+                <div class="flow-container">
+                    <div class="flow-box">
+                        Выбираем точку $\lambda \in \mathbb{C}$
+                    </div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box decision">
+                        Шаг 1: Анализируем Ядро<br>
+                        $\ker(\hat{L} - \lambda\hat{I})$
+                    </div>
+                    <div class="flow-arrow">↓</div>
+                    
+                    <div class="flow-row">
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed;">
+                                $\ker \neq \{0\}$<br>
+                                <small>$\exists f \neq 0 : \hat{L}f = \lambda f$</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result-warn">
+                                ТОЧЕЧНЫЙ СПЕКТР<br>
+                                $\lambda \in \sigma_p$ (дискретный)
+                            </div>
+                        </div>
+                        
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed;">
+                                $\ker = \{0\}$<br>
+                                <small>Уравнение имеет лишь $f=0$</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box decision">
+                                Шаг 2: Анализируем Образ<br>
+                                $\text{Ran}(\hat{L} - \lambda\hat{I})$
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow" style="margin-left: 50%; transform: translateX(-50%);">↓</div>
+                    
+                    <div class="flow-row" style="margin-top: 1rem;">
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                <small>Резольвента $\hat{R}_\lambda$ ограничена</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result">
+                                РЕГУЛЯРНАЯ ТОЧКА<br>
+                                (Не спектр)
+                            </div>
+                        </div>
+
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                <small>Но $\hat{R}_\lambda$ не ограничена</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result-warn" style="border-color: #3b82f6; background: rgba(59,130,246,0.1);">
+                                НЕПРЕРЫВНЫЙ СПЕКТР<br>
+                                $\lambda \in \sigma_c$ (сплошной)
+                            </div>
+                        </div>
+
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                $\overline{\text{Ran}} \neq \mathcal{H}$<br>
+                                <small>Образ не всюду плотен</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result-err">
+                                ОСТАТОЧНЫЙ СПЕКТР<br>
+                                $\lambda \in \sigma_r$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="q5">5. Свойства собственных функций и значений эрмитового оператора</h2>
+            <div class="card">
+                <ul>
+                    <li><strong>Вещественность:</strong> Все собственные числа $\lambda$ (весь спектр) вещественны. $\lambda = \lambda^*$.</li>
+                    <li><strong>Ортогональность:</strong> Собственные функции, отвечающие разным $\lambda$, ортогональны: $\langle \phi_m | \phi_n \rangle = 0$ при $\lambda_m \neq \lambda_n$.</li>
+                    <li><strong>Полнота:</strong> Система собственных функций самосопряженного оператора образует полный базис (базис разложения).</li>
+                    <li><strong>Унитарный оператор:</strong> Собственные числа унитарного оператора лежат на единичной окружности ($|\lambda|^2 = 1 \implies \lambda = e^{i\alpha}$).</li>
+                    <li>У эрмитовых и унитарных операторов <strong>остаточный спектр отсутствует</strong>.</li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <h2 id="q6">6. Разложение функций по спектру самосопряженного оператора</h2>
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <h3>Суть и значение разложения по спектру</h3>
+                <p><strong>Физическая концепция:</strong> Принцип суперпозиции утверждает, что любое состояние квантовой системы $|f\rangle \in \mathcal{H}$ можно представить как линейную комбинацию (суперпозицию) других квантовых состояний. Если мы выбираем в качестве этих состояний собственные функции $\phi$ физического оператора $\hat{L}$ (которые в силу самосопряженности $\hat{L}$ образуют полную систему), то коэффициенты разложения будут соответствовать <strong>амплитудам вероятности</strong> обнаружить те или иные значения измеряемой величины.</p>
+                <p>Математически это реализуется через <strong>разложение единичного оператора $\hat{I}$</strong> (разложение единицы), которое зависит от типа спектра наблюдаемой.</p>
+            </div>
+
+            <div class="card">
+                <h3>1. Чисто дискретный спектр (ЧДСП)</h3>
+                <p>Если самосопряженный оператор $\hat{L}$ обладает чисто дискретным спектром, то его собственные функции $\{\phi_k\}$ образуют в $\mathcal{H}$ полную ортонормированную систему (ОНС):</p>
+                <div class="math-block">
+                    $$\langle \phi_n | \phi_k \rangle = \delta_{n,k}$$
+                </div>
+                <p>Из свойства полноты этой системы векторов следует <strong>«разложение единицы»</strong>:</p>
+                <div class="math-block">
+                    $$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k|$$
+                </div>
+                <p>Подставляя это тождество к любому состоянию $|f\rangle \in \mathcal{H}$, получаем разложение по спектру:</p>
+                <div class="math-block">
+                    $$|f\rangle = \hat{I}|f\rangle = \sum_k |\phi_k\rangle\langle \phi_k|f\rangle = \sum_k c_k |\phi_k\rangle$$
+                </div>
+                <p>Где коэффициенты разложения (проекции вектора состояния на базис собственных функций) равны:</p>
+                <div class="math-block">
+                    $$c_k = \langle \phi_k | f\rangle \quad (\text{или в координатном виде: } c_k = \int \phi_k^*(x) f(x) dx)$$
+                </div>
+                <p>Если исходная функция нормирована на единицу ($\|f\| = 1$), то сумма квадратов модулей коэффициентов (вероятностей) равна единице (<strong>условие нормировки для ЧДСП</strong>):</p>
+                <div class="math-block">
+                    $$\|f\|^2 = \sum_k |c_k|^2 = 1$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>2. Чисто непрерывный спектр (ЧНСП)</h3>
+                <p>Если спектр $\sigma(\hat{L})$ непрерывен (например, для оператора координаты или импульса), собственные числа $\mu$ сплошь заполняют некоторый интервал $(a, b)$ или всю вещественную ось $\mathbb{R}$.</p>
+                <p>В этом случае уравнение на собственные функции $\hat{L}\psi_\mu = \mu \psi_\mu$ имеет решения, но они **не принадлежат гильбертову пространству** ($\psi_\mu \notin \mathcal{H}$), так как интеграл их нормы расходится:</p>
+                <div class="math-block">
+                    $$\|\psi_\mu\|^2 = \int_{-\infty}^{\infty} |\psi_\mu(x)|^2 dx = \infty$$
+                </div>
+                <p>Такие функции $\psi_\mu$ называют <span class="highlight">обобщенными собственными функциями</span>. Несмотря на расходимость нормы, они образуют полный непрерывный базис (в смысле обобщенных функций Дирака) с нормировкой на дельта-функцию (<strong>$\delta$-нормировка</strong>):</p>
+                <div class="math-block">
+                    $$\langle \psi_\mu | \psi_{\mu'} \rangle = \int_{-\infty}^{\infty} \psi_\mu^*(x) \psi_{\mu'}(x) dx = \delta(\mu - \mu')$$
+                </div>
+                <p>Разложение единицы для ЧНСП переходит в интеграл по спектру:</p>
+                <div class="math-block">
+                    $$\hat{I} = \int_{\sigma(\hat{L})} |\psi_\mu\rangle\langle \psi_\mu| d\mu$$
+                </div>
+                <p>Разложение любого состояния $|f\rangle \in \mathcal{H}$ записывается как:</p>
+                <div class="math-block">
+                    $$|f\rangle = \hat{I}|f\rangle = \int_{\sigma(\hat{L})} \langle \psi_\mu | f\rangle |\psi_\mu\rangle d\mu = \int_{\sigma(\hat{L})} c_\mu |\psi_\mu\rangle d\mu$$
+                </div>
+                <p>Где плотность амплитуды вероятности равна $c_\mu = \langle \psi_\mu | f\rangle$, а условие нормировки имеет вид:</p>
+                <div class="math-block">
+                    $$\int_{\sigma(\hat{L})} |c_\mu|^2 d\mu = 1$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>3. Смешанный спектр</h3>
+                <p>В реальных задачах (например, в атоме водорода, где есть дискретные связанные уровни энергии и непрерывная область ионизации) оператор $\hat{L}$ обладает смешанным спектром. Полная система состояний образуется объединением ОНС дискретного спектра $\{\phi_k\}$ и непрерывного базиса $\{\psi_\mu\}$:</p>
+                <div class="math-block">
+                    $$\langle \phi_n | \phi_k \rangle = \delta_{n, k}, \quad \langle \psi_\mu | \phi_k \rangle = 0, \quad \langle \psi_\mu | \psi_{\mu'} \rangle = \delta(\mu - \mu')$$
+                </div>
+                <p>Соответственно, разложение единицы объединяет сумму и интеграл:</p>
+                <div class="math-block">
+                    $$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k| + \int_{\sigma(\hat{L})_c} |\psi_\mu\rangle\langle\psi_\mu| d\mu$$
+                </div>
+                <p>Разложение произвольного состояния $|f\rangle$ принимает вид:</p>
+                <div class="math-block">
+                    $$|f\rangle = \sum_k c_k |\phi_k\rangle + \int_{\sigma(\hat{L})_c} c_\mu |\psi_\mu\rangle d\mu$$
+                </div>
+                <p>Где коэффициенты $c_k = \langle \phi_k | f\rangle$ и плотность амплитуд $c_\mu = \langle \psi_\mu | f\rangle$ связаны общим условием сохранения вероятности:</p>
+                <div class="math-block">
+                    $$\sum_k |c_k|^2 + \int_{\sigma(\hat{L})_c} |c_\mu|^2 d\mu = 1$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>4. Спектральное разложение оператора</h3>
+                <p>Зная разложение единицы, мы можем получить представление самого оператора $\hat{L}$ через его собственные значения и проекторы. Подействуем оператором $\hat{L}$ на произвольный вектор $|f\rangle$ (для наглядности рассмотрим ЧДСП-случай):</p>
+                <div class="math-block">
+                    $$\hat{L}|f\rangle = \hat{L}\hat{I}|f\rangle = \hat{L} \left( \sum_k |\phi_k\rangle\langle \phi_k|f\rangle \right) = \sum_k \left(\hat{L}|\phi_k\rangle\right)\langle \phi_k|f\rangle$$
+                </div>
+                <p>Используя уравнение на собственные значения $\hat{L}|\phi_k\rangle = \lambda_k |\phi_k\rangle$, получаем:</p>
+                <div class="math-block">
+                    $$\hat{L}|f\rangle = \sum_k \lambda_k |\phi_k\rangle\langle \phi_k|f\rangle$$
+                </div>
+                <p>Поскольку вектор $|f\rangle$ произвольный, мы можем исключить его из равенства и получить спектральное разложение самого оператора:</p>
+                <div class="math-block">
+                    $$\hat{L} = \sum_k \lambda_k |\phi_k\rangle\langle \phi_k| = \sum_k \lambda_k \hat{P}_k$$
+                </div>
+                <p>Где $\hat{P}_k = |\phi_k\rangle\langle \phi_k|$ — оператор проектирования на подпространство собственного состояния $\phi_k$. В случае смешанного спектра выражение принимает общий вид:</p>
+                <div class="math-block">
+                    $$\hat{L} = \sum_k \lambda_k |\phi_k\rangle\langle \phi_k| + \int_{\sigma(\hat{L})_c} \mu |\psi_\mu\rangle\langle \psi_\mu| d\mu$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>5. Разложение функции от оператора</h3>
+                <p>Существует <strong>два определения</strong> функции от оператора:</p>
+                
+                <p><strong>1. Через разложение в ряд Тейлора:</strong><br>
+                Пусть функция $F(x)$ раскладывается в ряд Тейлора: $F(x) = \sum_{n=0}^{\infty} c_n x^n$, где $c_n = \frac{1}{n!} \frac{d^n F}{dx^n} \Big|_{x=0}$.<br>
+                Тогда функция от оператора определяется подстановкой оператора в этот ряд:</p>
+                <div class="math-block">
+                    $$F(\hat{L}) = \sum_{n=0}^{\infty} c_n \hat{L}^n$$
+                </div>
+                
+                <p><strong>2. Через спектральное разложение:</strong><br>
+                Используя полученный аппарат спектрального разложения для самосопряженного оператора $\hat{L}$, функцию от оператора можно определить так, что она имеет те же собственные функции, а ее собственные значения равны функции от исходных собственных значений ($F(\hat{L}) |\phi_k\rangle = F(\lambda_k) |\phi_k\rangle$). Опираясь на разложение единицы, спектральное представление имеет вид:</p>
+                <div class="math-block">
+                    $$F(\hat{L}) = \sum_k F(\lambda_k) |\phi_k\rangle\langle \phi_k| + \int_{\sigma(\hat{L})_c} F(\mu) |\psi_\mu\rangle\langle \psi_\mu| d\mu$$
+                </div>
+
+                <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-left-color: #10b981; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Важное свойство:</strong> При этом функция от оператора всегда <strong>коммутирует</strong> с самим оператором: $[F(\hat{L}), \hat{L}] = 0$.
+                </div>
+            </div>
+
+
+            <!-- QUESTION 7 -->
+            <h2 id="q7">7. Определение дельта-функции Дирака</h2>
+            <div class="card">
+                <p>Дельта-функция относится к классу обобщенных функций (сингулярных распределений). При непрерывном спектре функции "выпадают" из гильбертова пространства и нормируются на дельта-функцию: $\langle \lambda | \lambda' \rangle = \delta(\lambda - \lambda')$.</p>
+                
+                <p>Строгое определение — ядро единичного интегрального оператора:</p>
+                <div class="math-block">
+                    $$f(x) = \int_{-\infty}^{\infty} \delta(x - x') f(x') dx'$$
+                </div>
+                <p><strong>Свойства дельта-функции:</strong></p>
+                <ul>
+                    <li>Свойство масштабирования: $\delta(\alpha x) = \frac{1}{|\alpha|} \delta(x)$.</li>
+                    <li>Корни сложного аргумента: $\delta[\varphi(x)] = \sum_i \frac{\delta(x - x_i)}{|\varphi'(x_i)|}$.</li>
+                    <li>Производная от функции Хэвисайда: $\frac{d\theta}{dx} = \delta(x)$.</li>
+                    <li>Интегральное представление (Фурье): $\delta(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ikx} dk$.</li>
+                </ul>
+
+                <!-- Интерактивная визуализация дельта-функции -->
+                <div class="visual-container">
+                    <div class="card-title">Интерактивный симулятор: $\delta(x)$ как предел Гауссиана</div>
+                    <canvas id="deltaCanvas" class="visual-canvas" width="600" height="250"></canvas>
+                    <div class="control-panel">
+                        <div class="control-group">
+                            <label for="sigmaSlider">Ширина ($\sigma$):</label>
+                            <input type="range" id="sigmaSlider" class="slider" min="0.04" max="1.0" step="0.01" value="0.3">
+                            <span id="sigmaVal">0.30</span>
+                        </div>
+                        <div>
+                            Максимум пика: <span id="peakVal" class="highlight" style="font-weight: 600;">1.33</span>
+                        </div>
+                        <div>
+                            Площадь $\int \rho(x)dx \equiv 1.00$
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+<!-- БИЛЕТ 10 -->
+<section id="ticket-10" class="ticket-section">
+    <h1>Билет 10</h1>
+    <p>Временное и стационарное уравнения Дирака. Плотность вероятности дираковской частицы. Спектр энергии Дирака свободной частицы. Интерпретация решений уравнения Дирака. Уравнение Дирака для частицы в электромагнитном поле. Качественный вид спектра Дирака для частицы в кулоновском поле. Нерелятивистский предел уравнения Дирака.</p>
+
+    <div class="card toc" style="border-color: rgba(168, 85, 247, 0.5);">
+        <h3 style="margin-bottom: 1rem; color: #c084fc;">Оглавление (Билет 10)</h3>
+        <ol>
+            <li><a href="#t10-eq">1. Временное и стационарное уравнения Дирака</a></li>
+            <li><a href="#t10-prob">2. Плотность вероятности дираковской частицы</a></li>
+            <li><a href="#t10-spectrum">3. Спектр энергии Дирака свободной частицы</a></li>
+            <li><a href="#t10-interp">4. Интерпретация решений (море Дирака)</a></li>
+            <li><a href="#t10-em-field">5. Частица в электромагнитном поле</a></li>
+            <li><a href="#t10-coulomb">6. Качественный вид спектра в кулоновском поле</a></li>
+            <li><a href="#t10-nr-limit">7. Нерелятивистский предел уравнения Дирака</a></li>
+        </ol>
+    </div>
+
+    <!-- 1. Уравнение Дирака -->
+    <h2 id="t10-eq">1. Временное и стационарное уравнения Дирака</h2>
+    <div class="card">
+        <p>Для построения релятивистски инвариантного уравнения Дирак предложил искать гамильтониан в виде линейной функции по импульсам (чтобы время и координаты входили симметрично, в первых производных):</p>
+        <div class="math-block">
+            $$ \hat{H}_D = c(\hat{\boldsymbol{\alpha}} \cdot \hat{\mathbf{p}}) + \hat{\beta} mc^2 + V(\mathbf{r}) $$
+        </div>
+        <p><strong>Временное уравнение Дирака:</strong></p>
+        <div class="math-block">
+            $$ i\hbar\frac{\partial \Psi(\mathbf{r},t)}{\partial t} = \hat{H}_D \Psi(\mathbf{r},t) $$
+        </div>
+        <p><strong>Стационарное уравнение Дирака:</strong> (когда $V(\mathbf{r})$ не зависит от времени, $\Psi(\mathbf{r},t) = \Psi(\mathbf{r})e^{-iEt/\hbar}$)</p>
+        <div class="math-block">
+            $$ \hat{H}_D \Psi(\mathbf{r}) = E \Psi(\mathbf{r}) $$
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Матрицы Дирака и Биспинор
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Требование того, чтобы свободный гамильтониан в квадрате давал релятивистское соотношение $\hat{H}^2 = c^2\hat{p}^2 + m^2c^4$, накладывает жесткие условия на операторы $\hat{\boldsymbol{\alpha}}$ и $\hat{\beta}$. Они должны антикоммутировать друг с другом и их квадраты должны быть равны 1. Это возможно только если они являются матрицами размером минимум $4 \times 4$. В <strong>представлении Дирака-Паули</strong> они имеют блочный вид:</p>
+                <div class="math-block">
+                    $$ \hat{\boldsymbol{\alpha}} = \begin{pmatrix} 0 & \boldsymbol{\sigma} \\ \boldsymbol{\sigma} & 0 \end{pmatrix}, \quad \hat{\beta} = \begin{pmatrix} I & 0 \\ 0 & -I \end{pmatrix} $$
+                </div>
+                <p>Поскольку гамильтониан есть матрица $4 \times 4$, волновая функция $\Psi$ представляет собой четырехкомпонентный столбец (<strong>биспинор Дирака</strong>). Две верхние компоненты условно называются <em>большими</em> ($\Phi$), а две нижние — <em>малыми</em> ($\chi$):</p>
+                <div class="math-block">
+                    $$ \Psi = \begin{pmatrix} \psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4 \end{pmatrix} = \begin{pmatrix} \Phi \\ \chi \end{pmatrix} $$
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Плотность вероятности -->
+    <h2 id="t10-prob">2. Плотность вероятности дираковской частицы</h2>
+    <div class="card">
+        <p>Для уравнения Дирака можно строго вывести уравнение неразрывности: $\frac{\partial \rho}{\partial t} + \text{div} \mathbf{j} = 0$.</p>
+        <p>В этой теории плотность вероятности является существенно <strong>положительно определенной величиной</strong> (в отличие от уравнения Клейна-Гордона-Фока):</p>
+        <div class="math-block">
+            $$ \rho(\mathbf{r}, t) = \Psi^+ \Psi = \sum_{i=1}^4 |\psi_i|^2 $$
+        </div>
+        <p>Плотность тока вероятности равна:</p>
+        <div class="math-block">
+            $$ \mathbf{j}(\mathbf{r}, t) = c \Psi^+ \hat{\boldsymbol{\alpha}} \Psi $$
+        </div>
+        <div class="alert">
+            Тот факт, что собственные значения матриц $\alpha_i$ равны $\pm 1$, приводит к парадоксальному выводу: собственные значения оператора скорости электрона $\hat{\mathbf{v}} = c\hat{\boldsymbol{\alpha}}$ равны скорости света $\pm c$. Однако среднее значение скорости частицы $\langle \mathbf{v} \rangle$ всегда меньше $c$.
+        </div>
+    </div>
+
+    <!-- 3. Спектр -->
+    <h2 id="t10-spectrum">3. Спектр энергии Дирака свободной частицы</h2>
+    <div class="card">
+        <p>При решении уравнения Дирака для свободной частицы ($V=0$) в виде плоской волны $\Psi \sim e^{i(\mathbf{p}\mathbf{r} - Et)/\hbar}$, мы приходим к характеристическому уравнению $E^2 = c^2 p^2 + m^2 c^4$, из которого следует, что энергия может принимать как положительные, так и отрицательные значения:</p>
+        <div class="math-block">
+            $$ E = \pm \sqrt{c^2 p^2 + m^2 c^4} $$
+        </div>
+        <p>Таким образом, спектр гамильтониана свободной частицы содержит два непрерывных диапазона энергий: $E \in [mc^2, +\infty)$ и $E \in (-\infty, -mc^2]$. Между ними находится "запрещенная зона" шириной $2mc^2$.</p>
+    </div>
+
+    <!-- 4. Интерпретация -->
+    <h2 id="t10-interp">4. Интерпретация решений уравнения Дирака (Море Дирака)</h2>
+    <div class="card">
+        <p>Наличие отрицательного континуума создает проблему: почему электроны с положительной энергией не "сваливаются" вниз, бесконечно излучая фотоны? Для спасения стабильности материи Дирак предложил следующую интерпретацию (дырочную теорию):</p>
+        <ul>
+            <li>Все состояния с отрицательной энергией в вакууме <strong>уже заполнены</strong> электронами (по два на каждый уровень из-за спина). Это заполненное состояние называется <em>Морем Дирака</em>.</li>
+            <li>Согласно принципу Паули, переходы электронов сверху в море запрещены.</li>
+            <li>Если квант света с энергией $\hbar\omega > 2mc^2$ выбивает электрон из моря в положительный континуум, в море образуется "дырка".</li>
+            <li>Дырка в фоне отрицательных зарядов ведет себя как частица с положительной массой $+m$ и положительным зарядом $+e$. Это <strong>позитрон</strong> (античастица электрона).</li>
+        </ul>
+        
+        <div class="visual-container" style="margin-top: 2rem;">
+            <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная модель: Море Дирака и рождение пар</h3>
+            <p style="font-size: 0.9rem; text-align: center; margin-bottom: 1rem;">
+                Нажмите "Поглотить фотон", чтобы выбить электрон из отрицательного континуума. Образуется электрон-позитронная пара.
+            </p>
+            <canvas id="diracSeaCanvas" width="600" height="400" style="width: 100%; max-width: 600px; display: block; margin: 0 auto; border-radius: 8px; background: #0f172a;"></canvas>
+            
+            <div style="text-align: center; margin-top: 1rem;">
+                <button id="btnEmitPhoton" style="background: #a855f7; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer; transition: background 0.2s;">
+                    Поглотить фотон ($\hbar\omega > 2mc^2$)
+                </button>
+                <button id="btnAnnihilate" style="background: #ef4444; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-left: 1rem;" disabled>
+                    Аннигиляция
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. В эл. магн. поле -->
+    <h2 id="t10-em-field">5. Уравнение Дирака для частицы в электромагнитном поле</h2>
+    <div class="card">
+        <p>Включение электромагнитного поля осуществляется стандартным удлинением производной (заменой кинематического импульса): $\hat{\mathbf{p}} \to \hat{\mathbf{P}} = \hat{\mathbf{p}} - \frac{e}{c}\mathbf{A}$ и добавлением скалярного потенциала $V = e\Phi$.</p>
+        <div class="math-block">
+            $$ \hat{H}_D = c\left( \hat{\boldsymbol{\alpha}} \cdot \left(\hat{\mathbf{p}} - \frac{e}{c}\mathbf{A}\right) \right) + \hat{\beta} mc^2 + e\Phi $$
+        </div>
+    </div>
+
+    <!-- 6. Кулоновское поле -->
+    <h2 id="t10-coulomb">6. Качественный вид спектра Дирака в кулоновском поле</h2>
+    <div class="card">
+        <p>В центральном кулоновском поле $V(r) = -Ze^2/r$ уравнение Дирака допускает точное решение. Спектр связанных состояний (атом водорода) лежит в зазоре $0 < E < mc^2$.</p>
+        <ul>
+            <li>В отличие от теории Шредингера, квантовым числом является $j$ (полный момент), а не орбитальный $l$.</li>
+            <li>Энергия зависит от $n$ и $j$, но <strong>не зависит от $l$</strong>. Таким образом, уровни с одинаковым $j$, но разным $l$ (например, $2s_{1/2}$ и $2p_{1/2}$) в уравнении Дирака вырождены. (На самом деле это вырождение снимается квантовоэлектродинамическими эффектами — лэмбовским сдвигом).</li>
+            <li>Уровни с одинаковым $n$, но разным $j$ (например, $2p_{1/2}$ и $2p_{3/2}$) расщепляются. Это <strong>тонкая структура</strong> атома водорода.</li>
+        </ul>
+    </div>
+
+    <!-- 7. Нерелятивистский предел -->
+    <h2 id="t10-nr-limit">7. Нерелятивистский предел уравнения Дирака</h2>
+    <div class="card">
+        <p>Если энергия мала (отличается от энергии покоя на величину $\varepsilon \ll mc^2$), можно перейти к нерелятивистскому пределу, разделив биспинор на большие $\Phi$ и малые $\chi$ компоненты.</p>
+        <div class="math-block">
+            $$ \begin{cases} c(\boldsymbol{\sigma} \hat{\mathbf{P}})\chi + (V+mc^2)\Phi = E\Phi \\ c(\boldsymbol{\sigma} \hat{\mathbf{P}})\Phi + (V-mc^2)\chi = E\chi \end{cases} $$
+        </div>
+        <p>Из второго уравнения $\chi \approx \frac{c(\boldsymbol{\sigma} \hat{\mathbf{P}})}{2mc^2} \Phi$. Подставив это в первое уравнение, получим нерелятивистское <strong>уравнение Паули</strong> для двухкомпонентного спинора $\Phi$:</p>
+        <div class="math-block">
+            $$ \left[ \frac{\hat{\mathbf{P}}^2}{2m} + V - \frac{e\hbar}{2mc}(\boldsymbol{\sigma} \cdot \mathbf{H}) \right] \Phi = \varepsilon \Phi $$
+        </div>
+        <p>Из этого уравнения <strong>автоматически вытекает</strong> наличие у электрона собственного магнитного момента $\hat{\boldsymbol{\mu}} = \frac{e\hbar}{2mc}\boldsymbol{\sigma}$ с гиромагнитным отношением (g-фактором Ланде), равным в точности 2.</p>
+    </div>
+</section>
+
+        <!-- БИЛЕТ 11 -->
+        <section id="ticket-11" class="ticket-section">
+            <h1>Билет 11</h1>
+            <p>Стационарная теория возмущений. Эффекты Штарка и Зеемана. Вариационный принцип.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (7 вопросов):</h3>
+                <ol>
+                    <li><a href="#t11q1">Отличие невырожденной и вырожденной стационарных теорий возмущений.</a></li>
+                    <li><a href="#t11q2">Поправки первого и второго порядков к энергии в невырожденной теории возмущений.</a></li>
+                    <li><a href="#t11q3">Поправка первого порядка к энергии и правильные волновые функции нулевого порядка в вырожденной теории возмущений.</a></li>
+                    <li><a href="#t11q4">Линейный и нелинейный эффекты Штарка в центральном поле.</a></li>
+                    <li><a href="#t11q5">Качественное описание нормального эффекта Зеемана, эффекта Пашена-Бака и аномального эффекта Зеемана.</a></li>
+                    <li><a href="#t11q6">Вариационный принцип Релея-Ритца.</a></li>
+                    <li><a href="#t11q7">Линейный вариационный принцип.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t11q1">1. Отличие невырожденной и вырожденной стационарных теорий возмущений</h2>
+            <div class="card">
+                <p><strong>Невырожденная теория возмущений</strong> применяется, когда невозмущенные уровни энергии изолированы (не вырождены). В этом случае поправки к энергии и волновой функции можно искать в виде рядов Тейлора по параметру малости $\lambda$:</p>
+                <div class="math-block">
+                    $$ E(\lambda) = E^{(0)} + \sum_{n=1}^\infty \lambda^n \delta E^{(n)} $$
+                    $$ \psi(\lambda) = \psi^{(0)} + \sum_{n=1}^\infty \lambda^n \delta \psi^{(n)} $$
+                </div>
+                <div class="alert" style="background: rgba(147, 197, 253, 0.1); border-left-color: #93c5fd; padding: 0.75rem 1rem;">
+                    <strong>Условие применимости невырожденной теории:</strong> Матричные элементы возмущения должны быть много меньше разности энергий невозмущенных уровней: $|V_{ki}| \ll |E_i^{(0)} - E_k^{(0)}|$.
+                </div>
+                <p><strong>Вырожденная теория возмущений</strong> применяется, когда уровень $E^{(0)}$ вырожден, то есть ему соответствуют несколько линейно независимых функций $\psi_\alpha^{(0)}$. В этом случае знаменатели в поправках невырожденной теории обращаются в ноль, и метод неприменим.</p>
+                <p>Главное отличие: в вырожденной теории "правильные" функции нулевого приближения заранее неизвестны и определяются вместе с поправками к энергии первого порядка путем диагонализации матрицы возмущения $\hat{V}$ в подпространстве вырожденного уровня.</p>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t11q2">2. Поправки первого и второго порядков к энергии в невырожденной теории возмущений</h2>
+            <div class="card">
+                <p><strong>Поправка 1-го порядка</strong> к энергии равна среднему значению оператора возмущения в невозмущенном состоянии:</p>
+                <div class="math-block">
+                    $$ \delta E_i^{(1)} = \langle \psi_i^{(0)} | \hat{V} | \psi_i^{(0)} \rangle = V_{ii} $$
+                </div>
+                <p><strong>Поправка 2-го порядка</strong> к энергии учитывает "релаксацию" волновой функции (подмешивание других состояний) и всегда отрицательна для основного состояния:</p>
+                <div class="math-block">
+                    $$ \delta E_i^{(2)} = \sum_{k \neq i} \frac{|V_{ki}|^2}{E_i^{(0)} - E_k^{(0)}} $$
+                </div>
+                <div class="alert" style="background: rgba(192, 132, 252, 0.1); border-left-color: #c084fc; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    Для основного состояния $E_0^{(0)} < E_k^{(0)}$, поэтому все слагаемые отрицательны. Система стремится минимизировать свою энергию при включении возмущения.
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t11q3">3. Поправка первого порядка к энергии и правильные волновые функции в вырожденной теории</h2>
+            <div class="card">
+                <p>В случае $m$-кратно вырожденного уровня $E^{(0)}$, мы ищем <span class="highlight">правильные волновые функции нулевого порядка</span> как суперпозицию базисных функций вырожденного уровня:</p>
+                <div class="math-block">
+                    $$ \psi_\alpha^{(0)} = \sum_{\beta=1}^m U_{\beta\alpha} \overline{\psi}_\beta^{(0)} $$
+                </div>
+                <p>Коэффициенты $U_{\beta\alpha}$ и поправки к энергии первого порядка $\delta E_\alpha^{(1)}$ находятся из решения векового (секулярного) уравнения:</p>
+                <div class="math-block">
+                    $$ \sum_{\gamma} V_{\beta\gamma} U_{\gamma\alpha} = \delta E_\alpha^{(1)} U_{\beta\alpha} $$
+                </div>
+                <p>Это эквивалентно задаче на диагонализацию матрицы возмущения $V_{\beta\gamma} = \langle \overline{\psi}_\beta^{(0)} | \hat{V} | \overline{\psi}_\gamma^{(0)} \rangle$. Собственные числа этой матрицы дают поправки к энергии $\delta E^{(1)}$, а собственные векторы — правильные функции.</p>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t11q4">4. Линейный и нелинейный эффекты Штарка в центральном поле</h2>
+            <div class="card">
+                <p>Эффект Штарка — сдвиг и расщепление уровней энергии во внешнем электрическом поле $\mathcal{E}$. Оператор возмущения: $\hat{V} = -\hat{\mathbf{d}} \cdot \mathcal{\mathbf{E}} = -e\mathcal{E}z$ (если поле вдоль оси $z$).</p>
+                
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Линейный эффект Штарка
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Возникает только при наличии вырождения состояний с <strong>разной четностью</strong> (например, $2s$ и $2p$ состояния в атоме водорода). В этом случае недиагональные матричные элементы $\langle 2s | z | 2p \rangle \neq 0$, и диагонализация дает расщепление, пропорциональное $\mathcal{E}$.</p>
+                        <p>Пример: уровень $n=2$ атома водорода расщепляется на симметричную картину уровней $\Delta E \sim \pm \mathcal{E}$.</p>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Квадратичный эффект Штарка
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Для невырожденных уровней (или уровней одинаковой четности) поправка 1-го порядка равна нулю, так как $\langle \psi | z | \psi \rangle = 0$ в силу определенной четности состояния.</p>
+                        <p>Главный вклад дает поправка 2-го порядка, пропорциональная $\mathcal{E}^2$:</p>
+                        <div class="math-block">
+                            $$ \delta E^{(2)} = - \frac{1}{2} \alpha \mathcal{E}^2 $$
+                        </div>
+                        <p>Где $\alpha$ — электрическая поляризуемость.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t11q5">5. Эффекты Зеемана и Пашена-Бака</h2>
+            <div class="card">
+                <p>Расщепление уровней во внешнем магнитном поле $\mathcal{H}$.</p>
+                <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-left-color: #10b981; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Нормальный эффект Зеемана:</strong> Наблюдается для систем с суммарным спином $S=0$. Расщепление чисто орбитальное. Уровень энергии с моментом $L$ расщепляется на $2L+1$ эквидистантных подуровней: $\Delta E = \mu_B \mathcal{H} m_L$.
+                </div>
+                <div class="alert" style="background: rgba(245, 158, 11, 0.1); border-left-color: #f59e0b; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Аномальный эффект Зеемана:</strong> Возникает при $S \neq 0$ в слабом поле (когда спин-орбитальное взаимодействие $\hat{H}_{SO}$ больше возмущения $\mu_B \mathcal{H}$). Полный момент $\hat{J} = \hat{L} + \hat{S}$ сохраняется. Расщепление: $\Delta E = g \mu_B \mathcal{H} m_J$, где $g$ — фактор Ланде ($g \neq 1$ или $2$).
+                </div>
+                <div class="alert" style="background: rgba(239, 68, 68, 0.1); border-left-color: #ef4444; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Эффект Пашена-Бака:</strong> Наблюдается в сильном магнитном поле, когда энергия магнитного расщепления превышает спин-орбитальное взаимодействие. Связь $\hat{L}$ и $\hat{S}$ разрывается (квантуются $m_L$ и $m_S$ по отдельности). Картина расщепления упрощается: $\Delta E = \mu_B \mathcal{H} (m_L + 2m_S)$.
+                </div>
+
+                <div class="visual-container">
+                    <div class="card-title">Интерактивная визуализация: Эффект Зеемана (Расщепление P-уровня, L=1, S=0)</div>
+                    <canvas id="zeemanCanvas" class="visual-canvas" width="600" height="250"></canvas>
+                    <div class="control-panel">
+                        <div class="control-group">
+                            <label for="bFieldSlider">Магнитное поле $\mathcal{H}$:</label>
+                            <input type="range" id="bFieldSlider" class="slider" min="0" max="5" step="0.1" value="0">
+                            <span id="bFieldVal">0.0</span> Тл
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 6 & 7 -->
+            <h2 id="t11q6">6-7. Вариационные принципы</h2>
+            <div class="card">
+                <h3>Вариационный принцип Релея-Ритца</h3>
+                <p>Метод поиска энергии и волновой функции основного состояния. Базируется на теореме: <em>для любой нормированной пробной функции $\tilde{\psi}$ математическое ожидание гамильтониана всегда не меньше точной энергии основного состояния $E_0$</em>.</p>
+                <div class="math-block">
+                    $$ \tilde{E} = \frac{\langle \tilde{\psi} | \hat{H} | \tilde{\psi} \rangle}{\langle \tilde{\psi} | \tilde{\psi} \rangle} \ge E_0 $$
+                </div>
+                <p>Минимизируя функционал $\tilde{E}$ по параметрам пробной функции, мы находим наилучшее приближение.</p>
+
+                <h3>Линейный вариационный принцип (Метод Ритца)</h3>
+                <p>Если искать пробную функцию в виде линейной комбинации базисных функций $\tilde{\psi} = \sum_k c_k \varphi_k$, то условие минимума $\frac{\partial \tilde{E}}{\partial c_k} = 0$ приводит к матричному уравнению:</p>
+                <div class="math-block">
+                    $$ \sum_k (H_{ik} - E S_{ik}) c_k = 0 $$
+                </div>
+                <p>Где $H_{ik} = \langle \varphi_i | \hat{H} | \varphi_k \rangle$, а $S_{ik} = \langle \varphi_i | \varphi_k \rangle$ — матрица перекрывания (если базис не ортонормирован). Этот метод позволяет найти приближения сразу для нескольких нижних состояний системы.</p>
+            </div>
+        </section>
+
+        <!-- БИЛЕТ 12 -->
+        <section id="ticket-12" class="ticket-section">
+            <h1>Билет 12</h1>
+            <p>Нестационарная теория возмущений. Излучение и поглощение.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (5 вопросов):</h3>
+                <ol>
+                    <li><a href="#t12q1">Амплитуда и вероятность перехода под действием возмущения, зависящего от времени.</a></li>
+                    <li><a href="#t12q2">Соотношение неопределенности энергия-время.</a></li>
+                    <li><a href="#t12q3">Индуцированное поглощение, индуцированное и спонтанное излучение света.</a></li>
+                    <li><a href="#t12q4">Вероятности перехода в случае вырожденных начального и конечного состояний.</a></li>
+                    <li><a href="#t12q5">Правила отбора по четности для дипольного электрического перехода.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t12q1">1. Амплитуда и вероятность перехода под действием возмущения</h2>
+            <div class="card">
+                <p>Пусть гамильтониан системы имеет вид $\hat{H}(t) = \hat{H}_0 + \hat{V}(t)$, где $\hat{H}_0$ — невозмущенный гамильтониан, а $\hat{V}(t)$ — зависящее от времени малое возмущение.</p>
+                <p>Решение нестационарного уравнения Шредингера ищется в виде разложения по стационарным состояниям невозмущенной задачи $\psi_k^{(0)}$:</p>
+                <div class="math-block">
+                    $$ \psi_n(\mathbf{r}, t) = \sum_k A_{kn}(t) \psi_k^{(0)}(\mathbf{r}) e^{-i E_k t / \hbar} $$
+                </div>
+                <p>Подставляя это в уравнение Шредингера, в <strong>первом порядке теории возмущений</strong> получаем выражение для <em>амплитуды перехода</em> $A_{kn}^{(1)}(t)$ из начального состояния $n$ в конечное $k$ ($k \neq n$):</p>
+                <div class="math-block">
+                    $$ A_{kn}^{(1)}(t) = -\frac{i}{\hbar} \int_0^t V_{kn}(\tau) e^{i\omega_{kn}\tau} d\tau $$
+                </div>
+                <p>где $V_{kn}(\tau) = \langle \psi_k^{(0)} | \hat{V}(\tau) | \psi_n^{(0)} \rangle$ — матричный элемент возмущения, а $\omega_{kn} = (E_k - E_n)/\hbar$ — частота перехода.</p>
+                <p><strong>Вероятность перехода</strong> $W_{kn}(t)$ к моменту времени $t$ равна квадрату модуля амплитуды:</p>
+                <div class="math-block">
+                    $$ W_{kn}(t) = |A_{kn}^{(1)}(t)|^2 = \frac{1}{\hbar^2} \left| \int_0^t V_{kn}(\tau) e^{i\omega_{kn}\tau} d\tau \right|^2 $$
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t12q2">2. Соотношение неопределенности энергия-время</h2>
+            <div class="card">
+                <p>Рассмотрим <em>мгновенное включение постоянного во времени возмущения</em> $\hat{V}$. Вероятность перехода из $n$ в $k$ принимает вид:</p>
+                <div class="math-block">
+                    $$ W_{kn}(t) = \frac{4|V_{kn}|^2}{\hbar^2 \omega_{kn}^2} \sin^2\left(\frac{\omega_{kn} t}{2}\right) $$
+                </div>
+                <p>График этой вероятности как функции $\omega_{kn}$ имеет резко выраженный главный максимум при $\omega_{kn} = 0$ (т.е. $E_k = E_n$). Ширина этого максимума $\Delta \omega$ на половине высоты связана со временем действия возмущения $t$ соотношением $\Delta \omega \simeq 2\pi/t$.</p>
+                <div class="alert" style="background: rgba(147, 197, 253, 0.1); border-left-color: #93c5fd; padding: 0.75rem 1rem;">
+                    <strong>Соотношение неопределенности энергия-время:</strong> Учитывая, что $\Delta E = \hbar \Delta \omega$, получаем:
+                    $$ \Delta E \cdot t \sim 2\pi \hbar \ge \hbar $$
+                    Это означает, что для точного выполнения закона сохранения энергии ($\Delta E \to 0$) требуется бесконечно большое время действия возмущения ($t \to \infty$).
+                </div>
+                <p>В пределе больших времен $t \to \infty$ вероятность перехода <em>в единицу времени</em> $P_{kn}$ определяется <strong>золотым правилом Ферми</strong>:</p>
+                <div class="math-block">
+                    $$ P_{kn} = \lim_{t \to \infty} \frac{W_{kn}(t)}{t} = \frac{2\pi}{\hbar} |V_{kn}|^2 \delta(E_k - E_n) $$
+                </div>
+                <p>Согласно золотому правилу Ферми, на больших временах переходы возможны только между состояниями с одинаковой невозмущенной энергией.</p>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t12q3">3. Индуцированное поглощение, индуцированное и спонтанное излучение</h2>
+            <div class="card">
+                <p>Рассмотрим действие <em>гармонического возмущения</em> (электромагнитной волны частоты $\omega$): $\hat{V}(t) = \hat{U} e^{i\omega t} + \hat{U}^\dagger e^{-i\omega t}$.</p>
+                <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-left-color: #10b981; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Индуцированное поглощение:</strong> Переход атома из нижнего состояния $n$ в верхнее $k$ ($E_k > E_n$). Энергия черпается из поля. Условие резонанса (закон сохранения энергии): $\hbar\omega = E_k - E_n$.
+                </div>
+                <div class="alert" style="background: rgba(245, 158, 11, 0.1); border-left-color: #f59e0b; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Индуцированное излучение (эмиссия):</strong> Переход из верхнего состояния в нижнее ($E_k < E_n$) <em>под действием внешнего поля</em>. Атом отдает квант энергии в поле: $\hbar\omega = E_n - E_k$. Индуцированный фотон когерентен вынуждающему полю (лазерный эффект).
+                </div>
+                <div class="alert" style="background: rgba(239, 68, 68, 0.1); border-left-color: #ef4444; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Спонтанное излучение:</strong> Переход из верхнего состояния в нижнее <em>в отсутствие внешнего электромагнитного поля</em>. Оно возникает как результат взаимодействия атома с нулевыми колебаниями электромагнитного вакуума (даже когда число реальных фотонов в моде $n_\lambda = 0$).
+                </div>
+                <p>Вероятность спонтанного дипольного перехода в единицу времени (коэффициент Эйнштейна $A$) пропорциональна $\omega^3$ и квадрату матричного элемента дипольного момента.</p>
+                
+                <div class="visual-container">
+                    <div class="card-title">Интерактивная визуализация: Переходы в двухуровневой системе</div>
+                    <canvas id="twoLevelCanvas" class="visual-canvas" width="600" height="250"></canvas>
+                    <div class="control-panel">
+                        <div class="control-group">
+                            <label for="photonFreq">Энергия фотона $\hbar\omega$:</label>
+                            <input type="range" id="photonFreq" class="slider" min="0.5" max="3" step="0.1" value="1.0">
+                            <span id="photonFreqVal">1.0</span> эВ
+                        </div>
+                        <div class="control-group" style="display: flex; gap: 10px;">
+                            <button id="btnEmitLight" class="action-btn">Направить свет</button>
+                            <button id="btnSpontaneous" class="action-btn" style="background: #10b981;">Спонтанный распад</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t12q4">4. Вероятности перехода в случае вырожденных состояний</h2>
+            <div class="card">
+                <p>На практике начальные и конечные состояния часто бывают вырождены (например, по магнитному квантовому числу $m$). Если начальное состояние $i$ вырождено с кратностью $g_i$, и мы не контролируем конкретные проекции спина или момента в эксперименте (неполяризованное состояние), то полную вероятность перехода $i \to f$ необходимо:</p>
+                <ul>
+                    <li><strong>Усреднить</strong> по всем возможным начальным вырожденным состояниям $\mu_i$.</li>
+                    <li><strong>Просуммировать</strong> по всем возможным конечным вырожденным состояниям $\mu_f$.</li>
+                </ul>
+                <div class="math-block">
+                    $$ P_{fi} = \frac{1}{g_i} \sum_{\mu_i} \sum_{\mu_f} P_{fi}(\mu_i, \mu_f) $$
+                </div>
+                <p>Здесь $P_{fi}(\mu_i, \mu_f)$ — вероятность перехода между конкретными подуровнями $\mu_i$ и $\mu_f$. Усреднение связано с тем, что до взаимодействия атом мог равновероятно находиться в любом из $g_i$ начальных подуровней.</p>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t12q5">5. Правила отбора по четности для дипольного перехода</h2>
+            <div class="card">
+                <p>В электрическом дипольном ($E1$) приближении вероятность перехода пропорциональна квадрату матричного элемента оператора дипольного момента $\mathbf{d} = e\mathbf{r}$:</p>
+                <div class="math-block">
+                    $$ \mathbf{D}_{fi} = \langle \psi_f | e\mathbf{r} | \psi_i \rangle = e \int \psi_f^*(\mathbf{r}) \, \mathbf{r} \, \psi_i(\mathbf{r}) \, d^3r $$
+                </div>
+                <p>Оператор координат $\mathbf{r}$ является <strong>нечетным</strong> оператором, то есть он меняет знак при пространственной инверсии $\mathbf{r} \to -\mathbf{r}$.</p>
+                <p>Чтобы интеграл не был тождественно равен нулю (поскольку интеграл от нечетной функции по симметричному объему равен нулю), произведение волновых функций $\psi_f^*(\mathbf{r}) \psi_i(\mathbf{r})$ должно быть нечетным. Это возможно <em>только тогда, когда состояния $\psi_i$ и $\psi_f$ имеют разную четность</em> (одно четное, другое нечетное).</p>
+                <div class="alert" style="background: rgba(147, 197, 253, 0.1); border-left-color: #93c5fd; padding: 0.75rem 1rem;">
+                    <strong>Правило Лапорта:</strong> Электрические дипольные переходы возможны только между состояниями различной четности (например, $s \to p$, $p \to d$). Переходы между состояниями одной четности ($s \to s$, $s \to d$) запрещены в дипольном приближении. Для центрального поля это означает изменение орбитального квантового числа $\Delta l = \pm 1$.
+                </div>
+            </div>
+        </section>
+
+        <!-- БИЛЕТ 2 -->
+        <section id="ticket-2" class="ticket-section">
+            <h1>Билет 2</h1>
+            <p>Фундаментальные операторы квантовой механики и гамильтониан частицы во внешних полях.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (6 вопросов):</h3>
+                <ol>
+                    <li><a href="#t2-q1">Оператор физической величины.</a></li>
+                    <li><a href="#t2-q2">Оператор координаты.</a></li>
+                    <li><a href="#t2-q3">Оператор импульса.</a></li>
+                    <li><a href="#t2-q4">Оператор кинетической энергии.</a></li>
+                    <li><a href="#t2-q5">Гамильтониан для частицы в потенциальном поле.</a></li>
+                    <li><a href="#t2-q6">Гамильтониан во внешнем электромагнитном поле.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t2-q1">1. Оператор физической величины</h2>
+            <div class="card">
+                <p>В квантовой механике (согласно постулатам) каждой физической величине (наблюдаемой) $A$ сопоставляется <span class="highlight">линейный самосопряженный (эрмитов) оператор</span> $\hat{A}$.</p>
+                <ul>
+                    <li><strong>Спектр:</strong> У самосопряженного оператора вещественный спектр $\sigma(\hat{A}) \subset \mathbb{R}$. Это гарантирует, что возможные результаты измерений (собственные значения $\lambda_n \in \text{Ran}(\hat{A})$) — всегда вещественные числа.</li>
+                    <li>
+                        <strong>Среднее значение (Математическое ожидание):</strong> $\bar{A} = \langle \psi | \hat{A} | \psi \rangle$.
+                        <div style="margin-top: 0.5rem; padding-left: 1rem; border-left: 2px solid rgba(255,255,255,0.2);">
+                            <p style="margin-bottom: 0.5rem;"><strong>Что это такое:</strong> Из-за принципиально вероятностной природы квантовой механики, среднее значение $\bar{A}$ — это среднее арифметическое результатов серии измерений величины $A$ над <em>ансамблем одинаково приготовленных систем</em>.</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Что значит «в состоянии $\psi$»:</strong> Это как раз и означает условие приготовления. Перед каждым измерением система была подготовлена таким образом, что её полностью описывает один и тот же вектор состояния $|\psi\rangle$.</p>
+                            <p style="margin-bottom: 0;"><strong>Почему так записывается:</strong> Запись $\langle \psi | \hat{A} | \psi \rangle$ — это элегантная форма классического матожидания. Если разложить состояние по базису собственных векторов оператора ($|\psi\rangle = \sum c_n |\phi_n\rangle$), то мы получим $\bar{A} = \sum \lambda_n |c_n|^2$, где $\lambda_n$ — возможное значение (результат измерения), а $|c_n|^2$ — вероятность его получить.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="alert" style="background: rgba(234, 179, 8, 0.1); border-left-color: #eab308; margin-top: 1.5rem; padding: 1rem;">
+                    <strong style="color: #eab308; font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">📌 Важное терминологическое замечание курса:</strong>
+                    <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.95rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Квантовая система</strong> математически связывается с гильбертовым пространством $\mathcal{H}$.</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Состояние</strong> — это математический объект, который полностью задает вероятности любых измерений.</li>
+                        <li style="margin-bottom: 0.5rem;">В рамках нашего курса чистое состояние <em>отождествляется</em> с <strong>Волновой функцией (ВФ)</strong> — абстрактным вектором $|\psi\rangle \in \mathcal{H}$, а не только с его проекцией на координаты.</li>
+                        <li><strong>Наблюдаемая величина</strong> — ей математически ставится в соответствие линейный самосопряженный оператор $\hat{A}$.</li>
+                    </ul>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        От эксперимента к математике: что такое «приготовленное состояние»
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Связь физики и математики можно выстроить в простую логическую цепочку:</p>
+                        <ol style="padding-left: 1.5rem; margin-bottom: 0;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Лаборатория (Подготовка):</strong> Мы берем физический прибор (например, источник электронов, пропущенных через магнитное поле). Этот прибор создает поток частиц с совершенно одинаковыми свойствами (например, у всех определенный импульс). Это называется <em>приготовлением состояния</em>.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Абстракция (Вектор состояния):</strong> В математике этой конкретной настройке приборов жестко сопоставляется абстрактный вектор $|\psi\rangle$ в гильбертовом пространстве.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Измерение (Наблюдаемая):</strong> Затем мы ставим детектор (начинаем измерять энергию, координату и т.д.). Самому детектору (измерительному процессу) в теории ставится в соответствие оператор $\hat{A}$.</li>
+                            <li><strong>Предсказание (Среднее значение):</strong> Сэндвич $\langle \psi | \hat{A} | \psi \rangle$ — это математическая машина, которая берет описание настройки источника ($|\psi\rangle$) и описание детектора ($\hat{A}$), и выдает число — средний результат, который мы увидим на приборе, если повторим опыт миллион раз.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Что такое «представление» (Representation)?
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Волновая функция (вектор состояния) $|\psi\rangle$ идеальна в абстрактных выкладках, но чтобы считать реальные интегралы и производные, нам нужно спроецировать её на понятные нам оси.</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>Аналогия:</strong> У вас есть физическая стрелка (вектор $\vec{v}$). Вы можете записать её в декартовых осях $(v_x, v_y, v_z)$, а можете в полярных. Стрелка одна и та же, но числа в тетрадке разные. В квантмехе "оси" — это базисы.</p>
+                        <ul style="margin-bottom: 0; padding-left: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Координатное представление:</strong> Мы берем абстрактную волновую функцию $|\psi\rangle$ и проецируем её на координатные оси (базис собственных векторов оператора координаты). Получаем <em>волновую функцию в координатном представлении</em> $\psi(x) = \langle x | \psi\rangle$.</li>
+                            <li><strong>Импульсное представление:</strong> Мы проецируем ту же самую волновую функцию на оси импульсов. Получаем <em>волновую функцию в импульсном представлении</em> $\psi(p) = \langle p | \psi\rangle$.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t2-q2">2. Оператор координаты</h2>
+            <div class="card">
+                <p>В координатном представлении $L_2(-\infty, \infty)$ оператор координаты $\hat{x}$ является оператором умножения на аргумент $x$:</p>
+                <div class="math-block">
+                    $$\hat{x} \psi(x) = x \psi(x)$$
+                </div>
+                <p>Уравнение на собственные значения имеет вид: $\hat{x} \phi_\lambda(x) = \lambda \phi_\lambda(x)$.</p>
+                <ul>
+                    <li><strong>Спектр:</strong> Чисто сплошной, $\sigma(\hat{x}) = \mathbb{R}$. Собственные значения $\lambda \in (-\infty, \infty)$.</li>
+                    <li><strong>Собственные функции:</strong> Формальным решением являются дельта-функции Дирака $\phi_\lambda(x) = \delta(x - \lambda)$. Они не интегрируемы с квадратом (не принадлежат $L_2$), но нормированы на дельта-функцию: $\langle \phi_\lambda | \phi_{\lambda'} \rangle = \delta(\lambda - \lambda')$.</li>
+                </ul>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        быть ненормируемой функцией?
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Дельта-функция не принадлежит гильбертову пространству $L_2$, так как интеграл от квадрата ее модуля расходится. Это означает, что физически невозможно приготовить состояние с абсолютно точным значением координаты (это потребовало бы бесконечной энергии).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t2-q3">3. Оператор импульса</h2>
+            <div class="card">
+                <p>В координатном представлении оператор импульса частицы $\hat{\mathbf{p}}$ выражается через градиент:</p>
+                <div class="math-block">
+                    $$\hat{\mathbf{p}} = -i\hbar \nabla \quad \left(\text{в одномерном случае: } \hat{p} = -i\hbar \frac{d}{dx} = \frac{\hbar}{i} \frac{d}{dx}\right)$$
+                </div>
+                <p><strong>Спектральные характеристики:</strong></p>
+                <ul>
+                    <li><strong>Спектр:</strong> Чисто непрерывный (сплошной), $\sigma(\hat{p}) = \mathbb{R}$. Возможные результаты измерения импульса лежат в диапазоне $p \in (-\infty, \infty)$.</li>
+                    <li><strong>Собственные функции:</strong> Собственное уравнение $\hat{p} \phi_p(x) = p \phi_p(x)$ дает уравнение $-i\hbar \frac{d\phi_p}{dx} = p \phi_p$. Его решение — плоские монохроматические волны Де Бройля:
+                        $$\phi_p(x) = \frac{1}{\sqrt{2\pi\hbar}} e^{i \frac{px}{\hbar}} = \frac{1}{\sqrt{2\pi}} e^{ikx}, \quad \text{где } p = \hbar k$$
+                    </li>
+                    <li><strong>Нормировка:</strong> Собственные функции сплошного спектра не принадлежат пространству $L_2$ (интеграл квадрата модуля расходится), поэтому они нормируются на дельта-функцию Дирака:
+                        $$\langle \phi_p | \phi_{p'} \rangle = \int_{-\infty}^{\infty} \phi_p^*(x) \phi_{p'}(x) dx = \delta(p - p')$$
+                    </li>
+                </ul>
+
+                <!-- Интерактивная визуализация плоской волны -->
+                <div class="visual-container">
+                    <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивный симулятор: Плоская волна $e^{ikx}$</h3>
+                    <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.5rem;">
+                        Изменяйте волновой вектор $k$ слайдером. Вы увидите действительную часть волны $\text{Re}(\psi) = \cos(kx)$ (синий график) и мнимую $\text{Im}(\psi) = \sin(kx)$ (пунктирный фиолетовый график). Обратите внимание: плотность вероятности $|\psi(x)|^2 = 1/(2\pi) \equiv \text{const}$ (частица равновероятно размазана по всему пространству).
+                    </p>
+                    <canvas id="waveCanvas" class="visual-canvas" width="600" height="200"></canvas>
+                    <div class="control-panel">
+                        <div class="control-group">
+                            <label for="kSlider">Волновой вектор ($k$):</label>
+                            <input type="range" id="kSlider" class="slider" min="0.5" max="5.0" step="0.1" value="2.0">
+                            <span id="kVal">2.0</span>
+                        </div>
+                        <div>
+                            Импульс $p = k\hbar$: <span id="pVal" class="highlight" style="font-weight: 600;">2.0 ħ</span>
+                        </div>
+                        <div>
+                            Кинетическая энергия $E_k = \frac{k^2\hbar^2}{2m}$: <span id="eVal" class="highlight-secondary" style="font-weight: 600;">2.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t2-q4">4. Оператор кинетической энергии</h2>
+            <div class="card">
+                <p>Оператор кинетической энергии $\hat{T}$ получается из классического выражения $T = \frac{p^2}{2m}$ заменой импульса на оператор:</p>
+                <div class="math-block">
+                    $$\hat{T} = \frac{\hat{\mathbf{p}}^2}{2m} = -\frac{\hbar^2}{2m}\Delta \quad \left(\text{в одномерном случае: } \hat{T} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\right)$$
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Доказательство положительной определенности оператора $\hat{T}$
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Оператор $\hat{A}$ называется положительно определенным, если для любого $|\psi\rangle \in D(\hat{A})$ выполняется $\langle\psi|\hat{A}|\psi\rangle \ge 0$.</p>
+                        <p>Докажем это для $\hat{T}$ в пространстве $L_2(-\infty, \infty)$ с помощью интегрирования по частям:</p>
+                        <div class="math-block">
+                            $$\langle \psi | \hat{T} | \psi \rangle = \int_{-\infty}^{\infty} \psi^*(x) \left(-\frac{\hbar^2}{2m} \frac{d^2\psi(x)}{dx^2}\right) dx$$
+                        </div>
+                        <p>Интегрируем по частям, полагая $u = \psi^*(x)$ и $dv = \frac{d^2\psi}{dx^2} dx$:</p>
+                        <div class="math-block">
+                            $$\langle \psi | \hat{T} | \psi \rangle = -\frac{\hbar^2}{2m} \left( \left. \psi^*(x) \frac{d\psi(x)}{dx} \right|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \frac{d\psi^*(x)}{dx} \frac{d\psi(x)}{dx} dx \right)$$
+                        </div>
+                        <p>В силу того, что $\psi(x) \in L_2$, на бесконечности $\psi(\pm\infty) = 0$, поэтому внеинтегральный член обращается в нуль. Получаем:</p>
+                        <div class="math-block">
+                            $$\langle \psi | \hat{T} | \psi \rangle = \frac{\hbar^2}{2m} \int_{-\infty}^{\infty} \left| \frac{d\psi(x)}{dx} \right|^2 dx \ge 0$$
+                        </div>
+                        <p>Равенство нулю достигается только при $\frac{d\psi}{dx} = 0 \implies \psi = \text{const}$, что в $L_2$ возможно только для тождественного нуля $\psi(x) \equiv 0$.</p>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Качественный вид спектров базовых операторов ($\hat{x}$, $\hat{p}$, $\hat{T}$)
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Спектры операторов определяются их физическим смыслом и математическими границами:</p>
+                        <ul>
+                            <li><strong>Координата $\hat{x}$ и Импульс $\hat{p}$:</strong> Спектр непрерывный и занимает всю вещественную ось: $\sigma(\hat{x}) = \sigma(\hat{p}) = (-\infty, \infty)$.</li>
+                            <li><strong>Кинетическая энергия $\hat{T}$:</strong> Поскольку оператор положительно определен, его собственные значения не могут быть отрицательными. Спектр является непрерывным полубесконечным: $\sigma(\hat{T}) = [0, \infty)$.</li>
+                        </ul>
+
+                        <!-- Сравнительная CSS диаграмма спектров -->
+                        <div class="visual-container" style="background: rgba(0,0,0,0.2); padding: 1.25rem; margin-top: 1rem; width: 100%;">
+                            <div style="font-weight: 600; margin-bottom: 1rem; color: #cbd5e1; text-align: center;">Сравнение спектров базовых операторов</div>
+                            <div style="width: 100%; margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.25rem;">
+                                    <span>Спектр $\hat{x}$ и $\hat{p}$ (Вещественная ось $\mathbb{R}$)</span>
+                                    <span style="color: #60a5fa;">Непрерывный</span>
+                                </div>
+                                <div style="height: 6px; background: linear-gradient(to right, transparent, #3b82f6, transparent); border-radius: 3px;"></div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
+                                    <span>$-\infty$</span>
+                                    <span>0</span>
+                                    <span>$+\infty$</span>
+                                </div>
+                            </div>
+                            <div style="width: 100%;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.25rem;">
+                                    <span>Спектр $\hat{T}$ (Положительная полуось $\mathbb{R}^+$)</span>
+                                    <span style="color: #a855f7;">Непрерывный, $\ge 0$</span>
+                                </div>
+                                <div style="height: 6px; display: flex; border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 50%; background: transparent; border-right: 2px solid #64748b;"></div>
+                                    <div style="width: 50%; background: linear-gradient(to right, #a855f7, transparent);"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
+                                    <span style="width: 50%; text-align: right; padding-right: 4px;">0</span>
+                                    <span>$+\infty$</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t2-q5">5. Гамильтониан для частицы в потенциальном поле</h2>
+            <div class="card">
+                <p><strong>Оператор Гамильтона (Гамильтониан) $\hat{H}$</strong> — это оператор полной энергии системы. Он является важнейшим оператором в квантовой механике, так как определяет временную эволюцию системы через уравнение Шредингера.</p>
+                <p>Для частицы массы $m$, движущейся в стационарном потенциальном поле $U(\mathbf{r})$, функция Гамильтона $H = T + U$ переходит в оператор:</p>
+                <div class="math-block">
+                    $$\hat{H} = \hat{T} + \hat{U} = -\frac{\hbar^2}{2m}\Delta + U(\mathbf{r})$$
+                </div>
+                <p>Где:</p>
+                <ul>
+                    <li>$\hat{T} = -\frac{\hbar^2}{2m}\Delta$ — оператор кинетической энергии.</li>
+                    <li>$\hat{U} = U(\mathbf{r})$ — оператор потенциальной энергии, сводящийся в координатном представлении к умножению волновой функции на вещественную функцию $U(\mathbf{r})$.</li>
+                </ul>
+                <div class="alert" style="background: rgba(16, 185, 129, 0.08); border-left-color: #10b981; padding: 1rem;">
+                    <strong>Спектр гамильтониана $\hat{H}$:</strong><br>
+                    В отличие от базовых операторов, спектр гамильтониана зависит от конкретного вида потенциала $U(\mathbf{r})$:
+                    <ul style="margin: 0.5rem 0 0; padding-left: 1.5rem;">
+                        <li><strong>Дискретный спектр</strong> (связанные состояния, когда частица заперта в яме, $E < U(\infty)$).</li>
+                        <li><strong>Непрерывный спектр</strong> (состояния рассеяния, свободное движение на бесконечности, $E > U(\infty)$).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <h2 id="t2-q6">6. Гамильтониан во внешнем электромагнитном поле</h2>
+            <div class="card">
+                <p>Электромагнитное поле описывается скалярным потенциалом $U(\mathbf{r}, t)$ и векторным потенциалом $\mathbf{A}(\mathbf{r}, t)$. Согласно процедуре квантования, обобщенный импульс $\mathbf{p}$ заменяется на оператор $\hat{\mathbf{p}}$, а кинетический импульс равен $\mathbf{P} = \mathbf{p} - \frac{e}{c}\mathbf{A}$.</p>
+                <p>Оператор Гамильтона частицы заряда $e$ в электромагнитном поле имеет вид:</p>
+                <div class="math-block">
+                    $$\hat{H} = \frac{1}{2m} \left( \hat{\mathbf{p}} - \frac{e}{c} \mathbf{A}(\mathbf{r}, t) \right)^2 + e U(\mathbf{r}, t)$$
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Раскрытие квадрата и Кулоновская калибровка
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Раскроем квадрат скобки оператора кинетического импульса, учитывая некоммутативность координаты (входящей в $\mathbf{A}$) и оператора импульса $\hat{\mathbf{p}}$:</p>
+                        <div class="math-block">
+                            $$\left(\hat{\mathbf{p}} - \frac{e}{c}\mathbf{A}\right)^2 = \hat{\mathbf{p}}^2 - \frac{e}{c}(\hat{\mathbf{p}}\cdot\mathbf{A} + \mathbf{A}\cdot\hat{\mathbf{p}}) + \frac{e^2}{c^2}\mathbf{A}^2$$
+                        </div>
+                        <p>Оператор импульса действует на произведение $\mathbf{A}\psi$ по правилу Лейбница:</p>
+                        <div class="math-block">
+                            $$\hat{\mathbf{p}} \cdot (\mathbf{A}\psi) = -i\hbar \nabla \cdot (\mathbf{A}\psi) = -i\hbar (\nabla\cdot\mathbf{A})\psi - i\hbar \mathbf{A}\cdot(\nabla\psi) = (-i\hbar \nabla\cdot\mathbf{A})\psi + \mathbf{A}\cdot(\hat{\mathbf{p}}\psi)$$
+                        </div>
+                        <p>Таким образом, коммутатор импульса и векторного потенциала равен: $[\hat{\mathbf{p}}, \mathbf{A}] = -i\hbar (\nabla \cdot \mathbf{A})$.</p>
+                        
+                        <p>В <strong>кулоновской калибровке</strong> полагают $\nabla \cdot \mathbf{A} = 0$. В этом случае операторы коммутируют ($\hat{\mathbf{p}}\cdot\mathbf{A} = \mathbf{A}\cdot\hat{\mathbf{p}}$), и гамильтониан упрощается:</p>
+                        <div class="math-block">
+                            $$\hat{H} = -\frac{\hbar^2}{2m}\Delta - \frac{e}{mc}\mathbf{A}\cdot\hat{\mathbf{p}} + \frac{e^2}{2mc^2}\mathbf{A}^2 + e U(\mathbf{r})$$
+                        </div>
+                        <p>Здесь член $-\frac{e}{mc}\mathbf{A}\cdot\hat{\mathbf{p}}$ описывает парамагнитное взаимодействие (спин-орбитальный магнитный момент), а $\frac{e^2}{2mc^2}\mathbf{A}^2$ — диамагнитный вклад.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БИЛЕТ 3 -->
+        <section id="ticket-3" class="ticket-section">
+            <h1>Билет 3</h1>
+            <p>Состояния квантовой системы, чистые и смешанные состояния, статистический оператор, и вероятностное толкование измерения.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета:</h3>
+                <ol>
+                    <li><a href="#t3-q1">Понятие состояния (Квантовая система, Вектор состояния, Волновая функция, Наблюдаемая величина).</a></li>
+                    <li><a href="#t3-q2">Чистые и смешанные состояния.</a></li>
+                    <li><a href="#t3-q3">Физический смысл волновой функции (Разложение по спектру).</a></li>
+                    <li><a href="#t3-q4">Среднее значение и дисперсия физической величины.</a></li>
+                    <li><a href="#t3-q5">Статистический оператор (матрица плотности) смешанного и чистого состояний.</a></li>
+                    <li><a href="#t3-q6">Вероятностное толкование процесса измерения и коллапс волновой функции.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t3-q1">1. Понятие состояния</h2>
+            <div class="card">
+                <ul>
+                    <li><span class="highlight">Квантовая система:</span> физическая система, которой математически ставится в соответствие гильбертово пространство $\mathcal{H}$.</li>
+                    <li><span class="highlight">Состояние:</span> математический объект, который <em>полностью задает вероятности</em> всех возможных результатов любых измерений над системой.</li>
+                    <li><span class="highlight">Волновая функция (ВФ):</span> вектор $|\psi\rangle \in \mathcal{H}$, определяющий состояние квантовой системы. Обычно состояния отождествляются с волновой функцией. Она всегда нормирована на единицу: $\langle \psi | \psi \rangle = 1$.</li>
+                    <li><span class="highlight">Наблюдаемая величина:</span> математически описывается линейным самосопряженным (эрмитовым) оператором $\hat{A}$. Область определения $D(\hat{A}) \subset \mathcal{H}$. Все возможные результаты измерения этой величины лежат в спектре оператора $\sigma(\hat{A}) \subset \mathbb{R}$.</li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t3-q2">2. Чистые и смешанные состояния</h2>
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Определения чистого и смешанного состояния
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-color: #10b981;">
+                        <strong>Чистое состояние:</strong> Состояние, которое описывается одной волновой функцией $|\psi\rangle$ (или $\psi(q)$ в координатном представлении). Это состояние максимального знания о системе.
+                    </div>
+                    <div class="alert">
+                        <strong>Смешанное состояние:</strong> Состояние, в котором система с вероятностью $w_1$ находится в чистом состоянии $|\psi_1\rangle$, с вероятностью $w_2$ — в состоянии $|\psi_2\rangle$, и т.д. Описывается <em>ансамблем</em> $\{w_n, |\psi_n\rangle\}$, где $\sum_k w_k = 1$. 
+                        <br><br>
+                        <em>Важно:</em> В смешанном состоянии нет квантовой интерференции между разными $|\psi_k\rangle$. Мы просто не знаем, в каком именно из них находится система (классическая неопределенность).
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Примеры смешанных состояний</h3>
+                <ul>
+                    <li>Пучок неполяризованных частиц (фотонов или электронов). Мы не можем описать весь пучок одной волновой функцией с определенным спином, так как частицы в пучке имеют разные случайно распределенные спины.</li>
+                    <li>Квантовая подсистема, взаимодействующая с большей системой (термостатом). Даже если вся замкнутая Вселенная находится в чистом состоянии, её выделенная часть из-за квантовой запутанности будет находиться в смешанном состоянии.</li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t3-q3">3. Физический смысл волновой функции</h2>
+            <div class="card">
+                <p>Физический смысл ВФ заключается в её вероятностной интерпретации. Разложим волновую функцию по собственным векторам некоторого оператора наблюдаемой $\hat{L}$ (базис $|\phi_n\rangle$).</p>
+                
+                <h3>Дискретный спектр</h3>
+                <p>Единичный оператор: $\hat{I} = \sum_n |\phi_n\rangle\langle\phi_n|$. Тогда разложение:</p>
+                <div class="math-block">
+                    $$|\psi\rangle = \sum_n c_n |\phi_n\rangle, \quad \text{где } c_n = \langle \phi_n | \psi \rangle$$
+                </div>
+                <p>Вероятность получить невырожденное собственное значение $\lambda_n$ при измерении равна квадрату модуля коэффициента разложения:</p>
+                <div class="math-block">
+                    $$P_n = |\langle \phi_n | \psi \rangle|^2 = |c_n|^2$$
+                </div>
+
+                <h3>Непрерывный спектр (на примере координаты $\hat{x}$)</h3>
+                <p>Для оператора координаты $\hat{x} \psi_\lambda = \lambda \psi_\lambda$, собственные функции $\psi_\lambda(x) = \delta(x-\lambda)$.</p>
+                <p>Аналогом вероятности $P_n$ выступает <strong>плотность вероятности</strong> $P(\lambda)$:</p>
+                <div class="math-block">
+                    $$P(\lambda) = |\langle \psi_\lambda | \psi \rangle|^2 = \left| \int_{-\infty}^\infty dx\, \delta(x-\lambda)\psi(x) \right|^2 = |\psi(\lambda)|^2$$
+                </div>
+                <p>Таким образом, $|\psi(x)|^2$ — это плотность вероятности обнаружить частицу в точке $x$. Квадрат модуля ВФ задает распределение вероятностей в непрерывном спектре.</p>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t3-q4">4. Среднее значение и дисперсия</h2>
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <h3>Математическое ожидание (Среднее значение)</h3>
+                <p>Среднее значение физической величины $L$ в чистом состоянии $|\psi\rangle$ вычисляется как:</p>
+                <div class="math-block">
+                    $$M[L] = \overline{L} = \sum_n P_n \lambda_n = \sum_n \langle \psi | \phi_n \rangle \lambda_n \langle \phi_n | \psi \rangle = \langle \psi | \hat{L} | \psi \rangle$$
+                </div>
+                <p>В случае непрерывного спектра (интегральный вид в $L_2$):</p>
+                <div class="math-block">
+                    $$M[L] = \int_{-\infty}^\infty \lambda \rho(\lambda) d\lambda = \int_{-\infty}^\infty \psi^*(x)\hat{L}\psi(x) dx$$
+                </div>
+                
+                <h3>Дисперсия (Среднеквадратичное отклонение)</h3>
+                <p>Дисперсия характеризует разброс (ширину распределения) результатов измерений вокруг среднего значения:</p>
+                <div class="math-block">
+                    $$\sigma^2(\hat{L}) = M[(\hat{L} - \overline{L})^2] = M[\hat{L}^2] - (M[\hat{L}])^2 \ge 0$$
+                </div>
+                <p>Среднеквадратичное отклонение (неопределенность величины $L$):</p>
+                <div class="math-block">
+                    $$\Delta L = \sqrt{\sigma^2(\hat{L})} = \sqrt{\overline{L^2} - \overline{L}^2}$$
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t3-q5">5. Статистический оператор (Матрица плотности)</h2>
+            <div class="card">
+                <p>В квантовой статистической механике вместо волновых функций удобнее использовать универсальный объект — <strong>статистический оператор</strong> $\hat{\rho}$.</p>
+                
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Для смешанного состояния
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Если система находится в ансамбле состояний $\{w_k, |\phi_k\rangle\}$, то статистический оператор по определению:</p>
+                        <div class="math-block">
+                            $$\hat{\rho} = \sum_k w_k |\phi_k\rangle\langle\phi_k|$$
+                        </div>
+                        <p>Среднее значение физической величины $L$ в смешанном состоянии ищется через след (Trace):</p>
+                        <div class="math-block">
+                            $$M[L] = \text{Tr}(\hat{\rho}\hat{L})$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Для чистого состояния
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Чистое состояние является частным случаем смешанного, когда одна из вероятностей $w_1 = 1$, а все остальные равны нулю. Тогда:</p>
+                        <div class="math-block">
+                            $$\hat{\rho} = |\psi\rangle\langle\psi|$$
+                        </div>
+                        <p>Этот оператор является проектором на состояние $|\psi\rangle$. Для чистого состояния всегда выполняется свойство идемпотентности: $\hat{\rho}^2 = \hat{\rho}$. Для смешанного это не так ($\text{Tr}(\hat{\rho}^2) < 1$).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <h2 id="t3-q6">6. Вероятностное толкование измерения и коллапс ВФ</h2>
+            <div class="card">
+                <h3>Процесс измерения и Постулат Фон Неймана</h3>
+                <p>Измерение в квантовой механике активно воздействует на систему. Пусть мы измеряем наблюдаемую $\hat{L}$. Согласно <strong>проекционному постулату фон Неймана</strong>:</p>
+                <ol>
+                    <li>При измерении мы всегда получаем одно из собственных значений $\lambda_n$ оператора $\hat{L}$. Вероятность этого исхода: $P_n = |\langle\phi_n|\psi\rangle|^2$.</li>
+                    <li><strong>Коллапс (редукция) волновой функции:</strong> Сразу после того, как прибор показал значение $\lambda_n$, исходное состояние $|\psi\rangle$ мгновенно "схлопывается" (переходит) в соответствующее собственное состояние $|\phi_n\rangle$.</li>
+                    <li>Если мы повторим измерение $\hat{L}$ через бесконечно малый промежуток времени, мы со $100\%$ вероятностью снова получим $\lambda_n$.</li>
+                </ol>
+
+                <div class="alert" style="background: rgba(245, 158, 11, 0.1); border-color: #f59e0b;">
+                    <strong>Измерение вырожденного состояния:</strong><br>
+                    Если полученное собственное значение $\lambda_n$ вырождено (ему соответствует не одна функция, а целое подпространство с базисом $|\phi_{n,k}\rangle$), то волновая функция проецируется на всё это подпространство.<br>
+                    Новое состояние:
+                    $$|\psi'\rangle = \frac{\hat{P}_\lambda |\psi\rangle}{\|\hat{P}_\lambda \psi\|}$$
+                    Где $\hat{P}_\lambda = \sum_k |\phi_{n,k}\rangle\langle\phi_{n,k}|$ — оператор проектирования на собственное подпространство $\lambda_n$.
+                </div>
+            </div>
+
+            <!-- ИНТЕРАКТИВНЫЙ БЛОК: СИМУЛЯТОР ИЗМЕРЕНИЯ -->
+            <div class="visual-container">
+                <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная симуляция: Коллапс волновой функции</h3>
+                <p style="text-align: center; font-size: 0.95rem; max-width: 800px; margin-bottom: 1rem;">
+                    Настройте начальное состояние системы как суперпозицию трех энергетических уровней: $|\psi\rangle = c_1|E_1\rangle + c_2|E_2\rangle + c_3|E_3\rangle$.<br>
+                    Нажмите "Измерить Энергию", чтобы увидеть случайный результат (с вероятностями $P_i \sim |c_i|^2$) и мгновенный коллапс волновой функции в одно из состояний.
+                </p>
+                
+                <canvas id="collapseCanvas" class="visual-canvas" width="600" height="250"></canvas>
+                
+                <div class="control-panel" style="justify-content: center; margin-top: 1rem; max-width: 700px;">
+                    <div class="control-group" style="flex-direction: column; align-items: flex-start; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+                        <h4 style="margin-bottom: 0.5rem; color: #cbd5e1;">Суперпозиция до измерения:</h4>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                            <label style="width: 120px;">$c_1$ (Уровень 1):</label>
+                            <input type="range" id="c1Slider" class="slider" min="0" max="1" step="0.05" value="0.7">
+                            <span id="c1Val" style="width: 40px; text-align: right;">0.70</span>
+                            <span id="pE1" style="color: #60a5fa; width: 50px; font-weight: bold; text-align: right;"></span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                            <label style="width: 120px;">$c_2$ (Уровень 2):</label>
+                            <input type="range" id="c2Slider" class="slider" min="0" max="1" step="0.05" value="0.5">
+                            <span id="c2Val" style="width: 40px; text-align: right;">0.50</span>
+                            <span id="pE2" style="color: #34d399; width: 50px; font-weight: bold; text-align: right;"></span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <label style="width: 120px;">$c_3$ (Уровень 3):</label>
+                            <input type="range" id="c3Slider" class="slider" min="0" max="1" step="0.05" value="0.2">
+                            <span id="c3Val" style="width: 40px; text-align: right;">0.20</span>
+                            <span id="pE3" style="color: #f472b6; width: 50px; font-weight: bold; text-align: right;"></span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; justify-content: center;">
+                        <button id="measureEnergyBtn" style="padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-family: inherit; font-weight: 600; transition: background 0.3s;">Измерить Энергию</button>
+                        <button id="measurePosBtn" style="padding: 0.75rem 1.5rem; background: #a855f7; color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-family: inherit; font-weight: 600; transition: background 0.3s;" title="Измерение другой наблюдаемой, не коммутирующей с энергией, разрушит энергетическое состояние">Измерить Координату</button>
+                        <button id="resetCollapseBtn" style="padding: 0.5rem 1rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 0.5rem; cursor: pointer; transition: all 0.3s;">Сбросить систему</button>
+                    </div>
+                </div>
+                
+                <div id="measurementStatus" style="margin-top: 1rem; font-weight: 600; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--accent); border-radius: 0.5rem; width: 100%; max-width: 700px;">
+                    Система подготовлена в суперпозиции. Ожидание измерения...
+                </div>
+            </div>
+        </section>
+
+        <!-- БИЛЕТ 4 -->
+        <section id="ticket-4" class="ticket-section">
+            <h1>Билет 4</h1>
+            <p>Характеристики физических наблюдаемых: среднее значение, дисперсия и соотношение неопределенностей Гейзенберга.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (3 вопроса):</h3>
+                <ol>
+                    <li><a href="#t4-q1">Среднее значение, дисперсия и среднеквадратичное отклонение физической величины.</a></li>
+                    <li><a href="#t4-q2">Соотношение неопределенности Гейзенберга общего вида.</a></li>
+                    <li><a href="#t4-q3">Соотношение неопределенности Гейзенберга для координаты и импульса.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t4-q1">1. Среднее значение и дисперсия</h2>
+            <div class="card">
+                <p>Физическая величина $L$, сопоставляемая с самосопряженным оператором $\hat{L}$, в квантовом состоянии $|\psi\rangle$ ведет себя как случайная величина. Её вероятностные характеристики определяются следующими величинами:</p>
+                <ul>
+                    <li><strong>Математическое ожидание (среднее значение) $\overline{L}$:</strong>
+                        <div class="math-block">
+                            $$\overline{L} = \langle \psi | \hat{L} | \psi \rangle$$
+                        </div>
+                        В координатном представлении для чистого состояния: $\overline{L} = \int_{-\infty}^{\infty} \psi^*(x) \hat{L} \psi(x) dx$. Для смешанного состояния: $\overline{L} = \text{Tr}(\hat{\rho}\hat{L})$.
+                    </li>
+                    <li><strong>Дисперсия $\sigma^2(L)$:</strong> определяет меру разброса результатов измерений вокруг среднего значения:
+                        <div class="math-block">
+                            $$\sigma^2(L) = \langle (\hat{L} - \overline{L}\hat{I})^2 \rangle = \overline{L^2} - (\overline{L})^2$$
+                        </div>
+                    </li>
+                    <li><strong>Среднеквадратичное отклонение (неопределенность) $\Delta L$:</strong>
+                        <div class="math-block">
+                            $$\Delta L = \sqrt{\sigma^2(L)} = \sqrt{\overline{L^2} - (\overline{L})^2}$$
+                        </div>
+                    </li>
+                </ul>
+                <p><strong>Физический смысл дисперсии:</strong> Дисперсия $\Delta L = 0$ тогда и только тогда, когда состояние $|\psi\rangle$ является <em>собственным состоянием</em> оператора $\hat{L}$ ($\hat{L}|\psi\rangle = \lambda|\psi\rangle$). В этом случае измерение величины $L$ дает единственное точное значение $\lambda$ с вероятностью 100%.</p>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t4-q2">2. Соотношение неопределенности Гейзенберга общего вида</h2>
+                <p>Пусть $\hat{A}$ и $\hat{B}$ — два самосопряженных оператора. Введем эрмитов оператор $\hat{D} = i[\hat{A}, \hat{B}]$ и <span class="highlight">квантовые скобки Пуассона</span>:</p>
+                <div class="math-block">
+                    $$\{\hat{A}, \hat{B}\} = \frac{i}{\hbar} [\hat{A}, \hat{B}]$$
+                </div>
+                <p>Тогда для неопределенностей (среднеквадратичных отклонений) физических величин $A$ и $B$ справедливо <strong>соотношение неопределенности общего вида</strong>:</p>
+                <div class="math-block">
+                    $$\Delta A \cdot \Delta B \ge \frac{\hbar}{2} \left| \langle \{\hat{A}, \hat{B}\} \rangle \right| = \frac{1}{2} \left| \langle \hat{D} \rangle \right|$$
+                </div>
+                <p>Если операторы $\hat{A}$ и $\hat{B}$ не коммутируют, то соответствующие физические величины нельзя одновременно измерить сколь угодно точно.</p>
+
+                <div class="accordion" onclick="this.classList.toggle('open')">
+                    <div class="accordion-header">
+                        Строгий математический вывод соотношения неопределенности
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Введем центрированные операторы: $\hat{A}' = \hat{A} - \overline{A}\hat{I}$ и $\hat{B}' = \hat{B} - \overline{B}\hat{I}$. Заметим, что $[\hat{A}', \hat{B}'] = [\hat{A}, \hat{B}]$.</p>
+                        <p>Для любого вещественного числа $\alpha$ рассмотрим вектор $|\phi\rangle = (\hat{A}' + i\alpha \hat{B}')|\psi\rangle$. Квадрат нормы любого вектора в гильбертовом пространстве неотрицателен: $\langle \phi | \phi \rangle \ge 0$.</p>
+                        <p>Распишем скалярное произведение, пользуясь самосопряженностью операторов $\hat{A}'$ и $\hat{B}'$:</p>
+                        <div class="math-block">
+                            $$\langle \phi | \phi \rangle = \langle (\hat{A}' + i\alpha \hat{B}')\psi | (\hat{A}' + i\alpha \hat{B}')\psi \rangle = \langle \psi | (\hat{A}' - i\alpha \hat{B}')(\hat{A}' + i\alpha \hat{B}') | \psi \rangle \ge 0$$
+                        </div>
+                        <p>Раскрываем скобки с сохранением порядка операторов:</p>
+                        <div class="math-block">
+                            $$\langle \psi | (\hat{A}'^2 + \alpha^2 \hat{B}'^2 + i\alpha [\hat{A}', \hat{B}']) | \psi \rangle = \langle \hat{A}'^2 \rangle + \alpha^2 \langle \hat{B}'^2 \rangle + i\alpha \langle [\hat{A}, \hat{B}] \rangle \ge 0$$
+                        </div>
+                        <p>Вспоминая определения дисперсии, запишем это как квадратный трехчлен относительно $\alpha$:</p>
+                        <div class="math-block">
+                            $$\alpha^2 (\Delta B)^2 + \alpha \cdot i\langle [\hat{A}, \hat{B}] \rangle + (\Delta A)^2 \ge 0$$
+                        </div>
+                        <p>Поскольку $[\hat{A}, \hat{B}]$ — кососимметричный оператор (коммутатор двух эрмитовых), его среднее значение чисто мнимо, следовательно, коэффициент при $\alpha$ — $i\langle [\hat{A}, \hat{B}] \rangle = \langle \hat{D} \rangle$ — вещественное число.</p>
+                        <p>Для того чтобы квадратный трехчлен был неотрицательным при всех вещественных $\alpha$, его дискриминант $D$ должен быть неположительным ($D \le 0$):</p>
+                        <div class="math-block">
+                            $$D = \left(i\langle [\hat{A}, \hat{B}] \rangle\right)^2 - 4(\Delta B)^2(\Delta A)^2 \le 0$$
+                        </div>
+                        <p>Поскольку $i^2 = -1$:</p>
+                        <div class="math-block">
+                            $$- \left|\langle [\hat{A}, \hat{B}] \rangle\right|^2 - 4(\Delta A)^2(\Delta B)^2 \le 0 \implies (\Delta A)^2(\Delta B)^2 \ge \frac{1}{4} \left|\langle [\hat{A}, \hat{B}] \rangle\right|^2$$
+                        </div>
+                        <p>Извлекая квадратный корень, получаем искомое соотношение:</p>
+                        <div class="math-block">
+                            $$\Delta A \cdot \Delta B \ge \frac{1}{2} \left| \langle [\hat{A}, \hat{B}] \rangle \right| = \frac{1}{2} |\langle \hat{D} \rangle| = \frac{\hbar}{2} |\langle \{\hat{A}, \hat{B}\} \rangle|$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t4-q3">3. Соотношение неопределенности Гейзенберга для координаты и импульса</h2>
+            <div class="card">
+                <p>Применим общее соотношение неопределенностей к операторам обобщенной координаты $\hat{q}$ и импульса $\hat{p}$.</p>
+                <p>Как известно из классической механики для обобщенных координат и импульсов, их скобки Пуассона равны единице. В квантовой механике <span class="highlight-secondary">квантовые скобки Пуассона</span> также равны единице:</p>
+                <div class="math-block">
+                    $$\{\hat{p}, \hat{q}\} = 1 \implies [\hat{p}, \hat{q}] = \frac{\hbar}{i}$$
+                </div>
+                <p>Подставляя $\{\hat{p}, \hat{q}\} = 1$ в общее соотношение, получаем:</p>
+                <div class="math-block">
+                    $$\Delta q \cdot \Delta p \ge \frac{\hbar}{2} \left| \langle \{\hat{p}, \hat{q}\} \rangle \right| = \frac{\hbar}{2}$$
+                </div>
+                <p>Это знаменитое <strong>соотношение неопределенностей Гейзенберга</strong>. Оно накладывает фундаментальный запрет на одновременное точное измерение координаты и импульса микрочастицы. Чем точнее локализована частица ($\Delta x \to 0$), тем шире разброс по импульсам ($\Delta p \to \infty$).</p>
+
+                <!-- Интерактивная визуализация пакета Гейзенберга -->
+                <div class="visual-container">
+                    <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная визуализация: Волновой пакет в $x$ и $p$ пространствах</h3>
+                    <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.5rem;">
+                        Управляйте координатной шириной пакета $\Delta x$ слайдером. Вы увидите, что сжатие пакета в пространстве координат приводит к его неминуемому уширению в импульсном пространстве, иллюстрируя закон сохранения $\Delta x \Delta p \ge \hbar/2$ (здесь $\hbar = 1$).
+                    </p>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; width: 100%;">
+                        <div>
+                            <div style="text-align: center; font-size: 0.85rem; margin-bottom: 0.25rem; color: #60a5fa;">Координатное пространство $|\psi(x)|^2$</div>
+                            <canvas id="heisenbergCanvasX" class="visual-canvas" width="280" height="180"></canvas>
+                        </div>
+                        <div>
+                            <div style="text-align: center; font-size: 0.85rem; margin-bottom: 0.25rem; color: #fbbf24;">Импульсное пространство $|\Phi(p)|^2$</div>
+                            <canvas id="heisenbergCanvasP" class="visual-canvas" width="280" height="180"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="control-panel" style="max-width: 600px; margin-top: 0.5rem;">
+                        <div class="control-group">
+                            <label for="heisenbergSigmaSlider">Разброс координат ($\Delta x$):</label>
+                            <input type="range" id="heisenbergSigmaSlider" class="slider" min="0.15" max="1.5" step="0.05" value="0.5">
+                            <span id="dxVal">0.50</span>
+                        </div>
+                        <div>
+                            Разброс импульсов $\Delta p$: <span id="dpVal" class="highlight" style="font-weight: 600;">1.00</span>
+                        </div>
+                        <div>
+                            Произведение $\Delta x \Delta p$: <span id="uncVal" class="highlight-secondary" style="font-weight: 600;">0.50</span> (предел: 0.50)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="ticket-5" class="ticket-section">
+    <div class="card toc">
+        <h2>Оглавление (Билет 5)</h2>
+        <ol>
+            <li><a href="#t5-schrodinger">Временное и стационарное уравнения Шредингера. Уравнение Лиувилля</a></li>
+            <li><a href="#t5-ehrenfest">Теоремы Эренфеста</a></li>
+            <li><a href="#t5-continuity">Плотность тока вероятности и квантовое уравнение непрерывности</a></li>
+        </ol>
+    </div>
+
+    <h2 id="t5-schrodinger">1. Временное и стационарное уравнения Шредингера. Уравнение Лиувилля</h2>
+    <div class="card">
+        <h3>Временное уравнение Шредингера</h3>
+        <p>
+            Развитие во времени чистого состояния квантовой системы, описываемого волновой функцией $\psi(t)$, постулируется 
+            <span class="highlight">временным уравнением Шредингера</span>:
+        </p>
+        <div class="math-block">
+            $$ i\hbar \frac{\partial}{\partial t}\psi(x, t) = \hat{H} \psi(x, t) $$
+        </div>
+        <p>где $\hat{H}$ — оператор энергии (гамильтониан) системы. Это уравнение первого порядка по времени, поэтому для однозначного определения волновой функции достаточно задать её в начальный момент $t=t_0$. Норма волновой функции при эволюции сохраняется.</p>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Вывод из эволюции средних значений
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Если предположить, что среднее значение любой величины $L$ развивается по закону:</p>
+                <div class="math-block">
+                    $$ \frac{d}{dt} \langle\psi|\hat{L}|\psi\rangle = \langle\psi|\frac{\partial\hat{L}}{\partial t}|\psi\rangle + \frac{i}{\hbar}\langle\psi|[\hat{H}, \hat{L}]|\psi\rangle $$
+                </div>
+                <p>Раскрыв производную $\frac{d}{dt}\langle\psi|\hat{L}|\psi\rangle$, получим:</p>
+                <div class="math-block">
+                    $$ \frac{d}{dt} \langle\psi|\hat{L}|\psi\rangle = \langle\frac{\partial\psi}{\partial t}|\hat{L}|\psi\rangle + \langle\psi|\frac{\partial\hat{L}}{\partial t}|\psi\rangle + \langle\psi|\hat{L}|\frac{\partial\psi}{\partial t}\rangle $$
+                </div>
+                <p>Сравнивая с постулатом и учитывая эрмитовость $\hat{H}$, приходим к соотношению:</p>
+                <div class="math-block">
+                    $$ \text{Re} \left[ \left\langle \hat{L}\psi \left| \frac{\partial}{\partial t} + \frac{i}{\hbar}\hat{H} \right| \psi \right\rangle \right] = 0 $$
+                </div>
+                <p>Поскольку это верно для любого оператора $\hat{L}$, в скобках должен стоять ноль, откуда и следует $i\hbar \frac{\partial\psi}{\partial t} = \hat{H}\psi$.</p>
+            </div>
+        </div>
+
+        <h3>Стационарное уравнение Шредингера</h3>
+        <p>
+            Если гамильтониан $\hat{H}$ явно не зависит от времени, можно разделить переменные, подставив решение в виде 
+            $\psi(x, t) = \psi(x)e^{-\frac{i}{\hbar}Et}$. Это приводит к 
+            <span class="highlight-secondary">стационарному уравнению Шредингера</span> (уравнению на собственные значения энергии):
+        </p>
+        <div class="math-block">
+            $$ \hat{H} \psi(x) = E \psi(x) $$
+        </div>
+        <p>Состояния с определенной энергией $E$ называются стационарными. В таких состояниях средние значения физических величин (не зависящих явно от времени) остаются постоянными.</p>
+
+        <h3>Уравнение Лиувилля</h3>
+        <p>Для смешанных состояний, описываемых оператором плотности $\hat{\rho} = \sum_k w_k |\psi_k\rangle\langle\psi_k|$, эволюция во времени задается 
+        <span class="highlight">квантовым уравнением Лиувилля</span> (уравнением фон Неймана):</p>
+        <div class="math-block">
+            $$ i\hbar \frac{\partial \hat{\rho}}{\partial t} = [\hat{H}, \hat{\rho}] $$
+        </div>
+    </div>
+
+    <h2 id="t5-ehrenfest">2. Теоремы Эренфеста</h2>
+    <div class="card">
+        <p>Теоремы Эренфеста показывают, что средние значения квантовомеханических величин изменяются по законам, аналогичным законам классической механики. В их основе лежит обобщенное уравнение для средних:</p>
+        <div class="math-block">
+            $$ \frac{d\langle\hat{A}\rangle}{dt} = \langle \frac{\partial \hat{A}}{\partial t} \rangle + \frac{i}{\hbar}\langle [\hat{H}, \hat{A}] \rangle $$
+        </div>
+
+        <h3>1-я теорема Эренфеста (аналог определения скорости)</h3>
+        <p>Рассмотрим оператор координаты $\hat{\mathbf{r}}$, который явно не зависит от времени. Коммутатор координаты с гамильтонианом $\hat{H} = \frac{\hat{\mathbf{p}}^2}{2m} + V(\mathbf{r})$ равен $[\hat{H}, \hat{\mathbf{r}}] = -\frac{i\hbar}{m}\hat{\mathbf{p}}$. Отсюда следует 1-я теорема:</p>
+        <div class="math-block">
+            $$ \frac{d\langle \mathbf{r} \rangle}{dt} = \frac{1}{m} \langle \hat{\mathbf{p}} \rangle $$
+        </div>
+
+        <h3>2-я теорема Эренфеста (аналог 2-го закона Ньютона)</h3>
+        <p>Теперь рассмотрим оператор импульса $\hat{\mathbf{p}}$. Коммутатор импульса с гамильтонианом равен $[\hat{H}, \hat{\mathbf{p}}] = [V(\mathbf{r}), \hat{\mathbf{p}}] = i\hbar\nabla V(\mathbf{r})$. Подстановка в уравнение эволюции дает 2-ю теорему:</p>
+        <div class="math-block">
+            $$ \frac{d\langle \hat{\mathbf{p}} \rangle}{dt} = \langle -\nabla V(\mathbf{r}) \rangle $$
+        </div>
+
+        <div class="alert">
+            <strong>Обратите внимание:</strong> Для средних значений квантовых величин выполняются классические законы Ньютона, где $-\nabla V(\mathbf{r})$ играет роль классической силы $\mathbf{F}$.
+        </div>
+    </div>
+
+    <h2 id="t5-continuity">3. Плотность тока вероятности и квантовое уравнение непрерывности</h2>
+    <div class="card">
+        <p>Квантовая механика требует сохранения вероятности. Если вероятность убывает в каком-то объеме, она должна «вытекать» через границы этого объема в виде потока (тока) вероятности.</p>
+        
+        <p>Введем плотность вероятности $\rho(\mathbf{r}, t) = |\psi(\mathbf{r}, t)|^2$ и <span class="highlight">плотность тока вероятности</span> $\mathbf{j}(\mathbf{r}, t)$:</p>
+        <div class="math-block">
+            $$ \mathbf{j}(\mathbf{r}, t) = \frac{\hbar}{2mi} \left( \psi^* \nabla \psi - \psi \nabla \psi^* \right) $$
+        </div>
+
+        <p>Из временного уравнения Шредингера напрямую следует <span class="highlight-secondary">квантовое уравнение непрерывности</span> (неразрывности):</p>
+        <div class="math-block">
+            $$ \frac{\partial \rho}{\partial t} + \text{div} \mathbf{j} = 0 $$
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Вывод уравнения непрерывности
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Запишем временное УШ и сопряженное к нему:</p>
+                <ul>
+                    <li>$ i\hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\Delta\psi + V\psi $</li>
+                    <li>$ -i\hbar \frac{\partial \psi^*}{\partial t} = -\frac{\hbar^2}{2m}\Delta\psi^* + V\psi^* $</li>
+                </ul>
+                <p>Умножим первое на $\psi^*$, а второе на $\psi$ и вычтем второе из первого. Члены с потенциалом сократятся:</p>
+                <div class="math-block">
+                    $$ i\hbar \frac{\partial}{\partial t}(\psi^* \psi) = -\frac{\hbar^2}{2m} (\psi^*\Delta\psi - \psi\Delta\psi^*) $$
+                </div>
+                <p>Поскольку $\psi^*\Delta\psi - \psi\Delta\psi^* = \text{div}(\psi^*\nabla\psi - \psi\nabla\psi^*)$, мы получаем:</p>
+                <div class="math-block">
+                    $$ \frac{\partial |\psi|^2}{\partial t} + \text{div} \left[ \frac{\hbar}{2mi} (\psi^*\nabla\psi - \psi\nabla\psi^*) \right] = 0 $$
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Canvas Simulation -->
+        <div class="canvas-container" style="margin-top: 2rem;">
+            <h3>Интерактивная модель: Плотность тока вероятности волнового пакета</h3>
+            <canvas id="currentSimCanvas" width="800" height="300" style="width: 100%; border-radius: 8px; background: #0f172a;"></canvas>
+            
+            <div class="controls" style="margin-top: 1rem; display: flex; gap: 1.5rem; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <label for="momentumSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Импульс $p_0$</label>
+                    <input type="range" id="momentumSlider" min="-5" max="5" value="2" step="0.1" style="width: 150px;">
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <label for="widthSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Ширина $\sigma$</label>
+                    <input type="range" id="widthSlider" min="0.5" max="3" value="1.5" step="0.1" style="width: 150px;">
+                </div>
+            </div>
+            <p style="text-align: center; color: #64748b; font-size: 0.9rem; margin-top: 1rem;">
+                Симуляция показывает плотность вероятности $\rho(x)$ (заливка) и направление плотности тока $j(x)$ (стрелки).
+            </p>
+        </div>
+    </div>
+</section>
+
+        <!-- БИЛЕТ 6 -->
+        <section id="ticket-6" class="ticket-section">
+            <h1>Билет 6</h1>
+            <p>Собственные функции одномерного оператора Гамильтона свободной частицы. Спектр гамильтониана свободной частицы. Монохроматическая плоская волна. Волновой пакет и движение свободной частицы.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета:</h3>
+                <ol>
+                    <li><a href="#t6-q1">Собственные функции одномерного оператора Гамильтона свободной частицы. Спектр.</a></li>
+                    <li><a href="#t6-q2">Монохроматическая плоская волна.</a></li>
+                    <li><a href="#t6-q3">Волновой пакет.</a></li>
+                    <li><a href="#t6-q4">Движение свободной частицы. Групповая скорость.</a></li>
+                    <li><a href="#t6-q5">Расплывание волнового пакета.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="t6-q1">1. СФ одномерного оператора Гамильтона свободной частицы. Спектр</h2>
+            <div class="card">
+                <p>Для свободной частицы потенциальная энергия равна нулю ($\hat{U} = 0$). Гамильтониан совпадает с оператором кинетической энергии:</p>
+                <div class="math-block">
+                    $$\hat{H} = \hat{T} + \hat{U} = \hat{T} = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2}$$
+                </div>
+                <p>Гамильтониан $\hat{H}$ коммутирует с оператором импульса $\hat{p} = \frac{\hbar}{i}\frac{d}{dx}$, поэтому они имеют общие собственные функции (СФ). Формальным решением уравнения на собственные значения являются <span class="highlight">монохроматические плоские волны</span>:</p>
+                <div class="math-block">
+                    $$\varphi_k(x) = \frac{1}{\sqrt{2\pi}} e^{ikx}$$
+                </div>
+                <p>Подействуем операторами $\hat{p}$ и $\hat{H}$ на эту функцию:</p>
+                <div class="math-block">
+                    $$\hat{p} \varphi_k(x) = \frac{\hbar}{i} \frac{d}{dx} \varphi_k(x) = \hbar k \varphi_k(x) = p \varphi_k(x)$$
+                </div>
+                <div class="math-block">
+                    $$\hat{H} \varphi_k(x) = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} \varphi_k(x) = \frac{\hbar^2 k^2}{2m} \varphi_k(x) = E(k) \varphi_k(x)$$
+                </div>
+                
+                <p>Отсюда находим <strong>спектр операторов</strong>:</p>
+                <ul>
+                    <li>Спектр импульса: $p = \hbar k$. Волновой вектор $k$ может принимать любые вещественные значения: $k \in (-\infty, +\infty)$. Спектр <span class="highlight-secondary">чисто сплошной</span>.</li>
+                    <li>Спектр энергии: $E = \frac{\hbar^2 k^2}{2m} = \frac{p^2}{2m}$. Значения энергии непрерывны и положительны $E \in [0, +\infty)$. Уровни энергии дважды вырождены (волнам $+k$ и $-k$ отвечает одна и та же энергия $E$).</li>
+                </ul>
+
+                <div class="alert" style="background: rgba(245, 158, 11, 0.1); border-left-color: #f59e0b; margin-top: 1rem;">
+                    <strong>Проблема нормировки:</strong><br>
+                    Плоские волны $\varphi_k(x)$ не интегрируемы с квадратом на всей оси $x$, то есть <em>не принадлежат гильбертову пространству $L_2(-\infty, \infty)$</em>. Интеграл от $|\varphi_k(x)|^2 = \frac{1}{2\pi}$ равен бесконечности. Такие функции нормируются на дельта-функцию Дирака:<br>
+                    $$\langle \varphi_k | \varphi_{k'} \rangle = \int_{-\infty}^{\infty} \varphi_k^*(x)\varphi_{k'}(x) dx = \delta(k - k')$$
+                    Поэтому строго говоря, плоская волна не является физически реализуемым состоянием (неопределенность координаты бесконечна).
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="t6-q2">2. Монохроматическая плоская волна</h2>
+            <div class="card">
+                <p>Рассмотрим временное уравнение Шредингера для свободной частицы:</p>
+                <div class="math-block">
+                    $$i\hbar \frac{\partial}{\partial t} \Psi(x,t) = \hat{H} \Psi(x,t)$$
+                </div>
+                <p>Так как гамильтониан не зависит от времени, частным формальным решением этого уравнения является зависящая от времени <strong>монохроматическая плоская волна де Бройля</strong>:</p>
+                <div class="math-block">
+                    $$\Psi_k(x,t) = \varphi_k(x) e^{-\frac{i}{\hbar}E(k)t} = \frac{1}{\sqrt{2\pi}} e^{i(kx - \omega t)}$$
+                </div>
+                <p>Связь частоты $\omega$ и энергии $E(k)$ задается формулой Планка-Эйнштейна:</p>
+                <div class="math-block">
+                    $$\omega = \frac{E(k)}{\hbar} = \frac{\hbar k^2}{2m} = \frac{p^2}{2m\hbar}$$
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="t6-q3">3. Волновой пакет</h2>
+            <div class="card">
+                <p>Физически реализуемое состояние свободной частицы (интегрируемое с квадратом) формируется как суперпозиция (интеграл) зависящих от времени плоских волн с различными импульсами (энергиями). Такая конструкция называется <span class="highlight">волновым пакетом</span>.</p>
+                <p>Общее решение временного уравнения Шредингера записывается в виде интеграла Фурье:</p>
+                <div class="math-block">
+                    $$\Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} dk \, C(k) e^{i(kx - \omega(k) t)} \quad \in L_2(-\infty, \infty)$$
+                </div>
+                <p>Здесь весовая функция $C(k)$ — это коэффициенты разложения, амплитуда вероятности найти частицу с волновым вектором $k$.</p>
+                <ul>
+                    <li>Волновой пакет <strong>является</strong> решением временного уравнения Шредингера.</li>
+                    <li>Волновой пакет <strong>не является</strong> собственной функцией гамильтониана $\hat{H}$ (он не имеет строго определенной энергии, так как "смешан" из разных $\omega(k)$).</li>
+                </ul>
+                <p>В начальный момент времени $t=0$ волновая функция $\Psi(x, 0) = \psi_0(x)$ нормирована на единицу. Коэффициенты $C(k)$ определяются как обратное преобразование Фурье начального состояния:</p>
+                <div class="math-block">
+                    $$C(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \psi_0(x) e^{-ikx} dx$$
+                </div>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <h2 id="t6-q4">4. Движение свободной частицы. Групповая скорость</h2>
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <p>Предположим, что спектр функции $C(k)$ узко локализован в $k$-пространстве вблизи некоторого значения $k_0$. Тогда $C(k)$ можно представить как $C(k) = \Phi(k - k_0) e^{-ikx_0}$, где функция $\Phi(q)$ имеет острый максимум в нуле.</p>
+                <p>Разложим частоту $\omega(k)$ в ряд Тейлора вблизи $k_0$, оставив только линейный член:</p>
+                <div class="math-block">
+                    $$\omega(k) \approx \omega(k_0) + \left. \frac{d\omega}{dk} \right|_{k=k_0} (k - k_0) = \omega_0 + v_g (k - k_0)$$
+                </div>
+                <p>Здесь <span class="highlight">групповая скорость</span> $v_g$ — это скорость движения центра локализованного волнового пакета. Для свободной частицы она совпадает с классической скоростью:</p>
+                <div class="math-block">
+                    $$v_g = \frac{d\omega}{dk} = \frac{d}{dk}\left( \frac{\hbar k^2}{2m} \right) = \frac{\hbar k_0}{m} = \frac{p_0}{m}$$
+                </div>
+                <div class="alert" style="background: rgba(16, 185, 129, 0.08); border-color: #10b981;">
+                    <strong>Групповая и фазовая скорости:</strong><br>
+                    - <em>Групповая скорость</em> $v_g = d\omega/dk = p/m$ — это физическая скорость движения самого "сгустка" (огибающей), с которой движется частица.<br>
+                    - <em>Фазовая скорость</em> $v_{ph} = \omega/k = p/(2m) = v_g/2$ — это скорость бега узлов синусоиды "внутри" пакета. Она не имеет прямого физического смысла для движения частицы.
+                </div>
+                <p>Подставляя линейное приближение для $\omega(k)$ в интеграл волнового пакета, мы получаем:</p>
+                <div class="math-block">
+                    $$\Psi(x,t) \approx e^{i(k_0 x - \omega_0 t)} F(x - x_0 - v_g t)$$
+                </div>
+                <p>Квадрат модуля плотности вероятности:</p>
+                <div class="math-block">
+                    $$|\Psi(x,t)|^2 \approx |F(x - x_0 - v_g t)|^2$$
+                </div>
+                <p>Это уравнение описывает волновой пакет $F(x)$, который движется прямолинейно и равномерно со скоростью $v_g$, при этом не меняя своей формы. (Но только в линейном приближении!).</p>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="t6-q5">5. Расплывание волнового пакета</h2>
+            <div class="card">
+                <p>Если учесть в разложении $\omega(k)$ квадратичные члены по $k$, то обнаружится фундаментальное квантовое явление — <span class="highlight-secondary">расплывание волнового пакета</span>.</p>
+                <p>Причина расплывания состоит в том, что разные $k$-компоненты пакета распространяются с разной фазовой скоростью ($v_{ph} \sim k$). Компоненты с большим импульсом убегают вперед, а с меньшим — отстают. Это приводит к размазыванию пакета в пространстве с течением времени.</p>
+                
+                <h3>Закон расплывания гауссова пакета</h3>
+                <p>Пусть в $t=0$ пакет имеет форму гауссианы с дисперсией $\sigma_0^2$. (Пакет минимизирует соотношение неопределенностей $\Delta x(0) \Delta p = \hbar/2$, где $\Delta x(0) = \sigma_0$).</p>
+                <p>При точном интегрировании ширина пакета (дисперсия $\sigma(t)$) со временем растет по закону:</p>
+                <div class="math-block">
+                    $$\sigma(t) = \sigma_0 \sqrt{1 + \left( \frac{\hbar t}{2m \sigma_0^2} \right)^2} \quad \implies \quad \Delta x(t) = \Delta x(0) \sqrt{1 + \left( \frac{\hbar t}{m (\Delta x(0))^2} \right)^2}$$
+                </div>
+                <p><strong>Важные следствия:</strong></p>
+                <ol>
+                    <li>При малых временах ($t \to 0$) расплывание идет с ускорением $\sigma(t) \approx \sigma_0 + \frac{\hbar^2 t^2}{8m^2\sigma_0^3}$.</li>
+                    <li>При больших временах ($t \to \infty$) ширина растет линейно со временем: $\sigma(t) \sim \frac{\hbar}{2m\sigma_0} t$. Скорость расплывания обратно пропорциональна начальной ширине: <em>чем точнее локализована частица изначально, тем быстрее она "размажется" по пространству</em>.</li>
+                    <li>Чем больше масса частицы $m$, тем медленнее идет расплывание. (Для макроскопических тел этот эффект незаметен).</li>
+                    <li><strong>Свободная квантовая частица не может оставаться локализованной вечно.</strong> Чтобы состояние было стабильным и локализованным, частица должна находиться в потенциальной яме.</li>
+                </ol>
+            </div>
+
+            <!-- ИНТЕРАКТИВНЫЙ БЛОК: СИМУЛЯТОР РАСПЛЫВАНИЯ -->
+            <div class="visual-container">
+                <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная симуляция: Движение и расплывание Гауссова волнового пакета</h3>
+                <p style="text-align: center; font-size: 0.95rem; max-width: 800px; margin-bottom: 1rem;">
+                    Наблюдайте, как центр пакета движется с групповой скоростью $v_g \sim p_0$, а ширина огибающей $|\Psi(x,t)|^2$ постепенно расплывается из-за дисперсии. Высокочастотные осцилляции внутри пакета (реальная часть ВФ) бегут с фазовой скоростью $v_{ph} = v_g / 2$.
+                </p>
+                
+                <canvas id="packetCanvas" class="visual-canvas" width="800" height="300"></canvas>
+                
+                <div class="control-panel" style="justify-content: center; margin-top: 1rem; max-width: 800px;">
+                    <div class="control-group" style="flex-direction: column; align-items: flex-start; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border); width: 100%;">
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; width: 100%;">
+                            <label style="width: 180px;">Импульс $p_0$ (скорость):</label>
+                            <input type="range" id="p0Slider" class="slider" min="1" max="15" step="0.5" value="6">
+                            <span id="p0Val" style="width: 40px; text-align: right; color: var(--accent); font-weight: bold;">6.0</span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; width: 100%;">
+                            <label style="width: 180px;">Нач. ширина $\Delta x(0)$:</label>
+                            <input type="range" id="sigmaSlider" class="slider" min="0.5" max="3" step="0.1" value="1.0">
+                            <span id="sigmaVal" style="width: 40px; text-align: right; color: #a855f7; font-weight: bold;">1.0</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: center; width: 100%; gap: 1rem; margin-top: 0.5rem;">
+                            <button id="playPauseBtn" style="padding: 0.5rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Пауза</button>
+                            <button id="resetSimBtn" style="padding: 0.5rem 1.5rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 0.5rem; cursor: pointer;">Сброс (t=0)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- БИЛЕТ 7 -->
+<section id="ticket-7" class="ticket-section">
+    <h1>Билет 7</h1>
+    <p>Вид гамильтониана частицы в потенциальном поле. Асимптотики волновых функций. Качественный вид спектра энергии для типовых потенциалов. Туннельный эффект и надбарьерное отражение. Нулевые колебания гармонического осциллятора.</p>
+
+    <div class="card toc" style="border-color: rgba(59, 130, 246, 0.5);">
+        <h3 style="margin-bottom: 1rem; color: #60a5fa;">Оглавление (Билет 7)</h3>
+        <ol>
+            <li><a href="#t7-hamiltonian">1. Гамильтониан и асимптотики волновых функций</a></li>
+            <li><a href="#t7-spectra">2. Качественный вид спектра энергии для типовых потенциалов</a></li>
+            <li><a href="#t7-tunnel">3. Туннельный эффект и надбарьерное отражение</a></li>
+            <li><a href="#t7-oscillator">4. Нулевые колебания гармонического осциллятора</a></li>
+        </ol>
+    </div>
+
+    <!-- 1. Гамильтониан и асимптотики -->
+    <h2 id="t7-hamiltonian">1. Гамильтониан и асимптотики волновых функций</h2>
+    <div class="card">
+        <p>Гамильтониан частицы в одномерном потенциальном поле $V(x)$ имеет вид:</p>
+        <div class="math-block">
+            $$ \hat{H} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x) $$
+        </div>
+        <p>Стационарное уравнение Шредингера: $\hat{H}\psi = E\psi$. Если потенциал $V(x)$ стремится к нулю на бесконечности ($V(x) \xrightarrow{|x|\to\infty} 0$), то асимптотическое уравнение Шредингера совпадает с уравнением для свободной частицы:</p>
+        <div class="math-block">
+            $$ -\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2} = E\psi, \quad |x| \to \infty $$
+        </div>
+        
+        <p>Поведение волновой функции $\psi(x)$ на бесконечности радикально зависит от знака энергии $E$:</p>
+        
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Дискретный спектр ($E < 0$)
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>При $E < 0$ введем вещественный положительный параметр $\alpha = \sqrt{-\frac{2mE}{\hbar^2}} > 0$. Общее решение асимптотического уравнения: $\psi(x) = A e^{\alpha x} + B e^{-\alpha x}$.</p>
+                <p>Для того чтобы волновая функция описывала физически реализуемое состояние (принадлежала гильбертову пространству $L_2$, т.е. была интегрируема с квадратом), она не должна бесконечно возрастать на бесконечности. Следовательно, мы должны отбросить растущие экспоненты:</p>
+                <div class="math-block">
+                    $$ \begin{cases} \psi(x) \approx A e^{\alpha x}, & x \to -\infty \\ \psi(x) \approx B e^{-\alpha x}, & x \to +\infty \end{cases} $$
+                </div>
+                <p>Такие экспоненциально спадающие решения существуют только при определенных (дискретных) значениях энергии $E_n$. Они соответствуют <strong>связанным состояниям</strong>.</p>
+            </div>
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Сплошной спектр ($E > 0$)
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>При $E > 0$ введем вещественный волновой вектор $k = \sqrt{\frac{2mE}{\hbar^2}} > 0$. Решение асимптотического уравнения представляет собой линейную комбинацию плоских волн:</p>
+                <div class="math-block">
+                    $$ \psi(x) = C e^{ikx} + D e^{-ikx}, \quad |x| \to \infty $$
+                </div>
+                <p>Такие функции осциллируют и не спадают на бесконечности (они не интегрируемы с квадратом в строгом смысле и нормируются на дельта-функцию). Решения существуют при любом $E > 0$, формируя <strong>сплошной спектр</strong>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Спектры типовых потенциалов -->
+    <h2 id="t7-spectra">2. Качественный вид спектра энергии для типовых потенциалов</h2>
+    <div class="card">
+        
+        <h3>Потенциальная яма</h3>
+        <p>Прямоугольная потенциальная яма: $V(x) = -V_0$ при $|x| \le a$ и $V(x) = 0$ при $|x| > a$ ($V_0 > 0$).</p>
+        <ul>
+            <li><strong>Связанные состояния ($E < 0$):</strong> спектр дискретный. В яме всегда существует <em>по крайней мере одно</em> (четное) связанное состояние. Число состояний растет пропорционально ширине ямы $a$ и параметру $Q = \sqrt{\frac{2ma^2}{\hbar^2}V_0}$. Энергии четных и нечетных состояний чередуются.</li>
+            <li><strong>Свободные состояния ($E > 0$):</strong> спектр сплошной (начиная от $E=0$ и до бесконечности). Каждое значение энергии $E>0$ двукратно вырождено (волна может падать как слева, так и справа).</li>
+        </ul>
+
+        <h3>Потенциальный барьер</h3>
+        <p>Прямоугольный барьер: $V(x) = V_0$ при $|x| \le a$ и $V(x) = 0$ при $|x| > a$ ($V_0 > 0$).</p>
+        <p>Потенциал ограничен снизу нулем, следовательно, связанных состояний нет. Спектр <strong>чисто сплошной</strong> и лежит в области $E > 0$.</p>
+
+        <h3>Периодический потенциал (решетка)</h3>
+        <p>Для бесконечной одномерной периодической решетки ($V(x+a) = V(x)$) спектр также <strong>сплошной</strong>, однако он имеет <strong>зонную структуру</strong> — состоит из чередующихся разрешенных и запрещенных зон энергии. (Следствие теоремы Блоха).</p>
+
+        <h3>Гармонический осциллятор</h3>
+        <p>Потенциал $V(x) = \frac{1}{2}m\omega^2 x^2$ неограниченно растет на бесконечности. Как следствие, спектр <strong>чисто дискретный</strong>, сплошного спектра нет вообще. Энергетические уровни эквидистантны (расстояние между соседними уровнями $\hbar\omega$).</p>
+    </div>
+
+    <!-- 3. Туннельный эффект -->
+    <h2 id="t7-tunnel">3. Туннельный эффект и надбарьерное отражение</h2>
+    <div class="card">
+        <p>Рассмотрим рассеяние частицы на потенциальном барьере $V_0$. Классическая частица, имея энергию $E < V_0$, обязательно отразится, а имея энергию $E > V_0$, обязательно пройдет над барьером.</p>
+        
+        <ul>
+            <li><strong>Туннельный эффект ($E < V_0$):</strong> В квантовой механике волновая функция экспоненциально затухает, но <em>не обрывается</em> внутри барьера. Если барьер достаточно тонкий, часть амплитуды «просачивается» в область за барьером. Таким образом, частица имеет ненулевую вероятность пройти <em>сквозь</em> барьер. Коэффициент прохождения $T > 0$.</li>
+            <li><strong>Надбарьерное отражение ($E > V_0$):</strong> Если частица имеет энергию больше высоты барьера, она всё равно испытывает отражение на границах изменения потенциала. Поэтому коэффициент отражения $R > 0$ (он монотонно убывает с ростом $E$, но обращается в нуль только при определенных резонансных значениях энергии).</li>
+        </ul>
+
+        <div class="visual-container" style="margin-top: 2rem;">
+            <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная модель: Прохождение через барьер</h3>
+            <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.5rem;">
+                Наблюдайте, как амплитуда волновой функции проходит через барьер. Управляйте энергией $E$ частицы относительно высоты барьера $V_0$.
+            </p>
+            <canvas id="barrierCanvas" width="800" height="300" style="width: 100%; border-radius: 8px; background: #0f172a;"></canvas>
+            
+            <div class="controls" style="margin-top: 1rem; display: flex; gap: 1.5rem; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <label for="energySlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Энергия $E/V_0$</label>
+                    <input type="range" id="energySlider" min="0.1" max="2.0" value="0.5" step="0.05" style="width: 200px;">
+                    <span id="energyVal" style="color: #38bdf8; font-weight: bold; margin-top: 0.25rem;">0.50</span>
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: center; color: #cbd5e1; font-size: 0.9rem;">
+                    <div>Прохождение ($T$): <span id="transVal" style="color: #a3e635; font-weight: bold;">0.00</span></div>
+                    <div>Отражение ($R$): <span id="reflVal" style="color: #f87171; font-weight: bold;">1.00</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Нулевые колебания -->
+    <h2 id="t7-oscillator">4. Нулевые колебания гармонического осциллятора</h2>
+    <div class="card">
+        <p>Энергетический спектр гармонического осциллятора определяется выражением:</p>
+        <div class="math-block">
+            $$ E_n = \hbar\omega\left(n + \frac{1}{2}\right), \quad n = 0, 1, 2, \dots $$
+        </div>
+        <p>В основном (низшем) состоянии при $n=0$ энергия осциллятора не равна нулю, а составляет:</p>
+        <div class="math-block">
+            $$ E_0 = \frac{\hbar\omega}{2} $$
+        </div>
+        <p>Это значение называется энергией <strong>нулевых колебаний</strong>.</p>
+        <div class="alert">
+            <strong>Связь с принципом неопределенности:</strong> Наличие энергии нулевых колебаний — прямое следствие соотношения неопределенностей Гейзенберга $\Delta x \Delta p \ge \hbar/2$. Если бы энергия была строго равна нулю ($E=0$), то частица покоилась бы на дне ямы ($x=0$, $p=0$), что означало бы точное одновременное знание координаты ($\Delta x=0$) и импульса ($\Delta p=0$), что запрещено квантовой механикой.
+        </div>
+        <p>Волновая функция основного состояния осциллятора $\psi_0(x)$ является гауссовым пакетом. Для него произведение неопределенностей достигает своего теоретического минимума: $\Delta x \Delta p = \hbar/2$ (это минимизирующий волновой пакет).</p>
+    </div>
+</section>
+
+<!-- БИЛЕТ 8 -->
+<section id="ticket-8" class="ticket-section">
+    <h1>Билет 8</h1>
+    <p>Определение оператора углового момента. Оператор орбитального момента. Оператор спинового момента. Матрицы Паули. Спиновые функции для спина 1/2.</p>
+
+    <div class="card toc" style="border-color: rgba(168, 85, 247, 0.5);">
+        <h3 style="margin-bottom: 1rem; color: #c084fc;">Оглавление (Билет 8)</h3>
+        <ol>
+            <li><a href="#t8-angular">1. Определение оператора углового момента</a></li>
+            <li><a href="#t8-orbital">2. Оператор орбитального момента</a></li>
+            <li><a href="#t8-spin">3. Оператор спинового момента</a></li>
+            <li><a href="#t8-pauli">4. Матрицы Паули</a></li>
+            <li><a href="#t8-spin-functions">5. Спиновые функции для спина 1/2</a></li>
+        </ol>
+    </div>
+
+    <!-- 1. Оператор углового момента -->
+    <h2 id="t8-angular">1. Определение оператора углового момента</h2>
+    <div class="card">
+        <p>Оператором углового момента называется векторный (точнее псевдовекторный) оператор $\hat{\mathbf{J}} = (\hat{J}_x, \hat{J}_y, \hat{J}_z)$, компоненты которого удовлетворяют двум ключевым условиям:</p>
+        
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                1. Эрмитовость (наблюдаемость)
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Все три декартовы проекции углового момента соответствуют физически измеримым величинам, следовательно, они являются самосопряженными (эрмитовыми) операторами:</p>
+                <div class="math-block">
+                    $$ \hat{J}_x^+ = \hat{J}_x, \quad \hat{J}_y^+ = \hat{J}_y, \quad \hat{J}_z^+ = \hat{J}_z $$
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                2. Фундаментальные коммутационные соотношения
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Проекции углового момента на разные оси не коммутируют друг с другом. Это означает, что их невозможно измерить одновременно с абсолютной точностью. Их коммутаторы имеют вид:</p>
+                <div class="math-block">
+                    $$ [\hat{J}_x, \hat{J}_y] = i\hbar\hat{J}_z, \quad [\hat{J}_y, \hat{J}_z] = i\hbar\hat{J}_x, \quad [\hat{J}_z, \hat{J}_x] = i\hbar\hat{J}_y $$
+                </div>
+                <p>Через тензор Леви-Чивиты это можно записать компактно:</p>
+                <div class="math-block">
+                    $$ [\hat{J}_n, \hat{J}_k] = i\hbar \sum_{l} \varepsilon_{nkl} \hat{J}_l \quad \text{или} \quad [\hat{\mathbf{J}} \times \hat{\mathbf{J}}] = i\hbar\hat{\mathbf{J}} $$
+                </div>
+            </div>
+        </div>
+
+        <p>Квадрат оператора углового момента $\hat{J}^2 = \hat{J}_x^2 + \hat{J}_y^2 + \hat{J}_z^2$ коммутирует с любой своей проекцией (например, $[\hat{J}^2, \hat{J}_z] = 0$). Следовательно, квадрат момента и одну из его проекций (обычно выбирают ось $z$) можно измерить одновременно, и они имеют общую систему собственных функций.</p>
+    </div>
+
+    <!-- 2. Оператор орбитального момента -->
+    <h2 id="t8-orbital">2. Оператор орбитального момента</h2>
+    <div class="card">
+        <p><strong>Орбитальный угловой момент</strong> возникает в результате движения частицы в трехмерном пространстве (аналог классического момента импульса $\mathbf{L} = \mathbf{r} \times \mathbf{p}$).</p>
+        <p>В квантовой механике оператор орбитального момента $\hat{\mathbf{L}}$ вводится простой заменой классических вектора координаты $\mathbf{r}$ и импульса $\mathbf{p}$ на соответствующие им операторы $\hat{\mathbf{r}}$ и $\hat{\mathbf{p}} = -i\hbar\nabla$:</p>
+        
+        <div class="math-block">
+            $$ \hat{\mathbf{L}} = [\hat{\mathbf{r}} \times \hat{\mathbf{p}}] = -i\hbar [\mathbf{r} \times \nabla] $$
+        </div>
+
+        <p>В декартовых координатах проекции имеют дифференциальный вид:</p>
+        <div class="math-block">
+            $$ \hat{L}_x = -i\hbar\left(y\frac{\partial}{\partial z} - z\frac{\partial}{\partial y}\right) $$
+            $$ \hat{L}_y = -i\hbar\left(z\frac{\partial}{\partial x} - x\frac{\partial}{\partial z}\right) $$
+            $$ \hat{L}_z = -i\hbar\left(x\frac{\partial}{\partial y} - y\frac{\partial}{\partial x}\right) $$
+        </div>
+        
+        <div class="alert">
+            Квантовое число орбитального момента (обозначается $l$) принимает <strong>только целые</strong> неотрицательные значения $l = 0, 1, 2, \dots$. Проекция $m$ принимает $(2l+1)$ значений от $-l$ до $+l$.
+        </div>
+    </div>
+
+    <!-- 3. Оператор спинового момента -->
+    <h2 id="t8-spin">3. Оператор спинового момента</h2>
+    <div class="card">
+        <p>Из опыта Штерна-Герлаха (расщепление пучка на две части) выяснилось, что электрон обладает собственным, внутренним угловым моментом, не связанным с движением в пространстве.</p>
+        <p>Этот внутренний момент называется <strong>спином</strong> электрона. Оператор спина обозначается как $\hat{\mathbf{s}}$. Поскольку пучок расщепляется на две части, проекция спина $m_s$ может принимать ровно два значения. Число проекций связано с квантовым числом спина $s$ как $(2s + 1) = 2$, откуда вытекает, что $s = 1/2$.</p>
+        
+        <p>Проекция $m_s$ принимает значения $\pm 1/2$. Уравнения на собственные значения записываются как:</p>
+        <div class="math-block">
+            $$ \hat{s}^2 |sm_s\rangle = \hbar^2 s(s+1) |sm_s\rangle = \frac{3}{4}\hbar^2 |sm_s\rangle $$
+            $$ \hat{s}_z |sm_s\rangle = \hbar m_s |sm_s\rangle $$
+        </div>
+        <p>Поскольку проекция имеет только два значения, оператор спина для $s=1/2$ действует в строго <strong>двумерном гильбертовом пространстве</strong>. В таком пространстве операторы представляются матрицами размера $2 \times 2$.</p>
+    </div>
+
+    <!-- 4. Матрицы Паули -->
+    <h2 id="t8-pauli">4. Матрицы Паули</h2>
+    <div class="card">
+        <p>Операторы проекций спина удобно выражать через безразмерные матрицы $2 \times 2$, называемые <strong>матрицами Паули</strong> ($\sigma_x, \sigma_y, \sigma_z$):</p>
+        <div class="math-block">
+            $$ \hat{s}_x = \frac{\hbar}{2}\sigma_x, \quad \hat{s}_y = \frac{\hbar}{2}\sigma_y, \quad \hat{s}_z = \frac{\hbar}{2}\sigma_z $$
+        </div>
+
+        <h3>Явный вид матриц Паули</h3>
+        <p>В стандартном (z-базисе) матрицы имеют вид:</p>
+        <div class="math-block">
+            $$ \sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad \sigma_y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \quad \sigma_z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} $$
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Ключевые свойства матриц Паули
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <ul>
+                    <li><strong>Эрмитовость:</strong> $\sigma_n^+ = \sigma_n$ ($n = x, y, z$).</li>
+                    <li><strong>Нулевой след:</strong> $\text{Tr}(\sigma_n) = 0$. (сумма диагональных элементов равна нулю).</li>
+                    <li><strong>Собственные числа:</strong> равны $\pm 1$.</li>
+                    <li><strong>Квадраты матриц:</strong> квадрат каждой матрицы дает единичную матрицу: $\sigma_x^2 = \sigma_y^2 = \sigma_z^2 = I$.</li>
+                    <li><strong>Коммутационные соотношения:</strong> $[\sigma_x, \sigma_y] = 2i\sigma_z$ (циклично переставляются). Обратите внимание на коэффициент 2, он появляется из-за того, что $\hat{\mathbf{s}} = \hbar/2 \vec{\sigma}$.</li>
+                    <li><strong>Антикоммутация:</strong> разные матрицы антикоммутируют: $\{\sigma_x, \sigma_y\} = \sigma_x\sigma_y + \sigma_y\sigma_x = 0$.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Спиновые функции -->
+    <h2 id="t8-spin-functions">5. Спиновые функции для спина 1/2</h2>
+    <div class="card">
+        <p>Поскольку пространство двумерно, состояния спина задаются двухкомпонентными векторами-столбцами (<strong>спинорами</strong>). Базисными функциями служат собственные векторы оператора $\hat{s}_z$:</p>
+        
+        <div class="math-block">
+            $$ \chi_{1/2} = \alpha = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \quad \text{— состояние со спином "вверх" } (\uparrow) $$
+            $$ \chi_{-1/2} = \beta = \begin{pmatrix} 0 \\ 1 \end{pmatrix} \quad \text{— состояние со спином "вниз" } (\downarrow) $$
+        </div>
+
+        <p>Эти функции ортонормированы:</p>
+        <div class="math-block">
+            $$ \alpha^+\alpha = \begin{pmatrix} 1 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = 1, \quad \alpha^+\beta = 0, \quad \beta^+\beta = 1 $$
+        </div>
+
+        <p>Произвольное спиновое состояние является линейной суперпозицией этих базисных векторов: $|\chi\rangle = c_1 \alpha + c_2 \beta = \begin{pmatrix} c_1 \\ c_2 \end{pmatrix}$, где $|c_1|^2 + |c_2|^2 = 1$.</p>
+        
+        <p>Полная волновая функция частицы со спином $\psi(\mathbf{r}, \sigma)$ зависит и от пространственных, и от спиновых координат, и записывается как двухкомпонентный спинор:</p>
+        <div class="math-block">
+            $$ \psi = \begin{pmatrix} \psi_1(\mathbf{r}) \\ \psi_2(\mathbf{r}) \end{pmatrix} = \psi_1(\mathbf{r})\alpha + \psi_2(\mathbf{r})\beta $$
+        </div>
+
+        <div class="visual-container" style="margin-top: 2rem;">
+            <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная модель: Сфера Блоха и квантовый спин</h3>
+            <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.5rem;">
+                Состояние двухуровневой системы (спин $1/2$) удобно изображать вектором на поверхности единичной сферы. Управляйте углами $\theta$ и $\phi$, чтобы задать суперпозицию, и наблюдайте за вероятностями измерения спина вдоль осей $X, Y, Z$.
+            </p>
+            <canvas id="blochCanvas" width="600" height="400" style="width: 100%; max-width: 600px; display: block; margin: 0 auto; border-radius: 8px; background: #0f172a; cursor: grab;"></canvas>
+            
+            <div class="controls" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; justify-content: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                <div style="display: flex; flex-direction: column; align-items: center; min-width: 150px;">
+                    <label for="thetaSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Полярный угол $\theta$ (0 до $\pi$)</label>
+                    <input type="range" id="thetaSlider" min="0" max="3.14159" value="0.785" step="0.01" style="width: 100%;">
+                    <span id="thetaVal" style="color: #c084fc; font-weight: bold; margin-top: 0.25rem;">0.79</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; min-width: 150px;">
+                    <label for="phiSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Азимут $\phi$ (0 до $2\pi$)</label>
+                    <input type="range" id="phiSlider" min="0" max="6.28318" value="0.0" step="0.01" style="width: 100%;">
+                    <span id="phiVal" style="color: #c084fc; font-weight: bold; margin-top: 0.25rem;">0.00</span>
+                </div>
+                <div style="display: flex; flex-direction: column; color: #cbd5e1; font-size: 0.9rem; background: rgba(0,0,0,0.3); padding: 0.5rem 1rem; border-radius: 6px;">
+                    <strong style="color: #f1f5f9; margin-bottom: 0.25rem;">Вероятности измерения $s_n=+\hbar/2$:</strong>
+                    <div>Ось Z (вверх): <span id="probZ" style="color: #4ade80; font-weight: bold;">0.00</span>%</div>
+                    <div>Ось X: <span id="probX" style="color: #60a5fa; font-weight: bold;">0.00</span>%</div>
+                    <div>Ось Y: <span id="probY" style="color: #f472b6; font-weight: bold;">0.00</span>%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- БИЛЕТ 9 -->
+<section id="ticket-9" class="ticket-section">
+    <h1>Билет 9</h1>
+    <p>Волновые функции центрального поля. Собственные функции операторов $\hat{L}^2$ и $\hat{L}_z$. Радиальное уравнение Шредингера. Асимптотики радиальных функции в нуле и на бесконечности. Спектр энергий атома водорода. Вырождение уровней энергии частицы в центральном поле. Число узлов радиальной волновой функции.</p>
+
+    <div class="card toc" style="border-color: rgba(168, 85, 247, 0.5);">
+        <h3 style="margin-bottom: 1rem; color: #c084fc;">Оглавление (Билет 9)</h3>
+        <ol>
+            <li><a href="#t9-central">1. Волновые функции центрального поля</a></li>
+            <li><a href="#t9-eigen">2. Собственные функции операторов $\hat{L}^2$ и $\hat{L}_z$</a></li>
+            <li><a href="#t9-radial">3. Радиальное уравнение Шредингера</a></li>
+            <li><a href="#t9-asymp">4. Асимптотики радиальных функций в нуле и на бесконечности</a></li>
+            <li><a href="#t9-spectrum">5. Спектр энергий атома водорода</a></li>
+            <li><a href="#t9-degen">6. Вырождение уровней энергии</a></li>
+            <li><a href="#t9-nodes">7. Число узлов радиальной волновой функции</a></li>
+        </ol>
+    </div>
+
+    <!-- 1. Волновые функции центрального поля -->
+    <h2 id="t9-central">1. Волновые функции центрального поля</h2>
+    <div class="card">
+        <p>Центральное поле характеризуется потенциальной энергией, зависящей только от расстояния $r$ до центра: $V = V(r)$. В таком поле гамильтониан $\hat{H}$ коммутирует с оператором квадрата момента $\hat{L}^2$ и его проекцией $\hat{L}_z$.</p>
+        <p>Следовательно, существует общая система собственных функций для этих трех наблюдаемых. Это позволяет разделить переменные (сферические координаты $r, \theta, \phi$) и искать волновую функцию в виде произведения радиальной части и угловой:</p>
+        <div class="math-block">
+            $$ \psi_{Elm}(r, \theta, \phi) = R_{El}(r) Y_{lm}(\theta, \phi) = \frac{P_{El}(r)}{r} Y_{lm}(\theta, \phi) $$
+        </div>
+        <p>Где функция $P_{El}(r)$ удобнее для расчетов, так как интеграл нормировки для нее приобретает простой вид $\int_0^\infty |P_{El}(r)|^2 dr = 1$.</p>
+    </div>
+
+    <!-- 2. Собственные функции L^2 и L_z -->
+    <h2 id="t9-eigen">2. Собственные функции операторов $\hat{L}^2$ и $\hat{L}_z$</h2>
+    <div class="card">
+        <p>Угловая часть волновой функции, $Y_{lm}(\theta, \phi)$, представляет собой <strong>сферические гармоники</strong>. Они являются собственными функциями операторов $\hat{L}^2$ и $\hat{L}_z$:</p>
+        <div class="math-block">
+            $$ \hat{L}^2 Y_{lm}(\theta, \phi) = \hbar^2 l(l+1) Y_{lm}(\theta, \phi) $$
+            $$ \hat{L}_z Y_{lm}(\theta, \phi) = \hbar m Y_{lm}(\theta, \phi) $$
+        </div>
+        <p>Сферические гармоники образуют полную ортонормированную систему функций на сфере.</p>
+    </div>
+
+    <!-- 3. Радиальное уравнение Шредингера -->
+    <h2 id="t9-radial">3. Радиальное уравнение Шредингера</h2>
+    <div class="card">
+        <p>После подстановки $\psi_{Elm}$ в уравнение Шредингера и сокращения угловых частей, для функции $P_{El}(r)$ получается эффективное одномерное уравнение на полуинтервале $r \in [0, \infty)$:</p>
+        <div class="math-block">
+            $$ \left[ -\frac{\hbar^2}{2m}\frac{d^2}{dr^2} + \frac{\hbar^2 l(l+1)}{2mr^2} + V(r) \right] P_{El}(r) = E P_{El}(r) $$
+        </div>
+        <div class="alert">
+            Обратите внимание на слагаемое $\frac{\hbar^2 l(l+1)}{2mr^2}$. Это так называемый <strong>центробежный потенциал</strong>. Физически он "отталкивает" частицу от центра при $l > 0$, не давая ей "упасть" на ядро. Для s-состояний ($l=0$) он равен нулю.
+        </div>
+    </div>
+
+    <!-- 4. Асимптотики -->
+    <h2 id="t9-asymp">4. Асимптотики радиальных функций в нуле и на бесконечности</h2>
+    <div class="card">
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Асимптотика в нуле ($r \to 0$)
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>При малых $r$ уравнение доминируется центробежным членом (если $V(r)$ растет не быстрее $1/r$). Уравнение сводится к $P'' = \frac{l(l+1)}{r^2} P$.</p>
+                <p>Ищем решение в виде $P \sim r^\gamma$. Корни характеристического уравнения дают $\gamma = l+1$ и $\gamma = -l$. Второе решение $r^{-l}$ не удовлетворяет условию нормировки (не интегрируемо с квадратом в нуле, а при $l=0$ приводит к возникновению дельта-функции при действии лапласиана). Поэтому остается только регулярное решение:</p>
+                <div class="math-block">
+                    $$ P_{El}(r) \sim r^{l+1} \quad \Rightarrow \quad R_{El}(r) \sim r^l \quad (r \to 0) $$
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Асимптотика на бесконечности ($r \to \infty$)
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>При $r \to \infty$ потенциалы $V(r)$ и центробежный член стремятся к нулю. Уравнение принимает вид свободной частицы $P'' = -\frac{2mE}{\hbar^2} P$.</p>
+                <ul>
+                    <li><strong>Дискретный спектр ($E < 0$):</strong> Вводим вещественное $\alpha = \sqrt{-2mE}/\hbar$. Решения $e^{-\alpha r}$ и $e^{\alpha r}$. Из условия нормируемости физический смысл имеет только убывающая экспонента: $P(r) \sim e^{-\alpha r}$.</li>
+                    <li><strong>Сплошной спектр ($E > 0$):</strong> Вводим $k = \sqrt{2mE}/\hbar$. Решение имеет вид осциллирующих функций $P(r) \sim C_1 e^{ikr} + C_2 e^{-ikr}$.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Спектр атома водорода -->
+    <h2 id="t9-spectrum">5. Спектр энергий атома водорода</h2>
+    <div class="card">
+        <p>Для атома водорода $V(r) = -Z e^2 / r$. Решение ищется в виде $P(r) = r^{l+1} e^{-\alpha r} f(r)$, где $f(r)$ раскладывается в степенной ряд.</p>
+        <p>Чтобы функция на бесконечности не расходилась как $e^{+\alpha r}$, гипергеометрический ряд для $f(r)$ должен оборваться на некотором члене (стать полиномом). Это условие обрыва дает <strong>квантование энергии</strong>:</p>
+        <div class="math-block">
+            $$ n_r + l + 1 = \frac{Z}{\alpha a_0} \equiv n $$
+        </div>
+        <p>Где $n_r$ — целое неотрицательное число (степень полинома), а $n$ — главное квантовое число. Отсюда следует спектр атома водорода (формула Бальмера):</p>
+        <div class="math-block">
+            $$ E_n = - \frac{m Z^2 e^4}{2 \hbar^2 n^2} \quad (n = 1, 2, 3, \dots) $$
+        </div>
+    </div>
+
+    <!-- 6. Вырождение -->
+    <h2 id="t9-degen">6. Вырождение уровней энергии</h2>
+    <div class="card">
+        <p>Энергия $E_n$ зависит <strong>только от главного квантового числа $n$</strong>.</p>
+        <ul>
+            <li><strong>Вырождение по $m$:</strong> Для каждого заданного $l$, магнитное число $m$ пробегает значения от $-l$ до $l$ (всего $2l+1$ состояний). Это вырождение имеет место в <em>любом</em> центральном поле из-за симметрии относительно вращений.</li>
+            <li><strong>Вырождение по $l$:</strong> Для заданного $n$, орбитальное число $l$ может принимать значения $l = 0, 1, \dots, n-1$. Энергия от $l$ не зависит. Это называется <em>случайным (специфическим) вырождением</em>, характерным именно для кулоновского поля (имеет скрытую $O(4)$ симметрию).</li>
+        </ul>
+        <p>Полная кратность вырождения $n$-го уровня:</p>
+        <div class="math-block">
+            $$ \sum_{l=0}^{n-1} (2l+1) = n^2 $$
+        </div>
+    </div>
+
+    <!-- 7. Число узлов -->
+    <h2 id="t9-nodes">7. Число узлов радиальной волновой функции</h2>
+    <div class="card">
+        <p>Радиальное квантовое число $n_r = n - l - 1$ имеет глубокий физический смысл: <strong>оно в точности равно количеству узлов</strong> (пересечений с нулем) функции $P_{nl}(r)$ на интервале $(0, \infty)$, не считая границ интервала $r=0$ и $r=\infty$.</p>
+        <p>Чем больше узлов имеет функция, тем "сильнее она осциллирует" и тем выше её радиальная кинетическая энергия.</p>
+
+        <div class="visual-container" style="margin-top: 2rem;">
+            <h3 style="color: #f1f5f9; margin-bottom: 0.5rem;">Интерактивная модель: Плотность радиального распределения $P_{nl}^2(r)$</h3>
+            <p style="font-size: 0.9rem; text-align: center; margin-bottom: 1rem;">
+                График показывает вероятность найти электрон атома водорода на расстоянии $r$ от ядра. Выбирайте $n$ и $l$, чтобы увидеть узлы (точки, где $P^2 = 0$). Обратите внимание, что число узлов всегда равно $n - l - 1$.
+            </p>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 1rem;">
+                <select id="nSelect" style="background: #1e293b; color: #f1f5f9; border: 1px solid #475569; padding: 0.5rem; border-radius: 4px;">
+                    <option value="1">n = 1</option>
+                    <option value="2">n = 2</option>
+                    <option value="3" selected>n = 3</option>
+                    <option value="4">n = 4</option>
+                </select>
+                <select id="lSelect" style="background: #1e293b; color: #f1f5f9; border: 1px solid #475569; padding: 0.5rem; border-radius: 4px;">
+                    <option value="0">l = 0 (s)</option>
+                    <option value="1" selected>l = 1 (p)</option>
+                    <option value="2">l = 2 (d)</option>
+                </select>
+            </div>
+
+            <canvas id="radialCanvas" width="600" height="300" style="width: 100%; max-width: 600px; display: block; margin: 0 auto; border-radius: 8px; background: #0f172a;"></canvas>
+            
+            <div style="text-align: center; margin-top: 1rem; font-size: 0.95rem; color: #94a3b8;">
+                Число узлов ($n_r = n - l - 1$): <strong id="nodesCount" style="color: #f472b6; font-size: 1.2rem;">1</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/canvases.js"></script>
+</body>
+</html>

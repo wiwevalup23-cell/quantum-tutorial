@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квантминимум | Билеты 1-3</title>
+
+    <!-- Подключаем локальный KaTeX для автономной работы без интернета -->
+    <link rel="stylesheet" href="katex/katex.min.css">
+    <script defer src="katex/katex.min.js"></script>
+    <script defer src="katex/contrib/auto-render.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false,
+                trust: true,
+                strict: false
+            });
+        });
+    </script>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    
+    <nav class="sidebar">
+        <div class="logo">Квант. минимум</div>
+        <button class="nav-btn active" onclick="showTicket(1)">Билет 1. Пространства и операторы</button>
+        <button class="nav-btn" onclick="showTicket(2)">Билет 2. Операторы физических величин</button>
+        <button class="nav-btn" onclick="showTicket(3)">Билет 3. Состояния и измерения</button>
+        <button class="nav-btn" onclick="showTicket(4)">Билет 4. Соотношение неопределенности</button>
+        <button class="nav-btn" onclick="showTicket(5)">Билет 5. Уравнения Шредингера и Эренфеста</button>
+        <button class="nav-btn" onclick="showTicket(6)">Билет 6. Движение свободной частицы</button>
+        <button class="nav-btn" onclick="showTicket(7)">Билет 7. Типовые потенциалы и квантовые эффекты</button>
+        <button class="nav-btn" onclick="showTicket(8)">Билет 8. Угловой момент, спин и матрицы Паули</button>
+        <button class="nav-btn" onclick="showTicket(9)">Билет 9. Волновые функции центрального поля</button>
+        <button class="nav-btn" onclick="showTicket(10)">Билет 10. Уравнение Дирака</button>
+        <button class="nav-btn" onclick="showTicket(11)">Билет 11. Теория возмущений и вариационный принцип</button>
+        <button class="nav-btn" onclick="showTicket(12)">Билет 12. Излучение и поглощение. Дипольное приближение</button>
+    </nav>
+
+    <main class="content">
+        <!-- TICKETS_CONTENT -->
+    </main>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/canvases.js"></script>
+</body>
+</html>

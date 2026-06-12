@@ -1,0 +1,386 @@
+        <!-- БИЛЕТ 1 -->
+        <section id="ticket-1" class="ticket-section active">
+            <h1>Билет 1</h1>
+            <p>Фундаментальные основы квантовой механики: от гильбертова пространства до классификации спектров.</p>
+
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.5);">
+                <h3 style="margin-bottom: 1rem; color: #60a5fa;">Структура билета (7 вопросов):</h3>
+                <ol>
+                    <li><a href="#q1">Определение гильбертова пространства и линейного оператора в гильбертовом пространстве.</a></li>
+                    <li><a href="#q2">Определение суммы, произведения, коммутатора и антикоммутатора операторов.</a></li>
+                    <li><a href="#q3">Определение обратного, эрмитово сопряженного, унитарного, эрмитового (самосопряженного) и антиэрмитового операторов.</a></li>
+                    <li><a href="#q4">Спектры эрмитового и унитарного операторов.</a></li>
+                    <li><a href="#q5">Свойства собственных функций и собственных значений эрмитового оператора.</a></li>
+                    <li><a href="#q6">Разложение функций по спектру самосопряженного оператора.</a></li>
+                    <li><a href="#q7">Определение дельта-функции Дирака.</a></li>
+                </ol>
+            </div>
+
+            <!-- QUESTION 1 -->
+            <h2 id="q1">1. Определение гильбертова пространства и линейного оператора</h2>
+            <div class="card">
+                <h3>Гильбертово пространство $\mathcal{H}$</h3>
+                <p>Это линейное векторное пространство над полем комплексных чисел $\mathbb{C}$, удовлетворяющее требованиям:</p>
+                <div class="alert" style="background: rgba(147, 197, 253, 0.1); border-left-color: #93c5fd; padding: 0.75rem 1rem;">
+                    <strong>Нотация Дирака (Бра и Кет векторы):</strong> В квантовой механике векторы состояний обозначаются как <strong>кет-векторы</strong> $| \psi \rangle$ (векторы-столбцы). Элементы сопряженного пространства (линейные функционалы) называются <strong>бра-векторами</strong> $\langle \phi |$ (векторы-строки). Скалярное произведение записывается как "скобка" (bracket): $\langle \phi | \psi \rangle$.
+                </div>
+                <ul>
+                    <li><span class="highlight">Введено скалярное произведение</span> $\langle x | y \rangle = (y,x)$. Из него следует неравенство Коши-Буняковского: $|\langle x | y \rangle| \le ||x||\cdot||y||$.</li>
+                    <li><span class="highlight">Бесконечномерность</span> (не существует конечного базиса).</li>
+                    <li><span class="highlight">Полнота:</span> всякая фундаментальная последовательность сходится к элементу этого же пространства (нет "дыр", пределы лежат в $\mathcal{H}$).</li>
+                    <li><span class="highlight">Сепарабельность:</span> существует счетное множество векторов, образующее всюду плотное множество (существует счетный базис).</li>
+                </ul>
+
+                <h3>Линейный оператор</h3>
+                <p>Отображение $\hat{L}$, которое каждому вектору $f$ из своей области определения $D(\hat{L}) \subset \mathcal{H}$ однозначно сопоставляет вектор $g \in \mathcal{H}$, и удовлетворяет условию линейности:</p>
+                <div class="math-block">
+                    $$\hat{L}(c_1 f + c_2 g) = c_1 \hat{L}f + c_2 \hat{L}g$$
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <h2 id="q2">2. Определение суммы, произведения, коммутатора и антикоммутатора</h2>
+            <div class="card">
+                <p>Бинарные операции в множестве операторов:</p>
+                <ul>
+                    <li><strong>Сумма:</strong> $\hat{C} = \hat{A} + \hat{B}$, если $\hat{C}f = \hat{A}f + \hat{B}f$.</li>
+                    <li><strong>Произведение:</strong> $\hat{C} = \hat{A}\hat{B}$, если $\hat{C}f = \hat{A}(\hat{B}f)$ (последовательное действие).</li>
+                    <li><strong>Коммутатор:</strong> $[\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}$. Операторы коммутируют, если $[\hat{A}, \hat{B}] = 0$.</li>
+                    <li><strong>Антикоммутатор:</strong> $\{\hat{A}, \hat{B}\} = [\hat{A}, \hat{B}]_+ = \hat{A}\hat{B} + \hat{B}\hat{A}$.</li>
+                </ul>
+                <div class="alert" style="background: rgba(192, 132, 252, 0.1); border-left-color: #c084fc; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Коммутирующие операторы и общий ОНБ:</strong> Если два эрмитовых оператора коммутируют ($[\hat{A}, \hat{B}] = 0$), то они обладают <strong>общей ортонормированной системой (ОНБ) собственных функций</strong>. С физической точки зрения это означает, что соответствующие им физические величины можно точно и одновременно измерить в одном состоянии.
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <h2 id="q3">3. Виды операторов (Строгая классификация)</h2>
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Обратный и Эрмитово сопряженный
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Обратный:</strong> $\hat{L}^{-1}$ существует, если отображение взаимно-однозначно (ядро пустое). $\hat{L}\hat{L}^{-1} = \hat{L}^{-1}\hat{L} = \hat{I}$.</p>
+                    <p><strong>Эрмитово сопряженный $\hat{L}^\dagger$:</strong> определяется интегральным тождеством $\langle \hat{L}^\dagger f | g \rangle = \langle f | \hat{L} g \rangle$.</p>
+                </div>
+            </div>
+
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Эрмитов vs Самосопряженный (Критично!)
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="alert">
+                        <strong>Эрмитов (Симметричный) оператор:</strong>
+                        Выполняется соотношение $\langle \hat{L} f | g \rangle = \langle f | \hat{L} g \rangle$ на области $D(\hat{L})$. При этом область определения сопряженного может быть шире: $D(\hat{L}) \subseteq D(\hat{L}^\dagger)$.
+                    </div>
+                    <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-color: #10b981; color: #e2e8f0;">
+                        <strong>Самосопряженный оператор:</strong>
+                        Оператор строго совпадает со своим сопряженным: $\hat{L} = \hat{L}^\dagger$, и их <strong>области определения совпадают</strong>: $D(\hat{L}) = D(\hat{L}^\dagger)$. Только они являются физическими наблюдаемыми!
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Антиэрмитов и Унитарный
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Антиэрмитов:</strong> $\hat{L}^\dagger = -\hat{L}$. (Пример: оператор $\frac{d}{dx}$ без множителя $i$).</p>
+                    <p><strong>Унитарный:</strong> $\hat{U}^\dagger \hat{U} = \hat{U} \hat{U}^\dagger = \hat{I}$ (т.е. $\hat{U}^\dagger = \hat{U}^{-1}$). Сохраняет скалярное произведение векторов $\langle \hat{U}f | \hat{U}g \rangle = \langle f | g \rangle$.</p>
+                </div>
+            </div>
+
+
+            <!-- QUESTION 4 -->
+            <h2 id="q4">4. Спектры эрмитового и унитарного операторов</h2>
+
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <h3>Суть задачи: что мы ищем и зачем?</h3>
+                <p><strong>Физическая постановка:</strong> В квантовой механике результаты измерения физической величины $L$ (например, энергии, импульса или координаты) являются случайными величинами. Но спектр возможных значений, которые мы вообще <em>можем</em> получить на приборе, фиксирован и определяется оператором $\hat{L}$. Наша цель — найти эти возможные значения.</p>
+                <p><strong>Математическая модель:</strong> Возможные результаты измерения соответствуют собственным значениям $\lambda$ оператора $\hat{L}$. Это приводит к уравнению на собственные значения и собственные векторы (функции) $f \neq 0$:</p>
+                <div class="math-block">
+                    $$\hat{L} f = \lambda f$$
+                </div>
+                <p><strong>Откуда берется оператор $(\hat{L} - \lambda\hat{I})$?</strong></p>
+                <p>Мы переносим всё в одну сторону и выносим вектор за скобки. Так как $\lambda$ — это число, а $\hat{L}$ — оператор, для корректности мы умножаем число $\lambda$ на единичный оператор $\hat{I}$:</p>
+                <div class="math-block">
+                    $$\hat{L} f - \lambda \hat{I} f = 0 \implies (\hat{L} - \lambda\hat{I}) f = 0$$
+                </div>
+                <p>Таким образом, поиск дискретных собственных значений сводится к нахождению таких $\lambda$, при которых оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ имеет нетривиальное (ненулевое) ядро $\ker(\hat{L}_\lambda) \neq \{0\}$.</p>
+                
+                <p><strong>Что такое спектр на самом деле?</strong></p>
+                <p>В бесконечномерных пространствах ситуация сложнее, чем в матричной алгебре (где либо есть нетривиальное решение, либо оператор полностью обратим). Здесь оператор обратной задачи — так называемая <span class="highlight">резольвента</span> $\hat{R}_\lambda = (\hat{L} - \lambda\hat{I})^{-1}$ — может ломаться тремя разными способами. Набор всех "плохих" точек $\lambda$, где резольвента $\hat{R}_\lambda$ не существует как взаимно-однозначный ограниченный оператор, определенный на всем $\mathcal{H}$, и называется <strong>спектром</strong> $\sigma(\hat{L})$:</p>
+                <ul>
+                    <li><span class="highlight">Точечный спектр ($\sigma_p$)</span>: Резольвента не существует, так как оператор склеивает векторы ($\ker \neq \{0\}$). Это дает классические <em>дискретные уровни</em> (например, уровни энергии в атоме водорода).</li>
+                    <li><span class="highlight">Непрерывный спектр ($\sigma_c$)</span>: Резольвента существует ($\ker = \{0\}$), ее область определения плотна, но она <em>не ограничена</em>. Физически это соответствует <em>состояниям рассеяния</em> (например, свободное движение частицы, где энергия может быть любой). Собственные функции непрерывного спектра (плоские волны) "не влезают" в гильбертово пространство $L_2$, так как не нормируются на единицу.</li>
+                    <li><span class="highlight">Остаточный спектр ($\sigma_r$)</span>: Резольвента существует, но ее образ не всюду плотен в $\mathcal{H}$. Это математическая патология, которая <strong>отсутствует у физических (самосопряженных) операторов</strong>, что гарантирует чистоту спектрального разложения.</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Понятия Ядра (Ker) и Образа (Ran)</h3>
+                <p>Для понимания спектра нужно знать две важнейшие характеристики оператора $\hat{A}$:</p>
+                <ul>
+                    <li><span class="highlight">Ядро $\ker(\hat{A})$</span>: множество всех векторов, которые оператор обнуляет ($\hat{A}f = 0$). Если ядро не пустое (содержит не только нуль), оператор "склеивает" векторы и необратим.</li>
+                    <li><span class="highlight">Образ $\text{Ran}(\hat{A})$</span>: множество всех возможных значений на выходе оператора ($\{g \in \mathcal{H} \mid g = \hat{A}f\}$). Если образ не покрывает всё гильбертово пространство, оператор не "дотягивается" до некоторых векторов.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Алгоритм классификации точек спектра $\sigma(\hat{L})$</h3>
+                <p>Исследуем оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ для классификации любой точки $\lambda \in \mathbb{C}$:</p>
+                
+                <!-- CSS Flowchart -->
+                <div class="flow-container">
+                    <div class="flow-box">
+                        Выбираем точку $\lambda \in \mathbb{C}$
+                    </div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box decision">
+                        Шаг 1: Анализируем Ядро<br>
+                        $\ker(\hat{L} - \lambda\hat{I})$
+                    </div>
+                    <div class="flow-arrow">↓</div>
+                    
+                    <div class="flow-row">
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed;">
+                                $\ker \neq \{0\}$<br>
+                                <small>$\exists f \neq 0 : \hat{L}f = \lambda f$</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result-warn">
+                                ТОЧЕЧНЫЙ СПЕКТР<br>
+                                $\lambda \in \sigma_p$ (дискретный)
+                            </div>
+                        </div>
+                        
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed;">
+                                $\ker = \{0\}$<br>
+                                <small>Уравнение имеет лишь $f=0$</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box decision">
+                                Шаг 2: Анализируем Образ<br>
+                                $\text{Ran}(\hat{L} - \lambda\hat{I})$
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow" style="margin-left: 50%; transform: translateX(-50%);">↓</div>
+                    
+                    <div class="flow-row" style="margin-top: 1rem;">
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                <small>Резольвента $\hat{R}_\lambda$ ограничена</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result">
+                                РЕГУЛЯРНАЯ ТОЧКА<br>
+                                (Не спектр)
+                            </div>
+                        </div>
+
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                <small>Но $\hat{R}_\lambda$ не ограничена</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result-warn" style="border-color: #3b82f6; background: rgba(59,130,246,0.1);">
+                                НЕПРЕРЫВНЫЙ СПЕКТР<br>
+                                $\lambda \in \sigma_c$ (сплошной)
+                            </div>
+                        </div>
+
+                        <div class="flow-col">
+                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                $\overline{\text{Ran}} \neq \mathcal{H}$<br>
+                                <small>Образ не всюду плотен</small>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box result-err">
+                                ОСТАТОЧНЫЙ СПЕКТР<br>
+                                $\lambda \in \sigma_r$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <h2 id="q5">5. Свойства собственных функций и значений эрмитового оператора</h2>
+            <div class="card">
+                <ul>
+                    <li><strong>Вещественность:</strong> Все собственные числа $\lambda$ (весь спектр) вещественны. $\lambda = \lambda^*$.</li>
+                    <li><strong>Ортогональность:</strong> Собственные функции, отвечающие разным $\lambda$, ортогональны: $\langle \phi_m | \phi_n \rangle = 0$ при $\lambda_m \neq \lambda_n$.</li>
+                    <li><strong>Полнота:</strong> Система собственных функций самосопряженного оператора образует полный базис (базис разложения).</li>
+                    <li><strong>Унитарный оператор:</strong> Собственные числа унитарного оператора лежат на единичной окружности ($|\lambda|^2 = 1 \implies \lambda = e^{i\alpha}$).</li>
+                    <li>У эрмитовых и унитарных операторов <strong>остаточный спектр отсутствует</strong>.</li>
+                </ul>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <h2 id="q6">6. Разложение функций по спектру самосопряженного оператора</h2>
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <h3>Суть и значение разложения по спектру</h3>
+                <p><strong>Физическая концепция:</strong> Принцип суперпозиции утверждает, что любое состояние квантовой системы $|f\rangle \in \mathcal{H}$ можно представить как линейную комбинацию (суперпозицию) других квантовых состояний. Если мы выбираем в качестве этих состояний собственные функции $\phi$ физического оператора $\hat{L}$ (которые в силу самосопряженности $\hat{L}$ образуют полную систему), то коэффициенты разложения будут соответствовать <strong>амплитудам вероятности</strong> обнаружить те или иные значения измеряемой величины.</p>
+                <p>Математически это реализуется через <strong>разложение единичного оператора $\hat{I}$</strong> (разложение единицы), которое зависит от типа спектра наблюдаемой.</p>
+            </div>
+
+            <div class="card">
+                <h3>1. Чисто дискретный спектр (ЧДСП)</h3>
+                <p>Если самосопряженный оператор $\hat{L}$ обладает чисто дискретным спектром, то его собственные функции $\{\phi_k\}$ образуют в $\mathcal{H}$ полную ортонормированную систему (ОНС):</p>
+                <div class="math-block">
+                    $$\langle \phi_n | \phi_k \rangle = \delta_{n,k}$$
+                </div>
+                <p>Из свойства полноты этой системы векторов следует <strong>«разложение единицы»</strong>:</p>
+                <div class="math-block">
+                    $$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k|$$
+                </div>
+                <p>Подставляя это тождество к любому состоянию $|f\rangle \in \mathcal{H}$, получаем разложение по спектру:</p>
+                <div class="math-block">
+                    $$|f\rangle = \hat{I}|f\rangle = \sum_k |\phi_k\rangle\langle \phi_k|f\rangle = \sum_k c_k |\phi_k\rangle$$
+                </div>
+                <p>Где коэффициенты разложения (проекции вектора состояния на базис собственных функций) равны:</p>
+                <div class="math-block">
+                    $$c_k = \langle \phi_k | f\rangle \quad (\text{или в координатном виде: } c_k = \int \phi_k^*(x) f(x) dx)$$
+                </div>
+                <p>Если исходная функция нормирована на единицу ($\|f\| = 1$), то сумма квадратов модулей коэффициентов (вероятностей) равна единице (<strong>условие нормировки для ЧДСП</strong>):</p>
+                <div class="math-block">
+                    $$\|f\|^2 = \sum_k |c_k|^2 = 1$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>2. Чисто непрерывный спектр (ЧНСП)</h3>
+                <p>Если спектр $\sigma(\hat{L})$ непрерывен (например, для оператора координаты или импульса), собственные числа $\mu$ сплошь заполняют некоторый интервал $(a, b)$ или всю вещественную ось $\mathbb{R}$.</p>
+                <p>В этом случае уравнение на собственные функции $\hat{L}\psi_\mu = \mu \psi_\mu$ имеет решения, но они **не принадлежат гильбертову пространству** ($\psi_\mu \notin \mathcal{H}$), так как интеграл их нормы расходится:</p>
+                <div class="math-block">
+                    $$\|\psi_\mu\|^2 = \int_{-\infty}^{\infty} |\psi_\mu(x)|^2 dx = \infty$$
+                </div>
+                <p>Такие функции $\psi_\mu$ называют <span class="highlight">обобщенными собственными функциями</span>. Несмотря на расходимость нормы, они образуют полный непрерывный базис (в смысле обобщенных функций Дирака) с нормировкой на дельта-функцию (<strong>$\delta$-нормировка</strong>):</p>
+                <div class="math-block">
+                    $$\langle \psi_\mu | \psi_{\mu'} \rangle = \int_{-\infty}^{\infty} \psi_\mu^*(x) \psi_{\mu'}(x) dx = \delta(\mu - \mu')$$
+                </div>
+                <p>Разложение единицы для ЧНСП переходит в интеграл по спектру:</p>
+                <div class="math-block">
+                    $$\hat{I} = \int_{\sigma(\hat{L})} |\psi_\mu\rangle\langle \psi_\mu| d\mu$$
+                </div>
+                <p>Разложение любого состояния $|f\rangle \in \mathcal{H}$ записывается как:</p>
+                <div class="math-block">
+                    $$|f\rangle = \hat{I}|f\rangle = \int_{\sigma(\hat{L})} \langle \psi_\mu | f\rangle |\psi_\mu\rangle d\mu = \int_{\sigma(\hat{L})} c_\mu |\psi_\mu\rangle d\mu$$
+                </div>
+                <p>Где плотность амплитуды вероятности равна $c_\mu = \langle \psi_\mu | f\rangle$, а условие нормировки имеет вид:</p>
+                <div class="math-block">
+                    $$\int_{\sigma(\hat{L})} |c_\mu|^2 d\mu = 1$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>3. Смешанный спектр</h3>
+                <p>В реальных задачах (например, в атоме водорода, где есть дискретные связанные уровни энергии и непрерывная область ионизации) оператор $\hat{L}$ обладает смешанным спектром. Полная система состояний образуется объединением ОНС дискретного спектра $\{\phi_k\}$ и непрерывного базиса $\{\psi_\mu\}$:</p>
+                <div class="math-block">
+                    $$\langle \phi_n | \phi_k \rangle = \delta_{n, k}, \quad \langle \psi_\mu | \phi_k \rangle = 0, \quad \langle \psi_\mu | \psi_{\mu'} \rangle = \delta(\mu - \mu')$$
+                </div>
+                <p>Соответственно, разложение единицы объединяет сумму и интеграл:</p>
+                <div class="math-block">
+                    $$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k| + \int_{\sigma(\hat{L})_c} |\psi_\mu\rangle\langle\psi_\mu| d\mu$$
+                </div>
+                <p>Разложение произвольного состояния $|f\rangle$ принимает вид:</p>
+                <div class="math-block">
+                    $$|f\rangle = \sum_k c_k |\phi_k\rangle + \int_{\sigma(\hat{L})_c} c_\mu |\psi_\mu\rangle d\mu$$
+                </div>
+                <p>Где коэффициенты $c_k = \langle \phi_k | f\rangle$ и плотность амплитуд $c_\mu = \langle \psi_\mu | f\rangle$ связаны общим условием сохранения вероятности:</p>
+                <div class="math-block">
+                    $$\sum_k |c_k|^2 + \int_{\sigma(\hat{L})_c} |c_\mu|^2 d\mu = 1$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>4. Спектральное разложение оператора</h3>
+                <p>Зная разложение единицы, мы можем получить представление самого оператора $\hat{L}$ через его собственные значения и проекторы. Подействуем оператором $\hat{L}$ на произвольный вектор $|f\rangle$ (для наглядности рассмотрим ЧДСП-случай):</p>
+                <div class="math-block">
+                    $$\hat{L}|f\rangle = \hat{L}\hat{I}|f\rangle = \hat{L} \left( \sum_k |\phi_k\rangle\langle \phi_k|f\rangle \right) = \sum_k \left(\hat{L}|\phi_k\rangle\right)\langle \phi_k|f\rangle$$
+                </div>
+                <p>Используя уравнение на собственные значения $\hat{L}|\phi_k\rangle = \lambda_k |\phi_k\rangle$, получаем:</p>
+                <div class="math-block">
+                    $$\hat{L}|f\rangle = \sum_k \lambda_k |\phi_k\rangle\langle \phi_k|f\rangle$$
+                </div>
+                <p>Поскольку вектор $|f\rangle$ произвольный, мы можем исключить его из равенства и получить спектральное разложение самого оператора:</p>
+                <div class="math-block">
+                    $$\hat{L} = \sum_k \lambda_k |\phi_k\rangle\langle \phi_k| = \sum_k \lambda_k \hat{P}_k$$
+                </div>
+                <p>Где $\hat{P}_k = |\phi_k\rangle\langle \phi_k|$ — оператор проектирования на подпространство собственного состояния $\phi_k$. В случае смешанного спектра выражение принимает общий вид:</p>
+                <div class="math-block">
+                    $$\hat{L} = \sum_k \lambda_k |\phi_k\rangle\langle \phi_k| + \int_{\sigma(\hat{L})_c} \mu |\psi_\mu\rangle\langle \psi_\mu| d\mu$$
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>5. Разложение функции от оператора</h3>
+                <p>Существует <strong>два определения</strong> функции от оператора:</p>
+                
+                <p><strong>1. Через разложение в ряд Тейлора:</strong><br>
+                Пусть функция $F(x)$ раскладывается в ряд Тейлора: $F(x) = \sum_{n=0}^{\infty} c_n x^n$, где $c_n = \frac{1}{n!} \frac{d^n F}{dx^n} \Big|_{x=0}$.<br>
+                Тогда функция от оператора определяется подстановкой оператора в этот ряд:</p>
+                <div class="math-block">
+                    $$F(\hat{L}) = \sum_{n=0}^{\infty} c_n \hat{L}^n$$
+                </div>
+                
+                <p><strong>2. Через спектральное разложение:</strong><br>
+                Используя полученный аппарат спектрального разложения для самосопряженного оператора $\hat{L}$, функцию от оператора можно определить так, что она имеет те же собственные функции, а ее собственные значения равны функции от исходных собственных значений ($F(\hat{L}) |\phi_k\rangle = F(\lambda_k) |\phi_k\rangle$). Опираясь на разложение единицы, спектральное представление имеет вид:</p>
+                <div class="math-block">
+                    $$F(\hat{L}) = \sum_k F(\lambda_k) |\phi_k\rangle\langle \phi_k| + \int_{\sigma(\hat{L})_c} F(\mu) |\psi_\mu\rangle\langle \psi_\mu| d\mu$$
+                </div>
+
+                <div class="alert" style="background: rgba(16, 185, 129, 0.1); border-left-color: #10b981; margin-top: 1rem; padding: 0.75rem 1rem;">
+                    <strong>Важное свойство:</strong> При этом функция от оператора всегда <strong>коммутирует</strong> с самим оператором: $[F(\hat{L}), \hat{L}] = 0$.
+                </div>
+            </div>
+
+
+            <!-- QUESTION 7 -->
+            <h2 id="q7">7. Определение дельта-функции Дирака</h2>
+            <div class="card">
+                <p>Дельта-функция относится к классу обобщенных функций (сингулярных распределений). При непрерывном спектре функции "выпадают" из гильбертова пространства и нормируются на дельта-функцию: $\langle \lambda | \lambda' \rangle = \delta(\lambda - \lambda')$.</p>
+                
+                <p>Строгое определение — ядро единичного интегрального оператора:</p>
+                <div class="math-block">
+                    $$f(x) = \int_{-\infty}^{\infty} \delta(x - x') f(x') dx'$$
+                </div>
+                <p><strong>Свойства дельта-функции:</strong></p>
+                <ul>
+                    <li>Свойство масштабирования: $\delta(\alpha x) = \frac{1}{|\alpha|} \delta(x)$.</li>
+                    <li>Корни сложного аргумента: $\delta[\varphi(x)] = \sum_i \frac{\delta(x - x_i)}{|\varphi'(x_i)|}$.</li>
+                    <li>Производная от функции Хэвисайда: $\frac{d\theta}{dx} = \delta(x)$.</li>
+                    <li>Интегральное представление (Фурье): $\delta(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ikx} dk$.</li>
+                </ul>
+
+                <!-- Интерактивная визуализация дельта-функции -->
+                <div class="visual-container">
+                    <div class="card-title">Интерактивный симулятор: $\delta(x)$ как предел Гауссиана</div>
+                    <canvas id="deltaCanvas" class="visual-canvas" width="600" height="250"></canvas>
+                    <div class="control-panel">
+                        <div class="control-group">
+                            <label for="sigmaSlider">Ширина ($\sigma$):</label>
+                            <input type="range" id="sigmaSlider" class="slider" min="0.04" max="1.0" step="0.01" value="0.3">
+                            <span id="sigmaVal">0.30</span>
+                        </div>
+                        <div>
+                            Максимум пика: <span id="peakVal" class="highlight" style="font-weight: 600;">1.33</span>
+                        </div>
+                        <div>
+                            Площадь $\int \rho(x)dx \equiv 1.00$
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
