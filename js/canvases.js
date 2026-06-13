@@ -619,6 +619,9 @@
             initTicket10Sim();
             initTicket11Sim();
             initTicket12Sim();
+            initTicket13Sim();
+            initTicket14Sim();
+            initTicket15Sim();
         });
 
 // --- --- Визуализация тока вероятности (Билет 5) --- ---
@@ -1933,4 +1936,377 @@ function drawTicket12Frame() {
         ctx.arc(centerX, currentY, eRadius + 4 + Math.sin(t12Time) * 2, 0, Math.PI * 2);
         ctx.stroke();
     }
+}
+
+// --- --- Симуляция задачи двух тел (Билет 13) --- ---
+let t13SimRunning = false;
+let t13Canvas = null;
+let t13Ctx = null;
+let t13Time = 0;
+
+function initTicket13Sim() {
+    t13Canvas = document.getElementById('twoBodyCanvas');
+    if (!t13Canvas) return;
+    t13Ctx = t13Canvas.getContext('2d');
+    
+    const m1Slider = document.getElementById('m1Slider');
+    const m2Slider = document.getElementById('m2Slider');
+    const m1Val = document.getElementById('m1Val');
+    const m2Val = document.getElementById('m2Val');
+    const muVal = document.getElementById('muVal');
+    
+    const updateMu = () => {
+        const m1 = parseFloat(m1Slider.value);
+        const m2 = parseFloat(m2Slider.value);
+        const mu = (m1 * m2) / (m1 + m2);
+        if (m1Val) m1Val.innerText = m1;
+        if (m2Val) m2Val.innerText = m2;
+        if (muVal) muVal.innerText = mu.toFixed(2);
+    };
+    
+    if (m1Slider) m1Slider.addEventListener('input', updateMu);
+    if (m2Slider) m2Slider.addEventListener('input', updateMu);
+    
+    updateMu();
+    
+    if (!t13SimRunning) {
+        t13SimRunning = true;
+        requestAnimationFrame(t13SimLoop);
+    }
+}
+
+function t13SimLoop() {
+    if (activeTicket !== 13) {
+        t13SimRunning = false;
+        return;
+    }
+    t13Time += 0.02;
+    drawTicket13Frame();
+    requestAnimationFrame(t13SimLoop);
+}
+
+function drawTicket13Frame() {
+    if (!t13Canvas || !t13Ctx) return;
+    const ctx = t13Ctx;
+    const W = t13Canvas.width;
+    const H = t13Canvas.height;
+    
+    const m1Slider = document.getElementById('m1Slider');
+    const m2Slider = document.getElementById('m2Slider');
+    const m1 = m1Slider ? parseFloat(m1Slider.value) : 1;
+    const m2 = m2Slider ? parseFloat(m2Slider.value) : 10;
+    
+    ctx.clearRect(0, 0, W, H);
+    
+    const cx = W / 2;
+    const cy = H / 2;
+    
+    // Расстояние между частицами
+    const R = 120;
+    
+    // Расстояния от центра масс
+    const r1 = R * m2 / (m1 + m2);
+    const r2 = R * m1 / (m1 + m2);
+    
+    // Угол вращения (скорость обратно пропорциональна корню из приведенной массы для наглядности)
+    const mu = (m1 * m2) / (m1 + m2);
+    const omega = 1.5 / Math.sqrt(mu);
+    const theta = t13Time * omega;
+    
+    const x1 = cx + r1 * Math.cos(theta);
+    const y1 = cy + r1 * Math.sin(theta);
+    
+    const x2 = cx - r2 * Math.cos(theta);
+    const y2 = cy - r2 * Math.sin(theta);
+    
+    // Центр масс
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+    ctx.beginPath();
+    ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.font = '12px sans-serif';
+    ctx.fillText('ЦМ', cx - 10, cy - 10);
+    
+    // Линия связи
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    
+    // Орбиты
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.2)';
+    ctx.beginPath();
+    ctx.arc(cx, cy, r1, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    ctx.strokeStyle = 'rgba(245, 158, 11, 0.2)';
+    ctx.beginPath();
+    ctx.arc(cx, cy, r2, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    // Частица 1
+    const size1 = 5 + Math.sqrt(m1) * 1.5;
+    ctx.fillStyle = '#3b82f6';
+    ctx.beginPath();
+    ctx.arc(x1, y1, size1, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'white';
+    ctx.fillText('m1', x1 + size1 + 5, y1 + 5);
+    
+    // Частица 2
+    const size2 = 5 + Math.sqrt(m2) * 1.5;
+    ctx.fillStyle = '#f59e0b';
+    ctx.beginPath();
+    ctx.arc(x2, y2, size2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'white';
+    ctx.fillText('m2', x2 + size2 + 5, y2 + 5);
+}
+
+// --- --- Симуляция Принципа Паули (Билет 14) --- ---
+let t14Canvas = null;
+let t14Ctx = null;
+let t14ParticleType = 'fermions'; // 'fermions', 'bosons', 'distinguishable'
+let t14ImageData = null;
+
+function initTicket14Sim() {
+    t14Canvas = document.getElementById('pauliCanvas');
+    if (!t14Canvas) return;
+    t14Ctx = t14Canvas.getContext('2d');
+    
+    const btnFermions = document.getElementById('btnFermions');
+    const btnBosons = document.getElementById('btnBosons');
+    const btnDistinguishable = document.getElementById('btnDistinguishable');
+    const label = document.getElementById('particleTypeLabel');
+    
+    if (btnFermions) btnFermions.onclick = () => {
+        t14ParticleType = 'fermions';
+        if (label) { label.innerText = 'Фермионы (Фермиевская дырка на диагонали)'; label.style.color = '#3b82f6'; }
+        drawTicket14Frame();
+    };
+    if (btnBosons) btnBosons.onclick = () => {
+        t14ParticleType = 'bosons';
+        if (label) { label.innerText = 'Бозоны (Группировка на диагонали)'; label.style.color = '#10b981'; }
+        drawTicket14Frame();
+    };
+    if (btnDistinguishable) btnDistinguishable.onclick = () => {
+        t14ParticleType = 'distinguishable';
+        if (label) { label.innerText = 'Различимые частицы (Независимое распределение)'; label.style.color = '#f59e0b'; }
+        drawTicket14Frame();
+    };
+    
+    // Draw immediately, no animation loop needed for a static heatmap
+    drawTicket14Frame();
+}
+
+function drawTicket14Frame() {
+    if (!t14Canvas || !t14Ctx) return;
+    const ctx = t14Ctx;
+    const W = t14Canvas.width;
+    const H = t14Canvas.height;
+    
+    // Create ImageData if not exists
+    if (!t14ImageData || t14ImageData.width !== W || t14ImageData.height !== H) {
+        t14ImageData = ctx.createImageData(W, H);
+    }
+    const data = t14ImageData.data;
+    
+    const phi1 = (x) => Math.sin(Math.PI * x);
+    const phi2 = (x) => Math.sin(2 * Math.PI * x);
+    
+    let maxVal = 0;
+    
+    // Compute max for normalization
+    for (let py = 0; py < H; py += 10) {
+        for (let px = 0; px < W; px += 10) {
+            const x1 = px / W;
+            const x2 = 1.0 - (py / H); 
+            
+            let val = 0;
+            if (t14ParticleType === 'fermions') {
+                val = phi1(x1)*phi2(x2) - phi2(x1)*phi1(x2);
+            } else if (t14ParticleType === 'bosons') {
+                val = phi1(x1)*phi2(x2) + phi2(x1)*phi1(x2);
+            } else {
+                val = Math.SQRT2 * phi1(x1) * Math.SQRT2 * phi2(x2); 
+            }
+            
+            const p = val * val;
+            if (p > maxVal) maxVal = p;
+        }
+    }
+    
+    if (maxVal === 0) maxVal = 1;
+    
+    for (let py = 0; py < H; py++) {
+        for (let px = 0; px < W; px++) {
+            const x1 = px / W;
+            const x2 = 1.0 - (py / H);
+            
+            let val = 0;
+            if (t14ParticleType === 'fermions') {
+                val = phi1(x1)*phi2(x2) - phi2(x1)*phi1(x2);
+            } else if (t14ParticleType === 'bosons') {
+                val = phi1(x1)*phi2(x2) + phi2(x1)*phi1(x2);
+            } else {
+                val = Math.SQRT2 * phi1(x1) * Math.SQRT2 * phi2(x2);
+            }
+            
+            const prob = (val * val) / maxVal;
+            
+            const idx = (py * W + px) * 4;
+            let r, g, b;
+            if (t14ParticleType === 'fermions') {
+                r = 15 + prob * (59 - 15);
+                g = 23 + prob * (130 - 23);
+                b = 42 + prob * (246 - 42); 
+            } else if (t14ParticleType === 'bosons') {
+                r = 15 + prob * (16 - 15);
+                g = 23 + prob * (185 - 23);
+                b = 42 + prob * (129 - 42); 
+            } else {
+                r = 15 + prob * (245 - 15);
+                g = 23 + prob * (158 - 23);
+                b = 42 + prob * (11 - 42); 
+            }
+            
+            data[idx] = r;
+            data[idx+1] = g;
+            data[idx+2] = b;
+            data[idx+3] = 255;
+        }
+    }
+    
+    ctx.putImageData(t14ImageData, 0, 0);
+    
+    // Draw diagonal x1 = x2 line
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo(0, H);
+    ctx.lineTo(W, 0);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    ctx.font = '14px sans-serif';
+    ctx.fillText('x₁ = x₂', W/2 + 10, H/2 - 10);
+    
+    ctx.fillText('x₁', W - 20, H - 10);
+    ctx.fillText('x₂', 10, 20);
+}
+
+// --- --- Визуализация Сдвига Фазы (Билет 15) --- ---
+let t15Canvas = null;
+let t15Ctx = null;
+let t15PhaseShift = 0.5;
+let t15SimRunning = false;
+let t15Time = 0;
+
+function initTicket15Sim() {
+    t15Canvas = document.getElementById('phaseShiftCanvas');
+    if (!t15Canvas) return;
+    t15Ctx = t15Canvas.getContext('2d');
+    
+    const slider = document.getElementById('phaseSlider');
+    const valSpan = document.getElementById('phaseVal');
+    const sigmaSpan = document.getElementById('sigmaLVal');
+    
+    if (slider) {
+        slider.oninput = (e) => {
+            t15PhaseShift = parseFloat(e.target.value);
+            if (valSpan) valSpan.innerText = t15PhaseShift.toFixed(2);
+            if (sigmaSpan) sigmaSpan.innerText = (Math.sin(t15PhaseShift)**2 * 100).toFixed(2);
+        };
+        t15PhaseShift = parseFloat(slider.value);
+        if (sigmaSpan) sigmaSpan.innerText = (Math.sin(t15PhaseShift)**2 * 100).toFixed(2);
+    }
+    
+    if (!t15SimRunning) {
+        t15SimRunning = true;
+        requestAnimationFrame(drawTicket15Loop);
+    }
+}
+
+function drawTicket15Loop() {
+    if (!document.getElementById('phaseShiftCanvas')) {
+        t15SimRunning = false;
+        return;
+    }
+    
+    drawTicket15Frame();
+    t15Time += 0.05;
+    
+    if (t15SimRunning) {
+        requestAnimationFrame(drawTicket15Loop);
+    }
+}
+
+function drawTicket15Frame() {
+    if (!t15Canvas || !t15Ctx) return;
+    const ctx = t15Ctx;
+    const W = t15Canvas.width;
+    const H = t15Canvas.height;
+    
+    ctx.clearRect(0, 0, W, H);
+    
+    // Grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, H/2);
+    ctx.lineTo(W, H/2);
+    ctx.stroke();
+    
+    // Potential region indication (r < a)
+    ctx.fillStyle = 'rgba(59, 130, 246, 0.1)';
+    ctx.fillRect(0, 0, W * 0.2, H);
+    ctx.fillStyle = 'rgba(147, 197, 253, 0.5)';
+    ctx.font = '12px sans-serif';
+    ctx.fillText('Область действия потенциала V(r)', 10, 20);
+    
+    const k = 0.05; // wave number
+    
+    // Draw free wave (dashed)
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.setLineDash([5, 5]);
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let x = 0; x < W; x++) {
+        const y = Math.sin(k * x - t15Time);
+        const screenY = H/2 - y * (H/3);
+        if (x === 0) ctx.moveTo(x, screenY);
+        else ctx.lineTo(x, screenY);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+    
+    // Draw scattered wave (solid)
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    for (let x = 0; x < W; x++) {
+        let phase = 0;
+        // In the asymptotic region (x > W*0.2), apply phase shift
+        if (x > W * 0.2) {
+            phase = t15PhaseShift;
+        } else {
+            // inside potential, it smoothly transitions from 0 to delta
+            phase = t15PhaseShift * (x / (W * 0.2));
+        }
+        const y = Math.sin(k * x - t15Time + phase);
+        const screenY = H/2 - y * (H/3);
+        if (x === 0) ctx.moveTo(x, screenY);
+        else ctx.lineTo(x, screenY);
+    }
+    ctx.stroke();
+    
+    // Legend
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.fillText('Свободная волна (пунктир)', W - 200, 30);
+    ctx.fillStyle = '#f59e0b';
+    ctx.fillText('Рассеянная волна (сплошная)', W - 200, 50);
 }

@@ -38,4 +38,7 @@
             if (num === 10) initTicket10Sim();
             if (num === 11) initTicket11Sim();
             if (num === 12) initTicket12Sim();
+            if (num === 13) initTicket13Sim();
+            if (num === 14) initTicket14Sim();
+            if (num === 15) initTicket15Sim();
         }
