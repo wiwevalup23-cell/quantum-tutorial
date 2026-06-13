@@ -85,10 +85,21 @@
                 </ul>
 
                 <h3>Линейный оператор</h3>
-                <p>Отображение $\hat{L}$, которое каждому вектору $f$ из своей области определения $D(\hat{L}) \subset \mathcal{H}$ однозначно сопоставляет вектор $g \in \mathcal{H}$, и удовлетворяет условию линейности:</p>
-                <div class="math-block">
-                    $$\hat{L}(c_1 f + c_2 g) = c_1 \hat{L}f + c_2 \hat{L}g$$
-                </div>
+                <p>Отображение $\hat{L}$, которое каждому вектору $f$ из своей области определения $D(\hat{L}) \subset \mathcal{H}$ однозначно сопоставляет вектор $g \in \mathcal{H}$, и удовлетворяет двум условиям:</p>
+                <ol>
+                    <li>
+                        <strong>Линейное подпространство области определения:</strong> для любых $f, g \in D(\hat{L})$ и любых $c_1, c_2 \in \mathbb{C}$ линейная комбинация снова лежит в области определения:
+                        <div class="math-block">
+                            $$c_1 f + c_2 g \in D(\hat{L})$$
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Условие линейности (аддитивность и однородность):</strong>
+                        <div class="math-block">
+                            $$\hat{L}(c_1 f + c_2 g) = c_1 \hat{L}f + c_2 \hat{L}g$$
+                        </div>
+                    </li>
+                </ol>
             </div>
 
             <!-- QUESTION 2 -->
@@ -183,84 +194,89 @@
                 </ul>
             </div>
 
-            <div class="card">
-                <h3>Алгоритм классификации точек спектра $\sigma(\hat{L})$</h3>
-                <p>Исследуем оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ для классификации любой точки $\lambda \in \mathbb{C}$:</p>
-                
-                <!-- CSS Flowchart -->
-                <div class="flow-container">
-                    <div class="flow-box">
-                        Выбираем точку $\lambda \in \mathbb{C}$
-                    </div>
-                    <div class="flow-arrow">↓</div>
-                    <div class="flow-box decision">
-                        Шаг 1: Анализируем Ядро<br>
-                        $\ker(\hat{L} - \lambda\hat{I})$
-                    </div>
-                    <div class="flow-arrow">↓</div>
-                    
-                    <div class="flow-row">
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed;">
-                                $\ker \neq \{0\}$<br>
-                                <small>$\exists f \neq 0 : \hat{L}f = \lambda f$</small>
-                            </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box result-warn">
-                                ТОЧЕЧНЫЙ СПЕКТР<br>
-                                $\lambda \in \sigma_p$ (дискретный)
-                            </div>
-                        </div>
-                        
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed;">
-                                $\ker = \{0\}$<br>
-                                <small>Уравнение имеет лишь $f=0$</small>
-                            </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box decision">
-                                Шаг 2: Анализируем Образ<br>
-                                $\text{Ran}(\hat{L} - \lambda\hat{I})$
-                            </div>
-                        </div>
-                    </div>
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Алгоритм классификации точек спектра $\sigma(\hat{L})$
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p style="margin-bottom: 1rem;">Исследуем оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ для классификации любой точки $\lambda \in \mathbb{C}$:</p>
 
-                    <div class="flow-arrow" style="margin-left: 50%; transform: translateX(-50%);">↓</div>
-                    
-                    <div class="flow-row" style="margin-top: 1rem;">
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
-                                $\overline{\text{Ran}} = \mathcal{H}$<br>
-                                <small>Резольвента $\hat{R}_\lambda$ ограничена</small>
+                    <!-- CSS Flowchart -->
+                    <div class="flow-container">
+                        <div class="flow-box">
+                            Выбираем точку $\lambda \in \mathbb{C}$
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box decision">
+                            Шаг 1: Анализируем Ядро<br>
+                            $\ker(\hat{L} - \lambda\hat{I})$
+                        </div>
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-row">
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed;">
+                                    $\ker \neq \{0\}$<br>
+                                    <small>$\exists f \neq 0 : \hat{L}f = \lambda f$</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box result-warn">
+                                    ТОЧЕЧНЫЙ СПЕКТР<br>
+                                    $\lambda \in \sigma_p$ (дискретный)
+                                </div>
                             </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box result">
-                                РЕГУЛЯРНАЯ ТОЧКА<br>
-                                (Не спектр)
+
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed;">
+                                    $\ker = \{0\}$<br>
+                                    <small>Уравнение имеет лишь $f=0$</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box decision">
+                                    Шаг 2: Анализируем Образ<br>
+                                    $\text{Ran}(\hat{L} - \lambda\hat{I})$
+                                </div>
                             </div>
                         </div>
 
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
-                                $\overline{\text{Ran}} = \mathcal{H}$<br>
-                                <small>Но $\hat{R}_\lambda$ не ограничена</small>
-                            </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box result-warn" style="border-color: #3b82f6; background: rgba(59,130,246,0.1);">
-                                НЕПРЕРЫВНЫЙ СПЕКТР<br>
-                                $\lambda \in \sigma_c$ (сплошной)
-                            </div>
-                        </div>
+                        <div class="flow-arrow" style="margin-left: 50%; transform: translateX(-50%);">↓</div>
 
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
-                                $\overline{\text{Ran}} \neq \mathcal{H}$<br>
-                                <small>Образ не всюду плотен</small>
+                        <div class="flow-row" style="margin-top: 1rem;">
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                    $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                    <small>Резольвента $\hat{R}_\lambda$ ограничена</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box result">
+                                    РЕГУЛЯРНАЯ ТОЧКА<br>
+                                    (Не спектр)
+                                </div>
                             </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box result-err">
-                                ОСТАТОЧНЫЙ СПЕКТР<br>
-                                $\lambda \in \sigma_r$
+
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                    $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                    <small>Но $\hat{R}_\lambda$ не ограничена</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box result-warn" style="border-color: #3b82f6; background: rgba(59,130,246,0.1);">
+                                    НЕПРЕРЫВНЫЙ СПЕКТР<br>
+                                    $\lambda \in \sigma_c$ (сплошной)
+                                </div>
+                            </div>
+
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                    $\overline{\text{Ran}} \neq \mathcal{H}$<br>
+                                    <small>Образ не всюду плотен</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box result-err">
+                                    ОСТАТОЧНЫЙ СПЕКТР<br>
+                                    $\lambda \in \sigma_r$
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -398,6 +414,70 @@
                 </div>
             </div>
 
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Сводная таблица: типы спектров самосопряжённого оператора
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div style="overflow-x: auto;">
+                        <table style="width:100%; border-collapse: collapse; font-size: 0.9rem; color: var(--text);">
+                            <thead>
+                                <tr style="background: rgba(99,102,241,0.15);">
+                                    <th style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: left;"></th>
+                                    <th style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; color: #a78bfa;">Дискретный (ЧДСП)</th>
+                                    <th style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; color: #60a5fa;">Непрерывный (ЧНСП)</th>
+                                    <th style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; color: #34d399;">Смешанный</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(255,255,255,0.02);">
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600; white-space: nowrap;">Собственные<br>функции</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$\phi_k \in \mathcal{H}$<br><small style="opacity:0.7">(нормируемые)</small></td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$\psi_\mu \notin \mathcal{H}$<br><small style="opacity:0.7">(обобщённые, $\in \Phi'$)</small></td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$\phi_k \in \mathcal{H}$ и $\psi_\mu \notin \mathcal{H}$</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Нормировка СФ</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\langle \phi_n | \phi_k \rangle = \delta_{nk}$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\langle \psi_\mu | \psi_{\mu'} \rangle = \delta(\mu - \mu')$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\langle \phi_n | \phi_k \rangle = \delta_{nk}$$ $$\langle \psi_\mu | \psi_{\mu'} \rangle = \delta(\mu{-}\mu')$$ $$\langle \psi_\mu | \phi_k \rangle = 0$$</td>
+                                </tr>
+                                <tr style="background: rgba(255,255,255,0.02);">
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Разложение<br>единицы $\hat{I}$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k|$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\hat{I} = \int |\psi_\mu\rangle\langle \psi_\mu|\,d\mu$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k| + \int |\psi_\mu\rangle\langle \psi_\mu|\,d\mu$$</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Разложение<br>$|f\rangle \in \mathcal{H}$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$|f\rangle = \sum_k c_k |\phi_k\rangle$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$|f\rangle = \int c_\mu |\psi_\mu\rangle\,d\mu$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$|f\rangle = \sum_k c_k |\phi_k\rangle + \int c_\mu |\psi_\mu\rangle\,d\mu$$</td>
+                                </tr>
+                                <tr style="background: rgba(255,255,255,0.02);">
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Амплитуды<br>вероятности</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$c_k = \langle \phi_k | f \rangle$<br><small style="opacity:0.7">$|c_k|^2$ — вероятность $\lambda_k$</small></td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$c_\mu = \langle \psi_\mu | f \rangle$<br><small style="opacity:0.7">$|c_\mu|^2 d\mu$ — вероятность $(\mu,\mu{+}d\mu)$</small></td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$c_k = \langle \phi_k | f \rangle$<br>$c_\mu = \langle \psi_\mu | f \rangle$</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Условие<br>нормировки</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\sum_k |c_k|^2 = 1$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\int |c_\mu|^2\,d\mu = 1$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\sum_k |c_k|^2 + \int |c_\mu|^2\,d\mu = 1$$</td>
+                                </tr>
+                                <tr style="background: rgba(255,255,255,0.02);">
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Пример</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.8;">Энергия в потенциальной яме, гармонический осциллятор</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.8;">Оператор импульса $\hat{p}$ свободной частицы</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.8;">Атом водорода (связанные уровни + ионизация)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             <!-- QUESTION 7 -->
             <h2 id="q7">7. Определение дельта-функции Дирака</h2>
@@ -2188,7 +2268,45 @@
     <!-- 2. Спектры типовых потенциалов -->
     <h2 id="t7-spectra">2. Качественный вид спектра энергии для типовых потенциалов</h2>
     <div class="card">
-        
+        <div class="table-container" style="overflow-x: auto; margin-bottom: 1.5rem;">
+            <table class="classic-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+                <thead>
+                    <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); color: #60a5fa;">
+                        <th style="padding: 0.75rem;">Потенциал</th>
+                        <th style="padding: 0.75rem;">Вид $V(x)$</th>
+                        <th style="padding: 0.75rem;">Тип спектра</th>
+                        <th style="padding: 0.75rem;">Особенности</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 0.75rem; font-weight: bold;">Потенциальная яма</td>
+                        <td style="padding: 0.75rem;">$V(x) = -V_0$ при $|x| \le a$<br>$V(x) = 0$ при $|x| > a$</td>
+                        <td style="padding: 0.75rem;"><span style="color: #f472b6;">Смешанный:</span><br>• $E < 0$ — дискретный<br>• $E > 0$ — сплошной</td>
+                        <td style="padding: 0.75rem;">Всегда есть хотя бы одно связанное состояние (четное).</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 0.75rem; font-weight: bold;">Потенциальный барьер</td>
+                        <td style="padding: 0.75rem;">$V(x) = V_0$ при $|x| \le a$<br>$V(x) = 0$ при $|x| > a$</td>
+                        <td style="padding: 0.75rem;"><span style="color: #4ade80;">Чисто сплошной:</span><br>$E > 0$</td>
+                        <td style="padding: 0.75rem;">Связанных состояний нет. Туннелирование, надбарьерное отражение.</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 0.75rem; font-weight: bold;">Периодический потенциал</td>
+                        <td style="padding: 0.75rem;">$V(x + a) = V(x)$</td>
+                        <td style="padding: 0.75rem;"><span style="color: #38bdf8;">Зонный:</span><br>чередование зон</td>
+                        <td style="padding: 0.75rem;">Описывается теоремой Блоха. Квазиимпульс.</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 0.75rem; font-weight: bold;">Гармонический осциллятор</td>
+                        <td style="padding: 0.75rem;">$V(x) = \frac{1}{2}m\omega^2 x^2$</td>
+                        <td style="padding: 0.75rem;"><span style="color: #c084fc;">Чисто дискретный:</span><br>$E_n = \hbar\omega(n + 1/2)$</td>
+                        <td style="padding: 0.75rem;">Эквидистантный спектр. Энергия нулевых колебаний $E_0 \neq 0$.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <h3>Потенциальная яма</h3>
         <p>Прямоугольная потенциальная яма: $V(x) = -V_0$ при $|x| \le a$ и $V(x) = 0$ при $|x| > a$ ($V_0 > 0$).</p>
         <ul>
@@ -2196,15 +2314,81 @@
             <li><strong>Свободные состояния ($E > 0$):</strong> спектр сплошной (начиная от $E=0$ и до бесконечности). Каждое значение энергии $E>0$ двукратно вырождено (волна может падать как слева, так и справа).</li>
         </ul>
 
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Интерактивная модель: Потенциальная яма
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <canvas id="wellCanvas" width="800" height="300" style="width: 100%; border-radius: 8px; background: #0f172a; margin-top: 1rem;"></canvas>
+                <div class="controls" style="margin-top: 1rem; display: flex; gap: 1.5rem; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; flex-wrap: wrap;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <label for="wellEnergySlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Энергия $E/V_0$</label>
+                        <input type="range" id="wellEnergySlider" min="-0.99" max="2.0" value="-0.5" step="0.01" style="width: 200px;">
+                        <span id="wellEnergyVal" style="color: #38bdf8; font-weight: bold; margin-top: 0.25rem;">-0.50</span>
+                    </div>
+                    <div style="color: #cbd5e1; font-size: 0.9rem; text-align: center;">
+                        <span id="wellStateLabel" style="color: #f472b6; font-weight: bold;">Дискретный спектр (прилипание к уровням)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h3>Потенциальный барьер</h3>
         <p>Прямоугольный барьер: $V(x) = V_0$ при $|x| \le a$ и $V(x) = 0$ при $|x| > a$ ($V_0 > 0$).</p>
         <p>Потенциал ограничен снизу нулем, следовательно, связанных состояний нет. Спектр <strong>чисто сплошной</strong> и лежит в области $E > 0$.</p>
 
         <h3>Периодический потенциал (решетка)</h3>
         <p>Для бесконечной одномерной периодической решетки ($V(x+a) = V(x)$) спектр также <strong>сплошной</strong>, однако он имеет <strong>зонную структуру</strong> — состоит из чередующихся разрешенных и запрещенных зон энергии. (Следствие теоремы Блоха).</p>
+        
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Теорема Блоха и зонная структура
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p><strong>Теорема Блоха</strong> утверждает, что стационарные состояния частицы в одномерном периодическом потенциале $V(x + a) = V(x)$ описываются волновыми функциями вида:</p>
+                <div class="math-block">
+                    $$ \psi_k(x) = u_k(x) e^{ikx} $$
+                </div>
+                <p>где $u_k(x) = u_k(x+a)$ — периодическая функция с периодом решетки $a$, а $k$ — волновой вектор (квазиимпульс).</p>
+                <p><strong>Физический смысл:</strong></p>
+                <ul>
+                    <li>При сдвиге на период трансляции $a$ волновая функция приобретает лишь фазовый множитель: $\psi_k(x+a) = \psi_k(x) e^{ika}$. Вероятность обнаружить частицу $|\psi_k(x)|^2$ остается строго периодической.</li>
+                    <li>Решения уравнения Шредингера существуют только для определенных интервалов энергий, где волновой вектор $k$ вещественен. Это приводит к возникновению <strong>разрешенных зон</strong>.</li>
+                    <li>В интервалах энергий, соответствующих <strong>запрещенным зонам</strong>, волновой вектор $k$ становится комплексным ($k = \alpha + i\beta$), и волновая функция экспоненциально затухает вглубь кристалла (бегущие волны не могут распространяться).</li>
+                </ul>
+
+                <canvas id="blochWaveCanvas" width="800" height="300" style="width: 100%; border-radius: 8px; background: #0f172a; margin-top: 1.5rem;"></canvas>
+                <div class="controls" style="margin-top: 1rem; display: flex; gap: 1.5rem; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <label for="blochKSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Квазиимпульс $k \cdot a$</label>
+                        <input type="range" id="blochKSlider" min="-3.14" max="3.14" value="0" step="0.05" style="width: 200px;">
+                        <span id="blochKVal" style="color: #38bdf8; font-weight: bold; margin-top: 0.25rem;">0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <h3>Гармонический осциллятор</h3>
         <p>Потенциал $V(x) = \frac{1}{2}m\omega^2 x^2$ неограниченно растет на бесконечности. Как следствие, спектр <strong>чисто дискретный</strong>, сплошного спектра нет вообще. Энергетические уровни эквидистантны (расстояние между соседними уровнями $\hbar\omega$).</p>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Интерактивная модель: Гармонический осциллятор
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <canvas id="oscCanvas" width="800" height="300" style="width: 100%; border-radius: 8px; background: #0f172a; margin-top: 1rem;"></canvas>
+                <div class="controls" style="margin-top: 1rem; display: flex; gap: 1.5rem; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <label for="oscNSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Квантовое число $n$</label>
+                        <input type="range" id="oscNSlider" min="0" max="5" value="0" step="1" style="width: 200px;">
+                        <span id="oscNVal" style="color: #38bdf8; font-weight: bold; margin-top: 0.25rem;">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- 3. Туннельный эффект -->
@@ -2230,9 +2414,13 @@
                     <input type="range" id="energySlider" min="0.1" max="2.0" value="0.5" step="0.05" style="width: 200px;">
                     <span id="energyVal" style="color: #38bdf8; font-weight: bold; margin-top: 0.25rem;">0.50</span>
                 </div>
-                <div style="display: flex; flex-direction: column; justify-content: center; color: #cbd5e1; font-size: 0.9rem;">
+                <div style="display: flex; flex-direction: column; justify-content: center; color: #cbd5e1; font-size: 0.9rem; gap: 0.5rem;">
                     <div>Прохождение ($T$): <span id="transVal" style="color: #a3e635; font-weight: bold;">0.00</span></div>
                     <div>Отражение ($R$): <span id="reflVal" style="color: #f87171; font-weight: bold;">1.00</span></div>
+                    <label style="color: #94a3b8; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-top: 0.25rem;">
+                        <input type="checkbox" id="showComponentsCheck" checked>
+                        Показывать огибающие и компоненты
+                    </label>
                 </div>
             </div>
         </div>
@@ -2328,8 +2516,30 @@
             $$ \hat{L}_z = -i\hbar\left(x\frac{\partial}{\partial y} - y\frac{\partial}{\partial x}\right) $$
         </div>
         
-        <div class="alert">
-            Квантовое число орбитального момента (обозначается $l$) принимает <strong>только целые</strong> неотрицательные значения $l = 0, 1, 2, \dots$. Проекция $m$ принимает $(2l+1)$ значений от $-l$ до $+l$.
+        <div class="alert" style="margin-bottom: 1rem;">
+            <strong>Что такое квантовые числа?</strong><br>
+            В квантовой механике состояние системы часто описывается набором сохраняющихся величин. Эти величины квантуются (принимают дискретные значения) и называются <em>квантовыми числами</em>. По сути, это своеобразный «паспорт» или «адрес» состояния, зная который, мы можем полностью определить волновую функцию.
+        </div>
+
+        <div class="accordion" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+                Смысл орбитальных квантовых чисел $l$ и $m$
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p><strong>Орбитальное квантовое число $l$:</strong></p>
+                <p>Определяет <em>абсолютную величину (модуль)</em> углового момента. Оно говорит нам о том, «насколько сильно» частица вращается. Принимает <strong>только целые</strong> неотрицательные значения: $l = 0, 1, 2, \dots$</p>
+                <div class="math-block">
+                    $$ \mathbf{L}^2 = \hbar^2 l(l+1) $$
+                </div>
+                
+                <p><strong>Магнитное квантовое число $m$:</strong></p>
+                <p>Определяет <em>проекцию (ориентацию)</em> вектора углового момента на заданную ось (обычно ось Z). Согласно законам квантовой механики, вектор не может указывать в любую сторону: его проекция квантуется. При заданном $l$, проекция $m$ принимает $(2l+1)$ значений: от $-l$ до $+l$ через единицу.</p>
+                <div class="math-block">
+                    $$ \hat{L}_z = \hbar m \quad (m = -l, -l+1, \dots, 0, \dots, l-1, l) $$
+                </div>
+                <p>Это явление называется <strong>пространственным квантованием</strong>: вектор момента импульса может располагаться только под строго определенными дискретными углами к оси Z.</p>
+            </div>
         </div>
     </div>
 
@@ -2337,6 +2547,29 @@
     <h2 id="t8-spin">3. Оператор спинового момента</h2>
     <div class="card">
         <p>Из опыта Штерна-Герлаха (расщепление пучка на две части) выяснилось, что электрон обладает собственным, внутренним угловым моментом, не связанным с движением в пространстве.</p>
+        
+        <div class="accordion" onclick="this.classList.toggle('open')" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="accordion-header">
+                Опыт Штерна-Герлаха: Открытие спина
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p><strong>В чем суть опыта?</strong></p>
+                <p>Пучок нейтральных атомов серебра (обладающих магнитным моментом из-за неспаренного электрона) испускается из печи и пропускается через <em>сильно неоднородное</em> магнитное поле. Неоднородное поле действует на магнитные моменты атомов с силой, которая отклоняет их от прямой траектории. Если бы момент импульса мог быть направлен как угодно (по классике), на экране мы увидели бы сплошную размытую полосу.</p>
+                <p><strong>Результат:</strong> Пучок расщепился ровно на <strong>два</strong> четких пятна! Это неопровержимо доказало, что проекция внутреннего момента импульса (спина) электрона на ось поля может принимать только два дискретных значения. Значит, электрон обладает спином $s = 1/2$.</p>
+                
+                <div class="visual-container" style="margin-top: 1rem;">
+                    <canvas id="sgCanvas" width="600" height="300" style="width: 100%; max-width: 600px; display: block; margin: 0 auto; border-radius: 8px; background: #0f172a;"></canvas>
+                    <div class="controls" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                        <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                            <label for="sgFieldSlider" style="margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem;">Градиент магнитного поля $\frac{\partial B_z}{\partial z}$</label>
+                            <input type="range" id="sgFieldSlider" min="0" max="2" value="1" step="0.1" style="width: 80%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <p>Этот внутренний момент называется <strong>спином</strong> электрона. Оператор спина обозначается как $\hat{\mathbf{s}}$. Поскольку пучок расщепляется на две части, проекция спина $m_s$ может принимать ровно два значения. Число проекций связано с квантовым числом спина $s$ как $(2s + 1) = 2$, откуда вытекает, что $s = 1/2$.</p>
         
         <p>Проекция $m_s$ принимает значения $\pm 1/2$. Уравнения на собственные значения записываются как:</p>

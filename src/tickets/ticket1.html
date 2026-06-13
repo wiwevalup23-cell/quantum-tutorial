@@ -32,10 +32,21 @@
                 </ul>
 
                 <h3>Линейный оператор</h3>
-                <p>Отображение $\hat{L}$, которое каждому вектору $f$ из своей области определения $D(\hat{L}) \subset \mathcal{H}$ однозначно сопоставляет вектор $g \in \mathcal{H}$, и удовлетворяет условию линейности:</p>
-                <div class="math-block">
-                    $$\hat{L}(c_1 f + c_2 g) = c_1 \hat{L}f + c_2 \hat{L}g$$
-                </div>
+                <p>Отображение $\hat{L}$, которое каждому вектору $f$ из своей области определения $D(\hat{L}) \subset \mathcal{H}$ однозначно сопоставляет вектор $g \in \mathcal{H}$, и удовлетворяет двум условиям:</p>
+                <ol>
+                    <li>
+                        <strong>Линейное подпространство области определения:</strong> для любых $f, g \in D(\hat{L})$ и любых $c_1, c_2 \in \mathbb{C}$ линейная комбинация снова лежит в области определения:
+                        <div class="math-block">
+                            $$c_1 f + c_2 g \in D(\hat{L})$$
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Условие линейности (аддитивность и однородность):</strong>
+                        <div class="math-block">
+                            $$\hat{L}(c_1 f + c_2 g) = c_1 \hat{L}f + c_2 \hat{L}g$$
+                        </div>
+                    </li>
+                </ol>
             </div>
 
             <!-- QUESTION 2 -->
@@ -130,84 +141,89 @@
                 </ul>
             </div>
 
-            <div class="card">
-                <h3>Алгоритм классификации точек спектра $\sigma(\hat{L})$</h3>
-                <p>Исследуем оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ для классификации любой точки $\lambda \in \mathbb{C}$:</p>
-                
-                <!-- CSS Flowchart -->
-                <div class="flow-container">
-                    <div class="flow-box">
-                        Выбираем точку $\lambda \in \mathbb{C}$
-                    </div>
-                    <div class="flow-arrow">↓</div>
-                    <div class="flow-box decision">
-                        Шаг 1: Анализируем Ядро<br>
-                        $\ker(\hat{L} - \lambda\hat{I})$
-                    </div>
-                    <div class="flow-arrow">↓</div>
-                    
-                    <div class="flow-row">
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed;">
-                                $\ker \neq \{0\}$<br>
-                                <small>$\exists f \neq 0 : \hat{L}f = \lambda f$</small>
-                            </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box result-warn">
-                                ТОЧЕЧНЫЙ СПЕКТР<br>
-                                $\lambda \in \sigma_p$ (дискретный)
-                            </div>
-                        </div>
-                        
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed;">
-                                $\ker = \{0\}$<br>
-                                <small>Уравнение имеет лишь $f=0$</small>
-                            </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box decision">
-                                Шаг 2: Анализируем Образ<br>
-                                $\text{Ran}(\hat{L} - \lambda\hat{I})$
-                            </div>
-                        </div>
-                    </div>
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Алгоритм классификации точек спектра $\sigma(\hat{L})$
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p style="margin-bottom: 1rem;">Исследуем оператор $\hat{L}_\lambda = \hat{L} - \lambda\hat{I}$ для классификации любой точки $\lambda \in \mathbb{C}$:</p>
 
-                    <div class="flow-arrow" style="margin-left: 50%; transform: translateX(-50%);">↓</div>
-                    
-                    <div class="flow-row" style="margin-top: 1rem;">
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
-                                $\overline{\text{Ran}} = \mathcal{H}$<br>
-                                <small>Резольвента $\hat{R}_\lambda$ ограничена</small>
+                    <!-- CSS Flowchart -->
+                    <div class="flow-container">
+                        <div class="flow-box">
+                            Выбираем точку $\lambda \in \mathbb{C}$
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box decision">
+                            Шаг 1: Анализируем Ядро<br>
+                            $\ker(\hat{L} - \lambda\hat{I})$
+                        </div>
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-row">
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed;">
+                                    $\ker \neq \{0\}$<br>
+                                    <small>$\exists f \neq 0 : \hat{L}f = \lambda f$</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box result-warn">
+                                    ТОЧЕЧНЫЙ СПЕКТР<br>
+                                    $\lambda \in \sigma_p$ (дискретный)
+                                </div>
                             </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box result">
-                                РЕГУЛЯРНАЯ ТОЧКА<br>
-                                (Не спектр)
+
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed;">
+                                    $\ker = \{0\}$<br>
+                                    <small>Уравнение имеет лишь $f=0$</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box decision">
+                                    Шаг 2: Анализируем Образ<br>
+                                    $\text{Ran}(\hat{L} - \lambda\hat{I})$
+                                </div>
                             </div>
                         </div>
 
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
-                                $\overline{\text{Ran}} = \mathcal{H}$<br>
-                                <small>Но $\hat{R}_\lambda$ не ограничена</small>
-                            </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box result-warn" style="border-color: #3b82f6; background: rgba(59,130,246,0.1);">
-                                НЕПРЕРЫВНЫЙ СПЕКТР<br>
-                                $\lambda \in \sigma_c$ (сплошной)
-                            </div>
-                        </div>
+                        <div class="flow-arrow" style="margin-left: 50%; transform: translateX(-50%);">↓</div>
 
-                        <div class="flow-col">
-                            <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
-                                $\overline{\text{Ran}} \neq \mathcal{H}$<br>
-                                <small>Образ не всюду плотен</small>
+                        <div class="flow-row" style="margin-top: 1rem;">
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                    $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                    <small>Резольвента $\hat{R}_\lambda$ ограничена</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box result">
+                                    РЕГУЛЯРНАЯ ТОЧКА<br>
+                                    (Не спектр)
+                                </div>
                             </div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-box result-err">
-                                ОСТАТОЧНЫЙ СПЕКТР<br>
-                                $\lambda \in \sigma_r$
+
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                    $\overline{\text{Ran}} = \mathcal{H}$<br>
+                                    <small>Но $\hat{R}_\lambda$ не ограничена</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box result-warn" style="border-color: #3b82f6; background: rgba(59,130,246,0.1);">
+                                    НЕПРЕРЫВНЫЙ СПЕКТР<br>
+                                    $\lambda \in \sigma_c$ (сплошной)
+                                </div>
+                            </div>
+
+                            <div class="flow-col">
+                                <div class="flow-box" style="border-style: dashed; font-size: 0.85rem;">
+                                    $\overline{\text{Ran}} \neq \mathcal{H}$<br>
+                                    <small>Образ не всюду плотен</small>
+                                </div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-box result-err">
+                                    ОСТАТОЧНЫЙ СПЕКТР<br>
+                                    $\lambda \in \sigma_r$
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -345,6 +361,70 @@
                 </div>
             </div>
 
+            <div class="accordion" onclick="this.classList.toggle('open')">
+                <div class="accordion-header">
+                    Сводная таблица: типы спектров самосопряжённого оператора
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div style="overflow-x: auto;">
+                        <table style="width:100%; border-collapse: collapse; font-size: 0.9rem; color: var(--text);">
+                            <thead>
+                                <tr style="background: rgba(99,102,241,0.15);">
+                                    <th style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: left;"></th>
+                                    <th style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; color: #a78bfa;">Дискретный (ЧДСП)</th>
+                                    <th style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; color: #60a5fa;">Непрерывный (ЧНСП)</th>
+                                    <th style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; color: #34d399;">Смешанный</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(255,255,255,0.02);">
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600; white-space: nowrap;">Собственные<br>функции</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$\phi_k \in \mathcal{H}$<br><small style="opacity:0.7">(нормируемые)</small></td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$\psi_\mu \notin \mathcal{H}$<br><small style="opacity:0.7">(обобщённые, $\in \Phi'$)</small></td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$\phi_k \in \mathcal{H}$ и $\psi_\mu \notin \mathcal{H}$</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Нормировка СФ</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\langle \phi_n | \phi_k \rangle = \delta_{nk}$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\langle \psi_\mu | \psi_{\mu'} \rangle = \delta(\mu - \mu')$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\langle \phi_n | \phi_k \rangle = \delta_{nk}$$ $$\langle \psi_\mu | \psi_{\mu'} \rangle = \delta(\mu{-}\mu')$$ $$\langle \psi_\mu | \phi_k \rangle = 0$$</td>
+                                </tr>
+                                <tr style="background: rgba(255,255,255,0.02);">
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Разложение<br>единицы $\hat{I}$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k|$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\hat{I} = \int |\psi_\mu\rangle\langle \psi_\mu|\,d\mu$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\hat{I} = \sum_k |\phi_k\rangle\langle \phi_k| + \int |\psi_\mu\rangle\langle \psi_\mu|\,d\mu$$</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Разложение<br>$|f\rangle \in \mathcal{H}$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$|f\rangle = \sum_k c_k |\phi_k\rangle$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$|f\rangle = \int c_\mu |\psi_\mu\rangle\,d\mu$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$|f\rangle = \sum_k c_k |\phi_k\rangle + \int c_\mu |\psi_\mu\rangle\,d\mu$$</td>
+                                </tr>
+                                <tr style="background: rgba(255,255,255,0.02);">
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Амплитуды<br>вероятности</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$c_k = \langle \phi_k | f \rangle$<br><small style="opacity:0.7">$|c_k|^2$ — вероятность $\lambda_k$</small></td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$c_\mu = \langle \psi_\mu | f \rangle$<br><small style="opacity:0.7">$|c_\mu|^2 d\mu$ — вероятность $(\mu,\mu{+}d\mu)$</small></td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$c_k = \langle \phi_k | f \rangle$<br>$c_\mu = \langle \psi_\mu | f \rangle$</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Условие<br>нормировки</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\sum_k |c_k|^2 = 1$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\int |c_\mu|^2\,d\mu = 1$$</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center;">$$\sum_k |c_k|^2 + \int |c_\mu|^2\,d\mu = 1$$</td>
+                                </tr>
+                                <tr style="background: rgba(255,255,255,0.02);">
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;">Пример</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.8;">Энергия в потенциальной яме, гармонический осциллятор</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.8;">Оператор импульса $\hat{p}$ свободной частицы</td>
+                                    <td style="padding: 0.6rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.8;">Атом водорода (связанные уровни + ионизация)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             <!-- QUESTION 7 -->
             <h2 id="q7">7. Определение дельта-функции Дирака</h2>
